@@ -9,7 +9,7 @@ namespace ExploreCalifornia.Models
 
         public string Location { get; set; }
 
-        public string TrailLocation { get; set; }
+        public string TrailCover { get; set; }
 
         public string TrailName { get; set; }
 

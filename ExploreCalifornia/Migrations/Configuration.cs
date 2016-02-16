@@ -10,7 +10,6 @@ namespace ExploreCalifornia.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
-            ContextKey = "ExploreCalifornia.DAL.ExploreCaliforniaContext";
         }
 
         protected override void Seed(ExploreCalifornia.DAL.ExploreCaliforniaContext context)
