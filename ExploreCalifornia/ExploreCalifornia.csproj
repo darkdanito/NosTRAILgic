@@ -195,9 +195,6 @@
     </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\images\CaliforniaState.jpg" />
-    <Content Include="Content\images\flag_photo.jpg" />
-    <Content Include="Content\images\logo.gif" />
     <Content Include="Content\images\mission_look.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
