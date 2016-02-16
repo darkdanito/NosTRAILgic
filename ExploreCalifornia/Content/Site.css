@@ -1,11 +1,11 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
-    font-family: Georgia,"Times New Roman",Times,serif;
+    font-family: 'Segoe UI';
 }
 
-h1 {
-    font-family: Georgia,"Times New Roman",Times,serif;
+h1, h2 {
+    font-family:'Agency FB';
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -54,3 +54,4 @@ input[type="checkbox"].input-validation-error {
 .validation-summary-valid {
     display: none;
 }
+
