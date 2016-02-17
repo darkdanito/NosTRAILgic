@@ -769,8 +769,8 @@ C:\Users\darkdanito\Documents\GitHub\NosTRAILgic\ExploreCalifornia\bin\Microsoft
 C:\Users\darkdanito\Documents\GitHub\NosTRAILgic\ExploreCalifornia\bin\Microsoft.Owin.Security.Google.xml
 C:\Users\darkdanito\Documents\GitHub\NosTRAILgic\ExploreCalifornia\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\darkdanito\Documents\GitHub\NosTRAILgic\ExploreCalifornia\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-C:\Users\darkdanito\Documents\GitHub\NosTRAILgic\ExploreCalifornia\obj\Debug\ExploreCalifornia.csprojResolveAssemblyReference.cache
 C:\Users\darkdanito\Documents\GitHub\NosTRAILgic\ExploreCalifornia\obj\Debug\ExploreCalifornia.Migrations.InitialCreate.resources
 C:\Users\darkdanito\Documents\GitHub\NosTRAILgic\ExploreCalifornia\obj\Debug\ExploreCalifornia.csproj.GenerateResource.Cache
 C:\Users\darkdanito\Documents\GitHub\NosTRAILgic\ExploreCalifornia\obj\Debug\ExploreCalifornia.dll
 C:\Users\darkdanito\Documents\GitHub\NosTRAILgic\ExploreCalifornia\obj\Debug\ExploreCalifornia.pdb
+C:\Users\darkdanito\Documents\GitHub\NosTRAILgic\ExploreCalifornia\obj\Debug\ExploreCalifornia.csprojResolveAssemblyReference.cache
