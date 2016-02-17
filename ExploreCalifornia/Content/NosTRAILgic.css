@@ -6,6 +6,20 @@
 
 /* Global Styles */
 
+.container 
+{
+    display: table;
+    vertical-align: middle;
+	margin:0;
+	padding:0;
+}
+
+.vertical-center-row 
+{
+    display: table-cell;
+    vertical-align: middle;
+}
+
 body {
     margin-top: 100px;
     background-color: #222;
