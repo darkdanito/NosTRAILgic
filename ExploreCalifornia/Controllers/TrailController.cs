@@ -26,7 +26,7 @@ namespace ExploreCalifornia.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index");
             }
             Trail trail = db.Trails.Find(id);
             if (trail == null)
@@ -64,7 +64,7 @@ namespace ExploreCalifornia.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index");
             }
             Trail trail = db.Trails.Find(id);
             if (trail == null)
@@ -95,7 +95,7 @@ namespace ExploreCalifornia.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index");
             }
             Trail trail = db.Trails.Find(id);
             if (trail == null)
