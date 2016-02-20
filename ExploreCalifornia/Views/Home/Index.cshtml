@@ -42,14 +42,6 @@
 
     var map;
 
-    // Historic Sites
-    // https://www.dropbox.com/s/uqatxl7gxiz9lzl/HISTORICSITES.kml?dl=1
-    // Monuments
-    // https://www.dropbox.com/s/pg72q12826s6et2/MONUMENTS.kml?dl=1
-    // Museums
-    // https://www.dropbox.com/s/dxd7uqm8tmztwyg/MUSEUM.kml?dl=1
-
-    //    var src = "https://www.dropbox.com/s/dxd7uqm8tmztwyg/MUSEUM.kml?dl=1";
     var src = "@ViewBag.modSitesName";
     /**
      * Initializes the map and calls the function that creates polylines.
@@ -82,7 +74,5 @@
     }
 
     google.maps.event.addDomListener(window, 'load', initialize);
-
-
 
 </script>

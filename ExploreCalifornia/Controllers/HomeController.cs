@@ -24,10 +24,10 @@ namespace ExploreCalifornia.Controllers
                 {
                     ViewBag.modSitesName = "https://www.dropbox.com/s/pg72q12826s6et2/MONUMENTS.kml?dl=1";
                 }
-                else
-                {
-                    ViewBag.modSitesName = "https://www.dropbox.com/s/dxd7uqm8tmztwyg/MUSEUM.kml?dl=1";
-                }
+
+            }else
+            {
+                ViewBag.modSitesName = "https://www.dropbox.com/s/dxd7uqm8tmztwyg/MUSEUM.kml?dl=1";
             }
 
             return View();
