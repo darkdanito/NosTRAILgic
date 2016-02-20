@@ -14,8 +14,6 @@ namespace ExploreCalifornia.DAL
 
         }
 
-        public DbSet<Tour> Tours{get;set;}
-
         public DbSet<Booking> Bookings { get; set; }
 
         public DbSet<Trail> Trails { get; set; }

@@ -13,17 +13,17 @@ namespace ExploreCalifornia.Controllers
         }
 
         // GET: Booking/Create
-        public ActionResult Create(Tour tour)
-        {
-            if (tour.Id == 0)
-                return RedirectToAction("Index", "Tour");
-            Booking booking = new Booking();
-            booking.TourID = tour.Id;
-            booking.TourName = tour.Name;
-            booking.ClientID = User.Identity.Name;
-            booking.DepartureDate = DateTime.Now;
-            return View(booking);
-        }
+        //public ActionResult Create(Tour tour)
+        //{
+        //    if (tour.Id == 0)
+        //        return RedirectToAction("Index", "Tour");
+        //    Booking booking = new Booking();
+        //    booking.TourID = tour.Id;
+        //    booking.TourName = tour.Name;
+        //    booking.ClientID = User.Identity.Name;
+        //    booking.DepartureDate = DateTime.Now;
+        //    return View(booking);
+        //}
 
         // POST: Booking/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
