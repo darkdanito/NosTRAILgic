@@ -43,7 +43,7 @@
 
     </dl>
 
-    <div id="map_canvas" style="width: 300px; height: 300px;"></div>
+    <div id="map_canvas" style="width: 600px; height: 300px;"></div>
 
 </div>
 <p>
@@ -81,37 +81,53 @@
         var geocoder;
         geocoder = new google.maps.Geocoder();
 
-        var address = "@Url.Content(Model.TrailName)";
+        var googleMapAddress = "";
 
-        if (geocoder) {
-            geocoder.geocode({ 'address': address }, function (results, status) {
-                if (status == google.maps.GeocoderStatus.OK) {
-                    if (status != google.maps.GeocoderStatus.ZERO_RESULTS) {
-                        map.setCenter(results[0].geometry.location);
+        var trailInput = "@Url.Content(Model.TrailName)"
+        var trailArray = trailInput.split(',');
 
-                        var infowindow = new google.maps.InfoWindow(
-                            {
-                                content: '<b>' + address + '</b>',
-                                size: new google.maps.Size(150, 50)
+        for (var i = trailArray.length; i > 0 ; i--)
+        {
+            googleMapAddress = trailArray[i - 1];
+
+            if (geocoder) {
+                geocoder.geocode({ 'address': googleMapAddress }, function (results, status) {
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        if (status != google.maps.GeocoderStatus.ZERO_RESULTS) {
+                            map.setCenter(results[0].geometry.location);
+
+                            var infowindow = new google.maps.InfoWindow(
+                                {
+                                    content: '<b>' + googleMapAddress + '</b>',
+                                    size: new google.maps.Size(150, 50)
+                                });
+
+                            var marker = new google.maps.Marker({
+                                position: results[0].geometry.location,
+                                map: map,
+                                title: googleMapAddress
                             });
 
-                        var marker = new google.maps.Marker({
-                            position: results[0].geometry.location,
-                            map: map,
-                            title: address
-                        });
-                        google.maps.event.addListener(marker, 'click', function () {
-                            infowindow.open(map, marker);
-                        });
+                            google.maps.event.addListener(marker, 'click', function () {
+                                infowindow.open(map, marker);
+                            });
 
+                        } else {
+                            alert("No results found");
+                        }
                     } else {
-                        alert("No results found");
+                        alert("Geocode was not successful for the following reason: " + status);
                     }
-                } else {
-                    alert("Geocode was not successful for the following reason: " + status);
-                }
-            });
+                });
+            }
         }
+
+        
+
+
+
+
+
 
     }
 

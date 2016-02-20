@@ -15,8 +15,9 @@ namespace ExploreCalifornia.DAL
         }
 
         public DbSet<Tour> Tours{get;set;}
+
         public DbSet<Booking> Bookings { get; set; }
 
-        public System.Data.Entity.DbSet<ExploreCalifornia.Models.Trail> Trails { get; set; }
+        public DbSet<Trail> Trails { get; set; }
     }
 }
