@@ -197,6 +197,9 @@
     <Content Include="Content\images\BirdPark.jpg" />
     <Content Include="Content\images\Zoo.jpg" />
     <Content Include="Content\NosTRAILgic.css" />
+    <Content Include="Content\Upload\BirdPark.jpg" />
+    <Content Include="Content\Upload\Sheep.jpg" />
+    <Content Include="Content\Upload\Zoo.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -265,6 +268,7 @@
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
