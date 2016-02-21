@@ -10,8 +10,10 @@ namespace ExploreCalifornia.Models
 
         public string Location { get; set; }
 
+        [Display(Name = "Trail Cover")]
         public string TrailCover { get; set; }
 
+        [Display(Name = "Trail Name")]
         public string TrailName { get; set; }
 
         public string Description { get; set; }
