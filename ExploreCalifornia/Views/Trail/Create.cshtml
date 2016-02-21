@@ -23,7 +23,7 @@
         </div>
 
         <div class="form-group">
-            @Html.Label("Trail Cover", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.TrailCover, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.TrailCover)
                 @Html.ValidationMessageFor(model => model.TrailCover)
@@ -31,7 +31,7 @@
         </div>
 
         <div class="form-group">
-            @Html.Label("Trail Name", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.TrailName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.TrailName)
                 @Html.ValidationMessageFor(model => model.TrailName)
@@ -49,7 +49,7 @@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />
-                @Html.ActionLink("Cancel", "../Trail/Index", null, new { @class = "btn btn-default" })
+                <input type="button" value="Cancel" class="btn btn-default" />
             </div>
         </div>
     </div>
