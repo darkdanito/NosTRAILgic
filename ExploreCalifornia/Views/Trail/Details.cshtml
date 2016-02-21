@@ -86,7 +86,10 @@
 
         var googleMapAddress = "";
 
-        var trailInput = "@Url.Content(Model.TrailName)"
+        // Code to take Trail Input of Location
+        var trailInput = "@Url.Content(Model.Location)"
+
+        // Split the Trail Input of Location based on COMMA into different location
         var trailArray = trailInput.split(',');
 
         for (var i = trailArray.length; i > 0 ; i--)
