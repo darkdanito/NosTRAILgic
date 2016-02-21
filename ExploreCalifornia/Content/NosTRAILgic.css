@@ -23,6 +23,7 @@
 body {
     margin-top: 100px;
     background-color: #222;
+        
 }
 
 @media(min-width:768px) {
@@ -38,7 +39,7 @@ body {
 #page-wrapper {
     /*padding: 0;*/
     background-color: #fff;
-    height:92vh;
+    height:100%;
 }
 
 .huge {
