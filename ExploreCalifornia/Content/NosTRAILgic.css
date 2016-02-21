@@ -36,9 +36,9 @@ body {
 }
 
 #page-wrapper {
-    width: 100%;
-    padding: 0;
+    /*padding: 0;*/
     background-color: #fff;
+    height:92vh;
 }
 
 .huge {
