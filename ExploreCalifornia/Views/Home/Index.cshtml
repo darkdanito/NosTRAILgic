@@ -6,12 +6,9 @@
 <div class="container" style="width: 100%">
     <div class="vertical-center-row">
         <div align="center">
-            <p>
-                <input id="Text1" type="text" placeholder="Search" />
-
-
                 @using (Html.BeginForm())
                 {
+                    <span><input id="Text1" type="text" placeholder="Search" />
                         @Html.DropDownList("Selection", new SelectListItem[]
                         {
                             new SelectListItem() { Text = "All", Value = "0" },
@@ -20,12 +17,9 @@
                             new SelectListItem() { Text = "Monuments", Value = "3" },
                         },
                             new { @onchange = "this.form.submit()" })
+                        <input id="bHomeIndexSearch" type="button" value="Search" disabled />
+                    </span>
                 }
-            </p>
-
-            <p>
-                <input id="bHomeIndexSearch" type="button" value="Search" disabled />
-            </p>
 
             <div id="map_canvas" style="width: 1000px; height: 300px;"></div>
 
