@@ -3,7 +3,7 @@ Bugs:
 ===============================================================================================================
 Google Map Marker name is the same name
 Layout of View/Trail/Index need fixing. perhaps 5 trails per row.
-Layout of ALL - Have a empty black box that can remove between the nav bar and body
+Increase the create page input box bigger
 
 
 ===============================================================================================================

@@ -11,6 +11,7 @@ namespace ExploreCalifornia.Models
         [Required]
         public string Location { get; set; }
 
+
         [Required]
         [Display(Name = "Trail Cover")]
         public string TrailCover { get; set; }
