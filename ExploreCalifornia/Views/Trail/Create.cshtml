@@ -37,7 +37,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.TrailCover, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <input type="file" name="file" id="file"/>
+                <input type="file" name="file" id="file" required/>
                 @Html.ValidationMessageFor(model => model.TrailCover)
             </div>
         </div>
