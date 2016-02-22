@@ -47,15 +47,29 @@ namespace ExploreCalifornia.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Location,TrailCover,TrailName,Description")] Trail trail, HttpPostedFileBase file)
+        public ActionResult Create([Bind(Include = "Id,Location,TrailCover,TrailName,Description")] Trail trail, HttpPostedFileBase file, String[] text)
         {
             if (ModelState.IsValid)
             {
                 string path = Server.MapPath("~/Content/Upload/" + file.FileName);
                 file.SaveAs(path);
 
-                trail.TrailCover = file.FileName;
 
+                
+
+                string combinedLocation = "";
+
+                for (int i = 0; i < text.Length; i++)
+                {
+                    combinedLocation += text[i] + ",";
+                }
+             //   combinedLocation = combinedLocation.Substring(0, combinedLocation.Length - 1);
+                
+                trail.Location = combinedLocation + trail.Location;
+                
+
+                trail.TrailCover = file.FileName;
+                
                 db.Trails.Add(trail);
                 db.SaveChanges();
 
