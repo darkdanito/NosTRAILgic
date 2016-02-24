@@ -5,7 +5,7 @@ namespace NosTRAILgic.DAL
 {
     public class NosTRAILgicContext : DbContext
     {
-        public NosTRAILgicContext() : base("ExploreCaliforniaDB")
+        public NosTRAILgicContext() : base("NosTRAILgicDB")
         {
 
         }

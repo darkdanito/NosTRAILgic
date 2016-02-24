@@ -50,8 +50,5 @@ C:\Users\darkdanito\Documents\GitHub\NosTRAILgic\ExploreCalifornia\bin\Microsoft
 C:\Users\darkdanito\Documents\GitHub\NosTRAILgic\ExploreCalifornia\bin\Microsoft.Owin.Security.Google.xml
 C:\Users\darkdanito\Documents\GitHub\NosTRAILgic\ExploreCalifornia\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\darkdanito\Documents\GitHub\NosTRAILgic\ExploreCalifornia\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-C:\Users\darkdanito\Documents\GitHub\NosTRAILgic\ExploreCalifornia\obj\Debug\ExploreCalifornia.Migrations.InitialCreate.resources
-C:\Users\darkdanito\Documents\GitHub\NosTRAILgic\ExploreCalifornia\obj\Debug\NosTRAILgic.csproj.GenerateResource.Cache
 C:\Users\darkdanito\Documents\GitHub\NosTRAILgic\ExploreCalifornia\obj\Debug\NosTRAILgic.dll
 C:\Users\darkdanito\Documents\GitHub\NosTRAILgic\ExploreCalifornia\obj\Debug\NosTRAILgic.pdb
-C:\Users\darkdanito\Documents\GitHub\NosTRAILgic\ExploreCalifornia\obj\Debug\NosTRAILgic.csprojResolveAssemblyReference.cache
