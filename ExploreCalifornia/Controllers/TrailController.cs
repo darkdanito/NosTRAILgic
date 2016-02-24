@@ -28,11 +28,14 @@ namespace ExploreCalifornia.Controllers
             {
                 return RedirectToAction("Index");
             }
+
             Trail trail = db.Trails.Find(id);
+
             if (trail == null)
             {
                 return HttpNotFound();
             }
+
             return View(trail);
         }
 
@@ -54,20 +57,17 @@ namespace ExploreCalifornia.Controllers
                 string path = Server.MapPath("~/Content/Upload/" + file.FileName);
                 file.SaveAs(path);
 
-
-                
-
+                // String for storing all the location that the user has inputted into the Location Input form
                 string combinedLocation = "";
 
                 for (int i = 0; i < text.Length; i++)
                 {
                     combinedLocation += text[i] + ",";
                 }
-             //   combinedLocation = combinedLocation.Substring(0, combinedLocation.Length - 1);
-                
+
+                // Update the dynamic location input + the original input for the location
                 trail.Location = combinedLocation + trail.Location;
                 
-
                 trail.TrailCover = file.FileName;
                 
                 db.Trails.Add(trail);
