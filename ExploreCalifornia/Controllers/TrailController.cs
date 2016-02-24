@@ -57,17 +57,19 @@ namespace NosTRAILgic.Controllers
                 string path = Server.MapPath("~/Content/Upload/" + file.FileName);
                 file.SaveAs(path);
 
-                // String for storing all the location that the user has inputted into the Location Input form
-                string combinedLocation = "";
-
-                for (int i = 0; i < text.Length; i++)
+                if (text != null)
                 {
-                    combinedLocation += text[i] + ",";
-                }
+                    // String for storing all the location that the user has inputted into the Location Input form
+                    string combinedLocation = "";
 
-                // Update the dynamic location input + the original input for the location
-                trail.Location = combinedLocation + trail.Location;
-                
+                    for (int i = 0; i < text.Length; i++)
+                    {
+                        combinedLocation += text[i] + ",";
+                    }
+
+                    // Update the dynamic location input + the original input for the location
+                    trail.Location = combinedLocation + trail.Location;
+                }
                 trail.TrailCover = file.FileName;
                 
                 db.Trails.Add(trail);
