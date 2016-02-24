@@ -1,8 +1,8 @@
 ﻿using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartupAttribute(typeof(ExploreCalifornia.Startup))]
-namespace ExploreCalifornia
+[assembly: OwinStartupAttribute(typeof(NosTRAILgic.Startup))]
+namespace NosTRAILgic
 {
     public partial class Startup
     {

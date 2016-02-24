@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Web.Mvc;
-using ExploreCalifornia.DAL;
-using ExploreCalifornia.Models;
+using NosTRAILgic.DAL;
+using NosTRAILgic.Models;
 
-namespace ExploreCalifornia.Controllers
+namespace NosTRAILgic.Controllers
 {
     public class BookingController : GeneralController<Booking>
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Web.Mvc;
 
-namespace ExploreCalifornia.Controllers
+namespace NosTRAILgic.Controllers
 {
     public class HomeController : Controller
     {

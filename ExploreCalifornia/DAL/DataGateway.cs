@@ -4,7 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
-namespace ExploreCalifornia.DAL
+namespace NosTRAILgic.DAL
 {
     public class DataGateway<T> : IDataGateway<T> where T : class
     {

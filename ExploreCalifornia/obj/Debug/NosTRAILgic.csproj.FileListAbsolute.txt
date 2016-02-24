@@ -54,3 +54,4 @@ C:\Users\darkdanito\Documents\GitHub\NosTRAILgic\ExploreCalifornia\obj\Debug\Exp
 C:\Users\darkdanito\Documents\GitHub\NosTRAILgic\ExploreCalifornia\obj\Debug\NosTRAILgic.csproj.GenerateResource.Cache
 C:\Users\darkdanito\Documents\GitHub\NosTRAILgic\ExploreCalifornia\obj\Debug\NosTRAILgic.dll
 C:\Users\darkdanito\Documents\GitHub\NosTRAILgic\ExploreCalifornia\obj\Debug\NosTRAILgic.pdb
+C:\Users\darkdanito\Documents\GitHub\NosTRAILgic\ExploreCalifornia\obj\Debug\NosTRAILgic.csprojResolveAssemblyReference.cache

@@ -1,7 +1,7 @@
-﻿using ExploreCalifornia.Models;
+﻿using NosTRAILgic.Models;
 using System.Data.Entity;
 
-namespace ExploreCalifornia.DAL
+namespace NosTRAILgic.DAL
 {
     public class NosTRAILgicContext : DbContext
     {

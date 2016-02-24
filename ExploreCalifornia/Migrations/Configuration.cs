@@ -1,18 +1,18 @@
-namespace ExploreCalifornia.Migrations
+namespace NosTRAILgic.Migrations
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<ExploreCalifornia.DAL.NosTRAILgicContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<NosTRAILgic.DAL.NosTRAILgicContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
         }
 
-        protected override void Seed(ExploreCalifornia.DAL.NosTRAILgicContext context)
+        protected override void Seed(NosTRAILgic.DAL.NosTRAILgicContext context)
         {
             //  This method will be called after migrating to the latest version.
 

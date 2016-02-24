@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ExploreCalifornia.Models
+namespace NosTRAILgic.Models
 {
     public class ExternalLoginConfirmationViewModel
     {

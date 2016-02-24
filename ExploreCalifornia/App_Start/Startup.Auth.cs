@@ -3,7 +3,7 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Owin;
 
-namespace ExploreCalifornia
+namespace NosTRAILgic
 {
     public partial class Startup
     {

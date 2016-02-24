@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ExploreCalifornia.DAL
+namespace NosTRAILgic.DAL
 {
     interface IDataGateway<T> where T:class
     {

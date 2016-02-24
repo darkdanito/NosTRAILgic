@@ -1,4 +1,4 @@
-﻿using ExploreCalifornia.DAL;
+﻿using NosTRAILgic.DAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +6,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
-namespace ExploreCalifornia.Controllers
+namespace NosTRAILgic.Controllers
 {
     public class GeneralController<T> : Controller where T :class
     {

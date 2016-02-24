@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace ExploreCalifornia.Models
+namespace NosTRAILgic.Models
 {
     public class Booking
     {
