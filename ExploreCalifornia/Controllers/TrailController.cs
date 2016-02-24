@@ -13,7 +13,7 @@ namespace ExploreCalifornia.Controllers
 {
     public class TrailController : Controller
     {
-        private ExploreCaliforniaContext db = new ExploreCaliforniaContext();
+        private NosTRAILgicContext db = new NosTRAILgicContext();
 
         // GET: Trail
         public ActionResult Index()

@@ -22,7 +22,7 @@
             </div>
         </div>
 
-        <div class="form-group" id="Sheep">
+        <div class="form-group" id="dynamicDivInput">
 
         </div>
 
@@ -76,15 +76,12 @@
             var $fieldCount = 0;
             $('#addField').on('click', function () {
                 $fieldCount++;;
-                //var $node = '<p><label for="text' + $fieldCount + '">Text ' + $fieldCount + ' : </label><input type="text" name="text.['+ $fieldCount +']" id="text' + $fieldCount + '"/><span class="removeField">X</span></p>';
-            //    var $node = '<p><label for="text">Text : </label><input type="text" name="text" id="text"/><span class="removeField">X</span></p>';
+            //  var $node = '<p><label for="text' + $fieldCount + '">Text ' + $fieldCount + ' : </label><input type="text" name="text.['+ $fieldCount +']" id="text' + $fieldCount + '"/><span class="removeField">X</span></p>';
+            //  var $node = '<p><label for="text">Text : </label><input type="text" name="text" id="text"/><span class="removeField">X</span></p>';
 
                 var $node = '<div class="form-group"><label class="control-label col-md-2" for="text">Location</label><div class="col-md-10"><input type="text" name="text" id="text"/><span class="removeField">X</span></div></div>';
 
-
-
-
-                $(Sheep).last().after($node);
+                $(dynamicDivInput).last().after($node);
             });
 
             $('form').on('click', '.removeField', function () {

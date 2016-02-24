@@ -1,15 +1,11 @@
 ﻿using ExploreCalifornia.Models;
-using System;
-using System.Collections.Generic;
 using System.Data.Entity;
-using System.Linq;
-using System.Web;
 
 namespace ExploreCalifornia.DAL
 {
-    public class ExploreCaliforniaContext : DbContext
+    public class NosTRAILgicContext : DbContext
     {
-        public ExploreCaliforniaContext() : base("ExploreCaliforniaDB")
+        public NosTRAILgicContext() : base("ExploreCaliforniaDB")
         {
 
         }

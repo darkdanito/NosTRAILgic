@@ -17,7 +17,7 @@ namespace ExploreCalifornia.Controllers
     public class AccountController : Controller
     {
         public AccountController()
-            : this(new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ExploreCaliforniaContext())))
+            : this(new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new NosTRAILgicContext())))
         {
         }
 

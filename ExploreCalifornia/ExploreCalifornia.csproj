@@ -170,7 +170,7 @@
     <Compile Include="Controllers\TrailController.cs" />
     <Compile Include="DAL\BookingGateway.cs" />
     <Compile Include="DAL\DataGateway.cs" />
-    <Compile Include="DAL\ExploreCaliforniaContext.cs" />
+    <Compile Include="DAL\NosTRAILgicContext.cs" />
     <Compile Include="DAL\IDataGateway.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

@@ -8,7 +8,7 @@ namespace ExploreCalifornia.DAL
 {
     public class DataGateway<T> : IDataGateway<T> where T : class
     {
-        internal ExploreCaliforniaContext db = new ExploreCaliforniaContext();
+        internal NosTRAILgicContext db = new NosTRAILgicContext();
         internal DbSet<T> data = null;
 
         public DataGateway()

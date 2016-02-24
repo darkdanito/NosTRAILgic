@@ -5,14 +5,14 @@ namespace ExploreCalifornia.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<ExploreCalifornia.DAL.ExploreCaliforniaContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<ExploreCalifornia.DAL.NosTRAILgicContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
         }
 
-        protected override void Seed(ExploreCalifornia.DAL.ExploreCaliforniaContext context)
+        protected override void Seed(ExploreCalifornia.DAL.NosTRAILgicContext context)
         {
             //  This method will be called after migrating to the latest version.
 
