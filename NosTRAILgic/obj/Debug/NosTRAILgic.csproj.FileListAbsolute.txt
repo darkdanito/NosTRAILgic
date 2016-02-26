@@ -160,6 +160,5 @@ C:\Users\darkdanito\Documents\GitHub\NosTRAILgic\NosTRAILgic\bin\Microsoft.Owin.
 C:\Users\darkdanito\Documents\GitHub\NosTRAILgic\NosTRAILgic\bin\Microsoft.Owin.Security.Google.xml
 C:\Users\darkdanito\Documents\GitHub\NosTRAILgic\NosTRAILgic\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\darkdanito\Documents\GitHub\NosTRAILgic\NosTRAILgic\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-C:\Users\darkdanito\Documents\GitHub\NosTRAILgic\NosTRAILgic\obj\Debug\NosTRAILgic.csprojResolveAssemblyReference.cache
 C:\Users\darkdanito\Documents\GitHub\NosTRAILgic\NosTRAILgic\obj\Debug\NosTRAILgic.dll
 C:\Users\darkdanito\Documents\GitHub\NosTRAILgic\NosTRAILgic\obj\Debug\NosTRAILgic.pdb

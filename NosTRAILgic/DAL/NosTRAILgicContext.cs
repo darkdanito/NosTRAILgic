@@ -10,8 +10,6 @@ namespace NosTRAILgic.DAL
 
         }
 
-        public DbSet<Booking> Bookings { get; set; }
-
         public DbSet<Trail> Trails { get; set; }
     }
 }
