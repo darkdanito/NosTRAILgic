@@ -26,7 +26,7 @@ namespace NosTRAILgic.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index");
             }
 
             TrailMeetup trailMeetup = db.Trails.Find(id);
@@ -85,7 +85,7 @@ namespace NosTRAILgic.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index");
             }
 
             TrailMeetup trailMeetup = db.Trails.Find(id);
@@ -119,7 +119,7 @@ namespace NosTRAILgic.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index");
             }
 
             TrailMeetup trailMeetup = db.Trails.Find(id);
