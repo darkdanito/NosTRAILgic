@@ -166,7 +166,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\GeneralController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\TrailController.cs" />
+    <Compile Include="Controllers\TrailMeetupController.cs" />
     <Compile Include="Controllers\UploadController.cs" />
     <Compile Include="DAL\DataGateway.cs" />
     <Compile Include="DAL\NosTRAILgicContext.cs" />
@@ -181,15 +181,11 @@
     <Compile Include="Models\Museum.cs" />
     <Compile Include="Models\Monument.cs" />
     <Compile Include="Models\Location.cs" />
-    <Compile Include="Models\Trail.cs" />
+    <Compile Include="Models\TrailMeetups.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\NosTRAILgicDB.mdf" />
-    <Content Include="App_Data\NosTRAILgicDB_log.ldf">
-      <DependentUpon>NosTRAILgicDB.mdf</DependentUpon>
-    </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\NosTRAILgic.css" />
@@ -239,13 +235,13 @@
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\_RemoveAccountPartial.cshtml" />
     <Content Include="Views\Account\_SetPasswordPartial.cshtml" />
-    <Content Include="Views\Trail\Create.cshtml" />
-    <Content Include="Views\Trail\Delete.cshtml" />
-    <Content Include="Views\Trail\Details.cshtml" />
-    <Content Include="Views\Trail\Edit.cshtml" />
-    <Content Include="Views\Trail\Index.cshtml" />
     <Content Include="Views\Upload\Index.cshtml" />
     <Content Include="Views\Upload\Create.cshtml" />
+    <Content Include="Views\TrailMeetup\Create.cshtml" />
+    <Content Include="Views\TrailMeetup\Delete.cshtml" />
+    <Content Include="Views\TrailMeetup\Details.cshtml" />
+    <Content Include="Views\TrailMeetup\Edit.cshtml" />
+    <Content Include="Views\TrailMeetup\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -254,7 +250,9 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

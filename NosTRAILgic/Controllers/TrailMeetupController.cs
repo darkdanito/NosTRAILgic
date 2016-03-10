@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using NosTRAILgic.DAL;
@@ -8,129 +11,107 @@ using NosTRAILgic.Models;
 
 namespace NosTRAILgic.Controllers
 {
-    public class TrailController : Controller
+    public class TrailMeetupController : Controller
     {
         private NosTRAILgicContext db = new NosTRAILgicContext();
 
-        // GET: Trail
+        // GET: TrailMeetup
         public ActionResult Index()
         {
             return View(db.Trails.ToList());
         }
 
-        // GET: Trail/Details/5
+        // GET: TrailMeetup/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
-                return RedirectToAction("Index");
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
-            TrailMeetup trail = db.Trails.Find(id);
-
-            if (trail == null)
+            TrailMeetup trailMeetup = db.Trails.Find(id);
+            if (trailMeetup == null)
             {
                 return HttpNotFound();
             }
-
-            return View(trail);
+            return View(trailMeetup);
         }
 
-        // GET: Trail/Create
+        // GET: TrailMeetup/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Trail/Create
+        // POST: TrailMeetup/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Location,TrailCover,TrailName,Description")] TrailMeetup trail, HttpPostedFileBase file, String[] text)
+        public ActionResult Create([Bind(Include = "TrailMeetupID,CreatorID,Name,Description,ImageLink,Date,TimeFrom,TimeTo,Limit")] TrailMeetup trailMeetup)
         {
             if (ModelState.IsValid)
             {
-                string path = Server.MapPath("~/Content/Upload/" + file.FileName);
-                file.SaveAs(path);
-
-                if (text != null)
-                {
-                    // String for storing all the location that the user has inputted into the Location Input form
-                    string combinedLocation = "";
-
-                    for (int i = 0; i < text.Length; i++)
-                    {
-                        combinedLocation += text[i] + ",";
-                    }
-
-                    // Update the dynamic location input + the original input for the location
-                    trail.Location = combinedLocation + trail.Location;
-                }
-                trail.TrailCover = file.FileName;
-                
-                db.Trails.Add(trail);
+                db.Trails.Add(trailMeetup);
                 db.SaveChanges();
-
                 return RedirectToAction("Index");
             }
 
-            return View(trail);
+            return View(trailMeetup);
         }
 
-        // GET: Trail/Edit/5
+        // GET: TrailMeetup/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
-                return RedirectToAction("Index");
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TrailMeetup trail = db.Trails.Find(id);
-            if (trail == null)
+            TrailMeetup trailMeetup = db.Trails.Find(id);
+            if (trailMeetup == null)
             {
                 return HttpNotFound();
             }
-            return View(trail);
+            return View(trailMeetup);
         }
 
-        // POST: Trail/Edit/5
+        // POST: TrailMeetup/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Location,TrailCover,TrailName,Description")] TrailMeetup trail)
+        public ActionResult Edit([Bind(Include = "TrailMeetupID,CreatorID,Name,Description,ImageLink,Date,TimeFrom,TimeTo,Limit")] TrailMeetup trailMeetup)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(trail).State = EntityState.Modified;
+                db.Entry(trailMeetup).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(trail);
+            return View(trailMeetup);
         }
 
-        // GET: Trail/Delete/5
+        // GET: TrailMeetup/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
-                return RedirectToAction("Index");
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TrailMeetup trail = db.Trails.Find(id);
-            if (trail == null)
+            TrailMeetup trailMeetup = db.Trails.Find(id);
+            if (trailMeetup == null)
             {
                 return HttpNotFound();
             }
-            return View(trail);
+            return View(trailMeetup);
         }
 
-        // POST: Trail/Delete/5
+        // POST: TrailMeetup/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            TrailMeetup trail = db.Trails.Find(id);
-            db.Trails.Remove(trail);
+            TrailMeetup trailMeetup = db.Trails.Find(id);
+            db.Trails.Remove(trailMeetup);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
