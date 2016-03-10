@@ -35,11 +35,13 @@ namespace NosTRAILgic.Models
         [Required]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:hh:mm tt}")]
         [DataType(DataType.Time)]
+        [Display(Name = "Start Time")]
         public DateTime? TimeFrom { get; set; }
 
         [Required]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:hh:mm tt}")]
         [DataType(DataType.Time)]
+        [Display(Name = "End Time")]
         public DateTime? TimeTo { get; set; }
 
         [Display(Name = "Maximum People")]
