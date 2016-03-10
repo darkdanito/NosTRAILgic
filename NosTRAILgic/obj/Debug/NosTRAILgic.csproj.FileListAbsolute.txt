@@ -217,3 +217,4 @@ C:\Users\Elson\Documents\GitHub\NosTRAILgic\NosTRAILgic\bin\Microsoft.Owin.Secur
 C:\Users\Elson\Documents\GitHub\NosTRAILgic\NosTRAILgic\obj\Debug\NosTRAILgic.csprojResolveAssemblyReference.cache
 C:\Users\Elson\Documents\GitHub\NosTRAILgic\NosTRAILgic\obj\Debug\NosTRAILgic.dll
 C:\Users\Elson\Documents\GitHub\NosTRAILgic\NosTRAILgic\obj\Debug\NosTRAILgic.pdb
+C:\Users\darkdanito\Documents\GitHub\NosTRAILgic\NosTRAILgic\obj\Debug\NosTRAILgic.csprojResolveAssemblyReference.cache

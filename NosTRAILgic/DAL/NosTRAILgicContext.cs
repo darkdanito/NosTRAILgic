@@ -10,7 +10,7 @@ namespace NosTRAILgic.DAL
 
         }
 
-        public DbSet<Trail> Trails { get; set; }
+        public DbSet<TrailMeetup> Trails { get; set; }
         public DbSet<Location> Locations { get; set; }
         public DbSet<Museum> Museums { get; set; }
         public DbSet<HistoricSite> HistoricSites { get; set; }

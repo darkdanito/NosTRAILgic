@@ -2,7 +2,7 @@
 
 namespace NosTRAILgic.Models
 {
-    public class Trail
+    public class TrailMeetup
     {
         public int Id { get; set; }
 

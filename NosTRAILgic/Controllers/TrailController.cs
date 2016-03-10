@@ -26,7 +26,7 @@ namespace NosTRAILgic.Controllers
                 return RedirectToAction("Index");
             }
 
-            Trail trail = db.Trails.Find(id);
+            TrailMeetup trail = db.Trails.Find(id);
 
             if (trail == null)
             {
@@ -47,7 +47,7 @@ namespace NosTRAILgic.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Location,TrailCover,TrailName,Description")] Trail trail, HttpPostedFileBase file, String[] text)
+        public ActionResult Create([Bind(Include = "Id,Location,TrailCover,TrailName,Description")] TrailMeetup trail, HttpPostedFileBase file, String[] text)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace NosTRAILgic.Controllers
             {
                 return RedirectToAction("Index");
             }
-            Trail trail = db.Trails.Find(id);
+            TrailMeetup trail = db.Trails.Find(id);
             if (trail == null)
             {
                 return HttpNotFound();
@@ -98,7 +98,7 @@ namespace NosTRAILgic.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Location,TrailCover,TrailName,Description")] Trail trail)
+        public ActionResult Edit([Bind(Include = "Id,Location,TrailCover,TrailName,Description")] TrailMeetup trail)
         {
             if (ModelState.IsValid)
             {
@@ -116,7 +116,7 @@ namespace NosTRAILgic.Controllers
             {
                 return RedirectToAction("Index");
             }
-            Trail trail = db.Trails.Find(id);
+            TrailMeetup trail = db.Trails.Find(id);
             if (trail == null)
             {
                 return HttpNotFound();
@@ -129,7 +129,7 @@ namespace NosTRAILgic.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Trail trail = db.Trails.Find(id);
+            TrailMeetup trail = db.Trails.Find(id);
             db.Trails.Remove(trail);
             db.SaveChanges();
             return RedirectToAction("Index");
