@@ -28,11 +28,14 @@ namespace NosTRAILgic.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             TrailMeetup trailMeetup = db.Trails.Find(id);
+
             if (trailMeetup == null)
             {
                 return HttpNotFound();
             }
+
             return View(trailMeetup);
         }
 
@@ -47,10 +50,28 @@ namespace NosTRAILgic.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "TrailMeetupID,CreatorID,Name,Description,Location,ImageLink,Date,TimeFrom,TimeTo,Limit")] TrailMeetup trailMeetup)
+        public ActionResult Create([Bind(Include = "TrailMeetupID,CreatorID,Name,Description,Location,ImageLink,Date,TimeFrom,TimeTo,Limit")] TrailMeetup trailMeetup, HttpPostedFileBase file, String[] text)
         {
             if (ModelState.IsValid)
             {
+                string path = Server.MapPath("~/Content/Upload/" + file.FileName);
+                file.SaveAs(path);
+
+                if (text != null)
+                {
+                    // String for storing all the location that the user has inputted into the Location Input form
+                    string combinedLocation = "";
+
+                    for (int i = 0; i < text.Length; i++)
+                    {
+                        combinedLocation += text[i] + ",";
+                    }
+
+                    // Update the dynamic location input + the original input for the location
+                    trailMeetup.Location = combinedLocation + trailMeetup.Location;
+                }
+                trailMeetup.ImageLink = file.FileName;
+
                 db.Trails.Add(trailMeetup);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -66,11 +87,14 @@ namespace NosTRAILgic.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             TrailMeetup trailMeetup = db.Trails.Find(id);
+
             if (trailMeetup == null)
             {
                 return HttpNotFound();
             }
+
             return View(trailMeetup);
         }
 
@@ -97,11 +121,14 @@ namespace NosTRAILgic.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             TrailMeetup trailMeetup = db.Trails.Find(id);
+
             if (trailMeetup == null)
             {
                 return HttpNotFound();
             }
+
             return View(trailMeetup);
         }
 

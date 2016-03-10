@@ -4,14 +4,13 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
+<h2>Edit Trail - @Html.DisplayFor(model => model.Name)</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>TrailMeetup</h4>
         <hr />
         @Html.ValidationSummary(true)
         @Html.HiddenFor(model => model.TrailMeetupID)
@@ -99,3 +98,7 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
