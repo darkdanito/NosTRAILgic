@@ -32,7 +32,9 @@ namespace NosTRAILgic
             //   appId: "",
             //   appSecret: "");
 
-            //app.UseGoogleAuthentication();
+            app.UseGoogleAuthentication(
+                clientId: "782719428680-svrdu45ijjivd4bnbr8a1pnuo5d8sdgl.apps.googleusercontent.com",
+                clientSecret: "pBZBf3RY9NBRWP3xpliBmtDa");
         }
     }
 }

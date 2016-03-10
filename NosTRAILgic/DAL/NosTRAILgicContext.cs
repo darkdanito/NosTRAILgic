@@ -1,9 +1,10 @@
-﻿using NosTRAILgic.Models;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using NosTRAILgic.Models;
 using System.Data.Entity;
 
 namespace NosTRAILgic.DAL
 {
-    public class NosTRAILgicContext : DbContext
+    public class NosTRAILgicContext : IdentityDbContext<ApplicationUser>
     {
         public NosTRAILgicContext() : base("NosTRAILgicDB")
         {
