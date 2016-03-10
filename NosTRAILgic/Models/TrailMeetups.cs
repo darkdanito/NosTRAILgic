@@ -22,6 +22,9 @@ namespace NosTRAILgic.Models
         [Required]
         public string Description { get; set; }
 
+        [Required]
+        public string Location { get; set; }
+
         [Display(Name = "Trail Cover")]
         public string ImageLink { get; set; }
 
