@@ -24,7 +24,7 @@
         @foreach (var item in Model)
         {
             <td>
-                @Html.ActionLink(item.Name, "Details", new { id = item.TrailMeetupID })
+                @Html.ActionLink(item.Name, "Details", new { id = item.TrailMeetupID }, new { @class = "btn btn-default" })
             </td>
         }
     </tr>

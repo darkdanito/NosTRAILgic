@@ -87,9 +87,10 @@
 
     </dl>
 </div>
+
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.TrailMeetupID }) |
-    @Html.ActionLink("Delete", "Delete", new { id = Model.TrailMeetupID }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.TrailMeetupID }, new { @class = "btn btn-default" })
+    @Html.ActionLink("Delete", "Delete", new { id = Model.TrailMeetupID }, new { @class = "btn btn-default" })
     <button class="btn btn-default" type="button" onclick="location.href='@Url.Action("Index", "TrailMeetup")'">Back to Trail Index</button>
 </p>
 
