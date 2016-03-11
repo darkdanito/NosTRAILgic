@@ -42,6 +42,13 @@ namespace NosTRAILgic.Controllers
         // GET: TrailMeetup/Create
         public ActionResult Create()
         {
+            TrailMeetup trail = new TrailMeetup();
+
+            //if (User.Identity.Name == null)
+            //{
+            //    trail.CreatorID = 012345;
+            //}
+
             return View();
         }
 
@@ -74,6 +81,7 @@ namespace NosTRAILgic.Controllers
 
                 db.Trails.Add(trailMeetup);
                 db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
 
@@ -109,6 +117,7 @@ namespace NosTRAILgic.Controllers
             {
                 db.Entry(trailMeetup).State = EntityState.Modified;
                 db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
             return View(trailMeetup);
