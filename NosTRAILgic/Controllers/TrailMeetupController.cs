@@ -15,6 +15,8 @@ namespace NosTRAILgic.Controllers
     {
         private NosTRAILgicContext db = new NosTRAILgicContext();
         JoinTrail jointrail = new JoinTrail();
+        Location location = new Location();
+        TrailMeetup_Location trailMeetup_Location = new TrailMeetup_Location();
 
         // GET: TrailMeetup
         public ActionResult Index()
@@ -37,6 +39,36 @@ namespace NosTRAILgic.Controllers
                 
             db.JoinTrails.Add(jointrail);
             db.SaveChanges();
+
+            //location.LocationId = 9000;
+            //location.Name = "Boon Lay MRT";
+            //location.AreaCode = 8888;
+            //location.PostalCode = 9002;
+            //location.Latitude = 01.33948;
+            //location.Longitude = 103.70580;
+
+            //db.Locations.Add(location);
+            //db.SaveChanges();
+
+            //location.LocationId = 9000;
+            //location.Name = "Lakeside MRT";
+            //location.AreaCode = 8887;
+            //location.PostalCode = 9001;
+            //location.Latitude = 01.34455;
+            //location.Longitude = 103.72100;
+
+            //db.Locations.Add(location);
+            //db.SaveChanges();
+
+            //location.LocationId = 9000;
+            //location.Name = "Chinese Garden MRT";
+            //location.AreaCode = 8886;
+            //location.PostalCode = 9002;
+            //location.Latitude = 01.34209;
+            //location.Longitude = 103.73260;
+
+            //db.Locations.Add(location);
+            //db.SaveChanges();
 
             return RedirectToAction("Index", "Home");
         }
@@ -101,10 +133,32 @@ namespace NosTRAILgic.Controllers
                 {
                     // String for storing all the location that the user has inputted into the Location Input form
                     string combinedLocation = "";
+                    string parameterLocation = "";
 
                     for (int i = 0; i < text.Length; i++)
                     {
                         combinedLocation += text[i] + ",";
+
+                        var idCount = db.Trails.OrderByDescending(r => r.TrailMeetupID).FirstOrDefault();
+
+                        //var linqParticipantsQuery = 
+                        //    (from p in db.Locations where p.Name == text[i] select p.LocationId).FirstOrDefault();
+
+
+                        parameterLocation = text[i];
+
+                        //int location = 0;
+
+                        //foreach (var p in linqParticipantsQuery)
+                        //{
+                        //    location = p;
+                        //}
+
+                        trailMeetup_Location.TrailMeetupID = idCount.TrailMeetupID + 1;
+                        trailMeetup_Location.LocationID = (from a in db.Locations where a.Name == parameterLocation select a.LocationId).FirstOrDefault();
+
+                        db.TrailMeetup_Location.Add(trailMeetup_Location);
+                        db.SaveChanges();
                     }
 
                     // Update the dynamic location input + the original input for the location
