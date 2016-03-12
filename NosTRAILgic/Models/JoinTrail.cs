@@ -15,6 +15,6 @@ namespace NosTRAILgic.Models
 
         public int TrailMeetupID { get; set; }
 
-        public int UserID { get; set; }
+        public string UserID { get; set; }
     }
 }

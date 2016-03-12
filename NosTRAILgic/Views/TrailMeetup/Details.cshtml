@@ -10,7 +10,7 @@
 </div>
 
 <div>
-    <button class="btn btn-default" type="button" onclick="location.href='@Url.Action("Index", "TrailMeetup")'">Join Trail</button>
+    @Html.ActionLink("Join Trail", "JoinTrail", new { id = Model.TrailMeetupID }, new { @class = "btn btn-default" })
 </div>
 
 <div>

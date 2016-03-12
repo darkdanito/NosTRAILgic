@@ -21,6 +21,32 @@ namespace NosTRAILgic.Controllers
             return View(db.Trails.ToList());
         }
 
+        public ActionResult JoinTrail(int? id)
+        {
+            JoinTrail jointrail = new JoinTrail();
+
+            if (User.Identity.Name == null)
+            {
+                jointrail.TrailMeetupID = (int)id;
+                jointrail.UserID = "testing_null_username";
+            }
+            else if (User.Identity.Name == "")
+            {
+                jointrail.TrailMeetupID = (int)id;
+                jointrail.UserID = "testing_empty_username";
+            }
+            else
+            {
+                jointrail.TrailMeetupID = (int)id;
+                jointrail.UserID = User.Identity.Name;
+            }
+                
+            db.JoinTrails.Add(jointrail);
+            db.SaveChanges();
+
+            return RedirectToAction("Index", "Home");
+        }
+
         // GET: TrailMeetup/Details/5
         public ActionResult Details(int? id)
         {
