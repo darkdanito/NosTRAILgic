@@ -14,6 +14,7 @@ namespace NosTRAILgic.Controllers
     public class TrailMeetupController : Controller
     {
         private NosTRAILgicContext db = new NosTRAILgicContext();
+        JoinTrail jointrail = new JoinTrail();
 
         // GET: TrailMeetup
         public ActionResult Index()
@@ -23,14 +24,7 @@ namespace NosTRAILgic.Controllers
 
         public ActionResult JoinTrail(int? id)
         {
-            JoinTrail jointrail = new JoinTrail();
-
-            if (User.Identity.Name == null)
-            {
-                jointrail.TrailMeetupID = (int)id;
-                jointrail.UserID = "testing_null_username";
-            }
-            else if (User.Identity.Name == "")
+            if (User.Identity.Name == null || User.Identity.Name == "")
             {
                 jointrail.TrailMeetupID = (int)id;
                 jointrail.UserID = "testing_empty_username";
@@ -61,6 +55,18 @@ namespace NosTRAILgic.Controllers
             {
                 return HttpNotFound();
             }
+
+            var linqParticipantsQuery = from p in db.JoinTrails where p.TrailMeetupID == id select p.UserID;
+
+            var addParticipants = "";
+
+            foreach (var p in linqParticipantsQuery)
+            {
+                addParticipants += p;
+                addParticipants += " , ";
+            }
+
+            ViewBag.participants = addParticipants;
 
             return View(trailMeetup);
         }
