@@ -113,7 +113,19 @@ namespace NosTRAILgic.Controllers
             //    trail.CreatorID = 012345;
             //}
 
-            return View();
+            if (User.Identity.Name == null || User.Identity.Name == "")
+            {
+                trail.CreatorID = "Anonymous Creator";
+            }
+            else
+            {
+                trail.CreatorID = User.Identity.Name;
+            }
+
+            trail.Limit = 1;
+            trail.Date = DateTime.Now;
+
+            return View(trail);
         }
 
         // POST: TrailMeetup/Create
