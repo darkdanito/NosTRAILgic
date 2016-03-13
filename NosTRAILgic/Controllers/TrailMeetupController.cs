@@ -100,6 +100,27 @@ namespace NosTRAILgic.Controllers
 
             ViewBag.participants = addParticipants;
 
+            ViewBag.linqLocationTest = "Gaaaa";
+
+            int trailID = (int)id;
+
+            var sample = from y in db.Trails
+                         join x in db.TrailMeetup_Location on y.TrailMeetupID equals x.TrailMeetupID
+                         join w in db.Locations on x.LocationID equals w.LocationId
+                         where y.TrailMeetupID == trailID
+                         select w.Name;
+
+            var nameString = "";
+
+            foreach (var s in sample)
+            {
+                nameString += s;
+                nameString += ",";
+            }
+
+
+            ViewBag.linqLocationTest = nameString;
+
             return View(trailMeetup);
         }
 

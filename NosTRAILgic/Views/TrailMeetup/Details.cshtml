@@ -6,7 +6,7 @@
 
 
 <div>
-    <h2>Trail Details - @Html.DisplayFor(model => model.Name)</h2>
+    <h2>Trail Details - @Html.DisplayFor(model => model.Name) sample Linq Output = @Html.Raw(ViewBag.linqLocationTest)</h2>
 </div>
 
 <div>
@@ -116,13 +116,18 @@
 
         // Code to take Trail Input of Location
 //      var trailInput = "@*@Url.Content(Model.Location)*@"  // Remember to remove the comment for the Razor Code
-        var trailInput = "Boon Lay MRT, Chinese Garden MRT, Lakeside MRT"
-
+//        var trailInput = "Boon Lay MRT, Chinese Garden MRT, Lakeside MRT"
+        var trailInput = '@ViewBag.linqLocationTest';
+        console.log(trailInput);
         // Split the Trail Input of Location based on COMMA into different location
         var trailArray = trailInput.split(',');
 
-        for (var i = trailArray.length; i > 0 ; i--)
+        console.log(trailInput);
+
+        for (var i = trailArray.length-1; i > 0 ; i--)
         {
+            console.log(trailArray[i - 1]);
+
             googleMapAddress = trailArray[i - 1];
 
             if (geocoder) {
