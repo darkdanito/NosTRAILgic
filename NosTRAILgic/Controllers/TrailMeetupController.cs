@@ -54,7 +54,6 @@ namespace NosTRAILgic.Controllers
             db.SaveChanges();
 
             return RedirectToAction("Details", "TrailMeetup", new { id = id });
-        
         }
 
         /************************************************************************************
@@ -153,6 +152,42 @@ namespace NosTRAILgic.Controllers
 
             // Update the View Bag so that it can be passed to the view
             ViewBag.linqLocationTest = AllLocation;
+
+
+
+
+
+            var LINQLatQuery = from y in db.Trails
+                                    join x in db.TrailMeetup_Location on y.TrailMeetupID equals x.TrailMeetupID
+                                    join w in db.Locations on x.LocationID equals w.LocationId
+                                    where y.TrailMeetupID == trailID
+                                    select w.Latitude;
+
+            var LINQLongQuery = from y in db.Trails
+                                    join x in db.TrailMeetup_Location on y.TrailMeetupID equals x.TrailMeetupID
+                                    join w in db.Locations on x.LocationID equals w.LocationId
+                                    where y.TrailMeetupID == trailID
+                                    select w.Longitude;
+
+
+            var AllLat = "";
+            var AllLong = "";
+
+            foreach (var Lat in LINQLatQuery)
+            {
+                AllLat += Lat;
+                AllLat += ",";
+            }
+
+            foreach (var Long in LINQLongQuery)
+            {
+                AllLong += Long;
+                AllLong += ",";
+            }
+
+            ViewBag.linqLatTest = AllLat;
+            ViewBag.linqLongTest = AllLong;
+
 
             return View(trailMeetup);
         }

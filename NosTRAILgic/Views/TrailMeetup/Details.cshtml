@@ -125,11 +125,18 @@
         var googleMapAddress = "";
 
         // Code to take Trail Input of Location
-//      var trailInput = "@*@Url.Content(Model.Location)*@"  // Remember to remove the comment for the Razor Code
-//        var trailInput = "Boon Lay MRT, Chinese Garden MRT, Lakeside MRT"
+        //      var trailInput = "@*@Url.Content(Model.Location)*@"  // Remember to remove the comment for the Razor Code
+        //        var trailInput = "Boon Lay MRT, Chinese Garden MRT, Lakeside MRT"
+
+
         var trailInput = '@ViewBag.linqLocationTest';
 
-        console.log("Viewbag results: ", trailInput);
+        var trailLatInput = '@ViewBag.linqLatTest';
+        var trailLongInput = '@ViewBag.linqLongTest';
+
+        console.log("Viewbag results for Location: ", trailInput);
+        console.log("Viewbag results for Lat: ", trailLatInput);
+        console.log("Viewbag results for Long: ", trailLongInput);
 
         // Split the Trail Input of Location based on COMMA into different location
         var trailArray = trailInput.split(',');
