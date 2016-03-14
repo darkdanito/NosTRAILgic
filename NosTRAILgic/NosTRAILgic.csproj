@@ -195,7 +195,6 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\JoinTrail.cs" />
-    <Compile Include="Models\UploadLocation.cs" />
     <Compile Include="Models\Location.cs" />
     <Compile Include="Models\TrailMeetups.cs" />
     <Compile Include="Models\TrailMeetup_Location.cs" />

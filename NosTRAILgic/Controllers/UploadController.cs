@@ -13,7 +13,7 @@ namespace NosTRAILgic.Controllers
     public class UploadController : Controller
     {
         private NosTRAILgicContext db = new NosTRAILgicContext();
-        private UploadLocation location;
+        private Location location;
 
         // GET: Upload
         public ActionResult Index()
@@ -37,6 +37,8 @@ namespace NosTRAILgic.Controllers
         [HttpPost]
         public ActionResult Create(HttpPostedFileBase MuseumFile, HttpPostedFileBase MonumentFile, HttpPostedFileBase HistoricSiteFile)
         {
+            Boolean skipLocation = false;
+
             try
             {
                 //Check If MuseumFile and Etc is not emptyy before continue
@@ -49,8 +51,8 @@ namespace NosTRAILgic.Controllers
                     //System.Diagnostics.Debug.WriteLine(path);
 
                     //Delete all previous musuem
-                    var deleteLocation = db.UploadLocations.Where(location => location.Category == "Musuem");
-                    db.UploadLocations.RemoveRange(deleteLocation);
+                    var deleteLocation = db.Locations.Where(location => location.Category == "Musuem");
+                    db.Locations.RemoveRange(deleteLocation);
                     db.SaveChanges();
 
                     //System.Diagnostics.Debug.WriteLine("Delete DB");
@@ -64,7 +66,7 @@ namespace NosTRAILgic.Controllers
                     //for (int placeIndex = 0; placeIndex < 1; placeIndex++)
                     for (int placeIndex = 0; placeIndex < nameList.Count; placeIndex++)
                     {
-                        location = new UploadLocation();
+                        location = new Location();
                         location.Name = nameList[placeIndex].ChildNodes[0].InnerText;
                         string[] corrdinate = corrdinateList[placeIndex].InnerText.Split(',');
                         location.Latitude = float.Parse(corrdinate[0]);
@@ -80,13 +82,15 @@ namespace NosTRAILgic.Controllers
                                 string postalCode = HttpUtility.HtmlDecode(nodes[descIndex + 1].InnerHtml);
                                 if (HttpUtility.HtmlDecode(nodes[descIndex + 1].InnerHtml).Equals("<Null>"))
                                 {
-                                    location.PostalCode = 0; // AreaCode and PostalCode = 0 if Null 
+                                    //location.PostalCode = 0; // AreaCode and PostalCode = 0 if Null 
+                                    skipLocation = true; //Skip
                                 }
                                 else
                                 {
                                     location.PostalCode = Int32.Parse(postalCode);
+                                    location.AreaCode = location.PostalCode / 10000; //get the first 2 digit
                                 }
-                                location.AreaCode = location.PostalCode / 10000; //get the first 2 digit
+
                             }
                             else if (nodes[descIndex].InnerHtml.Equals("DESCRIPTION"))
                             {
@@ -122,9 +126,14 @@ namespace NosTRAILgic.Controllers
                         //System.Diagnostics.Debug.WriteLine(location.Latitude.ToString());
                         //System.Diagnostics.Debug.WriteLine(location.Longitude.ToString());
                         //System.Diagnostics.Debug.WriteLine(location.Category);
-
-                        db.UploadLocations.Add(location);
-                        db.SaveChanges();
+                        if (!skipLocation) { 
+                            db.Locations.Add(location);
+                            db.SaveChanges();
+                        }
+                        else
+                        {
+                            skipLocation = false;
+                        }
                     }                    
                 }
 
@@ -138,8 +147,8 @@ namespace NosTRAILgic.Controllers
                     //System.Diagnostics.Debug.WriteLine(path);
 
                     //Delete all previous Monument
-                    var deleteLocation = db.UploadLocations.Where(location => location.Category == "Monument");
-                    db.UploadLocations.RemoveRange(deleteLocation);
+                    var deleteLocation = db.Locations.Where(location => location.Category == "Monument");
+                    db.Locations.RemoveRange(deleteLocation);
                     db.SaveChanges();
 
                     // TODO: Add insert logic here
@@ -151,7 +160,7 @@ namespace NosTRAILgic.Controllers
                     //for (int placeIndex = 0; placeIndex < 1; placeIndex++)
                     for (int placeIndex = 0; placeIndex < nameList.Count; placeIndex++)
                     {
-                        location = new UploadLocation();
+                        location = new Location();
                         location.Name = nameList[placeIndex].ChildNodes[0].InnerText;
                         string[] corrdinate = corrdinateList[placeIndex].InnerText.Split(',');
                         location.Latitude = float.Parse(corrdinate[0]);
@@ -167,13 +176,15 @@ namespace NosTRAILgic.Controllers
                                 string postalCode = HttpUtility.HtmlDecode(nodes[descIndex + 1].InnerHtml);
                                 if (HttpUtility.HtmlDecode(nodes[descIndex + 1].InnerHtml).Equals("<Null>"))
                                 {
-                                    location.PostalCode = 0; // AreaCode and PostalCode = 0 if Null 
+                                    //location.PostalCode = 0; // AreaCode and PostalCode = 0 if Null 
+                                    skipLocation = true; //Skip
                                 }
                                 else
                                 {
                                     location.PostalCode = Int32.Parse(postalCode);
+                                    location.AreaCode = location.PostalCode / 10000; //get the first 2 digit
                                 }
-                                location.AreaCode = location.PostalCode / 10000; //get the first 2 digit
+                                
                             }
                             else if (nodes[descIndex].InnerHtml.Equals("DESCRIPTION"))
                             {
@@ -192,8 +203,15 @@ namespace NosTRAILgic.Controllers
                         location.HyperLink = "<Null>";
                         location.Category = "Monument";
 
-                        db.UploadLocations.Add(location);
-                        db.SaveChanges();
+                        if (!skipLocation)
+                        {
+                            db.Locations.Add(location);
+                            db.SaveChanges();
+                        }
+                        else
+                        {
+                            skipLocation = false;
+                        }
                     }
                 }
 
@@ -207,8 +225,8 @@ namespace NosTRAILgic.Controllers
                     //System.Diagnostics.Debug.WriteLine(path);
 
                     //Delete all previous musuem
-                    var deleteLocation = db.UploadLocations.Where(location => location.Category == "HistoricSite");
-                    db.UploadLocations.RemoveRange(deleteLocation);
+                    var deleteLocation = db.Locations.Where(location => location.Category == "HistoricSite");
+                    db.Locations.RemoveRange(deleteLocation);
                     db.SaveChanges();
 
                     //System.Diagnostics.Debug.WriteLine("Delete DB");
@@ -222,7 +240,7 @@ namespace NosTRAILgic.Controllers
                     //for (int placeIndex = 0; placeIndex < 1; placeIndex++)
                     for (int placeIndex = 0; placeIndex < nameList.Count; placeIndex++)
                     {
-                        location = new UploadLocation();
+                        location = new Location();
                         location.Name = nameList[placeIndex].ChildNodes[0].InnerText;
                         string[] corrdinate = corrdinateList[placeIndex].InnerText.Split(',');
                         location.Latitude = float.Parse(corrdinate[0]);
@@ -238,13 +256,14 @@ namespace NosTRAILgic.Controllers
                                 string postalCode = HttpUtility.HtmlDecode(nodes[descIndex + 1].InnerHtml);
                                 if (HttpUtility.HtmlDecode(nodes[descIndex + 1].InnerHtml).Equals("<Null>"))
                                 {
-                                    location.PostalCode = 0; // AreaCode and PostalCode = 0 if Null 
+                                    //location.PostalCode = 0; // AreaCode and PostalCode = 0 if Null
+                                    skipLocation= true; // Skip 
                                 }
                                 else
                                 {
                                     location.PostalCode = Int32.Parse(postalCode);
+                                    location.AreaCode = location.PostalCode / 10000; //get the first 2 digit
                                 }
-                                location.AreaCode = location.PostalCode / 10000; //get the first 2 digit
                             }
                             else if (nodes[descIndex].InnerHtml.Equals("DESCRIPTION"))
                             {
@@ -270,8 +289,15 @@ namespace NosTRAILgic.Controllers
 
                         location.Category = "HistoricSite";
 
-                        db.UploadLocations.Add(location);
-                        db.SaveChanges();
+                        if (!skipLocation)
+                        {
+                            db.Locations.Add(location);
+                            db.SaveChanges();
+                        }
+                        else
+                        {
+                            skipLocation = false;
+                        }
                     }
                 }
                 return RedirectToAction("Create");
