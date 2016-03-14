@@ -118,7 +118,9 @@
 //      var trailInput = "@*@Url.Content(Model.Location)*@"  // Remember to remove the comment for the Razor Code
 //        var trailInput = "Boon Lay MRT, Chinese Garden MRT, Lakeside MRT"
         var trailInput = '@ViewBag.linqLocationTest';
-        console.log(trailInput);
+
+        console.log("Viewbag results: ", trailInput);
+
         // Split the Trail Input of Location based on COMMA into different location
         var trailArray = trailInput.split(',');
 

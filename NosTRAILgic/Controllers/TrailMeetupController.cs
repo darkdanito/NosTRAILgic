@@ -83,7 +83,9 @@ namespace NosTRAILgic.Controllers
             //db.Locations.Add(location);
             //db.SaveChanges();
 
-            return RedirectToAction("Index", "Home");
+            //    return RedirectToAction("Index", "TrailMeetup");
+            return RedirectToAction("Details", "TrailMeetup", new { id = id });
+        
         }
 
         /************************************************************************************
