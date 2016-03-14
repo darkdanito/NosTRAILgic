@@ -69,10 +69,10 @@ namespace NosTRAILgic.Controllers
                         location = new Location();
                         location.Name = nameList[placeIndex].ChildNodes[0].InnerText;
                         string[] corrdinate = corrdinateList[placeIndex].InnerText.Split(',');
-                        location.Latitude = float.Parse(corrdinate[0]);
-                        location.Longitude = float.Parse(corrdinate[1]);
+                        location.Longitude = float.Parse(corrdinate[0]);
+                        location.Latitude = float.Parse(corrdinate[1]); 
 
-                        HtmlDocument doc = new HtmlDocument();
+                         HtmlDocument doc = new HtmlDocument();
                         doc.LoadHtml(descList[placeIndex].InnerText);
                         HtmlNode[] nodes = doc.DocumentNode.SelectNodes("//td").ToArray();
                         for (int descIndex = 0; descIndex < nodes.Length; descIndex++)
@@ -163,8 +163,8 @@ namespace NosTRAILgic.Controllers
                         location = new Location();
                         location.Name = nameList[placeIndex].ChildNodes[0].InnerText;
                         string[] corrdinate = corrdinateList[placeIndex].InnerText.Split(',');
-                        location.Latitude = float.Parse(corrdinate[0]);
-                        location.Longitude = float.Parse(corrdinate[1]);
+                        location.Longitude = float.Parse(corrdinate[0]);
+                        location.Latitude = float.Parse(corrdinate[1]);
 
                         HtmlDocument doc = new HtmlDocument();
                         doc.LoadHtml(descList[placeIndex].InnerText);
@@ -243,8 +243,8 @@ namespace NosTRAILgic.Controllers
                         location = new Location();
                         location.Name = nameList[placeIndex].ChildNodes[0].InnerText;
                         string[] corrdinate = corrdinateList[placeIndex].InnerText.Split(',');
-                        location.Latitude = float.Parse(corrdinate[0]);
-                        location.Longitude = float.Parse(corrdinate[1]);
+                        location.Longitude = float.Parse(corrdinate[0]);
+                        location.Latitude = float.Parse(corrdinate[1]);
 
                         HtmlDocument doc = new HtmlDocument();
                         doc.LoadHtml(descList[placeIndex].InnerText);

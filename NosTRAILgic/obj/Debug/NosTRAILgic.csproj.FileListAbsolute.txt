@@ -278,3 +278,4 @@ C:\Users\darkdanito\Documents\GitHub\NosTRAILgic\NosTRAILgic\bin\HtmlAgilityPack
 C:\Users\darkdanito\Documents\GitHub\NosTRAILgic\NosTRAILgic\bin\HtmlAgilityPack.pdb
 C:\Users\darkdanito\Documents\GitHub\NosTRAILgic\NosTRAILgic\bin\HtmlAgilityPack.xml
 C:\Users\darkdanito\Documents\GitHub\NosTRAILgic\NosTRAILgic\obj\Debug\NosTRAILgic.csprojResolveAssemblyReference.cache
+C:\Users\Elson\Documents\GitHub\NosTRAILgic\NosTRAILgic\obj\Debug\NosTRAILgic.csprojResolveAssemblyReference.cache
