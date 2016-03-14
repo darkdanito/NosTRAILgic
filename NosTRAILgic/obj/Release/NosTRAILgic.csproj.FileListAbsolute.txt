@@ -108,3 +108,6 @@ C:\Users\darkdanito\Documents\GitHub\NosTRAILgic\NosTRAILgic\bin\Microsoft.Owin.
 C:\Users\darkdanito\Documents\GitHub\NosTRAILgic\NosTRAILgic\bin\Microsoft.Owin.Security.Google.xml
 C:\Users\darkdanito\Documents\GitHub\NosTRAILgic\NosTRAILgic\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\darkdanito\Documents\GitHub\NosTRAILgic\NosTRAILgic\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+C:\Users\darkdanito\Documents\GitHub\NosTRAILgic\NosTRAILgic\bin\HtmlAgilityPack.dll
+C:\Users\darkdanito\Documents\GitHub\NosTRAILgic\NosTRAILgic\bin\HtmlAgilityPack.pdb
+C:\Users\darkdanito\Documents\GitHub\NosTRAILgic\NosTRAILgic\bin\HtmlAgilityPack.xml

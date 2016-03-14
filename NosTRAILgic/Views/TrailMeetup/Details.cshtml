@@ -29,7 +29,7 @@
         <tr>
             <td><b>@Html.DisplayNameFor(model => model.Name)</b></td>
             <td>@Html.DisplayFor(model => model.Name)</td>
-            <td>@{
+            <td rowspan="7">@{
                 
                 @*@Html.Raw(ViewBag.participants)*@
 
@@ -52,7 +52,6 @@
         <tr>
             <td><b>@Html.DisplayNameFor(model => model.Description)</b></td>
             <td>@Html.DisplayFor(model => model.Description)</td>
-            <td></td>
         </tr>
 
         @*<tr>
@@ -64,31 +63,26 @@
         <tr>
             <td><b>@Html.DisplayNameFor(model => model.ImageLink)</b></td>
             <td>@Html.DisplayFor(model => model.ImageLink)</td>
-            <td></td>
         </tr>
 
         <tr>
             <td><b>@Html.DisplayNameFor(model => model.Date)</b></td>
             <td>@Html.DisplayFor(model => model.Date)</td>
-            <td></td>
         </tr>
 
         <tr>
             <td><b>@Html.DisplayNameFor(model => model.TimeFrom)</b></td>
             <td>@Html.DisplayFor(model => model.TimeFrom)</td>
-            <td></td>
         </tr>
 
         <tr>
             <td><b>@Html.DisplayNameFor(model => model.TimeTo)</b></td>
             <td>@Html.DisplayFor(model => model.TimeTo)</td>
-            <td></td>
         </tr>
 
         <tr>
             <td><b>@Html.DisplayNameFor(model => model.Limit)</b></td>
             <td>@Html.DisplayFor(model => model.Limit)</td>
-            <td></td>
         </tr>
 
     </table>

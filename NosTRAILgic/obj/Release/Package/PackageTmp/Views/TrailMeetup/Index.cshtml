@@ -1,0 +1,54 @@
+﻿@model IEnumerable<NosTRAILgic.Models.TrailMeetup>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Trail Index</h2>
+
+<p>
+    <button class="btn btn-default" type="button" onclick="location.href='@Url.Action("Create", "TrailMeetup")'">Create New Trail</button>
+</p>
+
+<table class="table table-bordered">
+
+    @{
+        int trailCount = 0;
+
+
+        foreach (var item in Model)
+        {
+            if (trailCount % 5 == 0)
+            {
+                @Html.Raw("<tr>");
+            }
+
+            @Html.Raw("<td width='20 %'>");
+            
+                <img src="/Content/Upload/@Url.Content(item.ImageLink)" width="100" height="100">
+
+            @Html.Raw("<hr />");
+
+                @Html.ActionLink(item.Name, "Details", new { id = item.TrailMeetupID }, new { @class = "btn btn-default" })
+            @Html.Raw("</td>");
+
+            if (trailCount % 5 == 4)
+            {
+                @Html.Raw("</tr>");
+            }
+            trailCount++;
+        }
+
+    }
+
+    @*<tr>
+        @foreach (var item in Model)
+        {
+            <td width="20%">
+                <img src="/Content/Upload/@Url.Content(item.ImageLink)" width="100" height="100">
+                
+                @Html.ActionLink(item.Name, "Details", new { id = item.TrailMeetupID }, new { @class = "btn btn-default" })
+            </td>
+        }
+    </tr>*@
+</table>

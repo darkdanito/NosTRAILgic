@@ -6,21 +6,23 @@
 
 <h2>Create New Trail</h2>
 
-
-@using (Html.BeginForm("Create", "Trail",FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("Create", "TrailMeetup", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
+
         <hr />
+
         @Html.ValidationSummary(true)
-        <div class="form-group">
+
+        @*<div class="form-group">
             @Html.LabelFor(model => model.Location, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Location)
                 @Html.ValidationMessageFor(model => model.Location)
             </div>
-        </div>
+        </div>*@
 
         <div class="form-group" id="dynamicDivInput">
 
@@ -28,25 +30,25 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="button" id="addField" value="Add" class="btn btn-default" /> 
+                <input type="button" id="addField" value="Add Location" class="btn btn-default" />
             </div>
         </div>
 
         <hr />
 
         <div class="form-group">
-            @Html.LabelFor(model => model.TrailCover, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.CreatorID, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <input type="file" name="file" id="file" required/>
-                @Html.ValidationMessageFor(model => model.TrailCover)
+                @Html.EditorFor(model => model.CreatorID)
+                @Html.ValidationMessageFor(model => model.CreatorID)
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.TrailName, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.TrailName)
-                @Html.ValidationMessageFor(model => model.TrailName)
+                @Html.EditorFor(model => model.Name)
+                @Html.ValidationMessageFor(model => model.Name)
             </div>
         </div>
 
@@ -58,18 +60,60 @@
             </div>
         </div>
 
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ImageLink, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="file" name="file" id="file" required />
+                @Html.ValidationMessageFor(model => model.ImageLink)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Date)
+                @Html.ValidationMessageFor(model => model.Date)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TimeFrom, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TimeFrom)
+                @Html.ValidationMessageFor(model => model.TimeFrom)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TimeTo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TimeTo)
+                @Html.ValidationMessageFor(model => model.TimeTo)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Limit, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Limit)
+                @Html.ValidationMessageFor(model => model.Limit)
+            </div>
+        </div>
+
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />
-                <input type="button" value="Cancel" class="btn btn-default" />
+                <button class="btn btn-default" type="button" onclick="location.href='@Url.Action("Index", "TrailMeetup")'">Cancel</button>
             </div>
         </div>
     </div>
 }
 
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-
     <script type="text/javascript">
 
         $(document).ready(function () {
@@ -91,7 +135,6 @@
 
     </script>
 }
-
 <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>
 <script type="text/javascript">
 
