@@ -225,6 +225,27 @@ namespace NosTRAILgic.Controllers
                 string path = Server.MapPath("~/Content/Upload/" + file.FileName);
                 file.SaveAs(path);
 
+                trailMeetup.ImageLink = file.FileName;
+
+                db.Trails.Add(trailMeetup);
+                db.SaveChanges();
+
+
+
+
+                string inputTrailName = trailMeetup.Name;
+
+                var LINQCreatedTrailIDQuery = from c in db.Trails where c.Name == inputTrailName select c.TrailMeetupID;
+
+                int TrailID = 0;
+
+                foreach (var Lat in LINQCreatedTrailIDQuery)
+                {
+                    TrailID = Lat;
+                }
+
+
+
                 if (text != null)
                 {
                     // String for storing all the location that the user has inputted into the Location Input form
@@ -235,7 +256,11 @@ namespace NosTRAILgic.Controllers
                     {
                         combinedLocation += text[i] + ",";
 
-                        var idCount = db.Trails.OrderByDescending(r => r.TrailMeetupID).FirstOrDefault();
+                    //    var idCount = db.Trails.OrderByDescending(r => r.TrailMeetupID).FirstOrDefault();
+
+                        
+
+
 
                         //var linqParticipantsQuery = 
                         //    (from p in db.Locations where p.Name == text[i] select p.LocationId).FirstOrDefault();
@@ -250,7 +275,8 @@ namespace NosTRAILgic.Controllers
                         //    location = p;
                         //}
 
-                        trailMeetup_Location.TrailMeetupID = idCount.TrailMeetupID + 1;
+                        //trailMeetup_Location.TrailMeetupID = idCount.TrailMeetupID + 1
+                        trailMeetup_Location.TrailMeetupID = TrailID;
                         trailMeetup_Location.LocationID = (from a in db.Locations where a.Name == parameterLocation select a.LocationId).FirstOrDefault();
 
                         db.TrailMeetup_Location.Add(trailMeetup_Location);
@@ -260,10 +286,7 @@ namespace NosTRAILgic.Controllers
                     // Update the dynamic location input + the original input for the location
                 //    trailMeetup.Location = combinedLocation + trailMeetup.Location;
                 }
-                trailMeetup.ImageLink = file.FileName;
-
-                db.Trails.Add(trailMeetup);
-                db.SaveChanges();
+                
 
                 return RedirectToAction("Index");
             }

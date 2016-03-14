@@ -1,8 +1,6 @@
 ===============================================================================================================
 Bugs:
 ===============================================================================================================
-Google Map Marker name is the same name
-Layout of View/Trail/Index need fixing. perhaps 5 trails per row.
 Increase the create page input box bigger
 When remove the dyanmic box, the word still remain 
 need to put a x sign for the remove
