@@ -53,37 +53,6 @@ namespace NosTRAILgic.Controllers
             db.JoinTrails.Add(jointrail);
             db.SaveChanges();
 
-            //location.LocationId = 9000;
-            //location.Name = "Boon Lay MRT";
-            //location.AreaCode = 8888;
-            //location.PostalCode = 9002;
-            //location.Latitude = 01.33948;
-            //location.Longitude = 103.70580;
-
-            //db.Locations.Add(location);
-            //db.SaveChanges();
-
-            //location.LocationId = 9000;
-            //location.Name = "Lakeside MRT";
-            //location.AreaCode = 8887;
-            //location.PostalCode = 9001;
-            //location.Latitude = 01.34455;
-            //location.Longitude = 103.72100;
-
-            //db.Locations.Add(location);
-            //db.SaveChanges();
-
-            //location.LocationId = 9000;
-            //location.Name = "Chinese Garden MRT";
-            //location.AreaCode = 8886;
-            //location.PostalCode = 9002;
-            //location.Latitude = 01.34209;
-            //location.Longitude = 103.73260;
-
-            //db.Locations.Add(location);
-            //db.SaveChanges();
-
-            //    return RedirectToAction("Index", "TrailMeetup");
             return RedirectToAction("Details", "TrailMeetup", new { id = id });
         
         }
@@ -140,7 +109,7 @@ namespace NosTRAILgic.Controllers
             foreach (var p in LINQTrailParticipantsQuery)
             {
                 TrailParticipants += p;
-                TrailParticipants += " , ";
+                TrailParticipants += ",";
             }
 
             // Update the View Bag so that it can be passed to the view

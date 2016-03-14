@@ -4,7 +4,6 @@
     ViewBag.Title = "Details";
 }
 
-
 <div>
     <h2>Trail Details - @Html.DisplayFor(model => model.Name)</h2>
 </div>
@@ -30,7 +29,24 @@
         <tr>
             <td><b>@Html.DisplayNameFor(model => model.Name)</b></td>
             <td>@Html.DisplayFor(model => model.Name)</td>
-            <td>@Html.Raw(ViewBag.participants)</td>
+            <td>@{
+                
+                @*@Html.Raw(ViewBag.participants)*@
+
+                string necro = ViewBag.participants;
+
+                string[] necroArray = necro.Split(',');
+
+                foreach (string z in necroArray)
+                {
+                    if (z.EndsWith(","))
+                    {
+                        z.Substring(0, z.Length - 2);
+                    }
+
+                    @Html.Raw("<p>"+z+"</p>");
+                }
+                } </td>
         </tr>
 
         <tr>
