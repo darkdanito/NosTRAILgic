@@ -1,12 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
 
 namespace NosTRAILgic.Models
 {
+    /************************************************************************************
+     * Description: Model for TrailMeetup                                               *
+     *                                                                                  *
+     * Developer: Yun Yong                                                              *
+     *                                                                                  *
+     * Date: 12/03/2016                                                                 *
+     ************************************************************************************/
     public class TrailMeetup
     {
         [Key]
@@ -21,9 +25,6 @@ namespace NosTRAILgic.Models
 
         [Required]
         public string Description { get; set; }
-
-        //[Required]
-        //public string Location { get; set; }
 
         [Display(Name = "Trail Cover")]
         public string ImageLink { get; set; }

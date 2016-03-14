@@ -1,12 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
 
 namespace NosTRAILgic.Models
 {
+    /************************************************************************************
+     * Description: Model for TrailMeetup_Location.                                     *
+     *                                                                                  *
+     * Developer: Yun Yong                                                              *
+     *                                                                                  *
+     * Date: 12/03/2016                                                                 *
+     ************************************************************************************/
     public class TrailMeetup_Location
     {
         [Key]

@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
-using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using NosTRAILgic.DAL;
@@ -11,9 +9,17 @@ using NosTRAILgic.Models;
 
 namespace NosTRAILgic.Controllers
 {
+    /************************************************************************************
+     * Description: This controller manages the handling of TrailMeetup View            *
+     *                                                                                  *
+     * Developer: Yun Yong                                                              *
+     *                                                                                  *
+     * Date: 17/02/2016                                                                 *
+     ************************************************************************************/
     public class TrailMeetupController : Controller
     {
         private NosTRAILgicContext db = new NosTRAILgicContext();
+
         JoinTrail jointrail = new JoinTrail();
         Location location = new Location();
         TrailMeetup_Location trailMeetup_Location = new TrailMeetup_Location();
@@ -24,9 +30,16 @@ namespace NosTRAILgic.Controllers
             return View(db.Trails.ToList());
         }
 
+        /************************************************************************************
+         * Description: This function handles the update of the user joining trails         *
+         *                                                                                  *
+         * Developer: Yun Yong                                                              *
+         *                                                                                  *
+         * Date: 13/03/2016                                                                 *
+         ************************************************************************************/
         public ActionResult JoinTrail(int? id)
         {
-            if (User.Identity.Name == null || User.Identity.Name == "")
+            if (User.Identity.Name == null || User.Identity.Name == "")             // Check is the username valid
             {
                 jointrail.TrailMeetupID = (int)id;
                 jointrail.UserID = "testing_empty_username";
@@ -73,7 +86,23 @@ namespace NosTRAILgic.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        // GET: TrailMeetup/Details/5
+        /************************************************************************************
+         * Description: This function handles the displaying of details view details        *
+         *                                                                                  *
+         *              It also will check the database for any participants who have join  *
+         *              the trails and return it to the viewbag: XXXXXX to be rendered      *
+         *              by the view                                                         *
+         *                                                                                  *
+         *              As the TrailMeetups DB store the location via ID, it will join      *
+         *              TrailMeetups DB with TrailMeetup_Location DB and Locations DB       *
+         *              to get the location names that the user have added to the trail.    *
+         *              This will be passed to the view via viewbag: XXXXX and passed to    *
+         *              Google API for rendering of the specific location                   *
+         *                                                                                  *
+         * Developer: Yun Yong                                                              *
+         *                                                                                  *
+         * Date: 13/03/2016                                                                 *
+         ************************************************************************************/
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -88,38 +117,71 @@ namespace NosTRAILgic.Controllers
                 return HttpNotFound();
             }
 
-            var linqParticipantsQuery = from p in db.JoinTrails where p.TrailMeetupID == id select p.UserID;
 
-            var addParticipants = "";
+            /************************************************************************************
+             * Description: This function check the database for any participants who have join *
+             *              the trails and return it to the viewbag: XXXXXX to be rendered      *
+             *              by the view                                                         *
+             *                                                                                  *
+             * Developer: Yun Yong                                                              *
+             *                                                                                  *
+             * Date: 13/03/2016                                                                 *
+             ************************************************************************************/
 
-            foreach (var p in linqParticipantsQuery)
+            // LINQ Query to query who are the participants in the trails
+            var LINQTrailParticipantsQuery = from p in db.JoinTrails where p.TrailMeetupID == id select p.UserID;
+
+            // Var to store the Trail Participants in string
+            var TrailParticipants = "";
+
+            // Loop through the LINQ Query results and append to the TrailParticipants
+            foreach (var p in LINQTrailParticipantsQuery)
             {
-                addParticipants += p;
-                addParticipants += " , ";
+                TrailParticipants += p;
+                TrailParticipants += " , ";
             }
 
-            ViewBag.participants = addParticipants;
+            // Update the View Bag so that it can be passed to the view
+            ViewBag.participants = TrailParticipants;
 
-            ViewBag.linqLocationTest = "Gaaaa";
 
+            /************************************************************************************
+             * Description: This function handles the displaying of getting location names      *
+             *                                                                                  *
+             *              As the TrailMeetups DB store the location via ID, it will join      *
+             *              TrailMeetups DB with TrailMeetup_Location DB and Locations DB       *
+             *              to get the location names that the user have added to the trail.    *
+             *              This will be passed to the view via viewbag: XXXXX and passed to    *
+             *              Google API for rendering of the specific location                   *
+             *                                                                                  *
+             * Developer: Yun Yong                                                              *
+             *                                                                                  *
+             * Date: 13/03/2016                                                                 *
+             ************************************************************************************/
+
+            // Convert the ID that was passed as a parameter into the function into INT
+            // as LINQ does not support suchh conversion
             int trailID = (int)id;
 
-            var sample = from y in db.Trails
+            // LINQ Query to query the location name given the trail ID
+            var LINQLocationQuery = from y in db.Trails
                          join x in db.TrailMeetup_Location on y.TrailMeetupID equals x.TrailMeetupID
                          join w in db.Locations on x.LocationID equals w.LocationId
                          where y.TrailMeetupID == trailID
                          select w.Name;
 
-            var nameString = "";
+            // Var to store the Locations name into a string
+            var AllLocation = "";
 
-            foreach (var s in sample)
+            // Loop through the LINQ Query results and append to the AllLocation
+            foreach (var l in LINQLocationQuery)
             {
-                nameString += s;
-                nameString += ",";
+                AllLocation += l;
+                AllLocation += ",";
             }
 
-
-            ViewBag.linqLocationTest = nameString;
+            // Update the View Bag so that it can be passed to the view
+            ViewBag.linqLocationTest = AllLocation;
 
             return View(trailMeetup);
         }
@@ -128,11 +190,6 @@ namespace NosTRAILgic.Controllers
         public ActionResult Create()
         {
             TrailMeetup trail = new TrailMeetup();
-
-            //if (User.Identity.Name == null)
-            //{
-            //    trail.CreatorID = 012345;
-            //}
 
             if (User.Identity.Name == null || User.Identity.Name == "")
             {

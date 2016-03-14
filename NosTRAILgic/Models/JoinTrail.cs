@@ -7,6 +7,13 @@ using System.Web;
 
 namespace NosTRAILgic.Models
 {
+    /************************************************************************************
+     * Description: Model for the Join Trail                                            *
+     *                                                                                  *
+     * Developer: Yun Yong                                                              *
+     *                                                                                  *
+     * Date: 12/03/2016                                                                 *
+     ************************************************************************************/
     public class JoinTrail
     {
         [Key]
