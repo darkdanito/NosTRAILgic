@@ -193,6 +193,7 @@ namespace NosTRAILgic.Controllers
         }
 
         // GET: TrailMeetup/Create
+        [Authorize]
         public ActionResult Create()
         {
             TrailMeetup trail = new TrailMeetup();
@@ -295,6 +296,7 @@ namespace NosTRAILgic.Controllers
         }
 
         // GET: TrailMeetup/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -331,6 +333,7 @@ namespace NosTRAILgic.Controllers
         }
 
         // GET: TrailMeetup/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
