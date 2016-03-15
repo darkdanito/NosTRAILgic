@@ -10,6 +10,7 @@ using HtmlAgilityPack;
 
 namespace NosTRAILgic.Controllers
 {
+    [Authorize]
     public class UploadController : Controller
     {
         private NosTRAILgicContext db = new NosTRAILgicContext();
