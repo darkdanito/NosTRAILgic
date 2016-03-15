@@ -192,20 +192,30 @@ namespace NosTRAILgic.Controllers
             return View(trailMeetup);
         }
 
-        // GET: TrailMeetup/Create
+        /************************************************************************************
+         * Description: This function handles the displaying of create view details         *
+         *                                                                                  *
+         *              This will return the create view to the user                        *
+         *              It will default the parameter of the Number of Participants and     *
+         *              the date of the Trail to be the current date                        *
+         *                                                                                  *
+         * Developer: Yun Yong                                                              *
+         *                                                                                  *
+         * Date: 13/03/2016                                                                 *
+         ************************************************************************************/
         [Authorize]
         public ActionResult Create()
         {
             TrailMeetup trail = new TrailMeetup();
 
-            if (User.Identity.Name == null || User.Identity.Name == "")
-            {
-                trail.CreatorID = "Anonymous Creator";
-            }
-            else
-            {
-                trail.CreatorID = User.Identity.Name;
-            }
+            //if (User.Identity.Name == null || User.Identity.Name == "")
+            //{
+            //    trail.CreatorID = "Anonymous Creator";
+            //}
+            //else
+            //{
+            //    trail.CreatorID = User.Identity.Name;
+            //}
 
             trail.Limit = 1;
             trail.Date = DateTime.Now;
@@ -218,8 +228,7 @@ namespace NosTRAILgic.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "TrailMeetupID,CreatorID,Name,Description,ImageLink,Date,TimeFrom,TimeTo,Limit")] TrailMeetup trailMeetup, HttpPostedFileBase file, String[] text)
-//        public ActionResult Create([Bind(Include = "TrailMeetupID,CreatorID,Name,Description,Location,ImageLink,Date,TimeFrom,TimeTo,Limit")] TrailMeetup trailMeetup, HttpPostedFileBase file, String[] text)
+        public ActionResult Create([Bind(Include = "TrailMeetupID,Name,Description,ImageLink,Date,TimeFrom,TimeTo,Limit")] TrailMeetup trailMeetup, HttpPostedFileBase file, String[] text)
         {
             if (ModelState.IsValid)
             {
@@ -227,13 +236,11 @@ namespace NosTRAILgic.Controllers
                 file.SaveAs(path);
 
                 trailMeetup.ImageLink = file.FileName;
+                trailMeetup.CreatorID = User.Identity.Name;
 
                 db.Trails.Add(trailMeetup);
                 db.SaveChanges();
-
-
-
-
+                
                 string inputTrailName = trailMeetup.Name;
 
                 var LINQCreatedTrailIDQuery = from c in db.Trails where c.Name == inputTrailName select c.TrailMeetupID;
@@ -244,8 +251,6 @@ namespace NosTRAILgic.Controllers
                 {
                     TrailID = Lat;
                 }
-
-
 
                 if (text != null)
                 {
