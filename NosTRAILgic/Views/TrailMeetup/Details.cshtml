@@ -30,21 +30,21 @@
             <td><b>@Html.DisplayNameFor(model => model.Name)</b></td>
             <td>@Html.DisplayFor(model => model.Name)</td>
             <td rowspan="7">@{
-                
+
                 @*@Html.Raw(ViewBag.participants)*@
 
-                string necro = ViewBag.participants;
+            string necro = ViewBag.participants;
 
-                string[] necroArray = necro.Split(',');
+            string[] necroArray = necro.Split(',');
 
-                foreach (string z in necroArray)
+            foreach (string z in necroArray)
+            {
+                if (z.EndsWith(","))
                 {
-                    if (z.EndsWith(","))
-                    {
-                        z.Substring(0, z.Length - 2);
-                    }
+                    z.Substring(0, z.Length - 2);
+                }
 
-                    @Html.Raw("<p>"+z+"</p>");
+                    @Html.Raw("<p>" + z + "</p>");
                 }
                 } </td>
         </tr>
@@ -90,8 +90,15 @@
 </div>
 
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.TrailMeetupID }, new { @class = "btn btn-default" })
-    @Html.ActionLink("Delete", "Delete", new { id = Model.TrailMeetupID }, new { @class = "btn btn-default" })
+    @{
+        if (User.IsInRole("Admin") || User.Identity.Name == Model.CreatorID)
+        {
+            @Html.ActionLink("Edit", "Edit", new { id = Model.TrailMeetupID }, new { @class = "btn btn-default" })
+            @Html.ActionLink("Delete", "Delete", new { id = Model.TrailMeetupID }, new { @class = "btn btn-default" })
+        }
+
+    }
+
     <button class="btn btn-default" type="button" onclick="location.href='@Url.Action("Index", "TrailMeetup")'">Back to Trail Index</button>
 </p>
 

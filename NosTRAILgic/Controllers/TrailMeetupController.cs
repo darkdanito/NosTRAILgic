@@ -115,6 +115,7 @@ namespace NosTRAILgic.Controllers
             ViewBag.participants = TrailParticipants;
 
 
+
             /************************************************************************************
              * Description: This function handles the displaying of getting location names      *
              *                                                                                  *
@@ -208,15 +209,6 @@ namespace NosTRAILgic.Controllers
         {
             TrailMeetup trail = new TrailMeetup();
 
-            //if (User.Identity.Name == null || User.Identity.Name == "")
-            //{
-            //    trail.CreatorID = "Anonymous Creator";
-            //}
-            //else
-            //{
-            //    trail.CreatorID = User.Identity.Name;
-            //}
-
             trail.Limit = 1;
             trail.Date = DateTime.Now;
 
@@ -255,33 +247,12 @@ namespace NosTRAILgic.Controllers
                 if (text != null)
                 {
                     // String for storing all the location that the user has inputted into the Location Input form
-                    string combinedLocation = "";
                     string parameterLocation = "";
 
                     for (int i = 0; i < text.Length; i++)
                     {
-                        combinedLocation += text[i] + ",";
-
-                    //    var idCount = db.Trails.OrderByDescending(r => r.TrailMeetupID).FirstOrDefault();
-
-                        
-
-
-
-                        //var linqParticipantsQuery = 
-                        //    (from p in db.Locations where p.Name == text[i] select p.LocationId).FirstOrDefault();
-
-
                         parameterLocation = text[i];
 
-                        //int location = 0;
-
-                        //foreach (var p in linqParticipantsQuery)
-                        //{
-                        //    location = p;
-                        //}
-
-                        //trailMeetup_Location.TrailMeetupID = idCount.TrailMeetupID + 1
                         trailMeetup_Location.TrailMeetupID = TrailID;
                         trailMeetup_Location.LocationID = (from a in db.Locations where a.Name == parameterLocation select a.LocationId).FirstOrDefault();
 
@@ -289,10 +260,7 @@ namespace NosTRAILgic.Controllers
                         db.SaveChanges();
                     }
 
-                    // Update the dynamic location input + the original input for the location
-                //    trailMeetup.Location = combinedLocation + trailMeetup.Location;
                 }
-                
 
                 return RedirectToAction("Index");
             }
@@ -325,7 +293,6 @@ namespace NosTRAILgic.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "TrailMeetupID,CreatorID,Name,Description,ImageLink,Date,TimeFrom,TimeTo,Limit")] TrailMeetup trailMeetup)
-//        public ActionResult Edit([Bind(Include = "TrailMeetupID,CreatorID,Name,Description,Location,ImageLink,Date,TimeFrom,TimeTo,Limit")] TrailMeetup trailMeetup)
         {
             if (ModelState.IsValid)
             {
