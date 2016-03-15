@@ -1,5 +1,8 @@
 namespace NosTRAILgic.Migrations
 {
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
+    using Models;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -25,7 +28,24 @@ namespace NosTRAILgic.Migrations
             //      new Person { FullName = "Brice Lambson" },
             //      new Person { FullName = "Rowan Miller" }
             //    );
-            //
+
+
+            var userStore = new UserStore<ApplicationUser>(context);
+            var userManager = new UserManager<ApplicationUser>(userStore);
+
+            if (!context.Users.Any(t => t.UserName.Equals("TrailAdmin")))
+            {
+                var user = new ApplicationUser
+                {
+                    UserName = "TrailAdmin"
+                };
+
+                userManager.Create(user, "password");
+                context.Roles.AddOrUpdate(r => r.Name, new IdentityRole { Name = "Admin" });
+                context.SaveChanges();
+
+                userManager.AddToRole(user.Id, "Admin");
+            };
         }
     }
 }

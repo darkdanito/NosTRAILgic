@@ -26,7 +26,14 @@
                         <li>@Html.ActionLink("Home", "Index", "Home")</li>
                         <li>@Html.ActionLink("Stats", "Stats", "Home")</li>
                         <li>@Html.ActionLink("Trail", "Index", "TrailMeetup")</li>
-                        <li>@Html.ActionLink("Upload", "Create", "Upload")</li>
+                        @{
+                            if (User.IsInRole("Admin"))
+                            {
+                                @Html.Raw("<li>");
+                                @Html.ActionLink("Upload", "Create", "Upload")
+                                @Html.Raw("</li>");
+                            }
+                        }
                     </ul>
                     @Html.Partial("_LoginPartial")
                 </div>

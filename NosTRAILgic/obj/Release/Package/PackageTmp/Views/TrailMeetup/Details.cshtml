@@ -19,7 +19,7 @@
 
     <hr />
 
-    <table border="1">
+    <table>
         <tr>
             <td width="25%"><b>@Html.DisplayNameFor(model => model.CreatorID)</b></td>
             <td width="25%">@Html.DisplayFor(model => model.CreatorID)</td>
@@ -102,14 +102,13 @@
     function initialize() {
 
         var mapOptions = {
-        //    center: new google.maps.LatLng(1.4038, 103.7941),
+            center: new google.maps.LatLng(1.4038, 103.7941),
         //    center: new google.maps.LatLng(1.3385674, 103.7059549),
-            zoom: 15,
+            zoom: 11,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
 
-        var map = new google.maps.Map(document.getElementById("map_canvas"),
-          mapOptions);
+        var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
 
         //// create a marker
         //var latlng = new google.maps.LatLng(1.4038, 103.7941);
@@ -119,59 +118,49 @@
         //    title: 'My Place'
         //});
 
-        var geocoder;
-        geocoder = new google.maps.Geocoder();
 
-        var googleMapAddress = "";
-
-        // Code to take Trail Input of Location
-//      var trailInput = "@*@Url.Content(Model.Location)*@"  // Remember to remove the comment for the Razor Code
-//        var trailInput = "Boon Lay MRT, Chinese Garden MRT, Lakeside MRT"
         var trailInput = '@ViewBag.linqLocationTest';
+        var trailLatInput = '@ViewBag.linqLatTest';
+        var trailLongInput = '@ViewBag.linqLongTest';
 
-        console.log("Viewbag results: ", trailInput);
+        console.log("Viewbag results for Location: ", trailInput);
+        console.log("Viewbag results for Lat: ", trailLatInput);
+        console.log("Viewbag results for Long: ", trailLongInput);
 
         // Split the Trail Input of Location based on COMMA into different location
         var trailArray = trailInput.split(',');
+        var latArray = trailLatInput.split(',');
+        var longArray = trailLongInput.split(',');
 
-        console.log(trailInput);
+        var markers = [];
+        var contents = [];
+        var infowindows = [];
 
-        for (var i = trailArray.length-1; i > 0 ; i--)
-        {
-            console.log(trailArray[i - 1]);
+        for (i = 0; i < (trailArray.length - 1); i++) {
 
-            googleMapAddress = trailArray[i - 1];
+            console.log("lat long: ", latArray[i] + " , " + longArray[i]);
 
-            if (geocoder) {
-                geocoder.geocode({ 'address': googleMapAddress }, function (results, status) {
-                    if (status == google.maps.GeocoderStatus.OK) {
-                        if (status != google.maps.GeocoderStatus.ZERO_RESULTS) {
-                            map.setCenter(results[0].geometry.location);
+            markers[i] = new google.maps.Marker({
+                position: new google.maps.LatLng(latArray[i], longArray[i]),
+                map: map,
+                title: 'samplemarker'
+            });
 
-                            var infowindow = new google.maps.InfoWindow(
-                                {
-                                    content: '<b>' + googleMapAddress + '</b>',
-                                    size: new google.maps.Size(150, 50)
-                                });
+            markers[i].index = i;
+            contents[i] = '<div class="popup_container">' + trailArray[i] + '</div>';
 
-                            var marker = new google.maps.Marker({
-                                position: results[0].geometry.location,
-                                map: map,
-                                title: googleMapAddress
-                            });
+            infowindows[i] = new google.maps.InfoWindow({
+                content: contents[i],
+                maxWidth: 300
+            });
 
-                            google.maps.event.addListener(marker, 'click', function () {
-                                infowindow.open(map, marker);
-                            });
-
-                        } else {
-                            alert("No results found");
-                        }
-                    } else {
-                        alert("Geocode was not successful for the following reason: " + status);
-                    }
-                });
-            }
+            google.maps.event.addListener(markers[i], 'click', function () {
+                console.log(this.index); // this will give correct index
+                console.log(i); //this will always give 10 for you
+                infowindows[this.index].open(map, markers[this.index]);
+                map.panTo(markers[this.index].getPosition());
+            });
         }
+
     }
 </script>
