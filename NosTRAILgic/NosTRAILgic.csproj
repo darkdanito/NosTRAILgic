@@ -275,6 +275,7 @@
     <Content Include="Views\TrailMeetup\Edit.cshtml" />
     <Content Include="Views\TrailMeetup\Index.cshtml" />
     <Content Include="Scripts\jquery-2.2.1.min.map" />
+    <Content Include="Views\Home\Stats.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
