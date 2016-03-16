@@ -37,6 +37,7 @@ namespace NosTRAILgic.Controllers
          *                                                                                  *
          * Date: 13/03/2016                                                                 *
          ************************************************************************************/
+        [Authorize]
         public ActionResult JoinTrail(int? id)
         {
             if (User.Identity.Name == null || User.Identity.Name == "")             // Check is the username valid

@@ -23,8 +23,11 @@
         </td>
         
         <td width="50%">
+            @{ 
+
             @Html.ActionLink("Join Trail", "JoinTrail", new { id = Model.TrailMeetupID }, new { @class = "btn btn-default" })
-            
+           
+            }
             <br />
 
             <b>@Html.DisplayNameFor(model => model.Date) : </b>
