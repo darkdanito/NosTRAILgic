@@ -267,7 +267,6 @@
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\_RemoveAccountPartial.cshtml" />
     <Content Include="Views\Account\_SetPasswordPartial.cshtml" />
-    <Content Include="Views\Upload\Index.cshtml" />
     <Content Include="Views\Upload\Create.cshtml" />
     <Content Include="Views\TrailMeetup\Create.cshtml" />
     <Content Include="Views\TrailMeetup\Delete.cshtml" />

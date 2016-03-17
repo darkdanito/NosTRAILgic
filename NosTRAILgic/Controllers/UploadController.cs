@@ -16,18 +16,6 @@ namespace NosTRAILgic.Controllers
         private NosTRAILgicContext db = new NosTRAILgicContext();
         private Location location;
 
-        // GET: Upload
-        public ActionResult Index()
-        {
-            return View();
-        }
-
-        // GET: Upload/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
         // GET: Upload/Create
         public ActionResult Create()
         {
@@ -308,49 +296,6 @@ namespace NosTRAILgic.Controllers
                 return View();
             }
         }
-
-        // GET: Upload/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Upload/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Upload/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Upload/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        
     }
 }
