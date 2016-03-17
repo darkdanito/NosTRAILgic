@@ -89,9 +89,12 @@
 
 <p>
     @{
-        if (User.IsInRole("Admin") || User.Identity.Name == Model.CreatorID)
+        if (User.Identity.Name == Model.CreatorID)
         {
             @Html.ActionLink("Edit", "Edit", new { id = Model.TrailMeetupID }, new { @class = "btn btn-default" })
+        }
+        if (User.IsInRole("Admin") || User.Identity.Name == Model.CreatorID)
+        {
             @Html.ActionLink("Delete", "Delete", new { id = Model.TrailMeetupID }, new { @class = "btn btn-default" })
         }
 
