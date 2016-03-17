@@ -28,9 +28,9 @@ namespace NosTRAILgic
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+               appId: "228561424165052",
+               appSecret: "2d43d7af009a35d13921102a951852f");
 
             app.UseGoogleAuthentication(
                 clientId: "782719428680-svrdu45ijjivd4bnbr8a1pnuo5d8sdgl.apps.googleusercontent.com",
