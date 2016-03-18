@@ -4,94 +4,102 @@
     ViewBag.Title = "Details";
 }
 
-<div>
-    <h2>Trail Details - @Html.DisplayFor(model => model.Name)</h2>
-</div>
+<table width="100%">
+    <tr>
+        <td width="10%"><img src="/Content/Upload/@Url.Content(Model.ImageLink)" width="100" height="100" /></td>
+        
+        <td width="40%">
+            <h2>Trail Details - @Html.DisplayFor(model => model.Name)</h2>
 
-<div>
-    @Html.ActionLink("Join Trail", "JoinTrail", new { id = Model.TrailMeetupID }, new { @class = "btn btn-default" })
-</div>
+            <br />
+            
+            <b>@Html.DisplayNameFor(model => model.CreatorID) : </b>
+            @Html.DisplayFor(model => model.CreatorID)
 
-<div>
-    <hr />
-    
-    <div id="map_canvas" style="width: 1000px; height: 300px;"></div>
+            <br />
 
-    <hr />
+            <b>@Html.DisplayNameFor(model => model.Description) : </b>
+            @Html.DisplayFor(model => model.Description)
+        </td>
+        
+        <td width="50%">
+            @{ 
 
-    <table>
-        <tr>
-            <td width="25%"><b>@Html.DisplayNameFor(model => model.CreatorID)</b></td>
-            <td width="25%">@Html.DisplayFor(model => model.CreatorID)</td>
-            <td width="25%"><b>Participants</b></td>
-        </tr>
+            @Html.ActionLink("Join Trail", "JoinTrail", new { id = Model.TrailMeetupID }, new { @class = "btn btn-default" })
+           
+            }
+            <br />
 
-        <tr>
-            <td><b>@Html.DisplayNameFor(model => model.Name)</b></td>
-            <td>@Html.DisplayFor(model => model.Name)</td>
-            <td rowspan="7">@{
-                
-                @*@Html.Raw(ViewBag.participants)*@
+            <b>@Html.DisplayNameFor(model => model.Date) : </b>
+            @Html.DisplayFor(model => model.Date)
 
-                string necro = ViewBag.participants;
+            <br />
 
-                string[] necroArray = necro.Split(',');
+            <b>Time : </b>
+            @Html.DisplayFor(model => model.TimeFrom)
+            <b> - </b>
+            @Html.DisplayFor(model => model.TimeTo)
 
-                foreach (string z in necroArray)
-                {
-                    if (z.EndsWith(","))
+            <br />
+
+            <b>@Html.DisplayNameFor(model => model.Limit)</b>
+            @Html.DisplayFor(model => model.Limit)
+        </td>
+    </tr>
+
+    <tr>
+        <td colspan="3"><div id="map_canvas" style="width: 1000px; height: 300px;"></div></td>
+    </tr>
+
+    <tr>
+        <td colspan="2">
+            <b>Participants : </b>
+
+            <br />
+
+            <ul style="list-style-type : none">
+
+                @{
+                    string necro = ViewBag.participants;
+
+                    string[] necroArray = necro.Split(',');
+
+                    foreach (string z in necroArray)
                     {
-                        z.Substring(0, z.Length - 2);
+                        if (z.EndsWith(","))
+                        {
+                            z.Substring(0, z.Length - 2);
+                        }
+
+                        @Html.Raw("<li>" + z + "</li>");
                     }
-
-                    @Html.Raw("<p>"+z+"</p>");
                 }
-                } </td>
-        </tr>
 
-        <tr>
-            <td><b>@Html.DisplayNameFor(model => model.Description)</b></td>
-            <td>@Html.DisplayFor(model => model.Description)</td>
-        </tr>
+            </ul>
+            
 
-        @*<tr>
-            <td><b>@Html.DisplayNameFor(model => model.Location)</b></td>
-            <td>@Html.DisplayFor(model => model.Location)</td>
-            <td></td>
-        </tr>*@
 
-        <tr>
-            <td><b>@Html.DisplayNameFor(model => model.ImageLink)</b></td>
-            <td>@Html.DisplayFor(model => model.ImageLink)</td>
-        </tr>
+        </td>
 
-        <tr>
-            <td><b>@Html.DisplayNameFor(model => model.Date)</b></td>
-            <td>@Html.DisplayFor(model => model.Date)</td>
-        </tr>
-
-        <tr>
-            <td><b>@Html.DisplayNameFor(model => model.TimeFrom)</b></td>
-            <td>@Html.DisplayFor(model => model.TimeFrom)</td>
-        </tr>
-
-        <tr>
-            <td><b>@Html.DisplayNameFor(model => model.TimeTo)</b></td>
-            <td>@Html.DisplayFor(model => model.TimeTo)</td>
-        </tr>
-
-        <tr>
-            <td><b>@Html.DisplayNameFor(model => model.Limit)</b></td>
-            <td>@Html.DisplayFor(model => model.Limit)</td>
-        </tr>
-
-    </table>
-    
-</div>
+        <td>
+            <b>Location Details : </b>
+        </td>
+    </tr>
+</table>
 
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.TrailMeetupID }, new { @class = "btn btn-default" })
-    @Html.ActionLink("Delete", "Delete", new { id = Model.TrailMeetupID }, new { @class = "btn btn-default" })
+    @{
+        if (User.Identity.Name == Model.CreatorID)
+        {
+            @Html.ActionLink("Edit", "Edit", new { id = Model.TrailMeetupID }, new { @class = "btn btn-default" })
+        }
+        if (User.IsInRole("Admin") || User.Identity.Name == Model.CreatorID)
+        {
+            @Html.ActionLink("Delete", "Delete", new { id = Model.TrailMeetupID }, new { @class = "btn btn-default" })
+        }
+
+    }
+
     <button class="btn btn-default" type="button" onclick="location.href='@Url.Action("Index", "TrailMeetup")'">Back to Trail Index</button>
 </p>
 
