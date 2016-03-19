@@ -117,6 +117,11 @@ namespace NosTRAILgic.Controllers
 
 
 
+
+
+           
+
+
             /************************************************************************************
              * Description: This function handles the displaying of getting location names      *
              *                                                                                  *
@@ -190,6 +195,18 @@ namespace NosTRAILgic.Controllers
             ViewBag.linqLatTest = AllLat;
             ViewBag.linqLongTest = AllLong;
 
+
+
+
+
+            string userName = User.Identity.Name;
+            var LINQIsUserInTrailQuery = from p in db.JoinTrails where p.UserID == userName && p.TrailMeetupID == trailID select p.UserID;
+            var userExist = "";
+            foreach (var ex in LINQIsUserInTrailQuery)
+            {
+                userExist += ex;
+            }
+            ViewBag.linqUserExistTest = userExist;
 
             return View(trailMeetup);
         }
