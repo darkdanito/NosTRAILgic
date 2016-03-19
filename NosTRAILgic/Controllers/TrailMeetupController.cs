@@ -280,6 +280,11 @@ namespace NosTRAILgic.Controllers
 
                 }
 
+                jointrail.TrailMeetupID = TrailID;
+                jointrail.UserID = User.Identity.Name;
+                db.JoinTrails.Add(jointrail);
+                db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
 
