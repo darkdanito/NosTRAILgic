@@ -25,6 +25,7 @@ namespace NosTRAILgic
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/NosTRAILgic.css",
+                      "~/Content/ZocialCSSSocialButtons/zocial.css",
                       "~/Content/site.css"));
         }
     }
