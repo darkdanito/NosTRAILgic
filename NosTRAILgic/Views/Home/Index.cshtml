@@ -4,11 +4,19 @@
 
 <div class="container" style="width: 100%">
     <div class="vertical-center-row">
-        <div align="center">
-                @using (Html.BeginForm())
-                {
-                    <span><input id="Text1" type="text" placeholder="Search" />
-                        @Html.DropDownList("Selection", new SelectListItem[]
+        <div class="page-header">
+            <h1>
+                Welcome to NosTRAILgic
+                <img style="width:50px;" src="~/images/logo.png" />
+            </h1>
+
+            @using (Html.BeginForm())
+            {
+                
+                <span style="float: right;">
+                    <i class="glyphicon glyphicon-search"></i>
+                    <input id="Text1" type="text" placeholder="Search" />
+                    @Html.DropDownList("Selection", new SelectListItem[]
                         {
                             new SelectListItem() { Text = "All", Value = "0" },
                             new SelectListItem() { Text = "Museum", Value = "1" },
@@ -16,13 +24,15 @@
                             new SelectListItem() { Text = "Monuments", Value = "3" },
                         },
                             new { @onchange = "this.form.submit()" })
-                        <input id="bHomeIndexSearch" type="button" value="Search" disabled />
-                    </span>
-                }
+                    <input id="bHomeIndexSearch" type="button" class="btn btn-default" value="Search" disabled />
+                </span>
+            }
+        </div>
 
-            <div id="map_canvas" style="width: 1000px; height: 300px;"></div>
+        <div align="center">
+            <div id="map_canvas" style="width: 1000px; height: 400px;"></div>
 
-            <div id="capture" style="width: 1000px; height: 300px;"></div>
+            <div id="capture" style="width: 1000px; height: 400px;"></div>
         </div>
     </div>
 </div>

@@ -279,3 +279,119 @@ C:\Users\darkdanito\Documents\GitHub\NosTRAILgic\NosTRAILgic\bin\System.Web.WebP
 C:\Users\darkdanito\Documents\GitHub\NosTRAILgic\NosTRAILgic\obj\Debug\NosTRAILgic.dll
 C:\Users\darkdanito\Documents\GitHub\NosTRAILgic\NosTRAILgic\obj\Debug\NosTRAILgic.pdb
 C:\Users\darkdanito\Documents\GitHub\NosTRAILgic\NosTRAILgic\obj\Debug\NosTRAILgic.csprojResolveAssemblyReference.cache
+C:\Users\Sharon\Desktop\School\Year2Sem2\your head lah\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\NosTRAILgic.dll.config
+C:\Users\Sharon\Desktop\School\Year2Sem2\your head lah\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\NosTRAILgic.dll
+C:\Users\Sharon\Desktop\School\Year2Sem2\your head lah\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\NosTRAILgic.pdb
+C:\Users\Sharon\Desktop\School\Year2Sem2\your head lah\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\Antlr3.Runtime.dll
+C:\Users\Sharon\Desktop\School\Year2Sem2\your head lah\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\EntityFramework.dll
+C:\Users\Sharon\Desktop\School\Year2Sem2\your head lah\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\EntityFramework.SqlServer.dll
+C:\Users\Sharon\Desktop\School\Year2Sem2\your head lah\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\HtmlAgilityPack.dll
+C:\Users\Sharon\Desktop\School\Year2Sem2\your head lah\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\Microsoft.AspNet.Identity.Core.dll
+C:\Users\Sharon\Desktop\School\Year2Sem2\your head lah\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\Sharon\Desktop\School\Year2Sem2\your head lah\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\Microsoft.AspNet.Identity.Owin.dll
+C:\Users\Sharon\Desktop\School\Year2Sem2\your head lah\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\Microsoft.Owin.dll
+C:\Users\Sharon\Desktop\School\Year2Sem2\your head lah\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\Users\Sharon\Desktop\School\Year2Sem2\your head lah\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\Microsoft.Owin.Security.Cookies.dll
+C:\Users\Sharon\Desktop\School\Year2Sem2\your head lah\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\Microsoft.Owin.Security.dll
+C:\Users\Sharon\Desktop\School\Year2Sem2\your head lah\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\Microsoft.Owin.Security.Facebook.dll
+C:\Users\Sharon\Desktop\School\Year2Sem2\your head lah\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\Microsoft.Owin.Security.Google.dll
+C:\Users\Sharon\Desktop\School\Year2Sem2\your head lah\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+C:\Users\Sharon\Desktop\School\Year2Sem2\your head lah\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\Microsoft.Owin.Security.OAuth.dll
+C:\Users\Sharon\Desktop\School\Year2Sem2\your head lah\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\Microsoft.Owin.Security.Twitter.dll
+C:\Users\Sharon\Desktop\School\Year2Sem2\your head lah\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\Sharon\Desktop\School\Year2Sem2\your head lah\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\Newtonsoft.Json.dll
+C:\Users\Sharon\Desktop\School\Year2Sem2\your head lah\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\Owin.dll
+C:\Users\Sharon\Desktop\School\Year2Sem2\your head lah\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\System.Web.Helpers.dll
+C:\Users\Sharon\Desktop\School\Year2Sem2\your head lah\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\System.Web.Mvc.dll
+C:\Users\Sharon\Desktop\School\Year2Sem2\your head lah\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\System.Web.Optimization.dll
+C:\Users\Sharon\Desktop\School\Year2Sem2\your head lah\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\System.Web.Razor.dll
+C:\Users\Sharon\Desktop\School\Year2Sem2\your head lah\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\System.Web.WebPages.Deployment.dll
+C:\Users\Sharon\Desktop\School\Year2Sem2\your head lah\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\System.Web.WebPages.dll
+C:\Users\Sharon\Desktop\School\Year2Sem2\your head lah\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\System.Web.WebPages.Razor.dll
+C:\Users\Sharon\Desktop\School\Year2Sem2\your head lah\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\WebGrease.dll
+C:\Users\Sharon\Desktop\School\Year2Sem2\your head lah\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\Antlr3.Runtime.pdb
+C:\Users\Sharon\Desktop\School\Year2Sem2\your head lah\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\EntityFramework.xml
+C:\Users\Sharon\Desktop\School\Year2Sem2\your head lah\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\EntityFramework.SqlServer.xml
+C:\Users\Sharon\Desktop\School\Year2Sem2\your head lah\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\HtmlAgilityPack.pdb
+C:\Users\Sharon\Desktop\School\Year2Sem2\your head lah\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\HtmlAgilityPack.xml
+C:\Users\Sharon\Desktop\School\Year2Sem2\your head lah\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\Microsoft.AspNet.Identity.Core.xml
+C:\Users\Sharon\Desktop\School\Year2Sem2\your head lah\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\Sharon\Desktop\School\Year2Sem2\your head lah\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\Microsoft.AspNet.Identity.Owin.xml
+C:\Users\Sharon\Desktop\School\Year2Sem2\your head lah\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\Microsoft.Owin.xml
+C:\Users\Sharon\Desktop\School\Year2Sem2\your head lah\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\Users\Sharon\Desktop\School\Year2Sem2\your head lah\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\Microsoft.Owin.Security.xml
+C:\Users\Sharon\Desktop\School\Year2Sem2\your head lah\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\Microsoft.Owin.Security.Cookies.xml
+C:\Users\Sharon\Desktop\School\Year2Sem2\your head lah\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\Microsoft.Owin.Security.Facebook.xml
+C:\Users\Sharon\Desktop\School\Year2Sem2\your head lah\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\Microsoft.Owin.Security.Google.xml
+C:\Users\Sharon\Desktop\School\Year2Sem2\your head lah\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+C:\Users\Sharon\Desktop\School\Year2Sem2\your head lah\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\Microsoft.Owin.Security.OAuth.xml
+C:\Users\Sharon\Desktop\School\Year2Sem2\your head lah\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\Microsoft.Owin.Security.Twitter.xml
+C:\Users\Sharon\Desktop\School\Year2Sem2\your head lah\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\Newtonsoft.Json.xml
+C:\Users\Sharon\Desktop\School\Year2Sem2\your head lah\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\System.Web.Helpers.xml
+C:\Users\Sharon\Desktop\School\Year2Sem2\your head lah\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\System.Web.Mvc.xml
+C:\Users\Sharon\Desktop\School\Year2Sem2\your head lah\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\System.Web.Optimization.xml
+C:\Users\Sharon\Desktop\School\Year2Sem2\your head lah\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\System.Web.Razor.xml
+C:\Users\Sharon\Desktop\School\Year2Sem2\your head lah\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\System.Web.WebPages.xml
+C:\Users\Sharon\Desktop\School\Year2Sem2\your head lah\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\System.Web.WebPages.Deployment.xml
+C:\Users\Sharon\Desktop\School\Year2Sem2\your head lah\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\System.Web.WebPages.Razor.xml
+C:\Users\Sharon\Desktop\School\Year2Sem2\your head lah\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\obj\Debug\NosTRAILgic.csprojResolveAssemblyReference.cache
+C:\Users\Sharon\Desktop\School\Year2Sem2\your head lah\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\obj\Debug\NosTRAILgic.dll
+C:\Users\Sharon\Desktop\School\Year2Sem2\your head lah\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\obj\Debug\NosTRAILgic.pdb
+C:\Users\darkdanito\Desktop\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\NosTRAILgic.dll.config
+C:\Users\darkdanito\Desktop\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\NosTRAILgic.dll
+C:\Users\darkdanito\Desktop\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\NosTRAILgic.pdb
+C:\Users\darkdanito\Desktop\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\Antlr3.Runtime.dll
+C:\Users\darkdanito\Desktop\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\EntityFramework.dll
+C:\Users\darkdanito\Desktop\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\EntityFramework.SqlServer.dll
+C:\Users\darkdanito\Desktop\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\HtmlAgilityPack.dll
+C:\Users\darkdanito\Desktop\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\Microsoft.AspNet.Identity.Core.dll
+C:\Users\darkdanito\Desktop\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\darkdanito\Desktop\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\Microsoft.AspNet.Identity.Owin.dll
+C:\Users\darkdanito\Desktop\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\Microsoft.Owin.dll
+C:\Users\darkdanito\Desktop\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\Users\darkdanito\Desktop\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\Microsoft.Owin.Security.Cookies.dll
+C:\Users\darkdanito\Desktop\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\Microsoft.Owin.Security.dll
+C:\Users\darkdanito\Desktop\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\Microsoft.Owin.Security.Facebook.dll
+C:\Users\darkdanito\Desktop\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\Microsoft.Owin.Security.Google.dll
+C:\Users\darkdanito\Desktop\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+C:\Users\darkdanito\Desktop\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\Microsoft.Owin.Security.OAuth.dll
+C:\Users\darkdanito\Desktop\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\Microsoft.Owin.Security.Twitter.dll
+C:\Users\darkdanito\Desktop\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\darkdanito\Desktop\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\Newtonsoft.Json.dll
+C:\Users\darkdanito\Desktop\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\Owin.dll
+C:\Users\darkdanito\Desktop\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\System.Web.Helpers.dll
+C:\Users\darkdanito\Desktop\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\System.Web.Mvc.dll
+C:\Users\darkdanito\Desktop\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\System.Web.Optimization.dll
+C:\Users\darkdanito\Desktop\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\System.Web.Razor.dll
+C:\Users\darkdanito\Desktop\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\System.Web.WebPages.Deployment.dll
+C:\Users\darkdanito\Desktop\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\System.Web.WebPages.dll
+C:\Users\darkdanito\Desktop\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\System.Web.WebPages.Razor.dll
+C:\Users\darkdanito\Desktop\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\WebGrease.dll
+C:\Users\darkdanito\Desktop\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\Antlr3.Runtime.pdb
+C:\Users\darkdanito\Desktop\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\EntityFramework.xml
+C:\Users\darkdanito\Desktop\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\EntityFramework.SqlServer.xml
+C:\Users\darkdanito\Desktop\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\HtmlAgilityPack.pdb
+C:\Users\darkdanito\Desktop\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\HtmlAgilityPack.xml
+C:\Users\darkdanito\Desktop\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\Microsoft.AspNet.Identity.Core.xml
+C:\Users\darkdanito\Desktop\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\darkdanito\Desktop\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\Microsoft.AspNet.Identity.Owin.xml
+C:\Users\darkdanito\Desktop\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\Microsoft.Owin.xml
+C:\Users\darkdanito\Desktop\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\Users\darkdanito\Desktop\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\Microsoft.Owin.Security.xml
+C:\Users\darkdanito\Desktop\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\Microsoft.Owin.Security.Cookies.xml
+C:\Users\darkdanito\Desktop\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\Microsoft.Owin.Security.Facebook.xml
+C:\Users\darkdanito\Desktop\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\Microsoft.Owin.Security.Google.xml
+C:\Users\darkdanito\Desktop\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+C:\Users\darkdanito\Desktop\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\Microsoft.Owin.Security.OAuth.xml
+C:\Users\darkdanito\Desktop\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\Microsoft.Owin.Security.Twitter.xml
+C:\Users\darkdanito\Desktop\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\Newtonsoft.Json.xml
+C:\Users\darkdanito\Desktop\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\System.Web.Helpers.xml
+C:\Users\darkdanito\Desktop\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\System.Web.Mvc.xml
+C:\Users\darkdanito\Desktop\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\System.Web.Optimization.xml
+C:\Users\darkdanito\Desktop\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\System.Web.Razor.xml
+C:\Users\darkdanito\Desktop\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\System.Web.WebPages.xml
+C:\Users\darkdanito\Desktop\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\System.Web.WebPages.Deployment.xml
+C:\Users\darkdanito\Desktop\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bin\System.Web.WebPages.Razor.xml
+C:\Users\darkdanito\Desktop\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\obj\Debug\NosTRAILgic.csprojResolveAssemblyReference.cache
+C:\Users\darkdanito\Desktop\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\obj\Debug\NosTRAILgic.dll
+C:\Users\darkdanito\Desktop\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\obj\Debug\NosTRAILgic.pdb

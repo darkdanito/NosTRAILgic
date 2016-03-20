@@ -1,9 +1,19 @@
 ===============================================================================================================
 Bugs:
 ===============================================================================================================
-Increase the create page input box bigger
-When remove the dyanmic box, the word still remain 
-need to put a x sign for the remove
+
+Home/Index   --> Search auto complete function
+
+
+Trail/Create --> Search auto complete function
+Trail/Create --> Increase the create page input box bigger
+Trail/Create --> When remove the dyanmic box, the word still remain 
+Trail/Create --> Need to put a x sign for the remove
+Trail/Create --> Time Validation from and to
+
+Seperate Google Map API code to a JS
+
+
 
 ===============================================================================================================
 Features Missing:

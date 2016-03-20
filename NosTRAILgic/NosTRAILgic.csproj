@@ -220,6 +220,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="images\greylogo.png" />
+    <Content Include="images\logo.png" />
+    <Content Include="images\nostrailgic.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Properties\DataSources\System.Data.DataSet.datasource" />
