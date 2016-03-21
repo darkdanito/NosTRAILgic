@@ -28,13 +28,23 @@ namespace NosTRAILgic
             //   consumerKey: "",
             //   consumerSecret: "");
 
+            //Facebook Local host
             app.UseFacebookAuthentication(
-               appId: "228561424165052",
-               appSecret: "2d43d7af009a35d13921102a951852f");
+               appId: "494623630721091",
+               appSecret: "5dced5c48305726f4665dadd1a70277");
+            //Azure Azure
+            //app.UseFacebookAuthentication(
+            //   appId: "228561424165052",
+            //   appSecret: "2d43d7af009a35d13921102a951852f");
 
+            //Google Local host
             app.UseGoogleAuthentication(
-                clientId: "782719428680-svrdu45ijjivd4bnbr8a1pnuo5d8sdgl.apps.googleusercontent.com",
-                clientSecret: "pBZBf3RY9NBRWP3xpliBmtDa");
+                clientId: "905341464171-iimnv742if6bjg80unlakipuh1tq32lj.apps.googleusercontent.com",
+                clientSecret: "4jNBKHe0T2jK3IgJ73mYVl2v");
+            //Google Azure
+            //app.UseGoogleAuthentication(
+            //    clientId: "744133716115-25rvvam56mltmb10m0jn3slg4t3uum2u.apps.googleusercontent.com",
+            //    clientSecret: "Pi5mX23y8eeaIT1Z0m4gI");
         }
     }
 }

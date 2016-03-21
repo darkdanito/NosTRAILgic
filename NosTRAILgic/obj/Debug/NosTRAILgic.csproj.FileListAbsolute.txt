@@ -395,3 +395,6 @@ C:\Users\darkdanito\Desktop\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\bi
 C:\Users\darkdanito\Desktop\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\obj\Debug\NosTRAILgic.csprojResolveAssemblyReference.cache
 C:\Users\darkdanito\Desktop\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\obj\Debug\NosTRAILgic.dll
 C:\Users\darkdanito\Desktop\NosTRAILgic-master\NosTRAILgic-master\NosTRAILgic\obj\Debug\NosTRAILgic.pdb
+C:\Users\Khaleef\Documents\GitHub\NosTRAILgic\NosTRAILgic\bin\HtmlAgilityPack.dll
+C:\Users\Khaleef\Documents\GitHub\NosTRAILgic\NosTRAILgic\bin\HtmlAgilityPack.pdb
+C:\Users\Khaleef\Documents\GitHub\NosTRAILgic\NosTRAILgic\bin\HtmlAgilityPack.xml
