@@ -92,9 +92,10 @@ namespace NosTRAILgic.Controllers
             //Create bar chart
             var chart = new Chart(width: 600, height: 200)
             .AddSeries(chartType: "line",
-                            xValue: new[] { "10 ", "50", "30 ", "70" },
-                            yValues: new[] { "50", "70", "90", "110" })
+                            xValue: new[] { "18 ", "19", "20 ", "21" },
+                            yValues: new[] { "50", "60", "70", "75" })
                             .GetBytes("png");
+            
             return File(chart, "image/bytes");
         }
 
