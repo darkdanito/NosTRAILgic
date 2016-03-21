@@ -108,13 +108,16 @@
                 var $node = '<div class="form-group"><label class="control-label col-md-2" for="text">Location</label><div class="col-md-10"><input type="text" name="text" id="text"/><span class="removeField">X</span></div></div>';
 
                 $(dynamicDivInput).last().after($node);
+
+                $('#text').autocomplete({
+                    source: '@Url.Action("GetMP")'
+                });
             });
 
             $('form').on('click', '.removeField', function () {
                 $(this).parent().remove();
             });
         });
-
     </script>
 }
 <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>

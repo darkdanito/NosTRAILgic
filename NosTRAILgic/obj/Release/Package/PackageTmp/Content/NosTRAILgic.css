@@ -22,8 +22,7 @@
 
 body {
     margin-top: 100px;
-    background-color: #222;
-        
+    background-color: #162C15;
 }
 
 @media(min-width:768px) {
@@ -32,13 +31,17 @@ body {
     }
 }
 
+.navbar, ul.nav.navbar-nav.side-nav {
+    background-color: #162C15;
+}
+
 #wrapper {
     padding-left: 0;
 }
 
 #page-wrapper {
     /*padding: 0;*/
-    background-color: #fff;
+    background-color: #FFF;
     height:100%;
 }
 
@@ -147,7 +150,7 @@ ul.alert-dropdown {
     .side-nav li a:hover,
     .side-nav li a:focus {
         outline: none;
-        background-color: #000 !important;
+        background-color: #245222 !important;
     }
 }
 
