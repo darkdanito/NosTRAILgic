@@ -1,0 +1,196 @@
+﻿@model IEnumerable<NosTRAILgic.Models.TrailMeetup_Details_ViewModel>
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<table width="100%">
+    <tr>
+        @foreach (var item in Model)
+            {
+            <td width="10%"><img src="/Content/Upload/@Url.Content(item.getTrailMeetup.ImageLink)" width="100" height="100" /></td>
+
+                <td width="40%">
+                    <h2>Trail Details - @Html.DisplayFor(model => item.getTrailMeetup.Name)</h2>
+
+                    <br />
+
+                    <b>@Html.DisplayNameFor(model => model.getTrailMeetup.CreatorID) : </b>
+                    @Html.DisplayFor(model => item.getTrailMeetup.CreatorID)
+
+                    <br />
+
+                    <b>@Html.DisplayNameFor(model => model.getTrailMeetup.Description) : </b>
+                    @Html.DisplayFor(model => item.getTrailMeetup.Description)
+                </td>
+
+                <td width="50%">
+                    @{
+                        if (ViewBag.linqUserExistTest == "")
+                        {
+                            @Html.ActionLink("Join Trail", "JoinTrail", new { id = item.getTrailMeetup.TrailMeetupID }, new { @class = "btn btn-default" })
+                        }
+                        else
+                        {
+                            <button class="btn btn-default" type="button" disabled>Joined</button>
+                        }
+
+                    }
+                    <br />
+
+                    <b>@Html.DisplayNameFor(model => model.getTrailMeetup.Date) : </b>
+                    @Html.DisplayFor(model => item.getTrailMeetup.Date)
+
+                    <br />
+
+                    <b>Time : </b>
+                    @Html.DisplayFor(model => item.getTrailMeetup.TimeFrom)
+                    <b> - </b>
+                    @Html.DisplayFor(model => item.getTrailMeetup.TimeTo)
+
+                    <br />
+
+                    <b>@Html.DisplayNameFor(model => model.getTrailMeetup.Limit)</b>
+                    @Html.DisplayFor(model => item.getTrailMeetup.Limit)
+                </td>
+                        }
+
+
+
+    </tr>
+
+    <tr>
+        <td colspan="3"><div id="map_canvas" style="width: 1000px; height: 300px;"></div></td>
+    </tr>
+
+    <tr>
+        <td colspan="2">
+            <b>Participants : </b>
+
+            <br />
+
+            <ul style="list-style-type : none">
+
+                @{
+                    string necro = ViewBag.participants;
+
+                    string[] necroArray = necro.Split(',');
+
+                    foreach (string z in necroArray)
+                    {
+                        if (z.EndsWith(","))
+                        {
+                            z.Substring(0, z.Length - 2);
+                        }
+
+                        @Html.Raw("<li>" + z + "</li>");
+                    }
+                }
+
+            </ul>
+
+
+
+        </td>
+
+        <td>
+            <b>Location Details : </b>
+
+            @{
+                foreach (var item in Model)
+                {
+                    <b>@Html.DisplayNameFor(model => model.necroLocation)</b>
+                        @Html.DisplayFor(model => item.necroLocation)
+                }
+            }
+        </td>
+    </tr>
+</table>
+
+<p>
+    @{
+        foreach (var item in Model)
+        {
+            if (User.Identity.Name == item.getTrailMeetup.CreatorID)
+            {
+                @Html.ActionLink("Edit", "Edit", new { id = item.getTrailMeetup.TrailMeetupID }, new { @class = "btn btn-default" })
+            }
+            if (User.IsInRole("Admin") || User.Identity.Name == item.getTrailMeetup.CreatorID)
+            {
+                @Html.ActionLink("Delete", "Delete", new { id = item.getTrailMeetup.TrailMeetupID }, new { @class = "btn btn-default" })
+            }
+        }
+    }
+
+    <button class="btn btn-default" type="button" onclick="location.href='@Url.Action("Index", "TrailMeetup")'">Back to Trail Index</button>
+</p>
+
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript">
+        window.onload = initialize;
+
+        function initialize() {
+
+            var mapOptions = {
+                center: new google.maps.LatLng(1.4038, 103.7941),
+                //    center: new google.maps.LatLng(1.3385674, 103.7059549),
+                zoom: 11,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+
+            var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+
+            //// create a marker
+            //var latlng = new google.maps.LatLng(1.4038, 103.7941);
+            //var marker = new google.maps.Marker({
+            //    position: latlng,
+            //    map: map,
+            //    title: 'My Place'
+            //});
+
+
+            var trailInput = '@ViewBag.linqLocationTest';
+            var trailLatInput = '@ViewBag.linqLatTest';
+            var trailLongInput = '@ViewBag.linqLongTest';
+
+            console.log("Viewbag results for Location: ", trailInput);
+            console.log("Viewbag results for Lat: ", trailLatInput);
+            console.log("Viewbag results for Long: ", trailLongInput);
+
+            // Split the Trail Input of Location based on COMMA into different location
+            var trailArray = trailInput.split(',');
+            var latArray = trailLatInput.split(',');
+            var longArray = trailLongInput.split(',');
+
+            var markers = [];
+            var contents = [];
+            var infowindows = [];
+
+            for (i = 0; i < (trailArray.length - 1) ; i++) {
+
+                console.log("lat long: ", latArray[i] + " , " + longArray[i]);
+
+                markers[i] = new google.maps.Marker({
+                    position: new google.maps.LatLng(latArray[i], longArray[i]),
+                    map: map,
+                    title: 'samplemarker'
+                });
+
+                markers[i].index = i;
+                contents[i] = '<div class="popup_container">' + trailArray[i] + '</div>';
+
+                infowindows[i] = new google.maps.InfoWindow({
+                    content: contents[i],
+                    maxWidth: 300
+                });
+
+                google.maps.event.addListener(markers[i], 'click', function () {
+                    console.log(this.index); // this will give correct index
+                    console.log(i); //this will always give 10 for you
+                    infowindows[this.index].open(map, markers[this.index]);
+                    map.panTo(markers[this.index].getPosition());
+                });
+            }
+
+        }
+</script>
