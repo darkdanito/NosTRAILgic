@@ -30,6 +30,15 @@ namespace NosTRAILgic.Controllers
             return View(db.Trails.ToList());
         }
 
+        public ActionResult GetMP(string term)
+        {
+            var result = from r in db.Locations
+                         select r.Name;
+          
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+
         /************************************************************************************
          * Description: This function handles the update of the user joining trails         *
          *                                                                                  *
