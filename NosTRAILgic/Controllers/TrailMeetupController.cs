@@ -30,12 +30,12 @@ namespace NosTRAILgic.Controllers
             return View(db.Trails.ToList());
         }
 
-        public ActionResult GetMP(string term)
+        public ActionResult GetLocation(string term)
         {
             var result = from r in db.Locations
-                         where r.Name.ToLower().Contains(term)
+                         where r.Name.ToLower().StartsWith(term)
                          select r.Name;
-          
+
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
