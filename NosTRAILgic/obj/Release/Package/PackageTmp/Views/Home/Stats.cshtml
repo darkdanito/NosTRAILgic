@@ -5,18 +5,80 @@
 
 <h2>Stats</h2>
 
-<p>
+<table width="100%">
+    <tr>
+        <td colspan="2">
 
-</p>
+        @using (Html.BeginForm())
+        {
+            <span style="float: right;">
+                Heritage located in: 
+                @Html.DropDownList("Selection", new SelectListItem[]
+                        {
+                            new SelectListItem() { Text = "All", Value = "0" },
+                            new SelectListItem() { Text = "Museum", Value = "1" },
+                            new SelectListItem() { Text = "Historical Sites", Value = "2" },
+                            new SelectListItem() { Text = "Monuments", Value = "3" },
+                        },
+                            new { @onchange = "this.form.submit()" })
+            </span>
+        }
+        
+            <p>
+                <img src="@Url.Action("CreateBar")" alt="Bar Chart using MVC" />
+            </p>
 
-<p>
-    <img src="@Url.Action("CreateBar")" alt="Bar Chart using MVC" />
-</p>
+        </td>
+    </tr>
 
-<p>
-    <img src="@Url.Action("CreatePie")" alt="Pie Chart using MVC" />
-</p>
+    <tr>
+        <td width="50%"> 
 
-<p>
-    <img src="@Url.Action("CreateLine")" alt="Line Chart using MVC" />
-</p>
+            @using (Html.BeginForm())
+            {
+                <span style="float: right;">
+                    Location Search per:
+                    @Html.DropDownList("Selection", new SelectListItem[]
+                        {
+                            new SelectListItem() { Text = "Week", Value = "0" },
+                            new SelectListItem() { Text = "Month", Value = "1" },
+                            new SelectListItem() { Text = "Year", Value = "3" },
+                        },
+                            new { @onchange = "this.form.submit()" })
+                </span>
+            }
+
+            <p>
+                <img src="@Url.Action("CreatePie")" alt="Pie Chart using MVC" />
+            </p>
+
+        </td>
+
+        <td>
+        
+            @using (Html.BeginForm())
+            {
+                <span style="float: right;">
+                    Visitor Count: 
+                    @Html.DropDownList("Selection", new SelectListItem[]
+                        {
+                            new SelectListItem() { Text = "Art Retreat Museum", Value = "0" },
+                            new SelectListItem() { Text = "The Changi Museum", Value = "1" },
+                            new SelectListItem() { Text = "Lee Kong Chian Natural History Museum", Value = "2" },
+                            new SelectListItem() { Text = "Peranakan Museum", Value = "3" },
+                        },
+                            new { @onchange = "this.form.submit()" })
+                </span>
+            }
+        
+            <p>
+                <img src="@Url.Action("CreateLine")" alt="Line Chart using MVC" />
+            </p>
+
+        </td>
+    </tr>
+</table>
+
+
+
+
