@@ -197,6 +197,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\JoinTrail.cs" />
     <Compile Include="Models\Location.cs" />
+    <Compile Include="Models\Statistic.cs" />
     <Compile Include="Models\TrailMeetup.cs" />
     <Compile Include="Models\TrailMeetup_Location.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -319,9 +320,8 @@
     <Content Include="Views\TrailMeetup\Edit.cshtml" />
     <Content Include="Views\TrailMeetup\Index.cshtml" />
     <Content Include="Scripts\jquery-2.2.1.min.map" />
-    <Content Include="Views\Home\Stats.cshtml" />
     <Content Include="Views\Shared\_GoogleAnalytics.cshtml" />
-    <Content Include="Views\stats\Index.cshtml" />
+    <Content Include="Views\Stats\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
