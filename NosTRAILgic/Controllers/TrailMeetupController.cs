@@ -33,6 +33,7 @@ namespace NosTRAILgic.Controllers
         public ActionResult GetMP(string term)
         {
             var result = from r in db.Locations
+                         where r.Name.ToLower().Contains(term)
                          select r.Name;
           
             return Json(result, JsonRequestBehavior.AllowGet);
