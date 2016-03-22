@@ -12,6 +12,8 @@ Trail/Details  --> Once user limit reached, Join will be disable and user cant j
 Trail/Details  --> Check location URL
 Trail/Details  --> IMG if <NULL>, do not display
 
+Trail/Edit     --> Start time and End Time is empty	
+
 Seperate Google Map API code to a JS
 
 Account        --> Profile Page
