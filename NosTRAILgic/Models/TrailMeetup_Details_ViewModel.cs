@@ -12,7 +12,7 @@ namespace NosTRAILgic.Models
         public TrailMeetup_Location getTrailMeetup_Location { get; set; }
         public Location getLocation { get; set; }
 
-        public List<string> necroLocation { get; set; }
+        public IEnumerable<string> necroLocation { get; set; }
 
 
 
