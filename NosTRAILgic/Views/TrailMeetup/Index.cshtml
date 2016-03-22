@@ -30,8 +30,8 @@
                 <li>@item.Date.ToShortDateString()</li>
                 <li>@item.TimeFrom.Value.ToShortTimeString() - @item.TimeTo.Value.ToShortTimeString()</li>
                 <li>@item.Limit</li>
-                <li>@Html.ActionLink("Details", "Details", new { id = item.TrailMeetupID }, new { @class = "btn btn-default" })</li>
-                <li>@Html.ActionLink("Details_ViewModel", "Details_ViewModel", new { id = item.TrailMeetupID }, new { @class = "btn btn-default" })</li>
+                @*<li>@Html.ActionLink("Details", "Details", new { id = item.TrailMeetupID }, new { @class = "btn btn-default" })</li>*@
+                <li>@Html.ActionLink("Details", "Details_ViewModel", new { id = item.TrailMeetupID }, new { @class = "btn btn-default" })</li>
             </ul>    
             
                 

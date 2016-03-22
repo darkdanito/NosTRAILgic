@@ -69,15 +69,16 @@
 
             <br />
 
-            <ul style="list-style-type : none">
-
+            <ul>
                 @{
                     foreach (var item in Model)
                     {
-                        <li>@Html.DisplayFor(model => item.necroLocation)</li>
+                        foreach (var trailParticipants in item.necroLocation)
+                        {
+                            <li>@trailParticipants</li>
+                        }
                     }
                 }
-
             </ul>
 
         </td>
