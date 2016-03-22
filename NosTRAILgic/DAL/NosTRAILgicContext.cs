@@ -18,6 +18,9 @@ namespace NosTRAILgic.DAL
 
         public DbSet<Area> Areas { get; set; }
 
+        public DbSet<Search> Searchs { get; set; }
+        public DbSet<CheckIn> CheckIns { get; set; }
+
         //public DbSet<UploadLocation> UploadLocations { get; set; }
         //public DbSet<Museum> Museums { get; set; }
         //public DbSet<HistoricSite> HistoricSites { get; set; }
