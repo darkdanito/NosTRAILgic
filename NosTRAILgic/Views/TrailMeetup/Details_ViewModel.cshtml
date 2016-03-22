@@ -140,20 +140,6 @@
         //    title: 'My Place'
         //});
 
-            @{
-                foreach (var item in Model)
-                {
-                    foreach (var meow in item.pewpewLocation)
-                    {
-                        <text>
-                            console.log("@meow.Name");
-                        </text>
-                    }
-
-                }
-            }
-
-
         var trailInput = '@ViewBag.linqLocationTest';
         var trailLatInput = '@ViewBag.linqLatTest';
         var trailLongInput = '@ViewBag.linqLongTest';
@@ -171,31 +157,72 @@
         var contents = [];
         var infowindows = [];
 
-        for (i = 0; i < (trailArray.length - 1) ; i++) {
+        // OMG
+        @{
+            foreach (var item in Model)
+            {
+                int counter = 0;
+                foreach (var meow in item.pewpewLocation)
+                {
+                    
 
-            console.log("lat long: ", latArray[i] + " , " + longArray[i]);
+                    <text>
+                        console.log("@meow.Name");
 
-            markers[i] = new google.maps.Marker({
-                position: new google.maps.LatLng(latArray[i], longArray[i]),
-                map: map,
-                title: 'samplemarker'
-            });
+                        markers[@counter] = new google.maps.Marker({
+                            position: new google.maps.LatLng(@meow.Latitude, @meow.Longitude),
+                            map: map,
+                            title: 'samplemarker'
+                        });
 
-            markers[i].index = i;
-            contents[i] = '<div class="popup_container">' + trailArray[i] + '</div>';
+                        markers[@counter].index = @counter;
+                        contents[@counter] = '<div class="popup_container">' + "@meow.Name" + '</div>';
 
-            infowindows[i] = new google.maps.InfoWindow({
-                content: contents[i],
-                maxWidth: 300
-            });
+                            infowindows[@counter] = new google.maps.InfoWindow({
+                                content: contents[@counter] ,
+                            maxWidth: 300
+                        });
 
-            google.maps.event.addListener(markers[i], 'click', function () {
-                console.log(this.index); // this will give correct index
-                console.log(i); //this will always give 10 for you
-                infowindows[this.index].open(map, markers[this.index]);
-                map.panTo(markers[this.index].getPosition());
-            });
+                        google.maps.event.addListener(markers[@counter], 'click', function () {
+                            //console.log(this.index); // this will give correct index
+                            //console.log(i); //this will always give 10 for you
+                            infowindows[this.index].open(map, markers[this.index]);
+                            map.panTo(markers[this.index].getPosition());
+                        });
+
+                    </text>
+
+                    counter++;
+                }
+
+            }
         }
+
+        //for (i = 0; i < (trailArray.length - 1) ; i++) {
+
+        //    console.log("lat long: ", latArray[i] + " , " + longArray[i]);
+
+        //    markers[i] = new google.maps.Marker({
+        //        position: new google.maps.LatLng(latArray[i], longArray[i]),
+        //        map: map,
+        //        title: 'samplemarker'
+        //    });
+
+        //    markers[i].index = i;
+        //    contents[i] = '<div class="popup_container">' + trailArray[i] + '</div>';
+
+        //    infowindows[i] = new google.maps.InfoWindow({
+        //        content: contents[i],
+        //        maxWidth: 300
+        //    });
+
+        //    google.maps.event.addListener(markers[i], 'click', function () {
+        //        console.log(this.index); // this will give correct index
+        //        console.log(i); //this will always give 10 for you
+        //        infowindows[this.index].open(map, markers[this.index]);
+        //        map.panTo(markers[this.index].getPosition());
+        //    });
+        //}
 
     }
 </script>
