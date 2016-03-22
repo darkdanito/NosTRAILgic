@@ -391,10 +391,10 @@ namespace NosTRAILgic.Controllers
             TrailMeetup_Details_ViewModel trailMeetup_Details_ViewModel = new TrailMeetup_Details_ViewModel();
 
 
-            trailMeetup_Details_ViewModel.getTrailMeetup = db.Trails.Find(id);
-            //     var LINQTrailDetailsQuery = from p in db.Trails where p.TrailMeetupID == id select p;
-            //     trailMeetup_Details_ViewModel.getTrailMeetup = LINQTrailDetailsQuery.FirstOrDefault();
 
+            // Get Detail Details by ID
+            trailMeetup_Details_ViewModel.getTrailMeetup = db.Trails.Find(id);
+            
             TrailMeetup trailMeetup = db.Trails.Find(id);
             trailMeetup_Details_ViewModel.getTrailMeetup = db.Trails.Find(id);
 

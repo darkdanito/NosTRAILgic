@@ -72,37 +72,20 @@
             <ul style="list-style-type : none">
 
                 @{
-                    string necro = ViewBag.participants;
-
-                    string[] necroArray = necro.Split(',');
-
-                    foreach (string z in necroArray)
+                    foreach (var item in Model)
                     {
-                        if (z.EndsWith(","))
-                        {
-                            z.Substring(0, z.Length - 2);
-                        }
-
-                        @Html.Raw("<li>" + z + "</li>");
+                        <li>@Html.DisplayFor(model => item.necroLocation)</li>
                     }
                 }
 
             </ul>
-
-
 
         </td>
 
         <td>
             <b>Location Details : </b>
 
-            @{
-                foreach (var item in Model)
-                {
-                    <b>@Html.DisplayNameFor(model => model.necroLocation)</b>
-                        @Html.DisplayFor(model => item.necroLocation)
-                }
-            }
+
         </td>
     </tr>
 </table>
