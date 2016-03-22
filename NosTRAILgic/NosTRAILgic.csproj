@@ -322,12 +322,9 @@
     <Content Include="Views\TrailMeetup\Index.cshtml" />
     <Content Include="Scripts\jquery-2.2.1.min.map" />
     <Content Include="Views\Shared\_GoogleAnalytics.cshtml" />
-<<<<<<< HEAD
     <Content Include="Views\stats\Index.cshtml" />
     <Content Include="Views\TrailMeetup\Details_ViewModel.cshtml" />
-=======
     <Content Include="Views\Stats\Index.cshtml" />
->>>>>>> refs/remotes/origin/master
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
