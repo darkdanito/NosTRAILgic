@@ -13,6 +13,8 @@ Trail/Create --> Time Validation from and to
 
 Seperate Google Map API code to a JS
 
+Trail/Create --> Participants Display Bug
+
 
 
 ===============================================================================================================
