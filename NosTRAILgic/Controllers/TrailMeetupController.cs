@@ -60,7 +60,7 @@ namespace NosTRAILgic.Controllers
                 jointrail.TrailMeetupID = (int)id;
                 jointrail.UserID = User.Identity.Name;
             }
-                
+
             db.JoinTrails.Add(jointrail);
             db.SaveChanges();
 
@@ -129,7 +129,7 @@ namespace NosTRAILgic.Controllers
 
 
 
-           
+
 
 
             /************************************************************************************
@@ -151,63 +151,92 @@ namespace NosTRAILgic.Controllers
             int trailID = (int)id;
 
             // LINQ Query to query the location name given the trail ID
-            var LINQLocationQuery = from y in db.Trails
-                         join x in db.TrailMeetup_Location on y.TrailMeetupID equals x.TrailMeetupID
-                         join w in db.Locations on x.LocationID equals w.LocationId
-                         where y.TrailMeetupID == trailID
-                         select w.Name;
+            //var LINQLocationQuery = from y in db.Trails
+            //             join x in db.TrailMeetup_Location on y.TrailMeetupID equals x.TrailMeetupID
+            //             join w in db.Locations on x.LocationID equals w.LocationId
+            //             where y.TrailMeetupID == trailID
+            //             select w.Name;
 
-            // Var to store the Locations name into a string
-            var AllLocation = "";
+            //// Var to store the Locations name into a string
+            //var AllLocation = "";
 
-            // Loop through the LINQ Query results and append to the AllLocation
-            foreach (var l in LINQLocationQuery)
-            {
-                AllLocation += l;
-                AllLocation += ",";
-            }
+            //// Loop through the LINQ Query results and append to the AllLocation
+            //foreach (var l in LINQLocationQuery)
+            //{
+            //    AllLocation += l;
+            //    AllLocation += ",";
+            //}
 
             // Update the View Bag so that it can be passed to the view
-            ViewBag.linqLocationTest = AllLocation;
+            //ViewBag.linqLocationTest = AllLocation;
 
+            //var LINQLatQuery = from y in db.Trails
+            //                        join x in db.TrailMeetup_Location on y.TrailMeetupID equals x.TrailMeetupID
+            //                        join w in db.Locations on x.LocationID equals w.LocationId
+            //                        where y.TrailMeetupID == trailID
+            //                        select w.Latitude, ;
 
+            //var LINQLongQuery = from y in db.Trails
+            //                        join x in db.TrailMeetup_Location on y.TrailMeetupID equals x.TrailMeetupID
+            //                        join w in db.Locations on x.LocationID equals w.LocationId
+            //                        where y.TrailMeetupID == trailID
+            //                        select w.Longitude;
 
+            //foreach (var Lat in LINQLatQuery)
+            //{
+            //    AllLat += Lat;
+            //    AllLat += ",";
+            //}
 
+            //foreach (var Long in LINQLongQuery)
+            //{
+            //    AllLong += Long;
+            //    AllLong += ",";
+            //}
 
-            var LINQLatQuery = from y in db.Trails
-                                    join x in db.TrailMeetup_Location on y.TrailMeetupID equals x.TrailMeetupID
-                                    join w in db.Locations on x.LocationID equals w.LocationId
-                                    where y.TrailMeetupID == trailID
-                                    select w.Latitude;
+            // Get Location Details
 
-            var LINQLongQuery = from y in db.Trails
-                                    join x in db.TrailMeetup_Location on y.TrailMeetupID equals x.TrailMeetupID
-                                    join w in db.Locations on x.LocationID equals w.LocationId
-                                    where y.TrailMeetupID == trailID
-                                    select w.Longitude;
+            var LINQLocationsQuery = from y in db.Trails
+                                     join x in db.TrailMeetup_Location on y.TrailMeetupID equals x.TrailMeetupID
+                                     join w in db.Locations on x.LocationID equals w.LocationId
+                                     where y.TrailMeetupID == trailID
+                                     select w;
 
+            var AllLocationName = "";
+            var AllocationDesc = "";
+            var AllLocationHyperLink = "";
+            var AllLocationImageLink = "";
+            var AllLocationPostalCode = "";
+            var AllLocationLat = "";
+            var AllLocationLong = "";
 
-            var AllLat = "";
-            var AllLong = "";
-
-            foreach (var Lat in LINQLatQuery)
+            foreach (var location in LINQLocationsQuery)
             {
-                AllLat += Lat;
-                AllLat += ",";
+                AllLocationName += location.Name;
+                AllLocationName += ",";
+                AllocationDesc += location.Description;
+                AllocationDesc += ",";
+                AllLocationHyperLink += location.HyperLink;
+                AllLocationHyperLink += ",";
+                AllLocationImageLink += location.ImageLink;
+                AllLocationImageLink += ",";
+                AllLocationPostalCode += location.PostalCode;
+                AllLocationPostalCode += ",";
+                AllLocationLat += location.Latitude;
+                AllLocationLat += ",";
+                AllLocationLong += location.Longitude;
+                AllLocationLong += ",";
             }
 
-            foreach (var Long in LINQLongQuery)
-            {
-                AllLong += Long;
-                AllLong += ",";
-            }
+            ViewBag.linqLocationName = AllLocationName;
+            ViewBag.linqLocationDesc = AllocationDesc;
+            ViewBag.linqLocationHyperLink = AllLocationHyperLink;
+            ViewBag.linqLocationImageLink = AllLocationImageLink;
+            ViewBag.linqLocationPostalCode = AllLocationPostalCode;
+            ViewBag.linqLocationLat = AllLocationLat;
+            ViewBag.linqLocationLong = AllLocationLong;
 
-            ViewBag.linqLatTest = AllLat;
-            ViewBag.linqLongTest = AllLong;
-
-
-
-
+            //Get Participate
 
             string userName = User.Identity.Name;
             var LINQIsUserInTrailQuery = from p in db.JoinTrails where p.UserID == userName && p.TrailMeetupID == trailID select p.UserID;
@@ -217,6 +246,7 @@ namespace NosTRAILgic.Controllers
                 userExist += ex;
             }
             ViewBag.linqUserExistTest = userExist;
+
 
             return View(trailMeetup);
         }
@@ -260,7 +290,7 @@ namespace NosTRAILgic.Controllers
 
                 db.Trails.Add(trailMeetup);
                 db.SaveChanges();
-                
+
                 string inputTrailName = trailMeetup.Name;
 
                 var LINQCreatedTrailIDQuery = from c in db.Trails where c.Name == inputTrailName select c.TrailMeetupID;

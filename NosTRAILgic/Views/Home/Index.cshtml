@@ -12,10 +12,10 @@
 
             @using (Html.BeginForm())
             {
-                
+
                 <span style="float: right;">
                     <i class="glyphicon glyphicon-search"></i>
-                    <input id="Text1" type="text" placeholder="Search" />
+                    <input id="searchKeyword" type="text" placeholder="Search" />
                     @Html.DropDownList("Selection", new SelectListItem[]
                         {
                             new SelectListItem() { Text = "All", Value = "0" },
@@ -72,3 +72,14 @@
     google.maps.event.addDomListener(window, 'load', initialize);
 
 </script>
+
+@section Scripts {
+    <link rel="stylesheet" href="~/Content/jquery-ui.min.css">
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#searchKeyword').autocomplete({
+                source: '@Url.Action("GetLocation")'
+            });
+        });
+    </script>
+}
