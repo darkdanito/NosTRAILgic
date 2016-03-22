@@ -137,77 +137,52 @@
 
         var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
 
-        //// create a marker
-        //var latlng = new google.maps.LatLng(1.4038, 103.7941);
-        //var marker = new google.maps.Marker({
-        //    position: latlng,
-        //    map: map,
-        //    title: 'My Place'
-        //});
-
-        var trailInput = '@ViewBag.linqLocationTest';
-        var trailLatInput = '@ViewBag.linqLatTest';
-        var trailLongInput = '@ViewBag.linqLongTest';
-
-        console.log("Viewbag results for Location: ", trailInput);
-        console.log("Viewbag results for Lat: ", trailLatInput);
-        console.log("Viewbag results for Long: ", trailLongInput);
-
-        // Split the Trail Input of Location based on COMMA into different location
-        var trailArray = trailInput.split(',');
-        var latArray = trailLatInput.split(',');
-        var longArray = trailLongInput.split(',');
-
         var markers = [];
         var contents = [];
         var infowindows = [];
 
-        // OMG
+        /************************************************************************************
+         * Description: This function handles the rendering of the markers to Google        *
+         *              map based on the enumerableAllLocationFromTrail object              *
+         *                                                                                  *
+         * Developer: Yun Yong                                                              *
+         *                                                                                  *
+         * Date: 21/03/2016                                                                 *
+         ************************************************************************************/
         @{
             foreach (var item in Model)
             {
                 int counter = 0;
-                foreach (var meow in item.enumerableAllLocationFromTrail)
+                foreach (var location in item.enumerableAllLocationFromTrail)
                 {
-
-
                     <text>
-                        console.log("@meow.Name");
-
                         markers[@counter] = new google.maps.Marker({
-                            position: new google.maps.LatLng(@meow.Latitude, @meow.Longitude),
+                            position: new google.maps.LatLng(@location.Latitude, @location.Longitude),
                             map: map,
-                            title: 'samplemarker'
+                            title: 'Some Marker Title'
                         });
 
                         markers[@counter].index = @counter;
-                        contents[@counter] = '<div class="popup_container">' + "@meow.Name" + '</div>';
+                        contents[@counter] = '<div class="popup_container">' + "@location.Name" + '</div>';
 
-                            infowindows[@counter] = new google.maps.InfoWindow({
+                        infowindows[@counter] = new google.maps.InfoWindow({
                                 content: contents[@counter] ,
                             maxWidth: 300
                         });
 
                         google.maps.event.addListener(markers[@counter], 'click', function () {
-
-
                             var content =
-                            '<div>Name: @meow.Name</div>' +
-                            '<div>Description: @meow.Description</div>' +
-                            '<div>Link: <a href="' + '@meow.HyperLink' + '">' + '@meow.HyperLink' + '</a></div>' +
-                            '<div>Image: <img src="' + '@meow.ImageLink' + '"/></div>' +
-                            '<div>Postal Code: @meow.PostalCode</div>' ;
+                            '<div>Name: @location.Name</div>' +
+                            '<div>Description: @location.Description</div>' +
+                            '<div>Link: <a href="' + '@location.HyperLink' + '">' + '@location.HyperLink' + '</a></div>' +
+                            '<div>Image: <img src="' + '@location.ImageLink' + '"/></div>' +
+                            '<div>Postal Code: @location.PostalCode</div>' ;
                            
                             document.getElementById("locationDetails").innerHTML = content;
 
-
-
-                            //console.log(this.index); // this will give correct index
-                            //console.log(i); //this will always give 10 for you
                             infowindows[this.index].open(map, markers[this.index]);
                             map.panTo(markers[this.index].getPosition());
                         });
-
                     </text>
 
                     counter++;
@@ -215,32 +190,5 @@
 
             }
         }
-
-        //for (i = 0; i < (trailArray.length - 1) ; i++) {
-
-        //    console.log("lat long: ", latArray[i] + " , " + longArray[i]);
-
-        //    markers[i] = new google.maps.Marker({
-        //        position: new google.maps.LatLng(latArray[i], longArray[i]),
-        //        map: map,
-        //        title: 'samplemarker'
-        //    });
-
-        //    markers[i].index = i;
-        //    contents[i] = '<div class="popup_container">' + trailArray[i] + '</div>';
-
-        //    infowindows[i] = new google.maps.InfoWindow({
-        //        content: contents[i],
-        //        maxWidth: 300
-        //    });
-
-        //    google.maps.event.addListener(markers[i], 'click', function () {
-        //        console.log(this.index); // this will give correct index
-        //        console.log(i); //this will always give 10 for you
-        //        infowindows[this.index].open(map, markers[this.index]);
-        //        map.panTo(markers[this.index].getPosition());
-        //    });
-        //}
-
     }
 </script>
