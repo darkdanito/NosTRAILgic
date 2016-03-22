@@ -189,6 +189,7 @@
     <Compile Include="DAL\DataGateway.cs" />
     <Compile Include="DAL\NosTRAILgicContext.cs" />
     <Compile Include="DAL\IDataGateway.cs" />
+    <Compile Include="DAL\TrailMeetupMapper.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

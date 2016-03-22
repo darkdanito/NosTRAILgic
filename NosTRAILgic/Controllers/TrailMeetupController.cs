@@ -28,6 +28,9 @@ namespace NosTRAILgic.Controllers
         // GET: TrailMeetup
         public ActionResult Index()
         {
+            //TrailMeetupMapper test = new TrailMeetupMapper();
+            //    test.StartEngine();
+
             return View(db.Trails.ToList());
         }
 
