@@ -387,19 +387,13 @@ namespace NosTRAILgic.Controllers
 
             List<TrailMeetup_Details_ViewModel> allViewModel = new List<TrailMeetup_Details_ViewModel>();
 
-
             TrailMeetup_Details_ViewModel trailMeetup_Details_ViewModel = new TrailMeetup_Details_ViewModel();
-
-
 
             // Get Detail Details by ID
             trailMeetup_Details_ViewModel.getTrailMeetup = db.Trails.Find(id);
             
             TrailMeetup trailMeetup = db.Trails.Find(id);
             trailMeetup_Details_ViewModel.getTrailMeetup = db.Trails.Find(id);
-
-
-
 
             if (trailMeetup_Details_ViewModel.getTrailMeetup == null)
             {
@@ -416,29 +410,10 @@ namespace NosTRAILgic.Controllers
              *                                                                                  *
              * Date: 13/03/2016                                                                 *
              ************************************************************************************/
-
-            // LINQ Query to query who are the participants in the trails
-            var LINQTrailParticipantsQuery = from p in db.JoinTrails where p.TrailMeetupID == id select p.UserID;
-
-
-
-            // Var to store the Trail Participants in string
-            var TrailParticipants = "";
-
-            // Loop through the LINQ Query results and append to the TrailParticipants
-            foreach (var p in LINQTrailParticipantsQuery)
-            {
-                TrailParticipants += p;
-                TrailParticipants += ",";
-            }
-
-            // Update the View Bag so that it can be passed to the view
-            ViewBag.participants = TrailParticipants;
-
             var LINQtoList = (from p in db.JoinTrails where p.TrailMeetupID == id select p.UserID).ToList();
 
             trailMeetup_Details_ViewModel.necroLocation = LINQtoList;
-            allViewModel.Add(trailMeetup_Details_ViewModel);
+    //        allViewModel.Add(trailMeetup_Details_ViewModel);
 
 
             /************************************************************************************
@@ -529,6 +504,24 @@ namespace NosTRAILgic.Controllers
                 userExist += ex;
             }
             ViewBag.linqUserExistTest = userExist;
+
+
+
+            var LINQAllLocationQuery = (from y in db.Trails
+                                     join x in db.TrailMeetup_Location on y.TrailMeetupID equals x.TrailMeetupID
+                                     join w in db.Locations on x.LocationID equals w.LocationId
+                                     where y.TrailMeetupID == trailID
+                                     select w);
+
+            trailMeetup_Details_ViewModel.pewpewLocation = LINQAllLocationQuery;
+
+
+           
+
+
+
+            allViewModel.Add(trailMeetup_Details_ViewModel);
+
 
 
 

@@ -7,7 +7,7 @@
 <table width="100%">
     <tr>
         @foreach (var item in Model)
-            {
+        {
             <td width="10%"><img src="/Content/Upload/@Url.Content(item.getTrailMeetup.ImageLink)" width="100" height="100" /></td>
 
                 <td width="40%">
@@ -84,8 +84,17 @@
 
         <td>
             <b>Location Details : </b>
+            @{
+                foreach (var item in Model)
+                {
+                    foreach (var meow in item.pewpewLocation)
+                    {
+                        @Html.DisplayFor(model => meow.Name)
+                    }
 
-
+                }
+            }
+            
         </td>
     </tr>
 </table>

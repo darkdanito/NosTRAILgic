@@ -13,5 +13,12 @@ namespace NosTRAILgic.Models
         public Location getLocation { get; set; }
 
         public List<string> necroLocation { get; set; }
+
+
+
+        public ICollection<Location> snowmanLocation { get; set; }
+
+        public IEnumerable<Location> pewpewLocation { get; set; }
+
     }
 }
