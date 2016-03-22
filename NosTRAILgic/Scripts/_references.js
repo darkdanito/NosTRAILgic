@@ -1,11 +1,14 @@
-﻿/// <reference path="jquery-ui-1.11.4.js" />
-/// <autosync enabled="true" />
+﻿/// <autosync enabled="true" />
+/// <reference path="../client scripts/mvcfoolproof.unobtrusive.min.js" />
+/// <reference path="../client scripts/mvcfoolproofjqueryvalidation.min.js" />
+/// <reference path="../client scripts/mvcfoolproofvalidation.min.js" />
 /// <reference path="bootstrap.js" />
 /// <reference path="jquery.validate.min.js" />
 /// <reference path="jquery.validate.unobtrusive.min.js" />
 /// <reference path="jquery-1.10.2.js" />
 /// <reference path="jquery-2.2.1.js" />
 /// <reference path="jquery-2.2.1.min.js" />
+/// <reference path="jquery-ui-1.11.4.js" />
 /// <reference path="jquery-ui-1.11.4.min.js" />
 /// <reference path="modernizr-2.6.2.js" />
 /// <reference path="modernizr-2.8.3.js" />

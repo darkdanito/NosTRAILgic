@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Foolproof;
 
 namespace NosTRAILgic.Models
 {
@@ -42,6 +43,7 @@ namespace NosTRAILgic.Models
         [Required]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:hh:mm tt}")]
         [DataType(DataType.Time)]
+        [GreaterThan("TimeFrom")]
         [Display(Name = "End Time")]
         public DateTime? TimeTo { get; set; }
 
