@@ -33,7 +33,8 @@ namespace NosTRAILgic.Controllers
                     ViewBag.modSitesName = "https://www.dropbox.com/s/pg72q12826s6et2/MONUMENTS.kml?dl=1";
                 }
 
-            }else
+            }
+            else
             {
                 ViewBag.modSitesName = "https://www.dropbox.com/s/dxd7uqm8tmztwyg/MUSEUM.kml?dl=1";
             }
@@ -42,14 +43,23 @@ namespace NosTRAILgic.Controllers
         }
 
         public ActionResult Stats()
-        {            
+        {
             return View();
+        }
+
+        public ActionResult GetLocation(string term)
+        {
+            var result = from r in db.Locations
+                         where r.Name.ToLower().StartsWith(term)
+                         select r.Name;
+
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult necrodiver()
         {
             //    var LINQTrailParticipantsQuery = from p in db.JoinTrails where p.TrailMeetupID == 1 select p.UserID;
-        //    var LINQTrailParticipantsQuery = from p in db.JoinTrails select p.TrailMeetupID ;
+            //    var LINQTrailParticipantsQuery = from p in db.JoinTrails select p.TrailMeetupID ;
 
             var orders = (from c in db.JoinTrails
                           group c by c.TrailMeetupID into g
@@ -95,7 +105,7 @@ namespace NosTRAILgic.Controllers
                             xValue: new[] { "18 ", "19", "20 ", "21" },
                             yValues: new[] { "50", "60", "70", "75" })
                             .GetBytes("png");
-            
+
             return File(chart, "image/bytes");
         }
 
