@@ -10,6 +10,13 @@ using System.Web.Mvc;
 
 namespace NosTRAILgic.Controllers
 {
+    /************************************************************************************
+     * Description: This controller manages the handling of Stats View                  *
+     *                                                                                  *
+     * Developer: Khaleef                                                               *
+     *                                                                                  *
+     * Date: 21/03/2016                                                                 *
+     ************************************************************************************/
     public class StatsController : Controller
     {
         private NosTRAILgicContext db = new NosTRAILgicContext();
@@ -18,25 +25,6 @@ namespace NosTRAILgic.Controllers
         {
             var stats = db.Database.SqlQuery<Statistic>("select t.Name as TrailName,count(j.TrailMeetupID) as NumberOfParticipant from JoinTrails j right join TrailMeetups t on t.TrailMeetupID = j.TrailMeetupID GROUP BY t.Name").ToList();
             return View(stats);
-        }
-
-        public ActionResult necrodiver()
-        {
-            //    var LINQTrailParticipantsQuery = from p in db.JoinTrails where p.TrailMeetupID == 1 select p.UserID;
-            //    var LINQTrailParticipantsQuery = from p in db.JoinTrails select p.TrailMeetupID ;
-
-            var orders = (from c in db.JoinTrails
-                          group c by c.TrailMeetupID into g
-                          select new { TrailMeetup = g.Key, Number = g.Count() });
-
-
-
-            var bytes = new Chart(width: 600, height: 400)
-                       .AddTitle("Orders")
-                       .DataBindTable(dataSource: orders, xField: "PaymentTypeID")
-                       .GetBytes("png");
-
-            return File(bytes, "image/bytes");
         }
 
         public ActionResult CreateBar()

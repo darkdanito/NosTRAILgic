@@ -1,13 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace NosTRAILgic.Models
+﻿namespace NosTRAILgic.Models
 {
+    /************************************************************************************
+     * Description: Model for the Join Trail                                            *
+     *                                                                                  *
+     * Developer: Khaleef                                                               *
+     *                                                                                  *
+     * Date: 21/03/2016                                                                 *
+     ************************************************************************************/
     public class Statistic
     {
         public string TrailName { get; set; }
+
         public int NumberOfParticipant { get; set; }
     }
 }

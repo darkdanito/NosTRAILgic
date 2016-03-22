@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -10,6 +9,13 @@ using HtmlAgilityPack;
 
 namespace NosTRAILgic.Controllers
 {
+    /************************************************************************************
+     * Description: This controller manages the handling of TrailMeetup View            *
+     *                                                                                  *
+     * Developer: Elson                                                                 *
+     *                                                                                  *
+     * Date: 14/03/2016                                                                 *
+     ************************************************************************************/
     [Authorize]
     public class UploadController : Controller
     {

@@ -3,6 +3,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NosTRAILgic.Models
 {
+    /************************************************************************************
+     * Description: Model for the Location                                              *
+     *                                                                                  *
+     * Developer: Elson                                                                 *
+     *                                                                                  *
+     * Date: 12/03/2016                                                                 *
+     ************************************************************************************/
     public class Location
     {
         [Key]

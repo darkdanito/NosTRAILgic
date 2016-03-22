@@ -8,59 +8,56 @@
     <tr>
         @foreach (var item in Model)
         {
-            <td width="10%"><img src="/Content/Upload/@Url.Content(item.getTrailMeetup.ImageLink)" width="100" height="100" /></td>
+            <td width="10%">                                                                   
+                <img src="/Content/Upload/@Url.Content(item.getTrailMeetup.ImageLink)" width="100" height="100" />
+            </td>
 
-                <td width="40%">
-                    <h2>Trail Details - @Html.DisplayFor(model => item.getTrailMeetup.Name)</h2>
+            <td width="40%">
+                <h2>Trail Details - @Html.DisplayFor(model => item.getTrailMeetup.Name)</h2>
 
-                    <br />
+                <br />
 
-                    <b>@Html.DisplayNameFor(model => model.getTrailMeetup.CreatorID) : </b>
+                <b>@Html.DisplayNameFor(model => model.getTrailMeetup.CreatorID) : </b>
                     @Html.DisplayFor(model => item.getTrailMeetup.CreatorID)
 
-                    <br />
+                <br />
 
-                    <b>@Html.DisplayNameFor(model => model.getTrailMeetup.Description) : </b>
+                <b>@Html.DisplayNameFor(model => model.getTrailMeetup.Description) : </b>
                     @Html.DisplayFor(model => item.getTrailMeetup.Description)
-                </td>
+            </td>
 
-                <td width="50%">
-                    @{
-                        if (ViewBag.linqUserExistTest == "")
-                        {
-                            @Html.ActionLink("Join Trail", "JoinTrail", new { id = item.getTrailMeetup.TrailMeetupID }, new { @class = "btn btn-default" })
-                        }
-                        else
-                        {
-                            <button class="btn btn-default" type="button" disabled>Joined</button>
-                        }
-
+            <td width="50%">
+                @{
+                    if (ViewBag.linqUserExistTest == "")
+                    {
+                        @Html.ActionLink("Join Trail", "JoinTrail", new { id = item.getTrailMeetup.TrailMeetupID }, new { @class = "btn btn-default" })
                     }
-                    <br />
+                    else
+                    {
+                        <button class="btn btn-default" type="button" disabled>Joined</button>
+                    }
+                }
+                
+                <br />
 
-                    <b>@Html.DisplayNameFor(model => model.getTrailMeetup.Date) : </b>
+                <b>@Html.DisplayNameFor(model => model.getTrailMeetup.Date) : </b>
                     @Html.DisplayFor(model => item.getTrailMeetup.Date)
 
-                    <br />
+                <br />
 
-                    <b>Time : </b>
-                    @Html.DisplayFor(model => item.getTrailMeetup.TimeFrom)
-                    <b> - </b>
-                    @Html.DisplayFor(model => item.getTrailMeetup.TimeTo)
+                <b>Time : </b> @Html.DisplayFor(model => item.getTrailMeetup.TimeFrom)
+                <b> - </b> @Html.DisplayFor(model => item.getTrailMeetup.TimeTo)
 
-                    <br />
+                <br />
 
-                    <b>@Html.DisplayNameFor(model => model.getTrailMeetup.Limit) : </b>
+                <b>@Html.DisplayNameFor(model => model.getTrailMeetup.Limit) : </b>
                     @Html.DisplayFor(model => item.getTrailMeetup.Limit)
-                </td>
-                        }
-
-
-
+            </td>
+        }
     </tr>
 
     <tr>
-        <td colspan="3"><div id="map_canvas" style="width: 1000px; height: 300px;"></div></td>
+        <td colspan="3"><div id="map_canvas" style="width: 100%; height: 300px;"></div></td>
     </tr>
 
     <tr>
@@ -70,10 +67,17 @@
             <br />
 
             <ul>
+                <!-----------------------------------------------------------------------------------
+                - Description: For the displaying who are participants of Trails                    -
+                -                                                                                   -
+                - Developer: Yun Yong                                                               -
+                -                                                                                   -
+                - Date: 21/03/2016                                                                  -
+                ------------------------------------------------------------------------------------->
                 @{
                     foreach (var item in Model)
                     {
-                        foreach (var trailParticipants in item.necroLocation)
+                        foreach (var trailParticipants in item.enumerableTrailParticipants)
                         {
                             <li>@trailParticipants</li>
                         }
@@ -86,25 +90,21 @@
         <td>
             <b>Location Details : </b>
 
-            <div id="locationDetails"></div>
-
-            @*@{
-
-                foreach (var item in Model)
-                {
-                    foreach (var meow in item.pewpewLocation)
-                    {
-                        @Html.DisplayFor(model => meow.Name)
-                    }
-
-                }
-            }*@
-            
+            <div id="locationDetails"></div>         
         </td>
     </tr>
 </table>
 
 <p>
+    <!-----------------------------------------------------------------------------------
+    - Description: Logic for showing the Edit and Delete Trail Button to users          -
+    -              Only the Trail Creator can edit the Trail information                -
+    -              Only the Trail Creator and the Site Admin can delete Trail           -
+    -                                                                                   -
+    - Developer: Yun Yong                                                               -
+    -                                                                                   -
+    - Date: 21/03/2016                                                                  -
+    ------------------------------------------------------------------------------------->
     @{
         foreach (var item in Model)
         {
@@ -167,7 +167,7 @@
             foreach (var item in Model)
             {
                 int counter = 0;
-                foreach (var meow in item.pewpewLocation)
+                foreach (var meow in item.enumerableAllLocationFromTrail)
                 {
 
 

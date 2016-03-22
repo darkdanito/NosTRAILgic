@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 
 namespace NosTRAILgic.Models
 {
@@ -20,11 +17,10 @@ namespace NosTRAILgic.Models
         public TrailMeetup_Location getTrailMeetup_Location { get; set; }
         public Location getLocation { get; set; }
 
-        public IEnumerable<string> necroLocation { get; set; }
+        public IEnumerable<string> enumerableTrailParticipants { get; set; }        // Enumerable that hold all the participants for 
+                                                                                    // the trails
 
-        //public ICollection<Location> snowmanLocation { get; set; }
-
-        public IEnumerable<Location> pewpewLocation { get; set; }
-
+        public IEnumerable<Location> enumerableAllLocationFromTrail { get; set; }   // Enumerable that hold all the Location informationn
+                                                                                    // for the trail
     }
 }

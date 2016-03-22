@@ -110,7 +110,7 @@ namespace NosTRAILgic.Controllers
              ************************************************************************************/
             var LINQtoList = (from p in db.JoinTrails where p.TrailMeetupID == id select p.UserID).ToList();
 
-            trailMeetup_Details_ViewModel.necroLocation = LINQtoList;
+            trailMeetup_Details_ViewModel.enumerableTrailParticipants = LINQtoList;
             //        allViewModel.Add(trailMeetup_Details_ViewModel);
 
 
@@ -211,7 +211,7 @@ namespace NosTRAILgic.Controllers
                                         where y.TrailMeetupID == trailID
                                         select w);
 
-            trailMeetup_Details_ViewModel.pewpewLocation = LINQAllLocationQuery;
+            trailMeetup_Details_ViewModel.enumerableAllLocationFromTrail = LINQAllLocationQuery;
 
 
 
