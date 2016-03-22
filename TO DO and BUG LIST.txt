@@ -2,25 +2,19 @@
 Bugs:
 ===============================================================================================================
 
-Home/Index   --> Search auto complete function
-
-
-Trail/Create --> Search auto complete function
 Trail/Create --> Increase the create page input box bigger
-Trail/Create --> When remove the dyanmic box, the word still remain 
-Trail/Create --> Need to put a x sign for the remove
-Trail/Create --> Time Validation from and to
+Trail/Create --> Time Validation from and to (From need to be early then To)
+Trail/Create --> User cannot add same location twice (low priority)
+Trail/Details --> User can Join TrailMeetup and cant unjoin, But only owner cannot unjoined. (low priority)
+
+Trail/Details --> Once user limit reached, Join will be disable and user cant join the trail meetup
 
 Seperate Google Map API code to a JS
-
-Trail/Create --> Participants Display Bug
-
-
 
 ===============================================================================================================
 Features Missing:
 ===============================================================================================================
-
+Service (elson doing)
 
 
 
