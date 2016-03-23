@@ -23,9 +23,11 @@ namespace NosTRAILgic.Controllers
 
         JoinTrail jointrail = new JoinTrail();
         Location location = new Location();
+
         TrailMeetup_Location trailMeetup_Location = new TrailMeetup_Location();
 
-        TrailMeetupMapper trailMeetupMapper = new TrailMeetupMapper();
+
+        TrailMeetupMapper trailMeetupMapper = new TrailMeetupMapper();                  // Data Mapper
 
         // GET: TrailMeetup
         public ActionResult Index()
@@ -60,8 +62,6 @@ namespace NosTRAILgic.Controllers
         {
             if (User.Identity.Name == null || User.Identity.Name == "")             // Check is the username valid
             {
-                //jointrail.TrailMeetupID = (int)id;
-                //jointrail.UserID = "testing_empty_username";
                 return HttpNotFound();
             }
             else
@@ -87,13 +87,9 @@ namespace NosTRAILgic.Controllers
 
             TrailMeetup_Details_ViewModel trailMeetup_Details_ViewModel = new TrailMeetup_Details_ViewModel();
 
-            // Get Detail Details by ID
-            //trailMeetup_Details_ViewModel.getTrailMeetup = db.Trails.Find(id);
+            trailMeetup_Details_ViewModel.getTrailMeetup = db.Trails.Find(id);          // Find TrailMeetup by id
 
-            //TrailMeetup trailMeetup = db.Trails.Find(id);
-            trailMeetup_Details_ViewModel.getTrailMeetup = db.Trails.Find(id);
-
-            if (trailMeetup_Details_ViewModel.getTrailMeetup == null)
+            if (trailMeetup_Details_ViewModel.getTrailMeetup == null)                   // If the TraiMeetup cannot be found
             {
                 return HttpNotFound();
             }
@@ -104,8 +100,7 @@ namespace NosTRAILgic.Controllers
 
             /************************************************************************************
              * Description: This function check the database for any participants who have join *
-             *              the trails and return it to the viewbag: XXXXXX to be rendered      *
-             *              by the view                                                         *
+             *              the trails and return it to the ViewModel                           *
              *                                                                                  *
              * Developer: Yun Yong                                                              *
              *                                                                                  *
@@ -122,12 +117,11 @@ namespace NosTRAILgic.Controllers
              *                                                                                  *
              * Date: 13/03/2016                                                                 *
              ************************************************************************************/
-
-            
-
-
+             
             string userName = User.Identity.Name;
+
             var LINQIsUserInTrailQuery = from p in db.JoinTrails where p.UserID == userName && p.TrailMeetupID == trailID select p.UserID;
+
             var userExist = "";
             foreach (var ex in LINQIsUserInTrailQuery)
             {
@@ -298,14 +292,14 @@ namespace NosTRAILgic.Controllers
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        //protected override void Dispose(bool disposing)
+        //{
+        //    if (disposing)
+        //    {
+        //        db.Dispose();
+        //    }
+        //    base.Dispose(disposing);
+        //}
         
     }
 }

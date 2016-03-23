@@ -6,10 +6,21 @@ using System.Web;
 
 namespace NosTRAILgic.DAL
 {
+    /************************************************************************************
+     * Description: This function                                                       *
+     *                                                                                  *
+     * Developer: Yun Yong                                                              *
+     *                                                                                  *
+     * Date: 13/03/2016                                                                 *
+     ************************************************************************************/
     public class TrailMeetupMapper
     {
         private NosTRAILgicContext db = new NosTRAILgicContext();
 
+        /************************************************************************************
+         * Description: This function                                                       *
+         *                                                                                  *
+         ************************************************************************************/
         public List<string> getTrailParticipants(int trailID)
         {
             var trailParticipants = (from p in db.JoinTrails where p.TrailMeetupID == trailID select p.UserID).ToList();
@@ -17,6 +28,10 @@ namespace NosTRAILgic.DAL
             return trailParticipants;
         }
 
+        /************************************************************************************
+         * Description: This function                                                       *
+         *                                                                                  *
+         ************************************************************************************/
         public IQueryable<string> getSearchAutoComplete(string term)
         {
             var result = from r in db.Locations
@@ -26,6 +41,10 @@ namespace NosTRAILgic.DAL
             return result;
         }
 
+        /************************************************************************************
+         * Description: This function                                                       *
+         *                                                                                  *
+         ************************************************************************************/
         public IQueryable<Location> getAllLocationInfoFromTrail(int trailID)
         {
             var LINQAllLocationQuery = (from y in db.Trails
