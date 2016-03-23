@@ -28,7 +28,7 @@
 
             <td width="50%">
                 @{
-                    if (ViewBag.linqUserExistTest == "")
+                    if (ViewBag.linqUserExistTest == "" || ViewBag.linqUserExistTest == null)
                     {
                         @Html.ActionLink("Join Trail", "JoinTrail", new { id = item.getTrailMeetup.TrailMeetupID }, new { @class = "btn btn-default" })
                     }
@@ -36,6 +36,7 @@
                     {
                         <button class="btn btn-default" type="button" disabled>Joined</button>
                     }
+
                 }
                 
                 <br />

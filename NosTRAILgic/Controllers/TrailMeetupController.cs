@@ -73,7 +73,7 @@ namespace NosTRAILgic.Controllers
             db.JoinTrails.Add(jointrail);
             db.SaveChanges();
 
-            return RedirectToAction("Details", "TrailMeetup", new { id = id });
+            return RedirectToAction("Details_ViewModel", "TrailMeetup", new { id = id });
         }
 
         public ActionResult Details_ViewModel(int? id)
@@ -111,23 +111,16 @@ namespace NosTRAILgic.Controllers
 
 
             /************************************************************************************
-             * Description: This function                                                       *
+             * Description: This function check the JoinTrail Table to check has the user       *
+             *              joined the TrailMeetup                                              *
              *                                                                                  *
              * Developer: Yun Yong                                                              *
              *                                                                                  *
              * Date: 13/03/2016                                                                 *
              ************************************************************************************/
-             
-            string userName = User.Identity.Name;
+            var LINQIsUserInTrailQuery = trailMeetupMapper.isUserInTrail(trailID, User.Identity.Name);
 
-            var LINQIsUserInTrailQuery = from p in db.JoinTrails where p.UserID == userName && p.TrailMeetupID == trailID select p.UserID;
-
-            var userExist = "";
-            foreach (var ex in LINQIsUserInTrailQuery)
-            {
-                userExist += ex;
-            }
-            ViewBag.linqUserExistTest = userExist;
+            ViewBag.linqUserExistTest = LINQIsUserInTrailQuery;
 
             /************************************************************************************
              * Description: This function handles the getting Locations Information from DB     *
@@ -186,9 +179,7 @@ namespace NosTRAILgic.Controllers
                 db.Trails.Add(trailMeetup);
                 db.SaveChanges();
 
-                string inputTrailName = trailMeetup.Name;
-
-                var LINQCreatedTrailIDQuery = from c in db.Trails where c.Name == inputTrailName select c.TrailMeetupID;
+                var LINQCreatedTrailIDQuery = trailMeetupMapper.getNewlyCreatedTrailID(trailMeetup.Name);
 
                 int TrailID = 0;
 
@@ -292,14 +283,5 @@ namespace NosTRAILgic.Controllers
             return RedirectToAction("Index");
         }
 
-        //protected override void Dispose(bool disposing)
-        //{
-        //    if (disposing)
-        //    {
-        //        db.Dispose();
-        //    }
-        //    base.Dispose(disposing);
-        //}
-        
     }
 }
