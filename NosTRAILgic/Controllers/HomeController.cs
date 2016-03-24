@@ -20,22 +20,75 @@ namespace NosTRAILgic.Controllers
 
             Home_ViewModel homeViewModel = new Home_ViewModel();                   // New Home_ViewModel()
 
-            if (!String.IsNullOrEmpty(Selection))
+            //if (!String.IsNullOrEmpty(Selection))
+            //{
+            //    if (Selection == "1")                                               // Musuem     
+            //    {
+            //        homeViewModel.enumerableAllLocation = homeMapper.getAllLocationInfo("Musuem");
+            //        listHomeViewModel.Add(homeViewModel);
+            //    }
+            //    else if (Selection == "2")                                          // HistoricSites
+            //    {
+            //        homeViewModel.enumerableAllLocation = homeMapper.getAllLocationInfo("Monument");
+            //        listHomeViewModel.Add(homeViewModel);
+            //    }
+            //    else if (Selection == "3")                                          // Monuments
+            //    {
+            //        homeViewModel.enumerableAllLocation = homeMapper.getAllLocationInfo("HistoricSite");
+            //        listHomeViewModel.Add(homeViewModel);
+            //    }
+            //    else
+            //    {
+            //        homeViewModel.enumerableAllLocation = homeMapper.getAllLocationInfo("All");
+            //        listHomeViewModel.Add(homeViewModel);
+            //    }
+            //}
+            //else
+            //{
+                
+            //}
+
+            homeViewModel.enumerableAllLocation = homeMapper.getAllLocationInfo("All");
+            listHomeViewModel.Add(homeViewModel);
+
+            return View(listHomeViewModel);
+        }
+
+        [HttpPost]
+        public ActionResult Index(string Selection, string searchKeyword)
+        {
+            List<Home_ViewModel> listHomeViewModel = new List<Home_ViewModel>();     // New List for Home_ViewModel()
+
+            Home_ViewModel homeViewModel = new Home_ViewModel();                   // New Home_ViewModel()
+
+            if (searchKeyword != null && searchKeyword != "")
             {
-                if (Selection == "1")                                               // Musuem     
+                homeViewModel.enumerableAllLocation = homeMapper.getLocationInfo(searchKeyword);
+                listHomeViewModel.Add(homeViewModel);
+            }
+            else {
+                if (!String.IsNullOrEmpty(Selection))
                 {
-                    homeViewModel.enumerableAllLocation = homeMapper.getAllLocationInfo("Musuem");
-                    listHomeViewModel.Add(homeViewModel);
-                }
-                else if (Selection == "2")                                          // HistoricSites
-                {
-                    homeViewModel.enumerableAllLocation = homeMapper.getAllLocationInfo("Monument");
-                    listHomeViewModel.Add(homeViewModel);
-                }
-                else if (Selection == "3")                                          // Monuments
-                {
-                    homeViewModel.enumerableAllLocation = homeMapper.getAllLocationInfo("HistoricSite");
-                    listHomeViewModel.Add(homeViewModel);
+                    if (Selection == "1")                                               // Musuem     
+                    {
+                        homeViewModel.enumerableAllLocation = homeMapper.getAllLocationInfo("Musuem");
+                        listHomeViewModel.Add(homeViewModel);
+                    }
+                    else if (Selection == "2")                                          // HistoricSites
+                    {
+                        homeViewModel.enumerableAllLocation = homeMapper.getAllLocationInfo("Monument");
+                        listHomeViewModel.Add(homeViewModel);
+                    }
+                    else if (Selection == "3")                                          // Monuments
+                    {
+                        homeViewModel.enumerableAllLocation = homeMapper.getAllLocationInfo("HistoricSite");
+                        listHomeViewModel.Add(homeViewModel);
+                    }
+                    else
+                    {
+                        homeViewModel.enumerableAllLocation = homeMapper.getAllLocationInfo("All");
+                        listHomeViewModel.Add(homeViewModel);
+                    }
                 }
                 else
                 {
@@ -43,11 +96,9 @@ namespace NosTRAILgic.Controllers
                     listHomeViewModel.Add(homeViewModel);
                 }
             }
-            else
-            {
-                homeViewModel.enumerableAllLocation = homeMapper.getAllLocationInfo("All");
-                listHomeViewModel.Add(homeViewModel);
-            }
+
+
+            
 
             return View(listHomeViewModel);
         }

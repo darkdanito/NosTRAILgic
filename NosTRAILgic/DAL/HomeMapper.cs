@@ -53,5 +53,14 @@ namespace NosTRAILgic.DAL
             
             return LINQAllLocationBasedOnCat;
         }
+
+        public IQueryable<Location> getLocationInfo(string searchLocation) {
+
+            var LINQAllLocationBasedOnCat = from a in db.Locations
+                                            where a.Name == searchLocation
+                                            select a;
+
+            return LINQAllLocationBasedOnCat;
+        }
     }
 }
