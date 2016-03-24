@@ -1,4 +1,6 @@
-﻿@{
+﻿@model IEnumerable<NosTRAILgic.Models.Home_ViewModel>
+
+@{
     ViewBag.Title = "Home Page";
 }
 
@@ -43,34 +45,71 @@
 <script type="text/javascript">
     window.onload = initialize;
 
-    var map;
-    var src = "@ViewBag.modSitesName";
-
     function initialize() {
-        map = new google.maps.Map(document.getElementById('map_canvas'), {
-            //    center: new google.maps.LatLng(1.4038, 103.7941),
-            //    zoom: 5,
+
+        var mapOptions = {
+            center: new google.maps.LatLng(1.4038, 103.7941),
+            //    center: new google.maps.LatLng(1.3385674, 103.7059549),
+            zoom: 11,
             mapTypeId: google.maps.MapTypeId.ROADMAP
-        });
-        loadKmlLayer(src, map);
+        };
+
+        var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+
+        var markers = [];
+        var contents = [];
+        var infowindows = [];
+
+        /************************************************************************************
+         * Description: This function handles the rendering of the markers to Google        *
+         *              map based on the enumerableAllLocationFromTrail object              *
+         *                                                                                  *
+         * Developer: Yun Yong                                                              *
+         *                                                                                  *
+         * Date: 21/03/2016                                                                 *
+         ************************************************************************************/
+        @{
+            foreach (var item in Model)
+            {
+                int counter = 0;
+                foreach (var location in item.enumerableAllLocation)
+                {
+                    <text>
+                        markers[@counter] = new google.maps.Marker({
+                            position: new google.maps.LatLng(@location.Latitude, @location.Longitude),
+                            map: map,
+                            title: 'Some Marker Title'
+                        });
+
+                        markers[@counter].index = @counter;
+                        contents[@counter] = '<div class="popup_container">' + "@location.Name" + '</div>';
+
+                        infowindows[@counter] = new google.maps.InfoWindow({
+                                content: contents[@counter] ,
+                            maxWidth: 300
+                        });
+
+                        google.maps.event.addListener(markers[@counter], 'click', function () {
+                            var content =
+                            '<div>Name: @location.Name</div>' +
+                            '<div>Description: @location.Description</div>' +
+                            '<div>Link: <a href="' + '@location.HyperLink' + '">' + '@location.HyperLink' + '</a></div>' +
+                            '<div>Image: <img src="' + '@location.ImageLink' + '"/></div>' +
+                            '<div>Postal Code: @location.PostalCode</div>' ;
+
+                            document.getElementById("locationDetails").innerHTML = content;
+
+                            infowindows[this.index].open(map, markers[this.index]);
+                            map.panTo(markers[this.index].getPosition());
+                        });
+                    </text>
+
+                    counter++;
+                }
+
+            }
+        }
     }
-
-    function loadKmlLayer(src, map) {
-        var kmlLayer = new google.maps.KmlLayer(src, {
-            suppressInfoWindows: true,
-            preserveViewport: false,
-            map: map
-        });
-
-        google.maps.event.addListener(kmlLayer, 'click', function (event) {
-            var content = event.featureData.infoWindowHtml;
-            var testimonial = document.getElementById('capture');
-            testimonial.innerHTML = content;
-        });
-    }
-
-    google.maps.event.addDomListener(window, 'load', initialize);
-
 </script>
 
 @section Scripts {
