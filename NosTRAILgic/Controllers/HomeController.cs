@@ -5,12 +5,16 @@ using System.Web.Mvc;
 using NosTRAILgic.DAL;
 using System.Collections.Generic;
 using NosTRAILgic.Models;
+using NosTRAILgic.Services;
 
 namespace NosTRAILgic.Controllers
 {
     public class HomeController : Controller
     {
-        private NosTRAILgicContext db = new NosTRAILgicContext();                   
+        private NosTRAILgicContext db = new NosTRAILgicContext();
+
+        //Testing with service
+        WeatherForecastGateway weatherService = new WeatherForecastGateway();
 
         HomeMapper homeMapper = new HomeMapper();                                   // New HomeMapper()
 
@@ -45,8 +49,11 @@ namespace NosTRAILgic.Controllers
             //}
             //else
             //{
-                
+
             //}
+
+            //Run service code
+            weatherService.updateNowcast();
 
             homeViewModel.enumerableAllLocation = homeMapper.getAllLocationInfo("All");
             listHomeViewModel.Add(homeViewModel);

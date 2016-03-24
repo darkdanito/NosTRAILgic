@@ -211,7 +211,10 @@
     <Compile Include="Models\TrailMeetup.cs" />
     <Compile Include="Models\TrailMeetup_Details_ViewModel.cs" />
     <Compile Include="Models\TrailMeetup_Location.cs" />
+    <Compile Include="Models\Weather.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\IWeatherForecastGateway.cs" />
+    <Compile Include="Services\WeatherForecastGateway.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
