@@ -5,11 +5,23 @@ using System.Net;
 using System.Net.Cache;
 using System.Web;
 using System.Xml;
+using NosTRAILgic.Models;
+using NosTRAILgic.DAL;
 
 namespace NosTRAILgic.Services
 {
+    /************************************************************************************
+     * Description: This weatherforecastgateway uses the REST API to get weather from   *
+     *              NEA website and insert into database                                *
+     *                                                                                  *
+     * Developer: Elson                                                                 *
+     *                                                                                  *
+     * Date: 24/03/2016                                                                 *
+     ************************************************************************************/
     public class WeatherForecastGateway : IWeatherForecastGateway
     {
+        NosTRAILgicContext db = new NosTRAILgicContext();
+
         public void updateNowcast()
         {
             string URL = "http://www.nea.gov.sg/api/WebAPI/?dataset=nowcast&keyref=781CF461BB6606ADC4A6A6217F5F2AD610E9D42F3AA8BF6D";
@@ -63,37 +75,24 @@ namespace NosTRAILgic.Services
                     yearLastUpdate = Int32.Parse(dateParts[2]);                    
                 }
             }
-            // DateTime(Year, Month, Day, Hour, Mintue, Second)
-            DateTime lastUpdated = new DateTime(yearLastUpdate, monthLastUpdate,dayLastUpdate, timeLastUpdate, 0, 0);
-            System.Diagnostics.Debug.WriteLine(lastUpdated);
-
+            // DateTime(Year, Month, Day, Hour, Mintue, Second, Millisecond)
+            DateTime lastUpdated = new DateTime(yearLastUpdate, monthLastUpdate,dayLastUpdate, timeLastUpdate, 0, 0, 0);
             
+            XmlNodeList areaList = xmlDoc.GetElementsByTagName("area");
+            for (int i = 0; i < areaList.Count; i++)
+            {
+                Weather weather = new Weather();
 
-            XmlNodeList elemList = xmlDoc.GetElementsByTagName("area");
-            for (int i = 0; i < elemList.Count; i++)
-            {                
-                //Area name
-                System.Diagnostics.Debug.WriteLine(elemList[i].Attributes["name"].Value);
-                //Forecast
-                System.Diagnostics.Debug.WriteLine(elemList[i].Attributes["forecast"].Value);
-                //Icon
-                System.Diagnostics.Debug.WriteLine(elemList[i].Attributes["icon"].Value);
-                //Region
-                System.Diagnostics.Debug.WriteLine(elemList[i].Attributes["zone"].Value);
+                weather.Area = areaList[i].Attributes["name"].Value;
+                weather.Forecast = areaList[i].Attributes["forecast"].Value;
+                weather.Icon = "~/~/images/" + areaList[i].Attributes["icon"].Value + ".png";
+                weather.Region = areaList[i].Attributes["zone"].Value;
+                weather.LastUpdated = lastUpdated;
 
-            }
-
-            //Test Display
-            //System.Diagnostics.Debug.WriteLine(location.Name);
-            //System.Diagnostics.Debug.WriteLine(location.Description);
-            //System.Diagnostics.Debug.WriteLine(location.HyperLink);
-            //System.Diagnostics.Debug.WriteLine(location.ImageLink);
-            //System.Diagnostics.Debug.WriteLine(location.AreaCode.ToString());
-            //System.Diagnostics.Debug.WriteLine(location.PostalCode.ToString());
-            //System.Diagnostics.Debug.WriteLine(location.Latitude.ToString());
-            //System.Diagnostics.Debug.WriteLine(location.Longitude.ToString());
-            //System.Diagnostics.Debug.WriteLine(location.Category);
-
+                //Add to Database
+                db.Weathers.Add(weather);
+                db.SaveChanges();
+            }       
         }
     }
 }

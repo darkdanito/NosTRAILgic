@@ -22,9 +22,5 @@ namespace NosTRAILgic.DAL
         public DbSet<CheckIn> CheckIns { get; set; }
 
         public DbSet<Weather> Weathers { get; set; }
-        //public DbSet<UploadLocation> UploadLocations { get; set; }
-        //public DbSet<Museum> Museums { get; set; }
-        //public DbSet<HistoricSite> HistoricSites { get; set; }
-        //public DbSet<Monument> Monuments { get; set; }
     }
 }

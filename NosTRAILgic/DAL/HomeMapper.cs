@@ -41,14 +41,15 @@ namespace NosTRAILgic.DAL
             if (trailCategory == "All")
             {
                 LINQAllLocationBasedOnCat = from a in db.Locations
+                                            orderby a.LocationId ascending
                                             select a;
             }
             else {
 
                 LINQAllLocationBasedOnCat = from a in db.Locations
                                             where a.Category == trailCategory
+                                            orderby a.LocationId ascending
                                             select a;
-
             }
             
             return LINQAllLocationBasedOnCat;
@@ -61,6 +62,55 @@ namespace NosTRAILgic.DAL
                                             select a;
 
             return LINQAllLocationBasedOnCat;
+        }
+
+        public IQueryable<Weather> getAllLocationWeather(string trailCategory)
+        {
+            //Attempt get current DateTime without second and minute and millisecond
+            DateTime currentDateTime = DateTime.Now;
+            currentDateTime = new DateTime(currentDateTime.Year, currentDateTime.Month, currentDateTime.Day, currentDateTime.Hour, 0, 0, 0);
+
+            IQueryable<Weather> LINQAllWeatherBasedOnCat;
+
+            if (trailCategory == "All")
+            {
+                LINQAllWeatherBasedOnCat = (from weather in db.Weathers
+                                            join area in db.Areas on weather.Area equals area.AreaName
+                                            join location in db.Locations on area.AreaCode equals location.AreaCode
+                                            where weather.LastUpdated == currentDateTime
+                                            orderby location.LocationId ascending
+                                            select weather);
+            }
+            else
+            {
+                LINQAllWeatherBasedOnCat = (from weather in db.Weathers
+                                            join area in db.Areas on weather.Area equals area.AreaName
+                                            join location in db.Locations on area.AreaCode equals location.AreaCode
+                                            where weather.LastUpdated == currentDateTime && location.Category == trailCategory
+                                            orderby location.LocationId ascending
+                                            select weather);
+            }
+
+            System.Diagnostics.Debug.WriteLine("GET WEATHER COUNT");
+            System.Diagnostics.Debug.WriteLine(LINQAllWeatherBasedOnCat.Count());
+
+            return LINQAllWeatherBasedOnCat;
+        }
+
+        public IQueryable<Weather> getLocationWeather(string searchLocation)
+        {
+            //Attempt get current DateTime without second and minute and millisecond
+            DateTime currentDateTime = DateTime.Now;
+            currentDateTime = new DateTime(currentDateTime.Year, currentDateTime.Month, currentDateTime.Day, currentDateTime.Hour, 0, 0, 0);
+
+            var LINQLocationWeather = (from weather in db.Weathers
+                                        join area in db.Areas on weather.Area equals area.AreaName
+                                        join location in db.Locations on area.AreaCode equals location.AreaCode
+                                        where weather.LastUpdated == currentDateTime && location.Name == searchLocation
+                                       orderby location.LocationId ascending
+                                        select weather);
+
+            return LINQLocationWeather;
         }
     }
 }

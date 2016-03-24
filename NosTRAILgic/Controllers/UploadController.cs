@@ -111,16 +111,6 @@ namespace NosTRAILgic.Controllers
 
                         location.Category = "Musuem";
 
-                        //Test Display
-                        //System.Diagnostics.Debug.WriteLine(location.Name);
-                        //System.Diagnostics.Debug.WriteLine(location.Description);
-                        //System.Diagnostics.Debug.WriteLine(location.HyperLink);
-                        //System.Diagnostics.Debug.WriteLine(location.ImageLink);
-                        //System.Diagnostics.Debug.WriteLine(location.AreaCode.ToString());
-                        //System.Diagnostics.Debug.WriteLine(location.PostalCode.ToString());
-                        //System.Diagnostics.Debug.WriteLine(location.Latitude.ToString());
-                        //System.Diagnostics.Debug.WriteLine(location.Longitude.ToString());
-                        //System.Diagnostics.Debug.WriteLine(location.Category);
                         if (!skipLocation) { 
                             db.Locations.Add(location);
                             db.SaveChanges();
@@ -301,7 +291,6 @@ namespace NosTRAILgic.Controllers
             {
                 return View();
             }
-        }
-        
+        }        
     }
 }

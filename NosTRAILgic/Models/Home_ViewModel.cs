@@ -16,5 +16,6 @@ namespace NosTRAILgic.Models
     public class Home_ViewModel
     {
         public IEnumerable<Location> enumerableAllLocation { get; set; }
+        public IEnumerable<Weather> enumerableAllWeather { get; set; }
     }
 }
