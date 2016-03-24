@@ -10,50 +10,46 @@ namespace NosTRAILgic.Controllers
 {
     public class HomeController : Controller
     {
-        private NosTRAILgicContext db = new NosTRAILgicContext();
+        private NosTRAILgicContext db = new NosTRAILgicContext();                   
 
-        HomeMapper homeMapper = new HomeMapper();                                   // Home Data Mapper
+        HomeMapper homeMapper = new HomeMapper();                                   // New HomeMapper()
 
         public ActionResult Index(string Selection)
         {
-            List<Home_ViewModel> homeALLViewModel = new List<Home_ViewModel>();
+            List<Home_ViewModel> listHomeViewModel = new List<Home_ViewModel>();     // New List for Home_ViewModel()
 
-            Home_ViewModel home_ViewModel = new Home_ViewModel();
+            Home_ViewModel homeViewModel = new Home_ViewModel();                   // New Home_ViewModel()
 
             if (!String.IsNullOrEmpty(Selection))
             {
                 if (Selection == "1")                                               // Musuem     
                 {
-                    home_ViewModel.enumerableAllLocation = homeMapper.getAllLocationInfo("Musuem");
-                    homeALLViewModel.Add(home_ViewModel);
+                    homeViewModel.enumerableAllLocation = homeMapper.getAllLocationInfo("Musuem");
+                    listHomeViewModel.Add(homeViewModel);
                 }
                 else if (Selection == "2")                                          // HistoricSites
                 {
-                    home_ViewModel.enumerableAllLocation = homeMapper.getAllLocationInfo("Monument");
-                    homeALLViewModel.Add(home_ViewModel);
+                    homeViewModel.enumerableAllLocation = homeMapper.getAllLocationInfo("Monument");
+                    listHomeViewModel.Add(homeViewModel);
                 }
                 else if (Selection == "3")                                          // Monuments
                 {
-                    home_ViewModel.enumerableAllLocation = homeMapper.getAllLocationInfo("HistoricSite");
-                    homeALLViewModel.Add(home_ViewModel);
+                    homeViewModel.enumerableAllLocation = homeMapper.getAllLocationInfo("HistoricSite");
+                    listHomeViewModel.Add(homeViewModel);
                 }
                 else
                 {
-                    home_ViewModel.enumerableAllLocation = homeMapper.getAllLocationInfo("All");
-                    homeALLViewModel.Add(home_ViewModel);
+                    homeViewModel.enumerableAllLocation = homeMapper.getAllLocationInfo("All");
+                    listHomeViewModel.Add(homeViewModel);
                 }
             }
             else
             {
-            //    ViewBag.modSitesName = "https://www.dropbox.com/s/dxd7uqm8tmztwyg/MUSEUM.kml?dl=1";
-
-                home_ViewModel.enumerableAllLocation = homeMapper.getAllLocationInfo("All");
-                homeALLViewModel.Add(home_ViewModel);
+                homeViewModel.enumerableAllLocation = homeMapper.getAllLocationInfo("All");
+                listHomeViewModel.Add(homeViewModel);
             }
 
-
-
-            return View(homeALLViewModel);
+            return View(listHomeViewModel);
         }
 
         /************************************************************************************

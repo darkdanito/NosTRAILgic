@@ -12,7 +12,7 @@
                 <img style="width:50px;" src="~/images/logo.png" />
             </h1>
 
-            @using (Html.BeginForm())
+            @using (Html.BeginForm("index", "Home", FormMethod.Post))
             {
 
                 <span style="float: right;">
@@ -26,15 +26,15 @@
                             new SelectListItem() { Text = "Monuments", Value = "3" },
                         },
                             new { @onchange = "this.form.submit()" })
-                    <input id="bHomeIndexSearch" type="button" class="btn btn-default" value="Search" disabled />
+                    <input id="bHomeIndexSearch" type="submit" class="btn btn-default" value="Search"/>
                 </span>
             }
         </div>
 
         <div align="center">
             <div id="map_canvas" style="width: 100%; height: 400px;"></div>
+
             <div id="locationDetails"></div> 
-            @*<div id="capture" style="width: 100%; height: 400px;"></div>*@
         </div>
     </div>
 </div>

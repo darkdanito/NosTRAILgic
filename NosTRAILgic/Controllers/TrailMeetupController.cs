@@ -27,7 +27,7 @@ namespace NosTRAILgic.Controllers
         TrailMeetup_Location trailMeetup_Location = new TrailMeetup_Location();
 
 
-        TrailMeetupMapper trailMeetupMapper = new TrailMeetupMapper();                  // Data Mapper
+        TrailMeetupMapper trailMeetupMapper = new TrailMeetupMapper();                  // New TrailMeetupMapper()
 
         // GET: TrailMeetup
         public ActionResult Index()
@@ -83,13 +83,13 @@ namespace NosTRAILgic.Controllers
                 return RedirectToAction("Index");
             }
 
-            List<TrailMeetup_Details_ViewModel> allViewModel = new List<TrailMeetup_Details_ViewModel>();
+            List<TrailMeetup_Details_ViewModel> listTrailMeetup_DetailsViewModel = new List<TrailMeetup_Details_ViewModel>();       // New List for TrailMeetup_Details_ViewModel()
 
-            TrailMeetup_Details_ViewModel trailMeetup_Details_ViewModel = new TrailMeetup_Details_ViewModel();
+            TrailMeetup_Details_ViewModel trailMeetup_DetailsViewModel = new TrailMeetup_Details_ViewModel();  // New TrailMeetup_Details_ViewModel()
 
-            trailMeetup_Details_ViewModel.getTrailMeetup = db.Trails.Find(id);          // Find TrailMeetup by id
+            trailMeetup_DetailsViewModel.getTrailMeetup = db.Trails.Find(id);          // Find TrailMeetup by id
 
-            if (trailMeetup_Details_ViewModel.getTrailMeetup == null)                   // If the TraiMeetup cannot be found
+            if (trailMeetup_DetailsViewModel.getTrailMeetup == null)                   // If the TraiMeetup cannot be found
             {
                 return HttpNotFound();
             }
@@ -107,7 +107,7 @@ namespace NosTRAILgic.Controllers
              * Date: 13/03/2016                                                                 *
              ************************************************************************************/
             var LINQtoList = trailMeetupMapper.getTrailParticipants(trailID);
-            trailMeetup_Details_ViewModel.enumerableTrailParticipants = LINQtoList;
+            trailMeetup_DetailsViewModel.enumerableTrailParticipants = LINQtoList;
 
 
             /************************************************************************************
@@ -132,11 +132,11 @@ namespace NosTRAILgic.Controllers
              ************************************************************************************/
             var LINQAllLocationQuery = trailMeetupMapper.getAllLocationInfoFromTrail(trailID);
 
-            trailMeetup_Details_ViewModel.enumerableAllLocationFromTrail = LINQAllLocationQuery;
-            
-            allViewModel.Add(trailMeetup_Details_ViewModel);                            // Update the objects into the ViewModel
+            trailMeetup_DetailsViewModel.enumerableAllLocationFromTrail = LINQAllLocationQuery;
 
-            return View(allViewModel);
+            listTrailMeetup_DetailsViewModel.Add(trailMeetup_DetailsViewModel);                            // Update the objects into the ViewModel
+
+            return View(listTrailMeetup_DetailsViewModel);
         }
 
         /************************************************************************************
