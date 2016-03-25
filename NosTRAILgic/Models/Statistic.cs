@@ -9,8 +9,8 @@
      ************************************************************************************/
     public class Statistic
     {
-        public string TrailName { get; set; }
+        public string Name { get; set; }
 
-        public int NumberOfParticipant { get; set; }
+        public int Number { get; set; }
     }
 }

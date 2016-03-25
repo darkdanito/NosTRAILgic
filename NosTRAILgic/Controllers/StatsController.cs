@@ -23,42 +23,14 @@ namespace NosTRAILgic.Controllers
         // GET: Stats
         public ActionResult Index()
         {
-            var stats = db.Database.SqlQuery<Statistic>("select t.Name as TrailName,count(j.TrailMeetupID) as NumberOfParticipant from JoinTrails j right join TrailMeetups t on t.TrailMeetupID = j.TrailMeetupID GROUP BY t.Name").ToList();
-            return View(stats);
-        }
+            var statsByParticipants = db.Database.SqlQuery<Statistic>("select t.Name as Name,count(j.TrailMeetupID) as Number from JoinTrails j right join TrailMeetups t on t.TrailMeetupID = j.TrailMeetupID GROUP BY t.Name").ToList();
+            var statsByCategory = db.Database.SqlQuery<Statistic>("select Category as Name, count(CheckInID) as Number from CheckIns c right join Locations l on l.LocationID = c.LocationID group by Category").ToList();
+            var statsBySearch = db.Database.SqlQuery<Statistic>("select Keyword as Name, YEAR(CONVERT(Date, DATE)) as Number from Searches").ToList();
 
-        public ActionResult CreateBar()
-        {
-            //Create bar chart
-            var chart = new Chart(width: 300, height: 200)
-            .AddSeries(chartType: "bar",
-                            xValue: new[] { "10 ", "50", "30 ", "70" },
-                            yValues: new[] { "50", "70", "90", "110" })
-                            .GetBytes("png");
-            return File(chart, "image/bytes");
-        }
+            ViewBag.statsByCategory = statsByCategory;
+            ViewBag.statsBySearch = statsBySearch;
 
-        public ActionResult CreatePie()
-        {
-            //Create bar chart
-            var chart = new Chart(width: 300, height: 200)
-            .AddSeries(chartType: "pie",
-                            xValue: new[] { "10 ", "50", "30 ", "70" },
-                            yValues: new[] { "50", "70", "90", "110" })
-                            .GetBytes("png");
-            return File(chart, "image/bytes");
-        }
-
-        public ActionResult CreateLine()
-        {
-            //Create bar chart
-            var chart = new Chart(width: 600, height: 200)
-            .AddSeries(chartType: "line",
-                            xValue: new[] { "18 ", "19", "20 ", "21" },
-                            yValues: new[] { "50", "60", "70", "75" })
-                            .GetBytes("png");
-
-            return File(chart, "image/bytes");
+            return View(statsByParticipants);
         }
     }
 }

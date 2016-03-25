@@ -9,14 +9,55 @@
 
 <h2>Statistical Page</h2>
 
+Number of Participants per Trail:
 <div id="chart"></div>
+Number of Check In per Category:
+<div id="pie"></div>
+
+Search Details:
+<style>
+    .keyword {
+        border: 1px solid #C0C0C0;
+        border-collapse: collapse;
+        padding: 5px;
+    }
+
+        .keyword th {
+            border: 1px solid #C0C0C0;
+            padding: 5px;
+            background: #F0F0F0;
+        }
+
+        .keyword td {
+            border: 1px solid #C0C0C0;
+            padding: 5px;
+        }
+</style>
+<table class="keyword">
+    <tr>
+        <th>Year</th>
+        <th>Keyword</th>
+    </tr>
+    @foreach (var item in @ViewBag.statsBySearch)
+    {
+        <tr>
+            <td>
+                @Html.Raw(item.Number)
+            </td>
+            <td>
+                @Html.Raw(item.Name)
+            </td>
+        </tr>
+    }
+</table>
+
 <script>
     new Morris.Bar({
         element: 'chart',
         data: [
             @foreach (var item in Model)
             {
-                @Html.Raw("{TrailName: " + Json.Encode(item.TrailName) + ",NumberOfParticipant: " + Json.Encode(item.NumberOfParticipant) + "},")
+                @Html.Raw("{TrailName: " + Json.Encode(item.Name) + ",NumberOfParticipant: " + Json.Encode(item.Number) + "},")
             }
         ],
         xkey: 'TrailName',
@@ -26,77 +67,14 @@
     });
 </script>
 
-
-<table width="100%">
-    <tr>
-        <td colspan="2">
-
-            @using (Html.BeginForm())
+<script>
+    new Morris.Donut({
+        element: 'pie',
+        data: [
+            @foreach (var item in @ViewBag.statsByCategory)
             {
-                <span style="float: right;">
-                    Heritage located in:
-                    @Html.DropDownList("Selection", new SelectListItem[]
-                        {
-                            new SelectListItem() { Text = "All", Value = "0" },
-                            new SelectListItem() { Text = "Museum", Value = "1" },
-                            new SelectListItem() { Text = "Historical Sites", Value = "2" },
-                            new SelectListItem() { Text = "Monuments", Value = "3" },
-                        },
-                            new { @onchange = "this.form.submit()" })
-                </span>
+                @Html.Raw("{label: " + Json.Encode(item.Name) + ",value: " + Json.Encode(item.Number) + "},")
             }
-
-            <p>
-                <img src="@Url.Action("CreateBar")" alt="Bar Chart using MVC" />
-            </p>
-
-        </td>
-    </tr>
-
-    <tr>
-        <td width="50%">
-
-            @using (Html.BeginForm())
-            {
-                <span style="float: right;">
-                    Location Search per:
-                    @Html.DropDownList("Selection", new SelectListItem[]
-                        {
-                            new SelectListItem() { Text = "Week", Value = "0" },
-                            new SelectListItem() { Text = "Month", Value = "1" },
-                            new SelectListItem() { Text = "Year", Value = "3" },
-                        },
-                            new { @onchange = "this.form.submit()" })
-                </span>
-            }
-
-            <p>
-                <img src="@Url.Action("CreatePie")" alt="Pie Chart using MVC" />
-            </p>
-
-        </td>
-
-        <td>
-
-            @using (Html.BeginForm())
-            {
-                <span style="float: right;">
-                    Visitor Count:
-                    @Html.DropDownList("Selection", new SelectListItem[]
-                        {
-                            new SelectListItem() { Text = "Art Retreat Museum", Value = "0" },
-                            new SelectListItem() { Text = "The Changi Museum", Value = "1" },
-                            new SelectListItem() { Text = "Lee Kong Chian Natural History Museum", Value = "2" },
-                            new SelectListItem() { Text = "Peranakan Museum", Value = "3" },
-                        },
-                            new { @onchange = "this.form.submit()" })
-                </span>
-            }
-
-            <p>
-                <img src="@Url.Action("CreateLine")" alt="Line Chart using MVC" />
-            </p>
-
-        </td>
-    </tr>
-</table>
+        ]
+    });
+</script>
