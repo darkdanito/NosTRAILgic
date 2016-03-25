@@ -53,15 +53,8 @@ namespace NosTRAILgic.Controllers
             //}
 
             homeViewModel.enumerableAllLocation = homeMapper.getAllLocationInfo("All");
-            homeViewModel.enumerableAllWeather = homeMapper.getAllLocationWeather("All");
-            //If not updated weather forecast
-            if(homeViewModel.enumerableAllWeather.Count() == 0)
-            {
-                //Update database with lastest forecast
-                weatherService.updateNowcast();
-                //Retrieve from database again
-                homeViewModel.enumerableAllWeather = homeMapper.getAllLocationWeather("All");
-            }
+            // getAllLocationWeather(Category , is to take current hours -1 data?)
+            homeViewModel.enumerableAllWeather = validateWeatherData("All");
             listHomeViewModel.Add(homeViewModel);
 
             return View(listHomeViewModel);
@@ -77,12 +70,7 @@ namespace NosTRAILgic.Controllers
             if (searchKeyword != null && searchKeyword != "")
             {
                 homeViewModel.enumerableAllLocation = homeMapper.getLocationInfo(searchKeyword);
-                homeViewModel.enumerableAllWeather = homeMapper.getLocationWeather(searchKeyword);
-                if (homeViewModel.enumerableAllWeather.Count() == 0)
-                {
-                    weatherService.updateNowcast();
-                    homeViewModel.enumerableAllWeather = homeMapper.getLocationWeather(searchKeyword);
-                }
+                homeViewModel.enumerableAllWeather = validateWeatherData(searchKeyword);
                 listHomeViewModel.Add(homeViewModel);
             }
             else {
@@ -91,65 +79,59 @@ namespace NosTRAILgic.Controllers
                     if (Selection == "1")                                               // Musuem     
                     {
                         homeViewModel.enumerableAllLocation = homeMapper.getAllLocationInfo("Musuem");
-                        homeViewModel.enumerableAllWeather = homeMapper.getAllLocationWeather("Musuem");
-                        if (homeViewModel.enumerableAllWeather.Count() == 0)
-                        {
-                            weatherService.updateNowcast();
-                            homeViewModel.enumerableAllWeather = homeMapper.getAllLocationWeather("Musuem");
-                        }
+                        homeViewModel.enumerableAllWeather = validateWeatherData("Musuem");
                         listHomeViewModel.Add(homeViewModel);
                     }
                     else if (Selection == "2")                                          // HistoricSites
                     {
                         homeViewModel.enumerableAllLocation = homeMapper.getAllLocationInfo("Monument");
-                        homeViewModel.enumerableAllWeather = homeMapper.getAllLocationWeather("Monument");
-                        if (homeViewModel.enumerableAllWeather.Count() == 0)
-                        {
-                            weatherService.updateNowcast();
-                            homeViewModel.enumerableAllWeather = homeMapper.getAllLocationWeather("Monument");
-                        }
+                        homeViewModel.enumerableAllWeather = validateWeatherData("Monument");
                         listHomeViewModel.Add(homeViewModel);
                     }
                     else if (Selection == "3")                                          // Monuments
                     {
                         homeViewModel.enumerableAllLocation = homeMapper.getAllLocationInfo("HistoricSite");
-                        homeViewModel.enumerableAllWeather = homeMapper.getAllLocationWeather("HistoricSite");
-                        if (homeViewModel.enumerableAllWeather.Count() == 0)
-                        {
-                            weatherService.updateNowcast();
-                            homeViewModel.enumerableAllWeather = homeMapper.getAllLocationWeather("HistoricSite");
-                        }
+                        homeViewModel.enumerableAllWeather = validateWeatherData("HistoricSite");
                         listHomeViewModel.Add(homeViewModel);
                     }
                     else
                     {
                         homeViewModel.enumerableAllLocation = homeMapper.getAllLocationInfo("All");
-                        homeViewModel.enumerableAllWeather = homeMapper.getAllLocationWeather("All");
-                        if (homeViewModel.enumerableAllWeather.Count() == 0)
-                        {
-                            weatherService.updateNowcast();
-                            homeViewModel.enumerableAllWeather = homeMapper.getAllLocationWeather("All");
-                        }
+                        homeViewModel.enumerableAllWeather = validateWeatherData("All");
                         listHomeViewModel.Add(homeViewModel);
                     }
                 }
                 else
                 {
                     homeViewModel.enumerableAllLocation = homeMapper.getAllLocationInfo("All");
-                    homeViewModel.enumerableAllWeather = homeMapper.getAllLocationWeather("All");
-                    if (homeViewModel.enumerableAllWeather.Count() == 0)
-                    {
-                        weatherService.updateNowcast();
-                        homeViewModel.enumerableAllWeather = homeMapper.getAllLocationWeather("All");
-                    }
+                    homeViewModel.enumerableAllWeather = validateWeatherData("All");
                     listHomeViewModel.Add(homeViewModel);
                 }
             }
-
-
-            
-
             return View(listHomeViewModel);
+        }
+
+        public IEnumerable<Weather> validateWeatherData(string search)
+        {
+            IEnumerable<Weather> enumerableAllWeather = homeMapper.getAllLocationWeather(search, false);
+            //If not updated weather forecast
+            if (enumerableAllWeather.Count() == 0)
+            {
+                //Update database with lastest forecast
+                weatherService.updateNowcast();
+                //Retrieve from database again
+                enumerableAllWeather = homeMapper.getAllLocationWeather(search, false);
+                if (enumerableAllWeather.Count() == 0)
+                {
+                    //Delete Duplicate weather forecast in database (a job for mapper or service)
+                    homeMapper.removeDuplicateWeatherData();
+                    //Update database with lastest forecast
+                    weatherService.updateNowcast();
+                    //Retrieve from database again
+                    enumerableAllWeather = homeMapper.getAllLocationWeather(search, true);
+                }
+            }
+            return enumerableAllWeather;
         }
 
         /************************************************************************************

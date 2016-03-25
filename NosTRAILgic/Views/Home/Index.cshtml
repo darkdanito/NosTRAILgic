@@ -104,7 +104,8 @@
                             '<div>Forecast: @item.enumerableAllWeather.ElementAt(counter).Forecast </div>' +
                             '<div>Region: @item.enumerableAllWeather.ElementAt(counter).Region </div>' +
                             '<div>Area: @item.enumerableAllWeather.ElementAt(counter).Area </div>' +
-                            '<div>Icon: <img src="' + '@item.enumerableAllWeather.ElementAt(counter).Icon' + '"/></div>';
+                            '<div>Icon: <img src="' + '@item.enumerableAllWeather.ElementAt(counter).Icon' + '"/></div>' +
+                            '<div>Last Updated: @item.enumerableAllWeather.ElementAt(counter).LastUpdated </div>' ;
 
                             document.getElementById("locationDetails").innerHTML = content;
 
@@ -123,7 +124,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $('#searchKeyword').autocomplete({
-                source: '@Url.Action("GetLocation", new { catergory = UrlParameter.Optional})'
+                source: '@Url.Action("GetLocation")'
             });
         });
     </script>

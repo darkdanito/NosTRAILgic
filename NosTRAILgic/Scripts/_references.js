@@ -3,6 +3,7 @@
 /// <reference path="../client scripts/mvcfoolproofjqueryvalidation.min.js" />
 /// <reference path="../client scripts/mvcfoolproofvalidation.min.js" />
 /// <reference path="bootstrap.js" />
+/// <reference path="googlemap.js" />
 /// <reference path="jquery.validate.min.js" />
 /// <reference path="jquery.validate.unobtrusive.min.js" />
 /// <reference path="jquery-1.10.2.js" />

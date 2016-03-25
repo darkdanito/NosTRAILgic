@@ -62,10 +62,14 @@ namespace NosTRAILgic.DAL
             return LINQAllLocationBasedOnCat;
         }
 
-        public IQueryable<Weather> getAllLocationWeather(string trailCategory)
+        public IQueryable<Weather> getAllLocationWeather(string trailCategory, Boolean olderData)
         {
             //Attempt get current DateTime without second and minute and millisecond
             DateTime currentDateTime = DateTime.Now;
+            if (olderData)
+            {
+                currentDateTime = currentDateTime.AddHours(-1); // -1 hours
+            }
             currentDateTime = new DateTime(currentDateTime.Year, currentDateTime.Month, currentDateTime.Day, currentDateTime.Hour, 0, 0, 0);
 
             IQueryable<Weather> LINQAllWeatherBasedOnCat;
@@ -95,10 +99,14 @@ namespace NosTRAILgic.DAL
             return LINQAllWeatherBasedOnCat;
         }
 
-        public IQueryable<Weather> getLocationWeather(string searchLocation)
+        public IQueryable<Weather> getLocationWeather(string searchLocation, Boolean olderData)
         {
             //Attempt get current DateTime without second and minute and millisecond
             DateTime currentDateTime = DateTime.Now;
+            if (olderData)
+            {
+                currentDateTime = currentDateTime.AddHours(-1); // -1 hours
+            }
             currentDateTime = new DateTime(currentDateTime.Year, currentDateTime.Month, currentDateTime.Day, currentDateTime.Hour, 0, 0, 0);
 
             var LINQLocationWeather = (from weather in db.Weathers
@@ -109,6 +117,27 @@ namespace NosTRAILgic.DAL
                                         select weather);
 
             return LINQLocationWeather;
+        }
+
+        public void removeDuplicateWeatherData()
+        {
+            //Attempt get current DateTime without second and minute and millisecond
+            DateTime currentDateTime = DateTime.Now;
+            currentDateTime = currentDateTime.AddHours(-1); // -1 hours
+            currentDateTime = new DateTime(currentDateTime.Year, currentDateTime.Month, currentDateTime.Day, currentDateTime.Hour, 0, 0, 0);
+
+            var LINQLocationWeather = (from weather in db.Weathers
+                                       where weather.LastUpdated == currentDateTime
+                                       select weather);
+
+            System.Diagnostics.Debug.WriteLine("DELETE DUPLICATE DATA");
+            System.Diagnostics.Debug.WriteLine(LINQLocationWeather.Count());
+
+            foreach (var weather in LINQLocationWeather)
+            {
+                db.Weathers.Remove(weather);                
+            }
+            db.SaveChanges();
         }
     }
 }
