@@ -16,7 +16,6 @@
             {
 
                 <span style="float: right;">
-                    @*<i class="glyphicon glyphicon-search"></i>*@
 
                     @Html.TextBox("searchKeyword", null, new { @placeholder = "Search"})
 
@@ -70,7 +69,7 @@
          * Description: This function handles the rendering of the markers to Google        *
          *              map based on the enumerableAllLocationFromTrail object              *
          *                                                                                  *
-         * Developer: Yun Yong                                                              *
+         * Developer: Yun Yong and Elson                                                    *
          *                                                                                  *
          * Date: 21/03/2016                                                                 *
          ************************************************************************************/
@@ -80,8 +79,6 @@
                 //int counter = 0;
                 for (int counter = 0; counter < item.enumerableAllLocation.Count(); counter++)
                 {
-                    //item.enumerableAllLocation.ElementAt(counter);
-                    //item.enumerableAllWeather.ElementAt(counter);
                     <text>
                         markers[@counter] = new google.maps.Marker({
                             position: new google.maps.LatLng(@item.enumerableAllLocation.ElementAt(counter).Latitude, @item.enumerableAllLocation.ElementAt(counter).Longitude),
@@ -126,7 +123,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $('#searchKeyword').autocomplete({
-                source: '@Url.Action("GetLocation")'
+                source: '@Url.Action("GetLocation", new { catergory = UrlParameter.Optional})'
             });
         });
     </script>

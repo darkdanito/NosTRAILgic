@@ -85,7 +85,7 @@ namespace NosTRAILgic.Services
 
                 weather.Area = areaList[i].Attributes["name"].Value;
                 weather.Forecast = areaList[i].Attributes["forecast"].Value;
-                weather.Icon = "~/~/images/" + areaList[i].Attributes["icon"].Value + ".png";
+                weather.Icon = "/images/" + areaList[i].Attributes["icon"].Value + ".png";
                 weather.Region = areaList[i].Attributes["zone"].Value;
                 weather.LastUpdated = lastUpdated;
 

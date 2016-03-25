@@ -77,11 +77,11 @@ namespace NosTRAILgic.Controllers
             if (searchKeyword != null && searchKeyword != "")
             {
                 homeViewModel.enumerableAllLocation = homeMapper.getLocationInfo(searchKeyword);
-                homeViewModel.enumerableAllWeather = homeMapper.getAllLocationWeather(searchKeyword);
+                homeViewModel.enumerableAllWeather = homeMapper.getLocationWeather(searchKeyword);
                 if (homeViewModel.enumerableAllWeather.Count() == 0)
                 {
                     weatherService.updateNowcast();
-                    homeViewModel.enumerableAllWeather = homeMapper.getAllLocationWeather(searchKeyword);
+                    homeViewModel.enumerableAllWeather = homeMapper.getLocationWeather(searchKeyword);
                 }
                 listHomeViewModel.Add(homeViewModel);
             }
