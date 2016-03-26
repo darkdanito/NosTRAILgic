@@ -353,6 +353,7 @@
     <Content Include="Views\Shared\_GoogleAnalytics.cshtml" />
     <Content Include="Views\Stats\Index.cshtml" />
     <Content Include="Views\TrailMeetup\Details_ViewModel.cshtml" />
+    <Content Include="Views\Home\UserProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

@@ -172,5 +172,10 @@ namespace NosTRAILgic.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult UserProfile()
+        {
+            return View();
+        }
+
     }
 }
