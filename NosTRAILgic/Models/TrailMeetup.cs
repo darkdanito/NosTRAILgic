@@ -47,7 +47,7 @@ namespace NosTRAILgic.Models
         [Display(Name = "End Time")]
         public DateTime? TimeTo { get; set; }
 
-        [Display(Name = "Maximum People")]
+        [Display(Name = "Maximum Participants")]
         public int Limit { get; set; }
     }
 }
