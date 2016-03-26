@@ -30,7 +30,10 @@
                 @{
                     if (ViewBag.linqUserExistTest == "" || ViewBag.linqUserExistTest == null)
                     {
-                        @Html.ActionLink("Join Trail", "JoinTrail", new { id = item.getTrailMeetup.TrailMeetupID }, new { @class = "btn btn-default" })
+                        if (ViewBag.TrailCount < item.getTrailMeetup.Limit)
+                        {
+                            @Html.ActionLink("Join Trail", "JoinTrail", new { id = item.getTrailMeetup.TrailMeetupID }, new { @class = "btn btn-default" })
+                        }
                     }
                     else
                     {
