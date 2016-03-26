@@ -136,6 +136,9 @@ namespace NosTRAILgic.Controllers
 
             listTrailMeetup_DetailsViewModel.Add(trailMeetup_DetailsViewModel);                            // Update the objects into the ViewModel
 
+            int TrailCount = db.Database.SqlQuery<int>("select COUNT(*) as count from JoinTrails where TrailMeetupID = " + trailID + "group by TrailMeetupID").Single();
+            ViewBag.TrailCount = TrailCount;
+
             return View(listTrailMeetup_DetailsViewModel);
         }
 
