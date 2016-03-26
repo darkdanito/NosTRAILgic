@@ -54,7 +54,7 @@ namespace NosTRAILgic.Controllers
 
             homeViewModel.enumerableAllLocation = homeMapper.getAllLocationInfo("All");
             // getAllLocationWeather(Category , is to take current hours -1 data?)
-            homeViewModel.enumerableAllWeather = validateWeatherData("All");
+            homeViewModel.enumerableAllWeather = validateCategoryWeatherData("All");
             listHomeViewModel.Add(homeViewModel);
 
             return View(listHomeViewModel);
@@ -70,7 +70,7 @@ namespace NosTRAILgic.Controllers
             if (searchKeyword != null && searchKeyword != "")
             {
                 homeViewModel.enumerableAllLocation = homeMapper.getLocationInfo(searchKeyword);
-                homeViewModel.enumerableAllWeather = validateWeatherData(searchKeyword);
+                homeViewModel.enumerableAllWeather = validateSearchWeatherData(searchKeyword);
                 listHomeViewModel.Add(homeViewModel);
             }
             else {
@@ -79,48 +79,48 @@ namespace NosTRAILgic.Controllers
                     if (Selection == "1")                                               // Musuem     
                     {
                         homeViewModel.enumerableAllLocation = homeMapper.getAllLocationInfo("Musuem");
-                        homeViewModel.enumerableAllWeather = validateWeatherData("Musuem");
+                        homeViewModel.enumerableAllWeather = validateCategoryWeatherData("Musuem");
                         listHomeViewModel.Add(homeViewModel);
                     }
                     else if (Selection == "2")                                          // HistoricSites
                     {
                         homeViewModel.enumerableAllLocation = homeMapper.getAllLocationInfo("Monument");
-                        homeViewModel.enumerableAllWeather = validateWeatherData("Monument");
+                        homeViewModel.enumerableAllWeather = validateCategoryWeatherData("Monument");
                         listHomeViewModel.Add(homeViewModel);
                     }
                     else if (Selection == "3")                                          // Monuments
                     {
                         homeViewModel.enumerableAllLocation = homeMapper.getAllLocationInfo("HistoricSite");
-                        homeViewModel.enumerableAllWeather = validateWeatherData("HistoricSite");
+                        homeViewModel.enumerableAllWeather = validateCategoryWeatherData("HistoricSite");
                         listHomeViewModel.Add(homeViewModel);
                     }
                     else
                     {
                         homeViewModel.enumerableAllLocation = homeMapper.getAllLocationInfo("All");
-                        homeViewModel.enumerableAllWeather = validateWeatherData("All");
+                        homeViewModel.enumerableAllWeather = validateCategoryWeatherData("All");
                         listHomeViewModel.Add(homeViewModel);
                     }
                 }
                 else
                 {
                     homeViewModel.enumerableAllLocation = homeMapper.getAllLocationInfo("All");
-                    homeViewModel.enumerableAllWeather = validateWeatherData("All");
+                    homeViewModel.enumerableAllWeather = validateCategoryWeatherData("All");
                     listHomeViewModel.Add(homeViewModel);
                 }
             }
             return View(listHomeViewModel);
         }
 
-        public IEnumerable<Weather> validateWeatherData(string search)
+        public IEnumerable<Weather> validateCategoryWeatherData(string category)
         {
-            IEnumerable<Weather> enumerableAllWeather = homeMapper.getAllLocationWeather(search, false);
+            IEnumerable<Weather> enumerableAllWeather = homeMapper.getAllLocationWeather(category, false);
             //If not updated weather forecast
             if (enumerableAllWeather.Count() == 0)
             {
                 //Update database with lastest forecast
                 weatherService.updateNowcast();
                 //Retrieve from database again
-                enumerableAllWeather = homeMapper.getAllLocationWeather(search, false);
+                enumerableAllWeather = homeMapper.getAllLocationWeather(category, false);
                 if (enumerableAllWeather.Count() == 0)
                 {
                     //Delete Duplicate weather forecast in database (a job for mapper or service)
@@ -128,10 +128,33 @@ namespace NosTRAILgic.Controllers
                     //Update database with lastest forecast
                     weatherService.updateNowcast();
                     //Retrieve from database again
-                    enumerableAllWeather = homeMapper.getAllLocationWeather(search, true);
+                    enumerableAllWeather = homeMapper.getAllLocationWeather(category, true);
                 }
             }
             return enumerableAllWeather;
+        }
+
+        public IEnumerable<Weather> validateSearchWeatherData(string search)
+        {
+            IEnumerable<Weather> enumerableWeather = homeMapper.getLocationWeather(search, false);
+            //If not updated weather forecast
+            if (enumerableWeather.Count() == 0)
+            {
+                //Update database with lastest forecast
+                weatherService.updateNowcast();
+                //Retrieve from database again
+                enumerableWeather = homeMapper.getLocationWeather(search, false);
+                if (enumerableWeather.Count() == 0)
+                {
+                    //Delete Duplicate weather forecast in database (a job for mapper or service)
+                    homeMapper.removeDuplicateWeatherData();
+                    //Update database with lastest forecast
+                    weatherService.updateNowcast();
+                    //Retrieve from database again
+                    enumerableWeather = homeMapper.getLocationWeather(search, true);
+                }
+            }
+            return enumerableWeather;
         }
 
         /************************************************************************************
