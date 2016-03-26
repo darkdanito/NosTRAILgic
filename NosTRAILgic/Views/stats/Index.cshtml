@@ -2,79 +2,29 @@
 @{
     ViewBag.Title = "Stats";
 }
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
-
 <h2>Statistical Page</h2>
 
 Number of Participants per Trail:
 <div id="chart"></div>
 Number of Check In per Category:
 <div id="pie"></div>
+<div class="pull-left">
+    @Html.Label("Location Search per")
+    @Html.DropDownList("statsBySearchLocationddl", null, new { onchange = "document.location.href='/Stats/Index?val='+this.value;" })
+</div>
 
-Search Details:
-<style>
-    .keyword {
-        border: 1px solid #C0C0C0;
-        border-collapse: collapse;
-        padding: 5px;
-    }
+<br />
+<br />
 
-        .keyword th {
-            border: 1px solid #C0C0C0;
-            padding: 5px;
-            background: #F0F0F0;
-        }
+@if (ViewBag.statsBySearchLocationddlDate == "0")
+{
+    <div id="chart_year"></div>
+    <div id="chart_month" hidden></div>
+}
+else if (ViewBag.statsBySearchLocationddlDate == "1")
+{
+    <div id="chart_year" hidden></div>
+    <div id="chart_month"></div>
+}
 
-        .keyword td {
-            border: 1px solid #C0C0C0;
-            padding: 5px;
-        }
-</style>
-<table class="keyword">
-    <tr>
-        <th>Year</th>
-        <th>Keyword</th>
-    </tr>
-    @foreach (var item in @ViewBag.statsBySearch)
-    {
-        <tr>
-            <td>
-                @Html.Raw(item.Number)
-            </td>
-            <td>
-                @Html.Raw(item.Name)
-            </td>
-        </tr>
-    }
-</table>
-
-<script>
-    new Morris.Bar({
-        element: 'chart',
-        data: [
-            @foreach (var item in Model)
-            {
-                @Html.Raw("{TrailName: " + Json.Encode(item.Name) + ",NumberOfParticipant: " + Json.Encode(item.Number) + "},")
-            }
-        ],
-        xkey: 'TrailName',
-        ykeys: ['NumberOfParticipant'],
-        labels: ['NumberOfParticipant'],
-        gridTextSize: 8
-    });
-</script>
-
-<script>
-    new Morris.Donut({
-        element: 'pie',
-        data: [
-            @foreach (var item in @ViewBag.statsByCategory)
-            {
-                @Html.Raw("{label: " + Json.Encode(item.Name) + ",value: " + Json.Encode(item.Number) + "},")
-            }
-        ]
-    });
-</script>
+@Html.Partial("_Script")

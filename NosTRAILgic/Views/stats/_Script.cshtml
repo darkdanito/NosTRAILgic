@@ -1,0 +1,111 @@
+﻿<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+<script>
+    new Morris.Bar({
+        element: 'chart',
+        data: [
+            @foreach (var item in @ViewBag.statsByParticipants)
+            {
+                @Html.Raw("{TrailName: " + Json.Encode(item.Name) + ",NumberOfParticipant: " + Json.Encode(item.Number) + "},")
+            }
+        ],
+        xkey: 'TrailName',
+        ykeys: ['NumberOfParticipant'],
+        labels: ['NumberOfParticipant'],
+        gridTextSize: 8
+    });
+
+    new Morris.Donut({
+        element: 'pie',
+        data: [
+            @foreach (var item in @ViewBag.statsByCategory)
+            {
+                @Html.Raw("{label: " + Json.Encode(item.Name) + ",value: " + Json.Encode(item.Number) + "},")
+            }
+        ]
+    });
+
+    google.charts.load('current', { packages: ['corechart', 'bar', 'geochart'] });
+    google.charts.setOnLoadCallback(drawBarColorsMonth);
+
+    function drawBarColorsMonth() {
+        var data = google.visualization.arrayToDataTable([
+          ['Location', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+
+            @foreach (var item in @ViewBag.statsBySearchLocationMonth)
+            {
+                @Html.Raw("['" + Json.Encode(item.Name) + "'");
+                for (int i = 0; i < 12; i++)
+                {
+                    if (i.Equals(item.Date))
+                    {
+                        @Html.Raw("," + Json.Encode(item.Number));
+                    }
+                    else
+                    {
+                        @Html.Raw(",0");
+                    }
+
+                }
+                @Html.Raw("],");
+            }
+        ]);
+
+        var options = {
+            title: 'Location Search per Month',
+            chartArea: { width: '70%' },
+            hAxis: {
+                title: 'Number of Search',
+                minValue: 0
+            },
+            vAxis: {
+                title: 'Location'
+            }
+        };
+        var chart = new google.visualization.BarChart(document.getElementById('chart_month'));
+        chart.draw(data, options);
+    }
+    google.charts.setOnLoadCallback(drawBarColorsYear);
+    function drawBarColorsYear() {
+        var data = google.visualization.arrayToDataTable([
+          ['Location', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020'],
+            @foreach (var item in @ViewBag.statsBySearchLocationYear)
+                        {
+                @Html.Raw("['" + Json.Encode(item.Name) + "'");
+                for (int i = 2010; i < 2021; i++)
+                {
+                    if (i.Equals(item.Date))
+                    {
+                        @Html.Raw("," + Json.Encode(item.Number));
+                    }
+                    else
+                    {
+                        @Html.Raw(",0");
+                    }
+
+                }
+                @Html.Raw("],");
+                        }
+            ]);
+
+    var options = {
+        title: 'Location Search per Year',
+        chartArea: { width: '70%' },
+        hAxis: {
+            title: 'Number of Search',
+            minValue: 0
+        },
+        vAxis: {
+            title: 'Location'
+        }
+    };
+    var chart = new google.visualization.BarChart(document.getElementById('chart_year'));
+    chart.draw(data, options);
+    }
+
+</script>
