@@ -12,6 +12,7 @@ Trail/Details   --> IMG if <NULL>, do not display (fixed)
 
 Trail/Edit      --> Start time and End Time is empty	
 
+Stats/Index 	--> Need to have data for checkin and search for chart to work correctly
 Stats/Index 	--> Showing multiple name for search by year and month
 
 Seperate Google Map API code to a JS
