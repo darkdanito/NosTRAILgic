@@ -181,7 +181,19 @@
                             '<div>Link: <a href="' + '@location.HyperLink' + '">' + '@location.HyperLink' + '</a></div>' +
                             '<div>Image: <img src="' + '@location.ImageLink' + '"/></div>' +
                             '<div>Postal Code: @location.PostalCode</div>' ;
-                           
+
+                            //Remove empty image
+                            var str = content;
+                            var res = str.split("<div>");
+                            if(!res[4].includes("jpg"))
+                            {
+                                delete res[4];
+                                content = res.join("<div>")
+                            }
+                            
+                            //Remove for empty link
+                            var content = content.replace('<div>Link: <a href="&lt;Null&gt;">&lt;Null&gt;</a></div>',"")
+                            
                             document.getElementById("locationDetails").innerHTML = content;
 
                             infowindows[this.index].open(map, markers[this.index]);

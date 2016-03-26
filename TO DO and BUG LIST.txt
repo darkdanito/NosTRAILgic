@@ -8,9 +8,9 @@ Trail/Detaiils  --> Display of Participants and Location Details box not aligned
 Trail/Details   --> Once user limit reached, Join will be disable and user cant join the trail meetup (fixed)
 Trail/Details   --> Display the count of the participants that joined the trail (fixed)
 Trail/Details   --> Location input box is missing the <required>
-Trail/Details   --> Check location URL
+Trail/Details   --> Check location URL(fixed)
 Trail/Details 	--> Page refresh when performing validation, thus form input will be lost for Location and image
-Trail/Details   --> IMG if <NULL>, do not display
+Trail/Details   --> IMG if <NULL>, do not display (fixed)
 
 Trail/Edit      --> Start time and End Time is empty	
 
