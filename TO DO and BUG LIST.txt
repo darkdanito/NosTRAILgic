@@ -4,33 +4,30 @@ Bugs:
 
 Trail/Create    --> User cannot add same location twice
 Trail/Details   --> User can Join TrailMeetup and cant unjoin, But only owner cannot unjoined.
-Trail/Detaiils  --> Display of Participants and Location Details box not aligned
+Trail/Details   --> Display of Participants and Location Details box not aligned
 Trail/Details   --> Location input box is missing the <required>
-Trail/Details   --> Check location URL(fixed)
 Trail/Details 	--> Page refresh when performing validation, thus form input will be lost for Location and image
-Trail/Details   --> IMG if <NULL>, do not display (fixed)
 
 Trail/Edit      --> Start time and End Time is empty	
 
 Stats/Index 	--> Need to have data for checkin and search for chart to work correctly
 Stats/Index 	--> Showing multiple name for search by year and month
 
-Seperate Google Map API code to a JS
+All affected page --> Seperate Google Map API code to a JS
 
-Account         --> Profile Page
-Account 	--> Facebook / Google login not working for LOCAL (fixed)
+Account/Profile --> Profile Page need too bbe updated
 Account 	--> Facebook / Google login not working for AZURE
 
 ===============================================================================================================
 Require Optimization:
 ===============================================================================================================
-
-TrailMeetupMapper --> Require optimization for the isUserInTrail Query
+Mapper 		  --> YY
+TrailMeetupMapper --> Require optimization for the isUserInTrail Query [YY]
 
 ===============================================================================================================
 Features Missing:
 ===============================================================================================================
-Service (elson doing)
+Service got bug   --> [Elson]
 
 
 

@@ -4,6 +4,14 @@
 }
 <h2>Statistical Page</h2>
 
+
+<hr />
+
+@Html.TextBox("searchKeyword", null, new { @placeholder = "Search" })
+
+<hr />
+
+
 Number of Participants per Trail:
 <div id="chart"></div>
 Number of Check In per Category:
@@ -27,4 +35,23 @@ else if (ViewBag.statsBySearchLocationddlDate == "1")
     <div id="chart_month"></div>
 }
 
+@section Scripts
+ {
+    @Scripts.Render("~/Content/themes/base/css")
+    <script src="@Url.Content("~/Scripts/jquery-2.2.1.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery-ui-1.11.4.min.js")" type="text/javascript"></script>
+}
+
+@*@section Scripts {
+    <link rel="stylesheet" href="~/Content/jquery-ui.min.css">
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#searchKeyword').autocomplete({
+                source: '@Url.Action("GetLocation")'
+            });
+        });
+    </script>
+}*@
+
 @Html.Partial("_Script")
+

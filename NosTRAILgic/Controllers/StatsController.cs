@@ -66,5 +66,15 @@ namespace NosTRAILgic.Controllers
 
             return View();
         }
+
+
+        public ActionResult GetLocation(string term)
+        {
+            var result = from r in db.Locations
+                         where r.Name.ToLower().StartsWith(term)
+                         select r.Name;
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
     }
 }
