@@ -111,3 +111,4 @@ C:\Users\darkdanito\Documents\GitHub\NosTRAILgic\NosTRAILgic\bin\Microsoft.Owin.
 C:\Users\darkdanito\Documents\GitHub\NosTRAILgic\NosTRAILgic\bin\HtmlAgilityPack.dll
 C:\Users\darkdanito\Documents\GitHub\NosTRAILgic\NosTRAILgic\bin\HtmlAgilityPack.pdb
 C:\Users\darkdanito\Documents\GitHub\NosTRAILgic\NosTRAILgic\bin\HtmlAgilityPack.xml
+C:\Users\darkdanito\Documents\GitHub\NosTRAILgic\NosTRAILgic\bin\FoolproofValidation.dll

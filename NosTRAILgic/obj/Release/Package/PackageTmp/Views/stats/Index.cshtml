@@ -2,101 +2,29 @@
 @{
     ViewBag.Title = "Stats";
 }
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
-
 <h2>Statistical Page</h2>
 
+Number of Participants per Trail:
 <div id="chart"></div>
-<script>
-    new Morris.Bar({
-        element: 'chart',
-        data: [
-            @foreach (var item in Model)
-            {
-                @Html.Raw("{TrailName: " + Json.Encode(item.TrailName) + ",NumberOfParticipant: " + Json.Encode(item.NumberOfParticipant) + "},")
-            }
-        ],
-        xkey: 'TrailName',
-        ykeys: ['NumberOfParticipant'],
-        labels: ['NumberOfParticipant'],
-        gridTextSize: 8
-    });
-</script>
+Number of Check In per Category:
+<div id="pie"></div>
+<div class="pull-left">
+    @Html.Label("Location Search per")
+    @Html.DropDownList("statsBySearchLocationddl", null, new { onchange = "document.location.href='/Stats/Index?val='+this.value;" })
+</div>
 
+<br />
+<br />
 
-<table width="100%">
-    <tr>
-        <td colspan="2">
+@if (ViewBag.statsBySearchLocationddlDate == "0")
+{
+    <div id="chart_year"></div>
+    <div id="chart_month" hidden></div>
+}
+else if (ViewBag.statsBySearchLocationddlDate == "1")
+{
+    <div id="chart_year" hidden></div>
+    <div id="chart_month"></div>
+}
 
-            @using (Html.BeginForm())
-            {
-                <span style="float: right;">
-                    Heritage located in:
-                    @Html.DropDownList("Selection", new SelectListItem[]
-                        {
-                            new SelectListItem() { Text = "All", Value = "0" },
-                            new SelectListItem() { Text = "Museum", Value = "1" },
-                            new SelectListItem() { Text = "Historical Sites", Value = "2" },
-                            new SelectListItem() { Text = "Monuments", Value = "3" },
-                        },
-                            new { @onchange = "this.form.submit()" })
-                </span>
-            }
-
-            <p>
-                <img src="@Url.Action("CreateBar")" alt="Bar Chart using MVC" />
-            </p>
-
-        </td>
-    </tr>
-
-    <tr>
-        <td width="50%">
-
-            @using (Html.BeginForm())
-            {
-                <span style="float: right;">
-                    Location Search per:
-                    @Html.DropDownList("Selection", new SelectListItem[]
-                        {
-                            new SelectListItem() { Text = "Week", Value = "0" },
-                            new SelectListItem() { Text = "Month", Value = "1" },
-                            new SelectListItem() { Text = "Year", Value = "3" },
-                        },
-                            new { @onchange = "this.form.submit()" })
-                </span>
-            }
-
-            <p>
-                <img src="@Url.Action("CreatePie")" alt="Pie Chart using MVC" />
-            </p>
-
-        </td>
-
-        <td>
-
-            @using (Html.BeginForm())
-            {
-                <span style="float: right;">
-                    Visitor Count:
-                    @Html.DropDownList("Selection", new SelectListItem[]
-                        {
-                            new SelectListItem() { Text = "Art Retreat Museum", Value = "0" },
-                            new SelectListItem() { Text = "The Changi Museum", Value = "1" },
-                            new SelectListItem() { Text = "Lee Kong Chian Natural History Museum", Value = "2" },
-                            new SelectListItem() { Text = "Peranakan Museum", Value = "3" },
-                        },
-                            new { @onchange = "this.form.submit()" })
-                </span>
-            }
-
-            <p>
-                <img src="@Url.Action("CreateLine")" alt="Line Chart using MVC" />
-            </p>
-
-        </td>
-    </tr>
-</table>
+@Html.Partial("_Script")

@@ -1,4 +1,6 @@
-﻿@{
+﻿@model IEnumerable<NosTRAILgic.Models.Home_ViewModel>
+
+@{
     ViewBag.Title = "Home Page";
 }
 
@@ -10,12 +12,14 @@
                 <img style="width:50px;" src="~/images/logo.png" />
             </h1>
 
-            @using (Html.BeginForm())
+            @using (Html.BeginForm("index", "Home", FormMethod.Post))
             {
 
                 <span style="float: right;">
-                    <i class="glyphicon glyphicon-search"></i>
-                    <input id="searchKeyword" type="text" placeholder="Search" />
+
+                    @Html.TextBox("searchKeyword", null, new { @placeholder = "Search"})
+
+
                     @Html.DropDownList("Selection", new SelectListItem[]
                         {
                             new SelectListItem() { Text = "All", Value = "0" },
@@ -24,15 +28,18 @@
                             new SelectListItem() { Text = "Monuments", Value = "3" },
                         },
                             new { @onchange = "this.form.submit()" })
-                    <input id="bHomeIndexSearch" type="button" class="btn btn-default" value="Search" disabled />
+                    
+                    <button type="submit" class="btn btn-default">
+                        <span class="glyphicon glyphicon-search"></span> Search
+                    </button>
                 </span>
             }
         </div>
 
         <div align="center">
-            <div id="map_canvas" style="width: 1000px; height: 400px;"></div>
+            <div id="map_canvas" style="width: 100%; height: 400px;"></div>
 
-            <div id="capture" style="width: 1000px; height: 400px;"></div>
+            <div id="locationDetails"></div> 
         </div>
     </div>
 </div>
@@ -43,34 +50,73 @@
 <script type="text/javascript">
     window.onload = initialize;
 
-    var map;
-    var src = "@ViewBag.modSitesName";
-
     function initialize() {
-        map = new google.maps.Map(document.getElementById('map_canvas'), {
-            //    center: new google.maps.LatLng(1.4038, 103.7941),
-            //    zoom: 5,
+
+        var mapOptions = {
+            center: new google.maps.LatLng(1.4038, 103.7941),
+            //    center: new google.maps.LatLng(1.3385674, 103.7059549),
+            zoom: 11,
             mapTypeId: google.maps.MapTypeId.ROADMAP
-        });
-        loadKmlLayer(src, map);
+        };
+
+        var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+
+        var markers = [];
+        var contents = [];
+        var infowindows = [];
+
+        /************************************************************************************
+         * Description: This function handles the rendering of the markers to Google        *
+         *              map based on the enumerableAllLocationFromTrail object              *
+         *                                                                                  *
+         * Developer: Yun Yong and Elson                                                    *
+         *                                                                                  *
+         * Date: 21/03/2016                                                                 *
+         ************************************************************************************/
+        @{
+            foreach (var item in Model)
+            {
+                //int counter = 0;
+                for (int counter = 0; counter < item.enumerableAllLocation.Count(); counter++)
+                {
+                    <text>
+                        markers[@counter] = new google.maps.Marker({
+                            position: new google.maps.LatLng(@item.enumerableAllLocation.ElementAt(counter).Latitude, @item.enumerableAllLocation.ElementAt(counter).Longitude),
+                            map: map,
+                            title: 'Some Marker Title'
+                        });
+
+                        markers[@counter].index = @counter;
+                        contents[@counter] = '<div class="popup_container">' + "@item.enumerableAllLocation.ElementAt(counter).Name" + '</div>';
+
+                        infowindows[@counter] = new google.maps.InfoWindow({
+                                content: contents[@counter] ,
+                            maxWidth: 300
+                        });
+
+                        google.maps.event.addListener(markers[@counter], 'click', function () {
+                            var content =
+                            '<div>Name: @item.enumerableAllLocation.ElementAt(counter).Name</div>' +
+                            '<div>Description: @item.enumerableAllLocation.ElementAt(counter).Description</div>' +
+                            '<div>Link: <a href="' + '@item.enumerableAllLocation.ElementAt(counter).HyperLink' +'">' + '@item.enumerableAllLocation.ElementAt(counter).HyperLink' + '</a></div>' +
+                            '<div>Image: <img src="' + '@item.enumerableAllLocation.ElementAt(counter).ImageLink' + '"/></div>' +
+                            '<div>Postal Code: @item.enumerableAllLocation.ElementAt(counter).PostalCode</div>' +
+                            '<div>Forecast: @item.enumerableAllWeather.ElementAt(counter).Forecast </div>' +
+                            '<div>Region: @item.enumerableAllWeather.ElementAt(counter).Region </div>' +
+                            '<div>Area: @item.enumerableAllWeather.ElementAt(counter).Area </div>' +
+                            '<div>Icon: <img src="' + '@item.enumerableAllWeather.ElementAt(counter).Icon' + '"/></div>' +
+                            '<div>Last Updated: @item.enumerableAllWeather.ElementAt(counter).LastUpdated </div>' ;
+
+                            document.getElementById("locationDetails").innerHTML = content;
+
+                            infowindows[this.index].open(map, markers[this.index]);
+                            map.panTo(markers[this.index].getPosition());
+                        });
+                    </text>
+                }
+            }
+        }
     }
-
-    function loadKmlLayer(src, map) {
-        var kmlLayer = new google.maps.KmlLayer(src, {
-            suppressInfoWindows: true,
-            preserveViewport: false,
-            map: map
-        });
-
-        google.maps.event.addListener(kmlLayer, 'click', function (event) {
-            var content = event.featureData.infoWindowHtml;
-            var testimonial = document.getElementById('capture');
-            testimonial.innerHTML = content;
-        });
-    }
-
-    google.maps.event.addDomListener(window, 'load', initialize);
-
 </script>
 
 @section Scripts {

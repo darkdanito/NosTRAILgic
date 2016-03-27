@@ -8,72 +8,83 @@
     <tr>
         @foreach (var item in Model)
         {
-            <td width="10%"><img src="/Content/Upload/@Url.Content(item.getTrailMeetup.ImageLink)" width="100" height="100" /></td>
+            <td width="10%">                                                                   
+                <img src="/Content/Upload/@Url.Content(item.getTrailMeetup.ImageLink)" width="100" height="100" />
+            </td>
 
-                <td width="40%">
-                    <h2>Trail Details - @Html.DisplayFor(model => item.getTrailMeetup.Name)</h2>
+            <td width="40%">
+                <h2>Trail Details - @Html.DisplayFor(model => item.getTrailMeetup.Name)</h2>
 
-                    <br />
+                <br />
 
-                    <b>@Html.DisplayNameFor(model => model.getTrailMeetup.CreatorID) : </b>
+                <b>@Html.DisplayNameFor(model => model.getTrailMeetup.CreatorID) : </b>
                     @Html.DisplayFor(model => item.getTrailMeetup.CreatorID)
 
-                    <br />
+                <br />
 
-                    <b>@Html.DisplayNameFor(model => model.getTrailMeetup.Description) : </b>
+                <b>@Html.DisplayNameFor(model => model.getTrailMeetup.Description) : </b>
                     @Html.DisplayFor(model => item.getTrailMeetup.Description)
-                </td>
+            </td>
 
-                <td width="50%">
-                    @{
-                        if (ViewBag.linqUserExistTest == "")
+            <td width="50%">
+                @{
+                    if (ViewBag.linqUserExistTest == "" || ViewBag.linqUserExistTest == null)
+                    {
+                        if (ViewBag.TrailCount < item.getTrailMeetup.Limit)
                         {
                             @Html.ActionLink("Join Trail", "JoinTrail", new { id = item.getTrailMeetup.TrailMeetupID }, new { @class = "btn btn-default" })
                         }
-                        else
-                        {
-                            <button class="btn btn-default" type="button" disabled>Joined</button>
+                        else {
+                            <button class="btn btn-default" type="button" disabled>Full</button>
                         }
-
                     }
-                    <br />
+                    else
+                    {
+                        <button class="btn btn-default" type="button" disabled>Joined</button>
+                    }
 
-                    <b>@Html.DisplayNameFor(model => model.getTrailMeetup.Date) : </b>
+                }
+                
+                <br />
+
+                <b>@Html.DisplayNameFor(model => model.getTrailMeetup.Date) : </b>
                     @Html.DisplayFor(model => item.getTrailMeetup.Date)
 
-                    <br />
+                <br />
 
-                    <b>Time : </b>
-                    @Html.DisplayFor(model => item.getTrailMeetup.TimeFrom)
-                    <b> - </b>
-                    @Html.DisplayFor(model => item.getTrailMeetup.TimeTo)
+                <b>Time : </b> @Html.DisplayFor(model => item.getTrailMeetup.TimeFrom)
+                <b> - </b> @Html.DisplayFor(model => item.getTrailMeetup.TimeTo)
 
-                    <br />
+                <br />
 
-                    <b>@Html.DisplayNameFor(model => model.getTrailMeetup.Limit) : </b>
-                    @Html.DisplayFor(model => item.getTrailMeetup.Limit)
-                </td>
-                        }
-
-
-
+                <b>@Html.DisplayNameFor(model => model.getTrailMeetup.Limit) : </b>
+                    @ViewBag.TrailCount / @Html.DisplayFor(model => item.getTrailMeetup.Limit)
+            </td>
+        }
     </tr>
 
     <tr>
-        <td colspan="3"><div id="map_canvas" style="width: 1000px; height: 300px;"></div></td>
+        <td colspan="3"><div id="map_canvas" style="width: 100%; height: 300px;"></div></td>
     </tr>
 
     <tr>
         <td colspan="2">
-            <b>Participants : </b>
+            <b>Participants :</b>
 
             <br />
 
             <ul>
+                <!-----------------------------------------------------------------------------------
+                - Description: For the displaying who are participants of Trails                    -
+                -                                                                                   -
+                - Developer: Yun Yong                                                               -
+                -                                                                                   -
+                - Date: 21/03/2016                                                                  -
+                ------------------------------------------------------------------------------------->
                 @{
                     foreach (var item in Model)
                     {
-                        foreach (var trailParticipants in item.necroLocation)
+                        foreach (var trailParticipants in item.enumerableTrailParticipants)
                         {
                             <li>@trailParticipants</li>
                         }
@@ -86,25 +97,21 @@
         <td>
             <b>Location Details : </b>
 
-            <div id="locationDetails"></div>
-
-            @*@{
-
-                foreach (var item in Model)
-                {
-                    foreach (var meow in item.pewpewLocation)
-                    {
-                        @Html.DisplayFor(model => meow.Name)
-                    }
-
-                }
-            }*@
-            
+            <div id="locationDetails"></div>         
         </td>
     </tr>
 </table>
 
 <p>
+    <!-----------------------------------------------------------------------------------
+    - Description: Logic for showing the Edit and Delete Trail Button to users          -
+    -              Only the Trail Creator can edit the Trail information                -
+    -              Only the Trail Creator and the Site Admin can delete Trail           -
+    -                                                                                   -
+    - Developer: Yun Yong                                                               -
+    -                                                                                   -
+    - Date: 21/03/2016                                                                  -
+    ------------------------------------------------------------------------------------->
     @{
         foreach (var item in Model)
         {
@@ -137,77 +144,64 @@
 
         var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
 
-        //// create a marker
-        //var latlng = new google.maps.LatLng(1.4038, 103.7941);
-        //var marker = new google.maps.Marker({
-        //    position: latlng,
-        //    map: map,
-        //    title: 'My Place'
-        //});
-
-        var trailInput = '@ViewBag.linqLocationTest';
-        var trailLatInput = '@ViewBag.linqLatTest';
-        var trailLongInput = '@ViewBag.linqLongTest';
-
-        console.log("Viewbag results for Location: ", trailInput);
-        console.log("Viewbag results for Lat: ", trailLatInput);
-        console.log("Viewbag results for Long: ", trailLongInput);
-
-        // Split the Trail Input of Location based on COMMA into different location
-        var trailArray = trailInput.split(',');
-        var latArray = trailLatInput.split(',');
-        var longArray = trailLongInput.split(',');
-
         var markers = [];
         var contents = [];
         var infowindows = [];
 
-        // OMG
+        /************************************************************************************
+         * Description: This function handles the rendering of the markers to Google        *
+         *              map based on the enumerableAllLocationFromTrail object              *
+         *                                                                                  *
+         * Developer: Yun Yong                                                              *
+         *                                                                                  *
+         * Date: 21/03/2016                                                                 *
+         ************************************************************************************/
         @{
             foreach (var item in Model)
             {
                 int counter = 0;
-                foreach (var meow in item.pewpewLocation)
+                foreach (var location in item.enumerableAllLocationFromTrail)
                 {
-
-
                     <text>
-                        console.log("@meow.Name");
-
                         markers[@counter] = new google.maps.Marker({
-                            position: new google.maps.LatLng(@meow.Latitude, @meow.Longitude),
+                            position: new google.maps.LatLng(@location.Latitude, @location.Longitude),
                             map: map,
-                            title: 'samplemarker'
+                            title: 'Some Marker Title'
                         });
 
                         markers[@counter].index = @counter;
-                        contents[@counter] = '<div class="popup_container">' + "@meow.Name" + '</div>';
+                        contents[@counter] = '<div class="popup_container">' + "@location.Name" + '</div>';
 
-                            infowindows[@counter] = new google.maps.InfoWindow({
+                        infowindows[@counter] = new google.maps.InfoWindow({
                                 content: contents[@counter] ,
                             maxWidth: 300
                         });
 
                         google.maps.event.addListener(markers[@counter], 'click', function () {
-
-
                             var content =
-                            '<div>Name: @meow.Name</div>' +
-                            '<div>Description: @meow.Description</div>' +
-                            '<div>Link: <a href="' + '@meow.HyperLink' + '">' + '@meow.HyperLink' + '</a></div>' +
-                            '<div>Image: <img src="' + '@meow.ImageLink' + '"/></div>' +
-                            '<div>Postal Code: @meow.PostalCode</div>' ;
-                           
+                            '<div>Name: @location.Name</div>' +
+                            '<div>Description: @location.Description</div>' +
+                            '<div>Link: <a href="' + '@location.HyperLink' + '">' + '@location.HyperLink' + '</a></div>' +
+                            '<div>Image: <img src="' + '@location.ImageLink' + '"/></div>' +
+                            '<div>Postal Code: @location.PostalCode</div>' ;
+
+                            //Remove empty image
+                            var str = content;
+                            var res = str.split("<div>");
+                            if(!res[4].includes("jpg"))
+                            {
+                                delete res[4];
+                                content = res.join("<div>")
+                            }
+                            
+                            //Remove for empty link
+                            var content = content.replace('<div>Link: <a href="&lt;Null&gt;">&lt;Null&gt;</a></div>',"")
+                            
                             document.getElementById("locationDetails").innerHTML = content;
 
-
-
-                            //console.log(this.index); // this will give correct index
-                            //console.log(i); //this will always give 10 for you
                             infowindows[this.index].open(map, markers[this.index]);
                             map.panTo(markers[this.index].getPosition());
                         });
-
                     </text>
 
                     counter++;
@@ -215,32 +209,5 @@
 
             }
         }
-
-        //for (i = 0; i < (trailArray.length - 1) ; i++) {
-
-        //    console.log("lat long: ", latArray[i] + " , " + longArray[i]);
-
-        //    markers[i] = new google.maps.Marker({
-        //        position: new google.maps.LatLng(latArray[i], longArray[i]),
-        //        map: map,
-        //        title: 'samplemarker'
-        //    });
-
-        //    markers[i].index = i;
-        //    contents[i] = '<div class="popup_container">' + trailArray[i] + '</div>';
-
-        //    infowindows[i] = new google.maps.InfoWindow({
-        //        content: contents[i],
-        //        maxWidth: 300
-        //    });
-
-        //    google.maps.event.addListener(markers[i], 'click', function () {
-        //        console.log(this.index); // this will give correct index
-        //        console.log(i); //this will always give 10 for you
-        //        infowindows[this.index].open(map, markers[this.index]);
-        //        map.panTo(markers[this.index].getPosition());
-        //    });
-        //}
-
     }
 </script>

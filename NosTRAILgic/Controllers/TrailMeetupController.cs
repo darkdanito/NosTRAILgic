@@ -21,16 +21,14 @@ namespace NosTRAILgic.Controllers
     {
         private NosTRAILgicContext db = new NosTRAILgicContext();
 
-        JoinTrail jointrail = new JoinTrail();
-        Location location = new Location();
-
-        TrailMeetup_Location trailMeetup_Location = new TrailMeetup_Location();
-
+//        JoinTrail jointrail = new JoinTrail();
+//        Location location = new Location();
 
         TrailMeetupMapper trailMeetupMapper = new TrailMeetupMapper();                  // New TrailMeetupMapper()
 
-        // GET: TrailMeetup
-        public ActionResult Index()
+        TrailMeetup_Location trailMeetup_Location = new TrailMeetup_Location();         // New TrailMeetup_Location Model()
+        
+        public ActionResult Index()                                                     // Display the Index Page
         {
             return View(db.Trails.ToList());
         }
@@ -60,6 +58,8 @@ namespace NosTRAILgic.Controllers
         [Authorize]
         public ActionResult JoinTrail(int? id)
         {
+            JoinTrail jointrail = new JoinTrail();
+
             if (User.Identity.Name == null || User.Identity.Name == "")             // Check is the username valid
             {
                 return HttpNotFound();
@@ -173,6 +173,8 @@ namespace NosTRAILgic.Controllers
         {
             if (ModelState.IsValid)
             {
+                JoinTrail jointrail = new JoinTrail();
+
                 string path = Server.MapPath("~/Content/Upload/" + file.FileName);
                 file.SaveAs(path);
 
