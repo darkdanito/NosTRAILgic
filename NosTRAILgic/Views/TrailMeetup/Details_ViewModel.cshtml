@@ -28,9 +28,9 @@
 
             <td width="50%">
                 @{
-                    if (ViewBag.linqUserExistTest == "" || ViewBag.linqUserExistTest == null)
+                    if (item.getUserinTrailMeetup == "" || item.getUserinTrailMeetup == null)
                     {
-                        if (ViewBag.TrailCount < item.getTrailMeetup.Limit)
+                        if (item.getNumberOfUsersInTrailMeetup < item.getTrailMeetup.Limit)
                         {
                             @Html.ActionLink("Join Trail", "JoinTrail", new { id = item.getTrailMeetup.TrailMeetupID }, new { @class = "btn btn-default" })
                         }
@@ -58,7 +58,7 @@
                 <br />
 
                 <b>@Html.DisplayNameFor(model => model.getTrailMeetup.Limit) : </b>
-                    @ViewBag.TrailCount / @Html.DisplayFor(model => item.getTrailMeetup.Limit)
+                    @Html.DisplayFor(model => item.getNumberOfUsersInTrailMeetup) / @Html.DisplayFor(model => item.getTrailMeetup.Limit)
             </td>
         }
     </tr>

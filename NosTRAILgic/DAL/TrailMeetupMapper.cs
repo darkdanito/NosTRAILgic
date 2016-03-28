@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
 namespace NosTRAILgic.DAL
 {
@@ -83,6 +82,21 @@ namespace NosTRAILgic.DAL
                                         select w);
 
             return LINQAllLocationQuery;
+        }
+
+        /************************************************************************************
+         * Description: This function handles the count of the number of participants       *
+         *              that join the TrailMeetup                                           *
+         *                                                                                  *
+         * Developer: Khaleef                                                               *
+         ************************************************************************************/
+        public int getTrailMeetupParticipantsCount(int trailID)
+        {
+            var LINQTrailMeetupParticipantsCount = (from c in db.JoinTrails
+                                                    where c.TrailMeetupID == trailID
+                                                    select c).Count();
+
+            return LINQTrailMeetupParticipantsCount;
         }
 
     }

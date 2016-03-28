@@ -17,6 +17,10 @@ namespace NosTRAILgic.Models
         public TrailMeetup_Location getTrailMeetup_Location { get; set; }
         public Location getLocation { get; set; }
 
+        public string getUserinTrailMeetup { get; set; }                            // Check if user is in TrailMeetup or not
+
+        public int getNumberOfUsersInTrailMeetup { get; set; }                      // Get the number of participants in the TrailMeetup
+
         public IEnumerable<string> enumerableTrailParticipants { get; set; }        // Enumerable that hold all the participants for 
                                                                                     // the trails
 

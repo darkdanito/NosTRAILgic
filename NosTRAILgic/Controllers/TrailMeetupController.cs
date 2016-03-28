@@ -21,9 +21,6 @@ namespace NosTRAILgic.Controllers
     {
         private NosTRAILgicContext db = new NosTRAILgicContext();
 
-//        JoinTrail jointrail = new JoinTrail();
-//        Location location = new Location();
-
         TrailMeetupMapper trailMeetupMapper = new TrailMeetupMapper();                  // New TrailMeetupMapper()
 
         TrailMeetup_Location trailMeetup_Location = new TrailMeetup_Location();         // New TrailMeetup_Location Model()
@@ -106,8 +103,7 @@ namespace NosTRAILgic.Controllers
              *                                                                                  *
              * Date: 13/03/2016                                                                 *
              ************************************************************************************/
-            var LINQtoList = trailMeetupMapper.getTrailParticipants(trailID);
-            trailMeetup_DetailsViewModel.enumerableTrailParticipants = LINQtoList;
+            trailMeetup_DetailsViewModel.enumerableTrailParticipants = trailMeetupMapper.getTrailParticipants(trailID);
 
 
             /************************************************************************************
@@ -118,9 +114,8 @@ namespace NosTRAILgic.Controllers
              *                                                                                  *
              * Date: 13/03/2016                                                                 *
              ************************************************************************************/
-            var LINQIsUserInTrailQuery = trailMeetupMapper.isUserInTrail(trailID, User.Identity.Name);
+            trailMeetup_DetailsViewModel.getUserinTrailMeetup = trailMeetupMapper.isUserInTrail(trailID, User.Identity.Name);
 
-            ViewBag.linqUserExistTest = LINQIsUserInTrailQuery;
 
             /************************************************************************************
              * Description: This function handles the getting Locations Information from DB     *
@@ -130,14 +125,21 @@ namespace NosTRAILgic.Controllers
              *                                                                                  *
              * Date: 21/03/2016                                                                 *
              ************************************************************************************/
-            var LINQAllLocationQuery = trailMeetupMapper.getAllLocationInfoFromTrail(trailID);
+            trailMeetup_DetailsViewModel.enumerableAllLocationFromTrail = trailMeetupMapper.getAllLocationInfoFromTrail(trailID);
 
-            trailMeetup_DetailsViewModel.enumerableAllLocationFromTrail = LINQAllLocationQuery;
+            
+            /************************************************************************************
+             * Description: This function handles the getting Locations Information from DB     *
+             *              based on the Trail ID                                               *
+             *                                                                                  *
+             * Developer: Khaleef                                                               *
+             *                                                                                  *
+             * Date: 26/03/2016                                                                 *
+             ************************************************************************************/
+            trailMeetup_DetailsViewModel.getNumberOfUsersInTrailMeetup = trailMeetupMapper.getTrailMeetupParticipantsCount(trailID);
+
 
             listTrailMeetup_DetailsViewModel.Add(trailMeetup_DetailsViewModel);                            // Update the objects into the ViewModel
-
-            int TrailCount = db.Database.SqlQuery<int>("select COUNT(*) as count from JoinTrails where TrailMeetupID = " + trailID + "group by TrailMeetupID").Single();
-            ViewBag.TrailCount = TrailCount;
 
             return View(listTrailMeetup_DetailsViewModel);
         }
