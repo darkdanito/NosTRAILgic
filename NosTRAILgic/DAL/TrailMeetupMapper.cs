@@ -1,5 +1,4 @@
 ﻿using NosTRAILgic.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -23,7 +22,9 @@ namespace NosTRAILgic.DAL
          ************************************************************************************/
         public List<string> getTrailParticipants(int trailID)
         {
-            var trailParticipants = (from p in db.JoinTrails where p.TrailMeetupID == trailID select p.UserID).ToList();
+            var trailParticipants = (from p in db.JoinTrails
+                                     where p.TrailMeetupID == trailID
+                                     select p.UserID).ToList();
 
             return trailParticipants;
         }
@@ -50,7 +51,10 @@ namespace NosTRAILgic.DAL
          ************************************************************************************/
         public string isUserInTrail(int trailID, string userName)
         {
-            var isUserNameInTrail = (from p in db.JoinTrails where p.UserID == userName && p.TrailMeetupID == trailID select p.UserID).FirstOrDefault();
+            var isUserNameInTrail = (from p in db.JoinTrails
+                                     where p.UserID == userName 
+                                     && p.TrailMeetupID == trailID
+                                     select p.UserID).FirstOrDefault();
 
             return isUserNameInTrail;
         }
@@ -60,11 +64,27 @@ namespace NosTRAILgic.DAL
          *              the user created and return the TrailMeetup ID                      *
          *                                                                                  *
          ************************************************************************************/
-        public IQueryable<int> getNewlyCreatedTrailID(string newTrailName)
+        public int getNewlyCreatedTrailID(string newTrailName)
         {
-            var newlyCreatedTrailID = from c in db.Trails where c.Name == newTrailName select c.TrailMeetupID;
+            var newlyCreatedTrailID = (from c in db.Trails
+                                       where c.Name == newTrailName
+                                       select c.TrailMeetupID).FirstOrDefault();
 
             return newlyCreatedTrailID;
+        }
+
+        /************************************************************************************
+         * Description: This function take in the name of the location and return the       *
+         *              location ID for insertion into TrailMeetup_Location DB              *
+         *                                                                                  *
+         ************************************************************************************/
+        public int getLocationID(string locationName)
+        {
+            var getLocationID = (from a in db.Locations
+                                 where a.Name == locationName
+                                 select a.LocationId).FirstOrDefault();
+
+            return getLocationID;
         }
 
         /************************************************************************************

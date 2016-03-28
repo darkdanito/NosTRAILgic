@@ -8,7 +8,6 @@ namespace NosTRAILgic.DAL
     {
         public NosTRAILgicContext() : base("NosTRAILgicDB")
         {
-
         }
 
         public DbSet<TrailMeetup> Trails { get; set; }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
@@ -91,8 +90,7 @@ namespace NosTRAILgic.Controllers
                 return HttpNotFound();
             }
 
-            // Convert the ID that was passed as a parameter into the function into INT
-            // as LINQ does not support such conversion
+            // Convert the ID that was passed as a parameter into the function into INT as LINQ does not support such conversion
             int trailID = (int)id;
 
             /************************************************************************************
@@ -186,14 +184,8 @@ namespace NosTRAILgic.Controllers
                 db.Trails.Add(trailMeetup);
                 db.SaveChanges();
 
-                var LINQCreatedTrailIDQuery = trailMeetupMapper.getNewlyCreatedTrailID(trailMeetup.Name);
-
-                int TrailID = 0;
-
-                foreach (var Lat in LINQCreatedTrailIDQuery)
-                {
-                    TrailID = Lat;
-                }
+                // Get the Trail ID for the newly added Trail above
+                int TrailID = trailMeetupMapper.getNewlyCreatedTrailID(trailMeetup.Name);
 
                 if (text != null)
                 {
@@ -205,7 +197,9 @@ namespace NosTRAILgic.Controllers
                         parameterLocation = text[i];
 
                         trailMeetup_Location.TrailMeetupID = TrailID;
-                        trailMeetup_Location.LocationID = (from a in db.Locations where a.Name == parameterLocation select a.LocationId).FirstOrDefault();
+
+                        // Convert the Location name to convert to the LocationID
+                        trailMeetup_Location.LocationID = trailMeetupMapper.getLocationID(parameterLocation);
 
                         db.TrailMeetup_Location.Add(trailMeetup_Location);
                         db.SaveChanges();
@@ -213,6 +207,7 @@ namespace NosTRAILgic.Controllers
 
                 }
 
+                // TrailMeetup Creator is automatically enrolled a TrailMeetup Participant 
                 jointrail.TrailMeetupID = TrailID;
                 jointrail.UserID = User.Identity.Name;
                 db.JoinTrails.Add(jointrail);

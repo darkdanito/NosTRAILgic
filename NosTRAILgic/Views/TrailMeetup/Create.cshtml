@@ -103,9 +103,7 @@
             var $fieldCount = 0;
             $('#addField').on('click', function () {
                 $fieldCount++;;
-            //  var $node = '<p><label for="text' + $fieldCount + '">Text ' + $fieldCount + ' : </label><input type="text" name="text.['+ $fieldCount +']" id="text' + $fieldCount + '"/><span class="removeField">X</span></p>';
-            //  var $node = '<p><label for="text">Text : </label><input type="text" name="text" id="text"/><span class="removeField">X</span></p>';
-
+         
                 var $node = '<div class="form-group" id="locationField"><label class="control-label col-md-2" for="text">Location</label><div class="col-md-10"><input type="text" placeholder="Location" style="width:100%" name="text" id="text"/><span class="removeField glyphicon glyphicon-remove"></span></div></div>';
 
                 $(dynamicDivInput).last().after($node);
