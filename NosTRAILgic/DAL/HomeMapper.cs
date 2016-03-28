@@ -67,6 +67,28 @@ namespace NosTRAILgic.DAL
             return LINQAllLocationBasedOnCat;
         }
 
+
+
+        public IQueryable<JoinTrail> getJoinedTrails(string userName)
+        {
+            var LINQGetAllJoinedTrails = from j in db.JoinTrails
+                                            where j.UserID == userName
+                                            select j;
+
+            return LINQGetAllJoinedTrails;
+        }
+
+        public IQueryable<TrailMeetup> getCreatedTrails(string userName)
+        {
+            var LINQGetAllCreatedTrails = from c in db.Trails
+                                          where c.CreatorID == userName
+                                          select c;
+
+            return LINQGetAllCreatedTrails;
+        }
+
+
+
         /************************************************************************************
          * Description: This function XXXXXXX [Elson do remember to fill in]                *
          *                                                                                  *

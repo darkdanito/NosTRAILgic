@@ -17,7 +17,7 @@ namespace NosTRAILgic.Controllers
      * Date: 17/02/2016                                                                 *
      ************************************************************************************/
     public class TrailMeetupController : GeneralController<TrailMeetup>
-//    public class TrailMeetupController : Controller
+//  public class TrailMeetupController : Controller
     {
         private NosTRAILgicContext db = new NosTRAILgicContext();
 
@@ -235,6 +235,8 @@ namespace NosTRAILgic.Controllers
             }
 
             TrailMeetup trailMeetup = db.Trails.Find(id);
+
+
 
             if (trailMeetup == null)
             {

@@ -191,9 +191,27 @@ namespace NosTRAILgic.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+        /************************************************************************************
+         * Description: This function handles profile of the user account                   *
+         *                                                                                  *
+         * Developer: Yun Yong                                                              *
+         *                                                                                  *
+         * Date: 26/03/2016                                                                 *
+         ************************************************************************************/
+        [Authorize]
         public ActionResult UserProfile()
         {
-            return View();
+            List<ProfileViewModel> listProfileViewModel = new List<ProfileViewModel>();       // New List for ProfileViewModelViewModel()
+
+            ProfileViewModel profileViewModel = new ProfileViewModel();                       // New profileViewModel()
+
+            profileViewModel.enumerableJoinedTrails = homeMapper.getJoinedTrails(User.Identity.Name);
+
+            profileViewModel.enumerableCreatedTrails = homeMapper.getCreatedTrails(User.Identity.Name);
+
+            listProfileViewModel.Add(profileViewModel);
+
+            return View(listProfileViewModel);
         }
 
     }

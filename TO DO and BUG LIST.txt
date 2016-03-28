@@ -15,14 +15,12 @@ Stats/Index 	--> Showing multiple name for search by year and month
 
 All affected page --> Seperate Google Map API code to a JS
 
-Account/Profile --> Profile Page need too bbe updated
 Account 	--> Facebook / Google login not working for AZURE
 
 ===============================================================================================================
 Require Optimization:
 ===============================================================================================================
-Mapper 		  --> YY
-TrailMeetupMapper --> Require optimization for the isUserInTrail Query [YY]
+
 
 ===============================================================================================================
 Features Missing:
