@@ -114,6 +114,11 @@ namespace NosTRAILgic.Controllers
         public IEnumerable<Weather> validateCategoryWeatherData(string category)
         {
             IEnumerable<Weather> enumerableAllWeather = homeMapper.getAllLocationWeather(category, false);
+
+            ViewBag.sheepTesting = "Mehhh";
+
+            String meh = "mehh";
+
             //If not updated weather forecast
             if (enumerableAllWeather.Count() == 0)
             {
@@ -121,6 +126,10 @@ namespace NosTRAILgic.Controllers
                 weatherService.updateNowcast();
                 //Retrieve from database again
                 enumerableAllWeather = homeMapper.getAllLocationWeather(category, false);
+
+                meh += " 2";
+                ViewBag.sheepTesting2 = "testing2: "+ enumerableAllWeather.Count();
+
                 if (enumerableAllWeather.Count() == 0)
                 {
                     //Delete Duplicate weather forecast in database (a job for mapper or service)
@@ -129,8 +138,18 @@ namespace NosTRAILgic.Controllers
                     weatherService.updateNowcast();
                     //Retrieve from database again
                     enumerableAllWeather = homeMapper.getAllLocationWeather(category, true);
+                    ViewBag.sheepTesting3 = "testing3: " + enumerableAllWeather.Count();
                 }
+                meh += " 3";
             }
+
+            meh += " 4";
+            ViewBag.sheepTesting4 = "testing4: " + enumerableAllWeather.Count();
+
+            DateTime currentDateTime = DateTime.Now;
+
+            ViewBag.sheepTesting = currentDateTime;
+
             return enumerableAllWeather;
         }
 
