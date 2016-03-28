@@ -13,8 +13,6 @@ namespace NosTRAILgic.Controllers
 {
     public class HomeController : Controller
     {
-        private NosTRAILgicContext db = new NosTRAILgicContext();
-
         //Testing with service
         WeatherForecastGateway weatherService = new WeatherForecastGateway();
 

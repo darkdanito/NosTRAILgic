@@ -20,20 +20,24 @@ namespace NosTRAILgic.Controllers
     public class TrailMeetupController : GeneralController<TrailMeetup>
 //  public class TrailMeetupController : Controller
     {
-        private NosTRAILgicContext db = new NosTRAILgicContext();
+        //private NosTRAILgicContext db = new NosTRAILgicContext();
 
         TrailMeetupMapper trailMeetupMapper = new TrailMeetupMapper();                  // New TrailMeetupMapper()
+        JoinTrailGateway joinTrailGateway = new JoinTrailGateway();
+        TrailMeetupLocationGateway trailMeetupLocationGateway = new TrailMeetupLocationGateway();
 
         TrailMeetup_Location trailMeetup_Location = new TrailMeetup_Location();         // New TrailMeetup_Location Model()
 
         public TrailMeetupController()
         {
+            //Tie to TrailMeetup
             dataGateway = new TrailMeetupMapper();
         }
 
         public ActionResult Index()                                                     // Display the Index Page
         {
-            return View(db.Trails.ToList());
+            return View(dataGateway.SelectAll());
+            //return View(db.Trails.ToList());
         }
 
         /************************************************************************************
@@ -73,8 +77,9 @@ namespace NosTRAILgic.Controllers
                 jointrail.UserID = User.Identity.Name;
             }
 
-            db.JoinTrails.Add(jointrail);
-            db.SaveChanges();
+            joinTrailGateway.Insert(jointrail);
+            //db.JoinTrails.Add(jointrail);
+            //db.SaveChanges();
 
             return RedirectToAction("Details_ViewModel", "TrailMeetup", new { id = id });
         }
@@ -90,7 +95,8 @@ namespace NosTRAILgic.Controllers
 
             TrailMeetup_Details_ViewModel trailMeetup_DetailsViewModel = new TrailMeetup_Details_ViewModel();  // New TrailMeetup_Details_ViewModel()
 
-            trailMeetup_DetailsViewModel.getTrailMeetup = db.Trails.Find(id);          // Find TrailMeetup by id
+            //trailMeetup_DetailsViewModel.getTrailMeetup = db.Trails.Find(id);          // Find TrailMeetup by id
+            trailMeetup_DetailsViewModel.getTrailMeetup = dataGateway.SelectById(id);
 
             if (trailMeetup_DetailsViewModel.getTrailMeetup == null)                   // If the TraiMeetup cannot be found
             {
@@ -192,8 +198,9 @@ namespace NosTRAILgic.Controllers
                 trailMeetup.ImageLink = file.FileName;
                 trailMeetup.CreatorID = User.Identity.Name;
 
-                db.Trails.Add(trailMeetup);
-                db.SaveChanges();
+                dataGateway.Insert(trailMeetup);
+                //db.Trails.Add(trailMeetup);
+                //db.SaveChanges();
 
                 // Get the Trail ID for the newly added Trail above
                 int TrailID = trailMeetupMapper.getNewlyCreatedTrailID(trailMeetup.Name);
@@ -212,8 +219,9 @@ namespace NosTRAILgic.Controllers
                         // Convert the Location name to convert to the LocationID
                         trailMeetup_Location.LocationID = trailMeetupMapper.getLocationID(parameterLocation);
 
-                        db.TrailMeetup_Location.Add(trailMeetup_Location);
-                        db.SaveChanges();
+                        trailMeetupLocationGateway.Insert(trailMeetup_Location);
+                        //db.TrailMeetup_Location.Add(trailMeetup_Location);
+                        //db.SaveChanges();
                     }
 
                 }
@@ -221,8 +229,9 @@ namespace NosTRAILgic.Controllers
                 // TrailMeetup Creator is automatically enrolled a TrailMeetup Participant 
                 jointrail.TrailMeetupID = TrailID;
                 jointrail.UserID = User.Identity.Name;
-                db.JoinTrails.Add(jointrail);
-                db.SaveChanges();
+                joinTrailGateway.Insert(jointrail);
+                //db.JoinTrails.Add(jointrail);
+                //db.SaveChanges();
 
                 return RedirectToAction("Index");
             }
@@ -238,10 +247,9 @@ namespace NosTRAILgic.Controllers
             {
                 return RedirectToAction("Index");
             }
-
-            TrailMeetup trailMeetup = db.Trails.Find(id);
-
-
+            
+            //TrailMeetup trailMeetup = db.Trails.Find(id);
+            TrailMeetup trailMeetup = dataGateway.SelectById(id);
 
             if (trailMeetup == null)
             {
@@ -260,8 +268,9 @@ namespace NosTRAILgic.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(trailMeetup).State = EntityState.Modified;
-                db.SaveChanges();
+                dataGateway.Update(trailMeetup);
+                //db.Entry(trailMeetup).State = EntityState.Modified;
+                //db.SaveChanges();
 
                 return RedirectToAction("Index");
             }

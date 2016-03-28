@@ -192,8 +192,10 @@
     <Compile Include="Controllers\UploadController.cs" />
     <Compile Include="DAL\DataGateway.cs" />
     <Compile Include="DAL\HomeMapper.cs" />
+    <Compile Include="DAL\JoinTrailGateway.cs" />
     <Compile Include="DAL\NosTRAILgicContext.cs" />
     <Compile Include="DAL\IDataGateway.cs" />
+    <Compile Include="DAL\TrailMeetupLocationGateway.cs" />
     <Compile Include="DAL\TrailMeetupMapper.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -363,7 +365,9 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Views\JoinTrailGateway\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
