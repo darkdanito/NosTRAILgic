@@ -8,7 +8,7 @@
     <div class="vertical-center-row">
         <div class="page-header">
             <h1>
-                Welcome to NosTRAILgic @ViewBag.sheepTesting @ViewBag.sheepTesting2 @ViewBag.sheepTesting3 @ViewBag.sheepTesting4
+                Welcome to NosTRAILgic 
                 <img style="width:50px;" src="~/images/logo.png" />
             </h1>
 
@@ -111,12 +111,12 @@
                             '<div>Description: @item.enumerableAllLocation.ElementAt(counter).Description</div>' +
                             '<div>Link: <a href="' + '@item.enumerableAllLocation.ElementAt(counter).HyperLink' +'">' + '@item.enumerableAllLocation.ElementAt(counter).HyperLink' + '</a></div>' +
                             '<div>Image: <img src="' + '@item.enumerableAllLocation.ElementAt(counter).ImageLink' + '"/></div>' +
-                            '<div>Postal Code: @item.enumerableAllLocation.ElementAt(counter).PostalCode</div>' @*+
+                            '<div>Postal Code: @item.enumerableAllLocation.ElementAt(counter).PostalCode</div>' +
                             '<div>Forecast: @item.enumerableAllWeather.ElementAt(counter).Forecast </div>' +
                             '<div>Region: @item.enumerableAllWeather.ElementAt(counter).Region </div>' +
                             '<div>Area: @item.enumerableAllWeather.ElementAt(counter).Area </div>' +
                             '<div>Icon: <img src="' + '@item.enumerableAllWeather.ElementAt(counter).Icon' + '"/></div>' +
-                            '<div>Last Updated: @item.enumerableAllWeather.ElementAt(counter).LastUpdated </div>'*@ ;
+                            '<div>Last Updated: @item.enumerableAllWeather.ElementAt(counter).LastUpdated </div>';
 
                             document.getElementById("locationDetails").innerHTML = content;
 

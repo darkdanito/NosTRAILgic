@@ -112,3 +112,7 @@ C:\Users\darkdanito\Documents\GitHub\NosTRAILgic\NosTRAILgic\bin\HtmlAgilityPack
 C:\Users\darkdanito\Documents\GitHub\NosTRAILgic\NosTRAILgic\bin\HtmlAgilityPack.pdb
 C:\Users\darkdanito\Documents\GitHub\NosTRAILgic\NosTRAILgic\bin\HtmlAgilityPack.xml
 C:\Users\darkdanito\Documents\GitHub\NosTRAILgic\NosTRAILgic\bin\FoolproofValidation.dll
+C:\Users\Elson\Documents\GitHub\NosTRAILgic\NosTRAILgic\bin\FoolproofValidation.dll
+C:\Users\Elson\Documents\GitHub\NosTRAILgic\NosTRAILgic\bin\HtmlAgilityPack.dll
+C:\Users\Elson\Documents\GitHub\NosTRAILgic\NosTRAILgic\bin\HtmlAgilityPack.pdb
+C:\Users\Elson\Documents\GitHub\NosTRAILgic\NosTRAILgic\bin\HtmlAgilityPack.xml

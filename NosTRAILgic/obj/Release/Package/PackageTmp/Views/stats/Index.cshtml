@@ -4,36 +4,33 @@
 }
 <h2>Statistical Page</h2>
 
+    <hr />
+        @Html.TextBox("searchKeyword", null, new { @placeholder = "Search" })
+    <hr />
 
-<hr />
+    Number of Participants per Trail:
+        <div id="chart"></div>
+    Number of Check In per Category:
+        <div id="pie"></div>
 
-@Html.TextBox("searchKeyword", null, new { @placeholder = "Search" })
+    <div class="pull-left">
+        @Html.Label("Location Search per")
+        @Html.DropDownList("statsBySearchLocationddl", null, new { onchange = "document.location.href='/Stats/Index?val='+this.value;" })
+    </div>
 
-<hr />
+    <br />
+    <br />
 
-
-Number of Participants per Trail:
-<div id="chart"></div>
-Number of Check In per Category:
-<div id="pie"></div>
-<div class="pull-left">
-    @Html.Label("Location Search per")
-    @Html.DropDownList("statsBySearchLocationddl", null, new { onchange = "document.location.href='/Stats/Index?val='+this.value;" })
-</div>
-
-<br />
-<br />
-
-@if (ViewBag.statsBySearchLocationddlDate == "0")
-{
-    <div id="chart_year"></div>
-    <div id="chart_month" hidden></div>
-}
-else if (ViewBag.statsBySearchLocationddlDate == "1")
-{
-    <div id="chart_year" hidden></div>
-    <div id="chart_month"></div>
-}
+    @if (ViewBag.statsBySearchLocationddlDate == "0")
+    {
+        <div id="chart_year"></div>
+        <div id="chart_month" hidden></div>
+    }
+    else if (ViewBag.statsBySearchLocationddlDate == "1")
+    {
+        <div id="chart_year" hidden></div>
+        <div id="chart_month"></div>
+    }
 
 @section Scripts
  {
@@ -41,17 +38,6 @@ else if (ViewBag.statsBySearchLocationddlDate == "1")
     <script src="@Url.Content("~/Scripts/jquery-2.2.1.min.js")" type="text/javascript"></script>
     <script src="@Url.Content("~/Scripts/jquery-ui-1.11.4.min.js")" type="text/javascript"></script>
 }
-
-@*@section Scripts {
-    <link rel="stylesheet" href="~/Content/jquery-ui.min.css">
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#searchKeyword').autocomplete({
-                source: '@Url.Action("GetLocation")'
-            });
-        });
-    </script>
-}*@
 
 @Html.Partial("_Script")
 

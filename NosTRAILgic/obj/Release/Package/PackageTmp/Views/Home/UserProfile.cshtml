@@ -1,17 +1,53 @@
-﻿
+﻿@model IEnumerable<NosTRAILgic.Models.ProfileViewModel>
+
 @{
     ViewBag.Title = "Profile";
 }
 
 <h2>Profile: </h2>
 
-
-
 <h2>List of Trails Meetup created: </h2>
 
+<table border="1">
 
+    <tr>
+        <td>Trail Meetup ID</td>
+        <td>Creator ID</td>
+        <td>Name</td>
+    </tr>
+    @foreach (var item in Model)
+    {
+        foreach (var row in item.enumerableCreatedTrails)
+        {
+            <tr>
+                <td>@row.TrailMeetupID</td>
+                <td>@row.CreatorID</td>
+                <td>@row.Name</td>
+            </tr>
+        }
+    }
+
+</table>
 
 <h2>List of Trails Meetup joined: </h2>
 
+<table border="1">
 
+    <tr>
+        <td>Join Trail ID</td>
+        <td>Trail Meetup ID</td>
+        <td>User ID</td>
+    </tr>
+    @foreach (var item in Model)
+    {
+        foreach (var row in item.enumerableJoinedTrails)
+        {
+            <tr>
+                <td>@row.JoinTrailID</td>
+                <td>@row.TrailMeetupID</td>
+                <td>@row.UserID</td>
+            </tr>
+        }
+    }
 
+</table>

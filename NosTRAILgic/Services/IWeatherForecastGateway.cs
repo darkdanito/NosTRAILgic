@@ -8,6 +8,6 @@ namespace NosTRAILgic.Services
 {
     public interface IWeatherForecastGateway
     {
-        void updateNowcast();
+        void getNowcast();
     }
 }
