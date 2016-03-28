@@ -289,6 +289,7 @@
     <Content Include="images\SH.png" />
     <Content Include="images\TS.png" />
     <Content Include="images\WD.png" />
+    <Content Include="Scripts\autocomplete.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Properties\DataSources\System.Data.DataSet.datasource" />
@@ -305,7 +306,7 @@
     <Content Include="Content\ZocialCSSSocialButtons\zocial.woff" />
     <None Include="Properties\PublishProfiles\Nostrailgic.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\homeScript.js" />
+    <Content Include="Scripts\googlemap.js" />
     <Content Include="Scripts\jquery-2.2.1.js" />
     <Content Include="Scripts\jquery-2.2.1.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />

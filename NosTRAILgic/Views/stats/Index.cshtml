@@ -7,6 +7,8 @@
     <hr />
         @Html.TextBox("searchKeyword", null, new { @placeholder = "Search" })
     <hr />
+    <!-- Passing to JS -->
+    <p hidden id="autoCompleteURL" data-url='@Url.Action("GetLocation")'></p>
 
     Number of Participants per Trail:
         <div id="chart"></div>
