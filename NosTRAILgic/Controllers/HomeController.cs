@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web.Mvc;
 using NosTRAILgic.DAL;
 using System.Collections.Generic;
+using System.Web.Script.Serialization;
+
 using NosTRAILgic.Models;
 using NosTRAILgic.Services;
 
@@ -54,8 +56,12 @@ namespace NosTRAILgic.Controllers
 
             homeViewModel.enumerableAllLocation = homeMapper.getAllLocationInfo("All");
             // getAllLocationWeather(Category , is to take current hours -1 data?)
-            homeViewModel.enumerableAllWeather = validateCategoryWeatherData("All");
+            homeViewModel.enumerableAllWeather = validateCategoryWeatherData("All");            
             listHomeViewModel.Add(homeViewModel);
+
+            //Passing data to javascript
+            JavaScriptSerializer oSerializer = new JavaScriptSerializer();
+            ViewBag.homeViewModelJSON = oSerializer.Serialize(homeViewModel);
 
             return View(listHomeViewModel);
         }
@@ -108,6 +114,11 @@ namespace NosTRAILgic.Controllers
                     listHomeViewModel.Add(homeViewModel);
                 }
             }
+
+            //Passing data to javascript
+            JavaScriptSerializer oSerializer = new JavaScriptSerializer();
+            ViewBag.homeViewModelJSON = oSerializer.Serialize(homeViewModel);
+
             return View(listHomeViewModel);
         }
 
