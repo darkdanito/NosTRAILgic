@@ -1,5 +1,8 @@
 ﻿@model IEnumerable<NosTRAILgic.Models.TrailMeetup_Details_ViewModel>
 
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript" src="~/Scripts/trailmeetup-details_viewmodel.js"></script>
+
 @{
     ViewBag.Title = "Details";
 }
@@ -102,6 +105,9 @@
     </tr>
 </table>
 
+<!-- Passing to JS -->
+<p hidden id="detailsViewModelData">@Html.Raw(ViewBag.detailsViewModelJSON)</p>
+
 <p>
     <!-----------------------------------------------------------------------------------
     - Description: Logic for showing the Edit and Delete Trail Button to users          -
@@ -129,85 +135,5 @@
     <button class="btn btn-default" type="button" onclick="location.href='@Url.Action("Index", "TrailMeetup")'">Back to Trail Index</button>
 </p>
 
-<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
-<script type="text/javascript">
-    window.onload = initialize;
 
-    function initialize() {
 
-        var mapOptions = {
-            center: new google.maps.LatLng(1.4038, 103.7941),
-            //    center: new google.maps.LatLng(1.3385674, 103.7059549),
-            zoom: 11,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
-
-        var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
-
-        var markers = [];
-        var contents = [];
-        var infowindows = [];
-
-        /************************************************************************************
-         * Description: This function handles the rendering of the markers to Google        *
-         *              map based on the enumerableAllLocationFromTrail object              *
-         *                                                                                  *
-         * Developer: Yun Yong                                                              *
-         *                                                                                  *
-         * Date: 21/03/2016                                                                 *
-         ************************************************************************************/
-        @{
-            foreach (var item in Model)
-            {
-                int counter = 0;
-                foreach (var location in item.enumerableAllLocationFromTrail)
-                {
-                    <text>
-                        markers[@counter] = new google.maps.Marker({
-                            position: new google.maps.LatLng(@location.Latitude, @location.Longitude),
-                            map: map,
-                            title: 'Some Marker Title'
-                        });
-
-                        markers[@counter].index = @counter;
-                        contents[@counter] = '<div class="popup_container">' + "@location.Name" + '</div>';
-
-                        infowindows[@counter] = new google.maps.InfoWindow({
-                                content: contents[@counter] ,
-                            maxWidth: 300
-                        });
-
-                        google.maps.event.addListener(markers[@counter], 'click', function () {
-                            var content =
-                            '<div>Name: @location.Name</div>' +
-                            '<div>Description: @location.Description</div>' +
-                            '<div>Link: <a href="' + '@location.HyperLink' + '">' + '@location.HyperLink' + '</a></div>' +
-                            '<div>Image: <img src="' + '@location.ImageLink' + '"/></div>' +
-                            '<div>Postal Code: @location.PostalCode</div>' ;
-
-                            //Remove empty image
-                            var str = content;
-                            var res = str.split("<div>");
-                            if(!res[4].includes("jpg"))
-                            {
-                                delete res[4];
-                                content = res.join("<div>")
-                            }
-                            
-                            //Remove for empty link
-                            var content = content.replace('<div>Link: <a href="&lt;Null&gt;">&lt;Null&gt;</a></div>',"")
-                            
-                            document.getElementById("locationDetails").innerHTML = content;
-
-                            infowindows[this.index].open(map, markers[this.index]);
-                            map.panTo(markers[this.index].getPosition());
-                        });
-                    </text>
-
-                    counter++;
-                }
-
-            }
-        }
-    }
-</script>

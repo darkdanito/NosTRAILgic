@@ -26,34 +26,6 @@ namespace NosTRAILgic.Controllers
 
             Home_ViewModel homeViewModel = new Home_ViewModel();                   // New Home_ViewModel()
 
-            //if (!String.IsNullOrEmpty(Selection))
-            //{
-            //    if (Selection == "1")                                               // Musuem     
-            //    {
-            //        homeViewModel.enumerableAllLocation = homeMapper.getAllLocationInfo("Musuem");
-            //        listHomeViewModel.Add(homeViewModel);
-            //    }
-            //    else if (Selection == "2")                                          // HistoricSites
-            //    {
-            //        homeViewModel.enumerableAllLocation = homeMapper.getAllLocationInfo("Monument");
-            //        listHomeViewModel.Add(homeViewModel);
-            //    }
-            //    else if (Selection == "3")                                          // Monuments
-            //    {
-            //        homeViewModel.enumerableAllLocation = homeMapper.getAllLocationInfo("HistoricSite");
-            //        listHomeViewModel.Add(homeViewModel);
-            //    }
-            //    else
-            //    {
-            //        homeViewModel.enumerableAllLocation = homeMapper.getAllLocationInfo("All");
-            //        listHomeViewModel.Add(homeViewModel);
-            //    }
-            //}
-            //else
-            //{
-
-            //}
-
             homeViewModel.enumerableAllLocation = homeMapper.getAllLocationInfo("All");
             // getAllLocationWeather(Category , is to take current hours -1 data?)
             homeViewModel.enumerableAllWeather = validateCategoryWeatherData("All");            

@@ -306,7 +306,7 @@
     <Content Include="Content\ZocialCSSSocialButtons\zocial.woff" />
     <None Include="Properties\PublishProfiles\Nostrailgic.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\googlemap.js" />
+    <Content Include="Scripts\home-index.js" />
     <Content Include="Scripts\jquery-2.2.1.js" />
     <Content Include="Scripts\jquery-2.2.1.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -322,6 +322,8 @@
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\trailmeetup-create.js" />
+    <Content Include="Scripts\trailmeetup-details_viewmodel.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using NosTRAILgic.DAL;
 using NosTRAILgic.Models;
 using System.Collections.Generic;
+using System.Web.Script.Serialization;
 
 namespace NosTRAILgic.Controllers
 {
@@ -144,6 +145,10 @@ namespace NosTRAILgic.Controllers
 
 
             listTrailMeetup_DetailsViewModel.Add(trailMeetup_DetailsViewModel);                            // Update the objects into the ViewModel
+
+            //Passing data to javascript
+            JavaScriptSerializer oSerializer = new JavaScriptSerializer();
+            ViewBag.detailsViewModelJSON = oSerializer.Serialize(trailMeetup_DetailsViewModel);
 
             return View(listTrailMeetup_DetailsViewModel);
         }
