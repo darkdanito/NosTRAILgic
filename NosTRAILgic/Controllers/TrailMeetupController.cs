@@ -16,14 +16,20 @@ namespace NosTRAILgic.Controllers
      *                                                                                  *
      * Date: 17/02/2016                                                                 *
      ************************************************************************************/
-    public class TrailMeetupController : Controller
+    public class TrailMeetupController : GeneralController<TrailMeetup>
+//    public class TrailMeetupController : Controller
     {
         private NosTRAILgicContext db = new NosTRAILgicContext();
 
         TrailMeetupMapper trailMeetupMapper = new TrailMeetupMapper();                  // New TrailMeetupMapper()
 
         TrailMeetup_Location trailMeetup_Location = new TrailMeetup_Location();         // New TrailMeetup_Location Model()
-        
+
+        public TrailMeetupController()
+        {
+            dataGateway = new TrailMeetupMapper();
+        }
+
         public ActionResult Index()                                                     // Display the Index Page
         {
             return View(db.Trails.ToList());
@@ -255,35 +261,35 @@ namespace NosTRAILgic.Controllers
             return View(trailMeetup);
         }
 
-        // GET: TrailMeetup/Delete/5
-        [Authorize]
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return RedirectToAction("Index");
-            }
+        //// GET: TrailMeetup/Delete/5
+        //[Authorize]
+        //public ActionResult Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return RedirectToAction("Index");
+        //    }
 
-            TrailMeetup trailMeetup = db.Trails.Find(id);
+        //    TrailMeetup trailMeetup = db.Trails.Find(id);
 
-            if (trailMeetup == null)
-            {
-                return HttpNotFound();
-            }
+        //    if (trailMeetup == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
 
-            return View(trailMeetup);
-        }
+        //    return View(trailMeetup);
+        //}
 
-        // POST: TrailMeetup/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            TrailMeetup trailMeetup = db.Trails.Find(id);
-            db.Trails.Remove(trailMeetup);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+        //// POST: TrailMeetup/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    TrailMeetup trailMeetup = db.Trails.Find(id);
+        //    db.Trails.Remove(trailMeetup);
+        //    db.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
 
     }
 }

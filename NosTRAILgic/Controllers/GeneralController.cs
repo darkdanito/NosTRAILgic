@@ -8,50 +8,54 @@ namespace NosTRAILgic.Controllers
     {
         internal IDataGateway<T> dataGateway;
 
-        virtual public ActionResult Index(int? id)
-        {
-            return View(dataGateway.SelectAll());
-        }
+        //virtual public ActionResult Index(int? id)
+        //{
+        //    return View(dataGateway.SelectAll());
+        //}
 
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            T obj = dataGateway.SelectById(id);
-            if (obj == null)
-            {
-                return HttpNotFound();
-            }
-            return View(obj);
-        }
+        //public ActionResult Details(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    T obj = dataGateway.SelectById(id);
+        //    if (obj == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(obj);
+        //}
 
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            T obj = dataGateway.SelectById(id);
-            if (obj == null)
-            {
-                return HttpNotFound();
-            }
-            return View(obj);
-        }
+        //public ActionResult Edit(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    T obj = dataGateway.SelectById(id);
+        //    if (obj == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(obj);
+        //}
 
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index");
+//              return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             T obj = dataGateway.SelectById(id);
+
             if (obj == null)
             {
                 return HttpNotFound();
             }
+
             return View(obj);
         }
 

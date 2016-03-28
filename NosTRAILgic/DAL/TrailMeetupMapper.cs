@@ -8,7 +8,7 @@ namespace NosTRAILgic.DAL
      * Description: This the data mapper for TrailMeetup                                *
      *                                                                                  *
      ************************************************************************************/
-    public class TrailMeetupMapper
+    public class TrailMeetupMapper : DataGateway<TrailMeetup>
     {
         private NosTRAILgicContext db = new NosTRAILgicContext();
 
