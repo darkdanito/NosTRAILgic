@@ -53,6 +53,11 @@ namespace NosTRAILgic.DAL
             return LINQAllLocationBasedOnCat;
         }
 
+        /************************************************************************************
+         * Description: This function will take what the user has key into the search box   *
+         *              and pass the location results back to the model to display          *
+         *                                                                                  *
+         ************************************************************************************/
         public IQueryable<Location> getLocationInfo(string searchLocation) {
 
             var LINQAllLocationBasedOnCat = from a in db.Locations
@@ -62,6 +67,13 @@ namespace NosTRAILgic.DAL
             return LINQAllLocationBasedOnCat;
         }
 
+        /************************************************************************************
+         * Description: This function XXXXXXX [Elson do remember to fill in]                *
+         *                                                                                  *
+         * Developer: Elson                                                                 *
+         *                                                                                  *
+         * Date: 25/03/2016                                                                 *
+         ************************************************************************************/
         public IQueryable<Weather> getAllLocationWeather(string trailCategory, Boolean olderData)
         {
             //Attempt get current DateTime without second and minute and millisecond
@@ -99,6 +111,13 @@ namespace NosTRAILgic.DAL
             return LINQAllWeatherBasedOnCat;
         }
 
+        /************************************************************************************
+         * Description: This function XXXXXXX [Elson do remember to fill in]                *
+         *                                                                                  *
+         * Developer: Elson                                                                 *
+         *                                                                                  *
+         * Date: 25/03/2016                                                                 *
+         ************************************************************************************/
         public IQueryable<Weather> getLocationWeather(string searchLocation, Boolean olderData)
         {
             //Attempt get current DateTime without second and minute and millisecond
@@ -119,6 +138,13 @@ namespace NosTRAILgic.DAL
             return LINQLocationWeather;
         }
 
+        /************************************************************************************
+         * Description: This function XXXXXXX [Elson do remember to fill in]                *
+         *                                                                                  *
+         * Developer: Elson                                                                 *
+         *                                                                                  *
+         * Date: 25/03/2016                                                                 *
+         ************************************************************************************/
         public void removeDuplicateWeatherData()
         {
             //Attempt get current DateTime without second and minute and millisecond

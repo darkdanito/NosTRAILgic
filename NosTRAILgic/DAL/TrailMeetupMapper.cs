@@ -7,9 +7,6 @@ namespace NosTRAILgic.DAL
     /************************************************************************************
      * Description: This the data mapper for TrailMeetup                                *
      *                                                                                  *
-     * Developer: Yun Yong                                                              *
-     *                                                                                  *
-     * Date: 13/03/2016                                                                 *
      ************************************************************************************/
     public class TrailMeetupMapper
     {
@@ -19,6 +16,9 @@ namespace NosTRAILgic.DAL
          * Description: This function take in the Trail ID and return the participants      *
          *              of the TrailMeetup                                                  *
          *                                                                                  *
+         * Developer: Yun Yong                                                              *
+         *                                                                                  *
+         * Date: 13/03/2016                                                                 *
          ************************************************************************************/
         public List<string> getTrailParticipants(int trailID)
         {
@@ -34,6 +34,9 @@ namespace NosTRAILgic.DAL
          *              and return a auto compelete list based on what the user             *
          *              has inputted                                                        *
          *                                                                                  *
+         * Developer: Yun Yong                                                              *
+         *                                                                                  *
+         * Date: 13/03/2016                                                                 *
          ************************************************************************************/
         public IQueryable<string> getSearchAutoComplete(string term)
         {
@@ -48,10 +51,13 @@ namespace NosTRAILgic.DAL
          * Description: This function take in the TrailMeetupID and Username                *
          *              and check to see is the User in the Trail or not                    *
          *                                                                                  *
+         * Developer: Yun Yong                                                              *
+         *                                                                                  *
+         * Date: 13/03/2016                                                                 *
          ************************************************************************************/
         public string isUserInTrail(int trailID, string userName)
         {
-            var isUserNameInTrail = (from p in db.JoinTrails
+            string isUserNameInTrail = (from p in db.JoinTrails
                                      where p.UserID == userName 
                                      && p.TrailMeetupID == trailID
                                      select p.UserID).FirstOrDefault();
@@ -63,10 +69,13 @@ namespace NosTRAILgic.DAL
          * Description: This function take in the name of the new TrailMeetup               *
          *              the user created and return the TrailMeetup ID                      *
          *                                                                                  *
+         * Developer: Yun Yong                                                              *
+         *                                                                                  *
+         * Date: 13/03/2016                                                                 *
          ************************************************************************************/
         public int getNewlyCreatedTrailID(string newTrailName)
         {
-            var newlyCreatedTrailID = (from c in db.Trails
+            int newlyCreatedTrailID = (from c in db.Trails
                                        where c.Name == newTrailName
                                        select c.TrailMeetupID).FirstOrDefault();
 
@@ -77,10 +86,13 @@ namespace NosTRAILgic.DAL
          * Description: This function take in the name of the location and return the       *
          *              location ID for insertion into TrailMeetup_Location DB              *
          *                                                                                  *
+         * Developer: Yun Yong                                                              *
+         *                                                                                  *
+         * Date: 13/03/2016                                                                 *
          ************************************************************************************/
         public int getLocationID(string locationName)
         {
-            var getLocationID = (from a in db.Locations
+            int getLocationID = (from a in db.Locations
                                  where a.Name == locationName
                                  select a.LocationId).FirstOrDefault();
 
@@ -92,6 +104,9 @@ namespace NosTRAILgic.DAL
          *              Location table that the TrailMeetup contains by joining the DB      *
          *              TrailMeetup_Location and TrailMeetup_Location with TrailMeetup      *
          *                                                                                  *
+         * Developer: Yun Yong                                                              *
+         *                                                                                  *
+         * Date: 13/03/2016                                                                 *
          ************************************************************************************/
         public IQueryable<Location> getAllLocationInfoFromTrail(int trailID)
         {
@@ -112,7 +127,7 @@ namespace NosTRAILgic.DAL
          ************************************************************************************/
         public int getTrailMeetupParticipantsCount(int trailID)
         {
-            var LINQTrailMeetupParticipantsCount = (from c in db.JoinTrails
+            int LINQTrailMeetupParticipantsCount = (from c in db.JoinTrails
                                                     where c.TrailMeetupID == trailID
                                                     select c).Count();
 

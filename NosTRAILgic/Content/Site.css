@@ -1,57 +1,54 @@
-﻿body {
-    /*padding-top: 50px;
-    padding-bottom: 20px;*/
-    font-family: 'Segoe UI';
-}
+﻿    body {
+        font-family: 'Segoe UI';
+    }
 
-h1, h2 {
-    font-family:'Agency FB';
-}
+    h1, h2 {
+        font-family:'Agency FB';
+    }
 
-/* Set padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
-    background-color:#ffffff;
-}
+    /* Set padding to keep content from hitting the edges */
+    .body-content {
+        padding-left: 15px;
+        padding-right: 15px;
+        background-color:#ffffff;
+    }
 
-p {
-    line-height: 1.8;
-}
+    p {
+        line-height: 1.8;
+    }
 
-.sidebar {
-    padding-top: 15px;
-}
+    .sidebar {
+        padding-top: 15px;
+    }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
-}
+    /* Set width on the form input elements since they're 100% wide by default */
+    input,
+    select,
+    textarea {
+        max-width: 280px;
+    }
 
-/* styles for validation helpers */
-.field-validation-error {
-    color: #b94a48;
-}
+    /* styles for validation helpers */
+    .field-validation-error {
+        color: #b94a48;
+    }
 
-.field-validation-valid {
-    display: none;
-}
+    .field-validation-valid {
+        display: none;
+    }
 
-input.input-validation-error {
-    border: 1px solid #b94a48;
-}
+    input.input-validation-error {
+        border: 1px solid #b94a48;
+    }
 
-input[type="checkbox"].input-validation-error {
-    border: 0 none;
-}
+    input[type="checkbox"].input-validation-error {
+        border: 0 none;
+    }
 
-.validation-summary-errors {
-    color: #b94a48;
-}
+    .validation-summary-errors {
+        color: #b94a48;
+    }
 
-.validation-summary-valid {
-    display: none;
-}
-
+    .validation-summary-valid {
+        display: none;
+    }
