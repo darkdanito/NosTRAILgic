@@ -28,7 +28,7 @@
                 <li><img src="/Content/Upload/@Url.Content(item.ImageLink)" width="100" height="100" /></li>
                 <li>@item.Name</li>
                 <li>@item.Date.ToShortDateString()</li>
-                <li>@item.TimeFrom.Value.ToShortTimeString() - @item.TimeTo.Value.ToShortTimeString()</li>
+                <li>@item.TimeFrom.ToShortTimeString() - @item.TimeTo.ToShortTimeString()</li>
                 <li>@item.Limit</li>
                 <li>@Html.ActionLink("Details", "Details_ViewModel", new { id = item.TrailMeetupID }, new { @class = "btn btn-default" })</li>
             </ul>    

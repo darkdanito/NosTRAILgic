@@ -1,8 +1,6 @@
 ﻿using NosTRAILgic.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
 namespace NosTRAILgic.DAL
 {
@@ -68,7 +66,11 @@ namespace NosTRAILgic.DAL
         }
 
 
-
+        /************************************************************************************
+         * Description: This function will take in the user's account name and              *
+         *              return all the TrailMeetup that he has joined                       *
+         *                                                                                  *
+         ************************************************************************************/
         public IQueryable<JoinTrail> getJoinedTrails(string userName)
         {
             var LINQGetAllJoinedTrails = from j in db.JoinTrails
@@ -78,6 +80,11 @@ namespace NosTRAILgic.DAL
             return LINQGetAllJoinedTrails;
         }
 
+        /************************************************************************************
+         * Description: This function will take in the user's account name and              *
+         *              return all the TrailMeetup that he has created                      *
+         *                                                                                  *
+         ************************************************************************************/
         public IQueryable<TrailMeetup> getCreatedTrails(string userName)
         {
             var LINQGetAllCreatedTrails = from c in db.Trails
@@ -86,8 +93,6 @@ namespace NosTRAILgic.DAL
 
             return LINQGetAllCreatedTrails;
         }
-
-
 
         /************************************************************************************
          * Description: This function XXXXXXX [Elson do remember to fill in]                *

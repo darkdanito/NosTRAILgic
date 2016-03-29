@@ -11,18 +11,20 @@
 <table border="1">
 
     <tr>
-        <td>Trail Meetup ID</td>
-        <td>Creator ID</td>
-        <td>Name</td>
+        <td>TrailMeetup Name</td>
+        <td>Date</td>
+        <td>Time</td>
+        <td>Maximum Participants</td>
     </tr>
     @foreach (var item in Model)
     {
         foreach (var row in item.enumerableCreatedTrails)
         {
             <tr>
-                <td>@row.TrailMeetupID</td>
-                <td>@row.CreatorID</td>
                 <td>@row.Name</td>
+                <td>@row.Date.ToShortDateString()</td>
+                <td>@row.TimeFrom.ToShortTimeString() - @row.TimeTo.ToShortTimeString()</td>
+                <td>@row.Limit</td>
             </tr>
         }
     }

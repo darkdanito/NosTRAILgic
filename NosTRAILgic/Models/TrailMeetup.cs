@@ -18,6 +18,7 @@ namespace NosTRAILgic.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int TrailMeetupID { get; set; }
 
+        [Display(Name = "Trail Creator")]
         public string CreatorID { get; set; }
 
         [Required]
@@ -38,14 +39,14 @@ namespace NosTRAILgic.Models
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:hh:mm tt}")]
         [DataType(DataType.Time)]
         [Display(Name = "Start Time")]
-        public DateTime? TimeFrom { get; set; }
+        public DateTime TimeFrom { get; set; }
 
         [Required]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:hh:mm tt}")]
         [DataType(DataType.Time)]
         [GreaterThan("TimeFrom")]
         [Display(Name = "End Time")]
-        public DateTime? TimeTo { get; set; }
+        public DateTime TimeTo { get; set; }
 
         [Display(Name = "Maximum Participants")]
         public int Limit { get; set; }
