@@ -19,7 +19,7 @@
         ],
         xkey: 'TrailName',
         ykeys: ['NumberOfParticipant'],
-        labels: ['NumberOfParticipant'],
+        labels: ['Number Of Participant'],
         gridTextSize: 8
     });
 
@@ -94,21 +94,34 @@
                 }
                 @Html.Raw("],");
                         }
-            ]);
+        ]);
 
-    var options = {
-        title: 'Location Search per Year',
-        chartArea: { width: '70%' },
-        hAxis: {
-            title: 'Number of Search',
-            minValue: 0
-        },
-        vAxis: {
-            title: 'Location'
-        }
-    };
-    var chart = new google.visualization.BarChart(document.getElementById('chart_year'));
-    chart.draw(data, options);
+        var options = {
+            title: 'Location Search per Year',
+            chartArea: { width: '70%' },
+            hAxis: {
+                title: 'Number of Search',
+                minValue: 0
+            },
+            vAxis: {
+                title: 'Location'
+            }
+        };
+        var chart = new google.visualization.BarChart(document.getElementById('chart_year'));
+        chart.draw(data, options);
     }
 
+    new Morris.Line({
+        element: 'line',
+        data: [
+            @foreach (var item in @ViewBag.searchLocationDay)
+            {
+                @Html.Raw("{Day: '" + Json.Encode(item.Date) + "',NumberOfVisitors: " + Json.Encode(item.Number) + "},")
+            }
+        ],
+        xkey: 'Day',
+        ykeys: ['NumberOfVisitors'],
+        labels: ['NumberOfVisitors'],
+
+    });
 </script>
