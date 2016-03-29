@@ -11,6 +11,7 @@ Trail/Edit      --> Start time and End Time is empty
 
 Stats/Index 	--> Need to have data for checkin and search for chart to work correctly
 Stats/Index 	--> Showing multiple name for search by year and month
+Stats/Index	--> Chart for visitor counts showing "19xx" bugs, "xx" is the days.
 
 Account 	--> Facebook login not working for AZURE
 
