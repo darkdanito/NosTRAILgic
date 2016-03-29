@@ -31,8 +31,9 @@ namespace NosTRAILgic.Controllers
             dropDownList.Add(secondItem);
             ViewBag.statsBySearchLocationddl = dropDownList;
         }
-        public ActionResult Index(string val)
+        public ActionResult Index(string val, string searchKeyword)
         {
+
             foreach (var item in ViewBag.statsBySearchLocationddl)
             {
                 if (item.Value == val)
@@ -52,17 +53,27 @@ namespace NosTRAILgic.Controllers
 
             var statsByParticipants = db.Database.SqlQuery<Statistic>("select t.Name as Name,count(j.TrailMeetupID) as Number from JoinTrails j right join TrailMeetups t on t.TrailMeetupID = j.TrailMeetupID GROUP BY t.Name").ToList();
             var statsByCategory = db.Database.SqlQuery<Statistic>("select Category as Name, count(CheckInID) as Number from CheckIns c right join Locations l on l.LocationID = c.LocationID group by Category").ToList();
-            var statsBySearch = db.Database.SqlQuery<Statistic>("select Keyword as Name, YEAR(CONVERT(Date, DATE)) as Number from Searches").ToList();
 
             ViewBag.statsByParticipants = statsByParticipants;
             ViewBag.statsByCategory = statsByCategory;
-            ViewBag.statsBySearch = statsBySearch;
 
             var statsBySearchLocationYear = db.Database.SqlQuery<Statistic>("select s.Keyword as Name, COUNT(YEAR(CONVERT(Date, DATE))) As Number, YEAR(CONVERT(Date, DATE)) as Date from Searches s inner join Locations l on s.Keyword = l.Name group by s.Keyword, YEAR(CONVERT(Date, DATE))").ToList();
             var statsBySearchLocationMonth = db.Database.SqlQuery<Statistic>("select s.Keyword as Name, COUNT(MONTH(CONVERT(Date, DATE))) As Number, MONTH(CONVERT(Date, DATE)) as Date from Searches s inner join Locations l on s.Keyword = l.Name group by s.Keyword, MONTH(CONVERT(Date, DATE))").ToList();
 
             ViewBag.statsBySearchLocationYear = statsBySearchLocationYear;
             ViewBag.statsBySearchLocationMonth = statsBySearchLocationMonth;
+
+            var searchLocationDay = db.Database.SqlQuery<Statistic>("select Name, count(DAY(CONVERT(Date, DATE))) as Number, DAY(CONVERT(Date, DATE)) as Date from CheckIns c left join Locations l on l.LocationID = c.LocationID where l.Name = '" + searchKeyword + "' group by l.Name, DAY(CONVERT(Date, DATE))").ToList();
+
+            if (searchKeyword == "" || searchKeyword == null)
+            {
+                searchLocationDay = db.Database.SqlQuery<Statistic>("select Name, count(DAY(CONVERT(Date, DATE))) as Number, DAY(CONVERT(Date, DATE)) as Date from CheckIns c left join Locations l on l.LocationID = c.LocationID where l.Name = '' group by l.Name, DAY(CONVERT(Date, DATE))").ToList();
+            }
+            else
+            {
+                searchLocationDay = db.Database.SqlQuery<Statistic>("select Name, count(DAY(CONVERT(Date, DATE))) as Number, DAY(CONVERT(Date, DATE)) as Date from CheckIns c left join Locations l on l.LocationID = c.LocationID where l.Name = '" + searchKeyword + "' group by l.Name, DAY(CONVERT(Date, DATE))").ToList();
+            }
+            ViewBag.searchLocationDay = searchLocationDay;
 
             return View();
         }

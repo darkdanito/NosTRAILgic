@@ -19,7 +19,7 @@
         ],
         xkey: 'TrailName',
         ykeys: ['NumberOfParticipant'],
-        labels: ['NumberOfParticipant'],
+        labels: ['Number Of Participant'],
         gridTextSize: 8
     });
 
@@ -94,21 +94,51 @@
                 }
                 @Html.Raw("],");
                         }
-            ]);
+        ]);
 
-    var options = {
-        title: 'Location Search per Year',
-        chartArea: { width: '70%' },
-        hAxis: {
-            title: 'Number of Search',
-            minValue: 0
-        },
-        vAxis: {
-            title: 'Location'
-        }
-    };
-    var chart = new google.visualization.BarChart(document.getElementById('chart_year'));
-    chart.draw(data, options);
+        var options = {
+            title: 'Location Search per Year',
+            chartArea: { width: '70%' },
+            hAxis: {
+                title: 'Number of Search',
+                minValue: 0
+            },
+            vAxis: {
+                title: 'Location'
+            }
+        };
+        var chart = new google.visualization.BarChart(document.getElementById('chart_year'));
+        chart.draw(data, options);
     }
 
+    new Morris.Line({
+        element: 'line',
+        data: [
+            @for (var i = 1; i < 32; i++)
+            {
+                var skip = 0;
+                foreach (var item in @ViewBag.searchLocationDay)
+                {
+                    if (i.Equals(item.Date))
+                    {
+                        @Html.Raw("{Day: '" + Json.Encode(item.Date) + "',NumberOfVisitors: " + Json.Encode(item.Number) + "},")
+                        skip = 1;
+                    }
+
+                    continue;
+                }
+                if(skip.Equals(1))
+                {
+
+                }
+                else
+                {
+                    @Html.Raw("{Day: '" + i.ToString() + "',NumberOfVisitors: " + 0 + "},")
+                }
+            }
+        ],
+        xkey: 'Day',
+        ykeys: ['NumberOfVisitors'],
+        labels: ['Number Of Visitors'],
+    });
 </script>
