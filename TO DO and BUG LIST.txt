@@ -12,6 +12,6 @@ Trail/Edit      --> Start time and End Time is empty
 Stats/Index 	--> Need to have data for checkin and search for chart to work correctly
 Stats/Index 	--> Showing multiple name for search by year and month
 
-Account 	--> Facebook / Google login not working for AZURE
+Account 	--> Facebook login not working for AZURE
 
 Updated the Detail Trails with the other delete statement [YY]
