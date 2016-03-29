@@ -43,7 +43,14 @@
                     }
                     else
                     {
-                        <button class="btn btn-default" type="button" disabled>Joined</button>
+                        if (User.Identity.Name == item.getTrailMeetup.CreatorID)
+                        {
+                            <button class="btn btn-default" type="button" disabled>Joined</button>
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Leave Trail", "LeaveTrail", new { id = item.getTrailMeetup.TrailMeetupID }, new { @class = "btn btn-default" })
+                        }
                     }
 
                 }

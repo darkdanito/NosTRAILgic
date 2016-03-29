@@ -79,6 +79,30 @@ namespace NosTRAILgic.Controllers
             return RedirectToAction("Details_ViewModel", "TrailMeetup", new { id = id });
         }
 
+        /************************************************************************************
+         * Description: This function handles the update of the user leaving trails         *
+         *                                                                                  *
+         * Developer: Yun Yong                                                              *
+         *                                                                                  *
+         * Date: 29/03/2016                                                                 *
+         ************************************************************************************/
+        [Authorize]
+        public ActionResult LeaveTrail(int id)
+        {
+            JoinTrail jointrail = new JoinTrail();
+
+            if (User.Identity.Name == null || User.Identity.Name == "")             // Check is the username valid
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                joinTrailGateway.Delete(trailMeetupMapper.getUserJoinTrailForDelete(id, User.Identity.Name));
+            }
+
+            return RedirectToAction("Details_ViewModel", "TrailMeetup", new { id = id });
+        }
+
         public ActionResult Details_ViewModel(int? id)
         {
             if (id == null)

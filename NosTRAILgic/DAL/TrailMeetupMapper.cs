@@ -134,5 +134,21 @@ namespace NosTRAILgic.DAL
             return LINQTrailMeetupParticipantsCount;
         }
 
+        /************************************************************************************
+         * Description: This function handles the count of the number of participants       *
+         *              that join the TrailMeetup                                           *
+         *                                                                                  *
+         * Developer: Khaleef                                                               *
+         ************************************************************************************/
+        public int getUserJoinTrailForDelete (int trailID, string userName)
+        {
+            var LINQGetUserJoinTrail = (from s in db.JoinTrails
+                                       where s.UserID == userName
+                                       && s.TrailMeetupID == trailID
+                                       select s.JoinTrailID).FirstOrDefault();
+
+            return LINQGetUserJoinTrail;
+        }
+
     }
 }

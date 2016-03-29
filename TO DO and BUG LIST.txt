@@ -16,3 +16,4 @@ Account 	--> Facebook / Google login not working for AZURE
 
 layout of profile to change --> YY
 Trail/Details   --> User can Join TrailMeetup and cant unjoin, But only owner cannot unjoined. [YY]
+Updated the Detail Trails with the other delete statement [YY]
