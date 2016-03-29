@@ -64,7 +64,7 @@ namespace NosTRAILgic.Models
 
     public class ProfileViewModel
     {
-        public IEnumerable<JoinTrail> enumerableJoinedTrails { get; set; }
+        public IEnumerable<TrailMeetup> enumerableJoinedTrails { get; set; }
 
         public IEnumerable<TrailMeetup> enumerableCreatedTrails { get; set; }
     }

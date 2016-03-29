@@ -71,11 +71,12 @@ namespace NosTRAILgic.DAL
          *              return all the TrailMeetup that he has joined                       *
          *                                                                                  *
          ************************************************************************************/
-        public IQueryable<JoinTrail> getJoinedTrails(string userName)
+        public IQueryable<TrailMeetup> getJoinedTrails(string userName)
         {
             var LINQGetAllJoinedTrails = from j in db.JoinTrails
+                                         join k in db.Trails on j.TrailMeetupID equals k.TrailMeetupID
                                             where j.UserID == userName
-                                            select j;
+                                            select k;
 
             return LINQGetAllJoinedTrails;
         }
