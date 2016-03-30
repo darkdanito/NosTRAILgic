@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Data;
 using System.Linq;
 using System.Web.Mvc;
 using NosTRAILgic.DAL;
 using System.Collections.Generic;
 using System.Web.Script.Serialization;
-
 using NosTRAILgic.Models;
 using NosTRAILgic.Services;
 

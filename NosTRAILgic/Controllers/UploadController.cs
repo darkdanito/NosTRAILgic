@@ -10,7 +10,8 @@ using HtmlAgilityPack;
 namespace NosTRAILgic.Controllers
 {
     /************************************************************************************
-     * Description: This controller manages the handling of TrailMeetup View            *
+     * Description: This controller manages the handling of Upload of KML into the      *
+     *              location database                                                   *
      *                                                                                  *
      * Developer: Elson                                                                 *
      *                                                                                  *

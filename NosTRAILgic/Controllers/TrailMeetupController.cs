@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Data.Entity;
-using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using NosTRAILgic.DAL;
@@ -305,6 +303,15 @@ namespace NosTRAILgic.Controllers
         }
 
         // POST: TrailMeetup/Delete/5
+        /************************************************************************************
+         * Description: This function handles the [POST: TrailMeetup/Delete]. It will       *
+         *              delete the trailMeetup that the user choose to delete and will      *
+         *              delete the data in JoinTrail and TrailMeetupLocation DB as well     *
+         *                                                                                  *
+         * Developer: Yun Yong                                                              *
+         *                                                                                  *
+         * Date: 30/03/2016                                                                 *
+         ************************************************************************************/
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -313,7 +320,15 @@ namespace NosTRAILgic.Controllers
 
             dataGateway.Delete(id);
 
-            // Delete all row from Join Trails where trailMeetupID = ID
+            /************************************************************************************
+             * Description: This function will get the list of users that has joined the trail  *
+             *              and delete them from the database since the TrailMeeetup            *
+             *              has been deleted                                                    *
+             *                                                                                  *
+             * Developer: Yun Yong                                                              *
+             *                                                                                  *
+             * Date: 30/03/2016                                                                 *
+             ************************************************************************************/
             var recordsToDeleteFromJoinTrails = trailMeetupMapper.getTrailUserCreated(id);
 
             if (recordsToDeleteFromJoinTrails.Count > 0)
@@ -321,25 +336,28 @@ namespace NosTRAILgic.Controllers
                 foreach (var record in recordsToDeleteFromJoinTrails)
                 {
                     joinTrailGateway.Delete(record);
-                    //db.JoinTrails.Remove(record);
-                    //db.SaveChanges();
                 }
             }
+            
 
-
-            // Delete all row from TrailMeetup_Locations where trailMeetupID = ID
+            /************************************************************************************
+             * Description: This function will get the list of locations that was linked        *
+             *              to the TrailMeetup and will be deleted from the database            *
+             *              since the trailMeetup is deleted                                    *
+             *                                                                                  *
+             * Developer: Yun Yong                                                              *
+             *                                                                                  *
+             * Date: 30/03/2016                                                                 *
+             ************************************************************************************/
             var recoardsToDeleteFromTrailMeetupLocations = trailMeetupMapper.getTrailUserJoined(id);
 
             if (recoardsToDeleteFromTrailMeetupLocations.Count > 0)
             {
                 foreach (var record in recoardsToDeleteFromTrailMeetupLocations)
                 {
-                    //db.TrailMeetup_Location.Remove(record);
-                    //db.SaveChanges();
                     trailMeetupLocationGateway.Delete(record);
                 }
             }
-
 
             return RedirectToAction("Index");
         }

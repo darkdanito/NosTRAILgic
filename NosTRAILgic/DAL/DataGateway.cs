@@ -13,6 +13,7 @@ namespace NosTRAILgic.DAL
         {
             this.data = db.Set<T>();
         }
+
         public T Delete(int? id)
         {
             T obj = data.Find(id);
