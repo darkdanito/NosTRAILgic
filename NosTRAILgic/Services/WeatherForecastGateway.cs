@@ -55,15 +55,16 @@ namespace NosTRAILgic.Services
                     //Convert to 24Hours format
                     if(issueParts[i + 2].Equals("PM"))
                     {
+                        if (timeLastUpdate == 12)
+                            timeLastUpdate = 0;
                         timeLastUpdate = timeLastUpdate + 12;
+
                     }
                     else
                     {
                         //If 12AM
                         if(timeLastUpdate == 12)
-                        {
                             timeLastUpdate = 0;
-                        }
                     }
                 }
                 //Attempt to capture last updated date
@@ -75,6 +76,8 @@ namespace NosTRAILgic.Services
                     yearLastUpdate = Int32.Parse(dateParts[2]);                    
                 }
             }
+
+            Console.WriteLine("");
             // DateTime(Year, Month, Day, Hour, Mintue, Second, Millisecond)
             DateTime lastUpdated = new DateTime(yearLastUpdate, monthLastUpdate,dayLastUpdate, timeLastUpdate, 0, 0, 0);
             
