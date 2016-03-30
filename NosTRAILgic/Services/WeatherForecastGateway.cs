@@ -53,18 +53,12 @@ namespace NosTRAILgic.Services
                     string[] timeParts = issueParts[i + 1].Split(':');
                     timeLastUpdate = Int32.Parse(timeParts[0]);
                     //Convert to 24Hours format
-                    if(issueParts[i + 2].Equals("PM"))
+                    if (timeLastUpdate == 12)
+                        timeLastUpdate = 0;
+                    if (issueParts[i + 2].Equals("PM"))
                     {
-                        if (timeLastUpdate == 12)
-                            timeLastUpdate = 0;
                         timeLastUpdate = timeLastUpdate + 12;
 
-                    }
-                    else
-                    {
-                        //If 12AM
-                        if(timeLastUpdate == 12)
-                            timeLastUpdate = 0;
                     }
                 }
                 //Attempt to capture last updated date
