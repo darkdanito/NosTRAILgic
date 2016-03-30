@@ -7,7 +7,7 @@
     ViewBag.Title = "Details";
 }
 
-<table width="100%" border="1">
+<table width="100%">
     <tr>
         @foreach (var item in Model)
         {
@@ -16,7 +16,7 @@
             </td>
 
             <td width="40%">
-                <h2>Trail Details - @Html.DisplayFor(model => item.getTrailMeetup.Name)</h2>
+                <h2>Trail Meetup Details - @Html.DisplayFor(model => item.getTrailMeetup.Name)</h2>
 
                 <br />
 

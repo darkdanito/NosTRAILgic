@@ -18,11 +18,11 @@ namespace NosTRAILgic.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int TrailMeetupID { get; set; }
 
-        [Display(Name = "TrailMeetup Creator")]
+        [Display(Name = "Trail Meetup Creator")]
         public string CreatorID { get; set; }
 
         [Required]
-        [Display(Name = "Trail Name")]
+        [Display(Name = "Trail Meetup Name")]
         public string Name { get; set; }
 
         [Required]
