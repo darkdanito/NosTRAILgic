@@ -1,5 +1,8 @@
 ﻿/* Global Styles */
-
+    
+    img {
+        width: auto;
+    }
     .container 
     {
         display: table;

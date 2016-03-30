@@ -45,6 +45,8 @@ function initMarker() {
         google.maps.event.addListener(markers[i], 'click', function () {
             
             var content =
+
+            
             '<div>Name: ' + location.Name + '</div>' +
             '<div>Description: ' + location.Description + '</div>' +
             '<div>Link: <a href="' + location.HyperLink + '">' + location.HyperLink + '</a></div>' +

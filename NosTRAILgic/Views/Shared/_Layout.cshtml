@@ -31,13 +31,13 @@
                 <div class="collapse navbar-collapse navbar-ex1-collapse">
                     <ul class="nav navbar-nav side-nav">
                         <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                        <li>@Html.ActionLink("Stats", "Index", "Stats")</li>
+                        <li>@Html.ActionLink("Trail Statistics", "Index", "Stats")</li>
                         <li>@Html.ActionLink("Trail Meetup", "Index", "TrailMeetup")</li>
                         @{
                             if (User.IsInRole("Admin"))
                             {
                                 @Html.Raw("<li>");
-                                @Html.ActionLink("Upload", "Create", "Upload")
+                                @Html.ActionLink("Upload Files", "Create", "Upload")
                                 @Html.Raw("</li>");
                             }
                         }
