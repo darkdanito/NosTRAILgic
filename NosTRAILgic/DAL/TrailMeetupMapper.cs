@@ -120,6 +120,40 @@ namespace NosTRAILgic.DAL
         }
 
         /************************************************************************************
+         * Description: This function will take in the trail ID and return the trails       *
+         *              that the user has created                                           *
+         *                                                                                  *
+         * Developer: Yun Yong                                                              *
+         *                                                                                  *
+         * Date: 13/03/2016                                                                 *
+         ************************************************************************************/
+        public List<int> getTrailUserCreated (int trailID)
+        {
+            var trailUserCreated = (from r in db.JoinTrails
+                                     where r.TrailMeetupID == trailID
+                                    select r.JoinTrailID).ToList<int>();
+
+            return trailUserCreated;
+        }
+
+        /************************************************************************************
+         * Description: This function will take in the trail ID and return the trails       *
+         *              that the user has joined                                            *
+         *                                                                                  *
+         * Developer: Yun Yong                                                              *
+         *                                                                                  *
+         * Date: 13/03/2016                                                                 *
+         ************************************************************************************/
+        public List<int> getTrailUserJoined(int trailID)
+        {
+            var trailUserCreated = (from d in db.TrailMeetup_Location
+                                    where d.TrailMeetupID == trailID
+                                    select d.TrailMeetup_LocationID).ToList<int>();
+
+            return trailUserCreated;
+        }
+
+        /************************************************************************************
          * Description: This function handles the count of the number of participants       *
          *              that join the TrailMeetup                                           *
          *                                                                                  *

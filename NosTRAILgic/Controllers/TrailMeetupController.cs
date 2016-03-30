@@ -284,5 +284,64 @@ namespace NosTRAILgic.Controllers
             }
             return View(trailMeetup);
         }
+
+        // GET: TrailMeetup/Delete/5
+        [Authorize]
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return RedirectToAction("Index");
+            }
+
+            TrailMeetup trailMeetup = dataGateway.SelectById(id);
+
+            if (trailMeetup == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(trailMeetup);
+        }
+
+        // POST: TrailMeetup/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            TrailMeetup trailMeetup = dataGateway.SelectById(id);
+
+            dataGateway.Delete(id);
+
+            // Delete all row from Join Trails where trailMeetupID = ID
+            var recordsToDeleteFromJoinTrails = trailMeetupMapper.getTrailUserCreated(id);
+
+            if (recordsToDeleteFromJoinTrails.Count > 0)
+            {
+                foreach (var record in recordsToDeleteFromJoinTrails)
+                {
+                    joinTrailGateway.Delete(record);
+                    //db.JoinTrails.Remove(record);
+                    //db.SaveChanges();
+                }
+            }
+
+
+            // Delete all row from TrailMeetup_Locations where trailMeetupID = ID
+            var recoardsToDeleteFromTrailMeetupLocations = trailMeetupMapper.getTrailUserJoined(id);
+
+            if (recoardsToDeleteFromTrailMeetupLocations.Count > 0)
+            {
+                foreach (var record in recoardsToDeleteFromTrailMeetupLocations)
+                {
+                    //db.TrailMeetup_Location.Remove(record);
+                    //db.SaveChanges();
+                    trailMeetupLocationGateway.Delete(record);
+                }
+            }
+
+
+            return RedirectToAction("Index");
+        }
     }
 }
