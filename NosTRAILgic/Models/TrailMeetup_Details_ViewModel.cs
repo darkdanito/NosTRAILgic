@@ -17,9 +17,9 @@ namespace NosTRAILgic.Models
         public TrailMeetup_Location getTrailMeetup_Location { get; set; }
         public Location getLocation { get; set; }
 
-        // This 2 add for ??????
-        public TrailMeetup getTrailTimeFrom { get; set; }                       
-        public TrailMeetup getTrailTimeTo { get; set; }
+        //// This 2 add for ??????
+        //public TrailMeetup getTrailTimeFrom { get; set; }                       
+        //public TrailMeetup getTrailTimeTo { get; set; }
 
         public string getUserinTrailMeetup { get; set; }                            // Check if user is in TrailMeetup or not
 
