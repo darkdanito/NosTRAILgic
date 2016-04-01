@@ -163,9 +163,9 @@ namespace NosTRAILgic.Controllers
          ************************************************************************************/
         public ActionResult GetLocation(string term)
         {
-            var result = homeMapper.getSearchAutoComplete(term);
+            var searchAutoComplete = homeMapper.getSearchAutoComplete(term);
 
-            return Json(result, JsonRequestBehavior.AllowGet);
+            return Json(searchAutoComplete, JsonRequestBehavior.AllowGet);
         }
 
         /************************************************************************************

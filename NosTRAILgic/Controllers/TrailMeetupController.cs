@@ -17,17 +17,14 @@ namespace NosTRAILgic.Controllers
      ************************************************************************************/
     public class TrailMeetupController : GeneralController<TrailMeetup>
     {
-        TrailMeetupMapper trailMeetupMapper = new TrailMeetupMapper();                  // New TrailMeetupMapper()
+        TrailMeetupMapper trailMeetupMapper = new TrailMeetupMapper();                  // New Mapper: TrailMeetup
 
-        JoinTrailGateway joinTrailGateway = new JoinTrailGateway();
-        TrailMeetupLocationGateway trailMeetupLocationGateway = new TrailMeetupLocationGateway();
-
-        TrailMeetup_Location trailMeetup_Location = new TrailMeetup_Location();         // New TrailMeetup_Location Model()
+        JoinTrailGateway joinTrailGateway = new JoinTrailGateway();                     // New Gateway: JoinTrail
+        TrailMeetupLocationGateway trailMeetupLocationGateway = new TrailMeetupLocationGateway(); // New Gateway: TraiLMeetupLocation
 
         public TrailMeetupController()
         {
-            
-            dataGateway = new TrailMeetupMapper();                                      // Tie to TrailMeetup
+            dataGateway = new TrailMeetupMapper();                                      // New Gateway: TraiLMeetup
         }
 
         public ActionResult Index()                                                     // Display the Index Page
@@ -45,9 +42,9 @@ namespace NosTRAILgic.Controllers
          ************************************************************************************/
         public ActionResult GetLocation(string term)
         {
-            var result = trailMeetupMapper.getSearchAutoComplete(term);
+            var searchAutoComplete = trailMeetupMapper.getSearchAutoComplete(term);
 
-            return Json(result, JsonRequestBehavior.AllowGet);
+            return Json(searchAutoComplete, JsonRequestBehavior.AllowGet);
         }
 
         /************************************************************************************
@@ -62,17 +59,17 @@ namespace NosTRAILgic.Controllers
         {
             JoinTrail jointrail = new JoinTrail();
 
-            if (User.Identity.Name == null || User.Identity.Name == "")             // Check is the username valid
+            if (User.Identity.Name == null || User.Identity.Name == "")                 // Check is the username valid
             {
                 return HttpNotFound();
             }
             else
             {
-                jointrail.TrailMeetupID = (int)id;
-                jointrail.UserID = User.Identity.Name;
+                jointrail.TrailMeetupID = (int)id;                                  
+                jointrail.UserID = User.Identity.Name;                              
             }
 
-            joinTrailGateway.Insert(jointrail);
+            joinTrailGateway.Insert(jointrail);                                         // Insert the new JoinTrail details into the DB                                       
 
             return RedirectToAction("Details_ViewModel", "TrailMeetup", new { id = id });
         }
@@ -89,13 +86,14 @@ namespace NosTRAILgic.Controllers
         {
             JoinTrail jointrail = new JoinTrail();
 
-            if (User.Identity.Name == null || User.Identity.Name == "")             // Check is the username valid
+            if (User.Identity.Name == null || User.Identity.Name == "")                 // Check is the username valid
             {
                 return HttpNotFound();
             }
             else
             {
-                joinTrailGateway.Delete(trailMeetupMapper.getUserJoinTrailForDelete(id, User.Identity.Name));
+                // Delete user from the TrailMeetup
+                joinTrailGateway.Delete(trailMeetupMapper.getUserJoinTrailForDelete(id, User.Identity.Name)); 
             }
 
             return RedirectToAction("Details_ViewModel", "TrailMeetup", new { id = id });
@@ -107,20 +105,22 @@ namespace NosTRAILgic.Controllers
             {
                 return RedirectToAction("Index");
             }
+            // Convert the ID that was passed as a parameter into the function into INT as LINQ does not support such conversion
+            int trailID = (int)id;
 
-            List<TrailMeetup_Details_ViewModel> listTrailMeetup_DetailsViewModel = new List<TrailMeetup_Details_ViewModel>();       // New List for TrailMeetup_Details_ViewModel()
+            // New List for Model: TrailMeetup_Details_ViewModel
+            List<TrailMeetup_Details_ViewModel> listTrailMeetup_DetailsViewModel = new List<TrailMeetup_Details_ViewModel>();
 
-            TrailMeetup_Details_ViewModel trailMeetup_DetailsViewModel = new TrailMeetup_Details_ViewModel();  // New TrailMeetup_Details_ViewModel()
+            // New Model: TrailMeetup_Details_ViewModel
+            TrailMeetup_Details_ViewModel trailMeetup_DetailsViewModel = new TrailMeetup_Details_ViewModel();  
 
+            // Select the TrailMeetup by ID
             trailMeetup_DetailsViewModel.getTrailMeetup = dataGateway.SelectById(id);
 
             if (trailMeetup_DetailsViewModel.getTrailMeetup == null)                   // If the TraiMeetup cannot be found
             {
                 return HttpNotFound();
             }
-
-            // Convert the ID that was passed as a parameter into the function into INT as LINQ does not support such conversion
-            int trailID = (int)id;
 
             /************************************************************************************
              * Description: This function check the database for any participants who have join *
@@ -166,9 +166,16 @@ namespace NosTRAILgic.Controllers
             trailMeetup_DetailsViewModel.getNumberOfUsersInTrailMeetup = trailMeetupMapper.getTrailMeetupParticipantsCount(trailID);
 
 
-            listTrailMeetup_DetailsViewModel.Add(trailMeetup_DetailsViewModel);                            // Update the objects into the ViewModel
+            listTrailMeetup_DetailsViewModel.Add(trailMeetup_DetailsViewModel);         // Update the objects into the ViewModel
 
             // Passing data to javascript
+            /************************************************************************************
+             * Description: This function pass data to the javascript via ViewBag               *
+             *                                                                                  *
+             * Developer: Elson                                                                 *
+             *                                                                                  *
+             * Date: 29/03/2016                                                                 *
+             ************************************************************************************/
             JavaScriptSerializer oSerializer = new JavaScriptSerializer();
             ViewBag.detailsViewModelJSON = oSerializer.Serialize(trailMeetup_DetailsViewModel);
 
@@ -191,15 +198,13 @@ namespace NosTRAILgic.Controllers
         {
             TrailMeetup trail = new TrailMeetup();
 
-            trail.Limit = 1;
-            trail.Date = DateTime.Now;
+            trail.Limit = 1;                                                        // Set the default TrailMeetup Limit to be 1
+            trail.Date = DateTime.Now;                                              // Set the default TrailMeetup Date to be today
 
             return View(trail);
         }
 
         // POST: TrailMeetup/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "TrailMeetupID,Name,Description,ImageLink,Date,TimeFrom,TimeTo,Limit")] TrailMeetup trailMeetup, HttpPostedFileBase file, String[] text)
@@ -207,6 +212,7 @@ namespace NosTRAILgic.Controllers
             if (ModelState.IsValid)
             {
                 JoinTrail jointrail = new JoinTrail();
+                TrailMeetup_Location trailMeetup_Location = new TrailMeetup_Location();         // New TrailMeetup_Location Model()
 
                 string path = Server.MapPath("~/Content/Upload/" + file.FileName);
                 file.SaveAs(path);
@@ -214,24 +220,19 @@ namespace NosTRAILgic.Controllers
                 trailMeetup.ImageLink = file.FileName;
                 trailMeetup.CreatorID = User.Identity.Name;
 
-                dataGateway.Insert(trailMeetup);
+                dataGateway.Insert(trailMeetup);                                        // Insert the newly created TrailMeetup into DB
                
                 // Get the Trail ID for the newly added Trail above
                 int TrailID = trailMeetupMapper.getNewlyCreatedTrailID(trailMeetup.Name);
 
                 if (text != null)
                 {
-                    // String for storing all the location that the user has inputted into the Location Input form
-                    string parameterLocation = "";
-
                     for (int i = 0; i < text.Length; i++)
                     {
-                        parameterLocation = text[i];
-
                         trailMeetup_Location.TrailMeetupID = TrailID;
 
                         // Convert the Location name to convert to the LocationID
-                        trailMeetup_Location.LocationID = trailMeetupMapper.getLocationID(parameterLocation);
+                        trailMeetup_Location.LocationID = trailMeetupMapper.getLocationID(text[i]);
 
                         trailMeetupLocationGateway.Insert(trailMeetup_Location);
                     }
@@ -268,8 +269,6 @@ namespace NosTRAILgic.Controllers
         }
 
         // POST: TrailMeetup/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "TrailMeetupID,Name,Description,ImageLink,Date,TimeFrom,TimeTo,Limit")] TrailMeetup trailMeetup)
@@ -304,7 +303,6 @@ namespace NosTRAILgic.Controllers
             return View(trailMeetup);
         }
 
-        // POST: TrailMeetup/Delete/5
         /************************************************************************************
          * Description: This function handles the [POST: TrailMeetup/Delete]. It will       *
          *              delete the trailMeetup that the user choose to delete and will      *
@@ -341,7 +339,6 @@ namespace NosTRAILgic.Controllers
                 }
             }
             
-
             /************************************************************************************
              * Description: This function will get the list of locations that was linked        *
              *              to the TrailMeetup and will be deleted from the database            *
