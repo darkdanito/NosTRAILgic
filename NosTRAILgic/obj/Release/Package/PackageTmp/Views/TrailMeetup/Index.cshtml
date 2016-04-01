@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Trail Meetup Index</h2>
+<h2>Upcoming Traill Meetup</h2>
 
 <p>
     <button class="btn btn-default" type="button" onclick="location.href='@Url.Action("Create", "TrailMeetup")'">Create New Trail Meetup</button>
@@ -25,7 +25,7 @@
             @Html.Raw("<td width='20 %'>");
             
             <ul style="list-style-type : none">
-                <li><img src="/Content/Upload/@Url.Content(item.ImageLink)" width="100px" height="100px" /></li>
+                <li><img src="/Content/Upload/@Url.Content(item.ImageLink)" style = "height: 100px; width: 100px" /></li>
                 <li>@item.Name</li>
                 <li>@item.Date.ToShortDateString()</li>
                 <li>@item.TimeFrom.ToShortTimeString() - @item.TimeTo.ToShortTimeString()</li>
