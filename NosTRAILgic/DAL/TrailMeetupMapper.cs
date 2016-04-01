@@ -1,4 +1,5 @@
 ﻿using NosTRAILgic.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -46,6 +47,24 @@ namespace NosTRAILgic.DAL
 
             return result;
         }
+
+
+        public IQueryable<TrailMeetup> getTrailsByDate()
+        {
+
+            //DateTime currentDateTime = DateTime.Now;
+            //currentDateTime = new DateTime(currentDateTime.Year, currentDateTime.Month, currentDateTime.Day, currentDateTime.Hour, 0, 0, 0);
+
+            var result = from i in db.Trails
+                             //             where i.TimeFrom >= DateTime.Now
+                         select i;
+
+            //System.Diagnostics.Debug.WriteLine(result.ToArray()[0].TimeFrom);
+            //System.Diagnostics.Debug.WriteLine(DateTime.Now);
+
+            return result;
+        }
+
 
         /************************************************************************************
          * Description: This function take in the TrailMeetupID and Username                *
