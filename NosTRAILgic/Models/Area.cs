@@ -2,6 +2,11 @@
 
 namespace NosTRAILgic.Models
 {
+    /************************************************************************************
+     * Description: This model handle the creation of the Area DB in the database.      *
+     *              It store the Area Code that is link the the Area name               *
+     *                                                                                  *
+     ************************************************************************************/
     public class Area
     {
         [Key]

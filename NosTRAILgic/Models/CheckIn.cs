@@ -4,6 +4,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NosTRAILgic.Models
 {
+    /************************************************************************************
+     * Description: This handle the storing of the information related to CheckIn       *
+     *                                                                                  *
+     ************************************************************************************/
     public class CheckIn
     {
         [Key]
