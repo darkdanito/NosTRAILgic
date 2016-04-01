@@ -4,33 +4,45 @@
 }
 <h2>Statistical Page</h2>
 
-    <hr />
-        @Html.TextBox("searchKeyword", null, new { @placeholder = "Search" })
-    <hr />
-
     Number of Participants per Trail:
-        <div id="chart"></div>
+<div id="chart"></div>
+<hr />
     Number of Check In per Category:
-        <div id="pie"></div>
+<div id="pie"></div>
+<hr />
+<div class="pull-left">
+    @Html.Label("Location Search per")
+    @Html.DropDownList("statsBySearchLocationddl", null, new { onchange = "document.location.href='/Stats/Index?val='+this.value;" })
+</div>
 
-    <div class="pull-left">
-        @Html.Label("Location Search per")
-        @Html.DropDownList("statsBySearchLocationddl", null, new { onchange = "document.location.href='/Stats/Index?val='+this.value;" })
-    </div>
+<br />
+<br />
 
-    <br />
-    <br />
-
-    @if (ViewBag.statsBySearchLocationddlDate == "0")
-    {
-        <div id="chart_year"></div>
+@if (ViewBag.statsBySearchLocationddlDate == "0")
+{
+    <div id="chart_year"></div>
         <div id="chart_month" hidden></div>
-    }
-    else if (ViewBag.statsBySearchLocationddlDate == "1")
-    {
-        <div id="chart_year" hidden></div>
+}
+else if (ViewBag.statsBySearchLocationddlDate == "1")
+{
+    <div id="chart_year" hidden></div>
         <div id="chart_month"></div>
-    }
+}
+
+
+<hr />
+
+<form>
+    Visitor Count: @Html.TextBox("searchKeyword", null, new { @placeholder = "Location", })
+    <input type="submit" value="Submit">
+</form>
+<div id="searchLocation"></div>
+
+<!-- Passing to JS -->
+<p hidden id="autoCompleteURL" data-url='@Url.Action("GetLocation")'></p>
+
+<div id="line_visitor"></div>
+
 
 @section Scripts
  {
@@ -40,4 +52,3 @@
 }
 
 @Html.Partial("_Script")
-

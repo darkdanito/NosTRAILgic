@@ -2,8 +2,9 @@
 /// <reference path="../client scripts/mvcfoolproof.unobtrusive.min.js" />
 /// <reference path="../client scripts/mvcfoolproofjqueryvalidation.min.js" />
 /// <reference path="../client scripts/mvcfoolproofvalidation.min.js" />
+/// <reference path="autocomplete.js" />
 /// <reference path="bootstrap.js" />
-/// <reference path="homescript.js" />
+/// <reference path="home-index.js" />
 /// <reference path="jquery.validate.min.js" />
 /// <reference path="jquery.validate.unobtrusive.min.js" />
 /// <reference path="jquery-1.10.2.js" />
@@ -15,3 +16,5 @@
 /// <reference path="modernizr-2.8.3.js" />
 /// <reference path="respond.matchmedia.addlistener.min.js" />
 /// <reference path="respond.min.js" />
+/// <reference path="trailmeetup-create.js" />
+/// <reference path="trailmeetup-details_viewmodel.js" />

@@ -16,35 +16,38 @@
 <body>
         <div id="wrapper">
             <nav class="navbar navbar-inverse navbar-fixed-top">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a href="@Url.Action("Index","Home")"><img style="width:45px;" src="~/images/greylogo.png" /></a>
-                    <a href="@Url.Action("Index","Home")"><img src="~/images/nostrailgic.png" /></a>
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a href="@Url.Action("Index","Home")"><img style="width:45px;" src="~/images/greylogo.png" /></a>
+                        <a href="@Url.Action("Index","Home")"><img src="~/images/nostrailgic.png" /></a>
 
-                </div>
+                    </div>
 
-                <div class="collapse navbar-collapse navbar-ex1-collapse">
-                    <ul class="nav navbar-nav side-nav">
-                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                        <li>@Html.ActionLink("Stats", "Index", "Stats")</li>
-                        <li>@Html.ActionLink("Trail", "Index", "TrailMeetup")</li>
-                        @{
-                            if (User.IsInRole("Admin"))
-                            {
-                                @Html.Raw("<li>");
-                                @Html.ActionLink("Upload", "Create", "Upload")
-                                @Html.Raw("</li>");
+                    <div class="collapse navbar-collapse navbar-ex1-collapse">
+                        <ul class="nav navbar-nav side-nav">
+                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                            <li>@Html.ActionLink("Trail Statistics", "Index", "Stats")</li>
+                            <li>@Html.ActionLink("Trail Meetup", "Index", "TrailMeetup")</li>
+                            @{
+                                if (User.IsInRole("Admin"))
+                                {
+                                    @Html.Raw("<li>");
+                                    @Html.ActionLink("Upload Files", "Create", "Upload")
+                                    @Html.Raw("</li>");
+                                }
                             }
-                        }
-                    </ul>
-                    @Html.Partial("_LoginPartial")
+                        </ul>
+                        @Html.Partial("_LoginPartial")
+                    </div>
                 </div>
-            </nav>
+                    
+</nav>
 
             <div id="page-wrapper">
                 @RenderBody()

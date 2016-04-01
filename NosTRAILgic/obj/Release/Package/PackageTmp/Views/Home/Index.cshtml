@@ -1,8 +1,10 @@
 ﻿@model IEnumerable<NosTRAILgic.Models.Home_ViewModel>
 
-<script type="text/javascript" src="~/Scripts/homeScript.js"></script>
-<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 <link rel="stylesheet" href="~/Content/jquery-ui.min.css">
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+
+<script type="text/javascript" src="~/Scripts/home-index.js"></script>
+<script type="text/javascript" src="~/Scripts/autocomplete.js"></script>
 
 @{
     ViewBag.Title = "Home Page";
@@ -11,18 +13,22 @@
 <div class="container" style="width: 100%">
     <div class="vertical-center-row">
         <div class="page-header">
-            <h1>
-                Welcome to NosTRAILgic 
-                <img style="width:50px;" src="~/images/logo.png" />
-            </h1>
+            <center>
+                <h1>                    
+                    Welcome to NosTRAILgic
+                    <img style="width:100px;" src="~/images/logo.png" />
+                </h1>
+            </center>
 
             @using (Html.BeginForm("index", "Home", FormMethod.Post))
             {
-                <span style="float: right;">
+                <center>
+                    <span>
 
-                    @Html.TextBox("searchKeyword", null, new { @placeholder = "Search"})
 
-                    @Html.DropDownList("Selection", new SelectListItem[]
+                        @Html.TextBox("searchKeyword", null, new { @placeholder = "Search" })
+
+                        @Html.DropDownList("Selection", new SelectListItem[]
                         {
                             new SelectListItem() { Text = "All", Value = "0" },
                             new SelectListItem() { Text = "Museum", Value = "1" },
@@ -30,11 +36,13 @@
                             new SelectListItem() { Text = "Monuments", Value = "3" },
                         },
                             new { @onchange = "this.form.submit()" })
-                    
-                    <button type="submit" class="btn btn-default">
-                        <span class="glyphicon glyphicon-search"></span> Search
-                    </button>
-                </span>
+
+                        <button type="submit" class="btn btn-default">
+                            <span class="glyphicon glyphicon-search"></span> Search
+                        </button>
+
+                    </span>
+                </center>
             }
         </div>
 
@@ -43,9 +51,11 @@
         <p hidden id="autoCompleteURL" data-url='@Url.Action("GetLocation")'></p>
 
         <div align="center">
+            <!--displaying google map-->
             <div id="map_canvas" style="width: 100%; height: 400px;"></div>
 
-            <div id="locationDetails"></div> 
+            <!--details of each marker-->
+            <div id="locationDetails" style="width: 100%;" ></div> 
         </div>
     </div>
 </div>

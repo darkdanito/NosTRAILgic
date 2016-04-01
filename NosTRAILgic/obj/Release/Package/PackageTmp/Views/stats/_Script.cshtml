@@ -6,14 +6,9 @@
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
+<script type="text/javascript" src="~/Scripts/autocomplete.js"></script>
+
 <script>
-
-    $(document).ready(function () {
-        $('#searchKeyword').autocomplete({
-            source: '@Url.Action("GetLocation")'
-        });
-    });
-
     new Morris.Bar({
         element: 'chart',
         data: [
@@ -24,7 +19,7 @@
         ],
         xkey: 'TrailName',
         ykeys: ['NumberOfParticipant'],
-        labels: ['NumberOfParticipant'],
+        labels: ['Number Of Participant'],
         gridTextSize: 8
     });
 
@@ -38,7 +33,7 @@
         ]
     });
 
-    google.charts.load('current', { packages: ['corechart', 'bar', 'geochart'] });
+    google.charts.load('current', { packages: ['corechart', 'bar', 'geochart', 'line'] });
     google.charts.setOnLoadCallback(drawBarColorsMonth);
 
     function drawBarColorsMonth() {
@@ -99,21 +94,78 @@
                 }
                 @Html.Raw("],");
                         }
-            ]);
+        ]);
 
-    var options = {
-        title: 'Location Search per Year',
-        chartArea: { width: '70%' },
-        hAxis: {
-            title: 'Number of Search',
-            minValue: 0
-        },
-        vAxis: {
-            title: 'Location'
-        }
-    };
-    var chart = new google.visualization.BarChart(document.getElementById('chart_year'));
-    chart.draw(data, options);
+        var options = {
+            title: 'Location Search per Year',
+            chartArea: { width: '70%' },
+            hAxis: {
+                title: 'Number of Search',
+                minValue: 0
+            },
+            vAxis: {
+                title: 'Location'
+            }
+        };
+        var chart = new google.visualization.BarChart(document.getElementById('chart_year'));
+        chart.draw(data, options);
     }
 
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('number', 'Day');
+        data.addColumn('number', 'Number Of Visitors');
+
+        data.addRows([
+
+                        @for (var i = 1; i < 32; i++)
+        {
+            var skip = 0;
+            foreach (var item in @ViewBag.searchLocationDay)
+            {
+                if (i.Equals(item.Date))
+                {
+                    @Html.Raw("[" + Json.Encode(item.Date) + ", " + Json.Encode(item.Number) + "],")
+                    skip = 1;
+                }
+
+                continue;
+            }
+            if(skip.Equals(1))
+            {
+
+            }
+            else
+            {
+                @Html.Raw("[" + i.ToString() + ", " + 0 + "],")
+            }
+        }
+        ]);
+
+        var options = {
+
+            axes: {
+                x: {
+                    all: {
+                        range: {
+                            max: 31,
+                            min: 0
+                        }
+                    }
+                },
+                y: {
+                    all: {
+                        range: {
+                            min: 0
+                        }
+                    }
+                }
+            }
+        };
+
+        var chart = new google.charts.Line(document.getElementById('line_visitor'));
+
+        chart.draw(data, options);
+    }
 </script>
