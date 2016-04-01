@@ -1,5 +1,4 @@
 ﻿using NosTRAILgic.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -47,7 +46,6 @@ namespace NosTRAILgic.DAL
 
             return result;
         }
-
 
         /************************************************************************************
          * Description: This function take in the TrailMeetupID and Username                *

@@ -4,6 +4,10 @@ using System.Linq;
 
 namespace NosTRAILgic.DAL
 {
+    /************************************************************************************
+     * Description: The application Dataway                                             *
+     *                                                                                  *
+     ************************************************************************************/
     public class DataGateway<T> : IDataGateway<T> where T : class
     {
         internal NosTRAILgicContext db = new NosTRAILgicContext();

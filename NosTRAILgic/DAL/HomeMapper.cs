@@ -40,8 +40,8 @@ namespace NosTRAILgic.DAL
                                             orderby a.LocationId ascending
                                             select a;
             }
-            else {
-
+            else
+            {
                 LINQAllLocationBasedOnCat = from a in db.Locations
                                             where a.Category == trailCategory
                                             orderby a.LocationId ascending
@@ -56,7 +56,8 @@ namespace NosTRAILgic.DAL
          *              and pass the location results back to the model to display          *
          *                                                                                  *
          ************************************************************************************/
-        public IQueryable<Location> getLocationInfo(string searchLocation) {
+        public IQueryable<Location> getLocationInfo(string searchLocation)
+        {
 
             var LINQAllLocationBasedOnCat = from a in db.Locations
                                             where a.Name == searchLocation
@@ -64,7 +65,6 @@ namespace NosTRAILgic.DAL
 
             return LINQAllLocationBasedOnCat;
         }
-
 
         /************************************************************************************
          * Description: This function will take in the user's account name and              *
@@ -75,8 +75,8 @@ namespace NosTRAILgic.DAL
         {
             var LINQGetAllJoinedTrails = from j in db.JoinTrails
                                          join k in db.Trails on j.TrailMeetupID equals k.TrailMeetupID
-                                            where j.UserID == userName
-                                            select k;
+                                         where j.UserID == userName
+                                         select k;
 
             return LINQGetAllJoinedTrails;
         }
@@ -104,11 +104,11 @@ namespace NosTRAILgic.DAL
          ************************************************************************************/
         public IQueryable<Weather> getAllLocationWeather(string trailCategory, Boolean olderData)
         {
-            //Attempt get current DateTime without second and minute and millisecond
+            // Attempt get current DateTime without second and minute and millisecond
             DateTime currentDateTime = DateTime.Now;
             if (olderData)
             {
-                currentDateTime = currentDateTime.AddHours(-1); // -1 hours
+                currentDateTime = currentDateTime.AddHours(-1);                         // -1 hours
             }
             //currentDateTime = new DateTime(currentDateTime.Year, currentDateTime.Month, currentDateTime.Day, currentDateTime.Hour, 0, 0, 0);
 
@@ -151,7 +151,7 @@ namespace NosTRAILgic.DAL
          ************************************************************************************/
         public IQueryable<Weather> getLocationWeather(string searchLocation, Boolean olderData)
         {
-            //Attempt get current DateTime without second and minute and millisecond
+            // Attempt get current DateTime without second and minute and millisecond
             DateTime currentDateTime = DateTime.Now;
             if (olderData)
             {
@@ -181,7 +181,7 @@ namespace NosTRAILgic.DAL
          ************************************************************************************/
         public void removeDuplicateWeatherData()
         {
-            //Attempt get current DateTime without second and minute and millisecond
+            // Attempt get current DateTime without second and minute and millisecond
             DateTime currentDateTime = DateTime.Now;
             currentDateTime = currentDateTime.AddHours(-1); // -1 hours
             currentDateTime = new DateTime(currentDateTime.Year, currentDateTime.Month, currentDateTime.Day, currentDateTime.Hour, 0, 0, 0);

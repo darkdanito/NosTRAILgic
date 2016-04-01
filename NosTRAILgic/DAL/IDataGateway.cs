@@ -2,6 +2,10 @@
 
 namespace NosTRAILgic.DAL
 {
+    /************************************************************************************
+     * Description: Interface for the Gateway: DataGateway                              *
+     *                                                                                  *
+     ************************************************************************************/
     interface IDataGateway<T> where T:class
     {
         IEnumerable<T> SelectAll();
