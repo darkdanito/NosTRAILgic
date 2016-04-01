@@ -15,6 +15,7 @@ namespace NosTRAILgic.Controllers
         WeatherForecastGateway weatherService = new WeatherForecastGateway();
 
         HomeMapper homeMapper = new HomeMapper();                                   // New HomeMapper()
+        SearchGateway searchGateway = new SearchGateway();
 
         public ActionResult Index(string Selection)
         {
@@ -43,9 +44,22 @@ namespace NosTRAILgic.Controllers
 
             if (searchKeyword != null && searchKeyword != "")
             {
-                homeViewModel.enumerableAllLocation = homeMapper.getLocationInfo(searchKeyword);
-                homeViewModel.enumerableAllWeather = validateSearchWeatherData(searchKeyword);
-                listHomeViewModel.Add(homeViewModel);
+                if (homeMapper.getLocationInfo(searchKeyword).Count() != 0)
+                {
+                    homeViewModel.enumerableAllLocation = homeMapper.getLocationInfo(searchKeyword);
+                    homeViewModel.enumerableAllWeather = validateSearchWeatherData(searchKeyword);
+
+                    listHomeViewModel.Add(homeViewModel);
+
+                    Search searchModel = new Search();
+                    searchModel.Keyword = searchKeyword;
+                    searchModel.Date = DateTime.Now;
+
+                    searchGateway.Insert(searchModel);
+                }
+
+
+
             }
             else {
                 if (!String.IsNullOrEmpty(Selection))

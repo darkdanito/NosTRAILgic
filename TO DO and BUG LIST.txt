@@ -13,3 +13,6 @@ Stats/Index 	--> Need to have data for checkin and search for chart to work corr
 Stats/Index 	--> Showing multiple name for search by year and month
 
 Account 	--> Facebook login not working for AZURE
+
+Stats 		--> Add the X and Y axis name  
+Stats		--> Y axis postive number
