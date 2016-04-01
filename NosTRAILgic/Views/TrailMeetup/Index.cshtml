@@ -14,32 +14,37 @@
 
     @{
         int trailCount = 0;
-        
+
         foreach (var item in Model)
         {
-            if (trailCount % 5 == 0)
+            if (item.Date.CompareTo(DateTime.Now) >= 0)
             {
-                @Html.Raw("<tr>");
+                if (trailCount % 5 == 0)
+                {
+                    @Html.Raw("<tr>");
+                }
+
+                @Html.Raw("<td width='20 %'>");
+
+                <ul style="list-style-type : none">
+                    <li><img src="/Content/Upload/@Url.Content(item.ImageLink)" style="height: 100px; width: 100px" /></li>
+                    <li>@item.Name</li>
+                    <li>@item.Date.ToShortDateString()</li>
+                    <li>@item.TimeFrom.ToShortTimeString() - @item.TimeTo.ToShortTimeString()</li>
+                    <li>Max Participants: @item.Limit</li>
+                    <li>@Html.ActionLink("Details", "Details_ViewModel", new { id = item.TrailMeetupID }, new { @class = "btn btn-default" })</li>
+                </ul>
+
+                @Html.Raw("</td>");
+
+                if (trailCount % 5 == 4)
+                {
+                    @Html.Raw("</tr>");
+                }
+                trailCount++;
             }
 
-            @Html.Raw("<td width='20 %'>");
-            
-            <ul style="list-style-type : none">
-                <li><img src="/Content/Upload/@Url.Content(item.ImageLink)" style = "height: 100px; width: 100px" /></li>
-                <li>@item.Name</li>
-                <li>@item.Date.ToShortDateString()</li>
-                <li>@item.TimeFrom.ToShortTimeString() - @item.TimeTo.ToShortTimeString()</li>
-                <li>Max Participants: @item.Limit</li>
-                <li>@Html.ActionLink("Details", "Details_ViewModel", new { id = item.TrailMeetupID }, new { @class = "btn btn-default" })</li>
-            </ul>    
-            
-            @Html.Raw("</td>");
 
-            if (trailCount % 5 == 4)
-            {
-                @Html.Raw("</tr>");
-            }
-            trailCount++;
         }
 
     }
