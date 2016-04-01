@@ -67,7 +67,7 @@
 
                 <br />
 
-                <b>@Html.DisplayNameFor(model => model.getTrailMeetup.Limit) : </b>
+                <b><a href="#" data-toggle="modal" data-target="#listOfParticipants">@Html.DisplayNameFor(model => model.getTrailMeetup.Limit) :</a></b>
                     @Html.DisplayFor(model => item.getNumberOfUsersInTrailMeetup) / @Html.DisplayFor(model => item.getTrailMeetup.Limit)
             </td>
         }
@@ -78,42 +78,68 @@
     </tr>
 
     <tr>
-        <td colspan="2">
-            <b>Participants :</b>
-        </td>
-
-        <td>
+        <td colspan="3">
             <b>Location Details : </b>
         </td>
     </tr>
 
     <tr>
-        <td colspan="2" valign="top">
-            <ul>
-                <!-----------------------------------------------------------------------------------
-                - Description: For the displaying who are participants of Trails                    -
-                -                                                                                   -
-                - Developer: Yun Yong                                                               -
-                -                                                                                   -
-                - Date: 21/03/2016                                                                  -
-                ------------------------------------------------------------------------------------->
-                @{
-                    foreach (var item in Model)
-                    {
-                        foreach (var trailParticipants in item.enumerableTrailParticipants)
-                        {
-                            <li>@trailParticipants</li>
-                        }
-                    }
-                }
-            </ul>
-        </td>
-
-        <td>
+        <td colspan="3">
             <div id="locationDetails"></div>  
         </td>
     </tr>
 </table>
+
+
+
+
+
+
+<div class="modal fade" id="listOfParticipants" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+
+                <table class="table table-bordered" style="width:100%">
+                    <tr>
+                        <td>List of Trail Meetup Participants: </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <ul>
+                                <!-----------------------------------------------------------------------------------
+                                - Description: For the displaying who are participants of Trails                    -
+                                -                                                                                   -
+                                - Developer: Yun Yong                                                               -
+                                -                                                                                   -
+                                - Date: 21/03/2016                                                                  -
+                                ------------------------------------------------------------------------------------->
+                                @{
+                                    foreach (var item in Model)
+                                    {
+                                        foreach (var trailParticipants in item.enumerableTrailParticipants)
+                                        {
+                                            <li>@trailParticipants</li>
+                                        }
+                                    }
+                                }
+                            </ul>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>    
+
+
+
+
+
+
+
 
 <!-- Passing to JS -->
 <p hidden id="detailsViewModelData">@Html.Raw(ViewBag.detailsViewModelJSON)</p>
