@@ -40,14 +40,14 @@ namespace NosTRAILgic.Controllers
                 //Check If MuseumFile and Etc is not emptyy before continue
                 if (MuseumFile != null)
                 {
-                    System.Diagnostics.Debug.WriteLine("Upload Musuem Files");
+                    System.Diagnostics.Debug.WriteLine("Upload Museum Files");
 
                     string path = Server.MapPath("~/Content/KML/" + MuseumFile.FileName);
                     MuseumFile.SaveAs(path);
                     //System.Diagnostics.Debug.WriteLine(path);
 
-                    //Delete all previous musuem
-                    var deleteLocation = db.Locations.Where(location => location.Category == "Musuem");
+                    //Delete all previous Museum
+                    var deleteLocation = db.Locations.Where(location => location.Category == "Museum");
                     db.Locations.RemoveRange(deleteLocation);
                     db.SaveChanges();
 
@@ -110,7 +110,7 @@ namespace NosTRAILgic.Controllers
                             }
                         }
 
-                        location.Category = "Musuem";
+                        location.Category = "Museum";
 
                         if (!skipLocation) { 
                             db.Locations.Add(location);
@@ -210,7 +210,7 @@ namespace NosTRAILgic.Controllers
                     HistoricSiteFile.SaveAs(path);
                     //System.Diagnostics.Debug.WriteLine(path);
 
-                    //Delete all previous musuem
+                    //Delete all previous museum
                     var deleteLocation = db.Locations.Where(location => location.Category == "HistoricSite");
                     db.Locations.RemoveRange(deleteLocation);
                     db.SaveChanges();
