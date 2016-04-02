@@ -220,6 +220,11 @@ namespace NosTRAILgic.Controllers
                 trailMeetup.ImageLink = file.FileName;
                 trailMeetup.CreatorID = User.Identity.Name;
 
+                DateTime currentTimeFrom = new DateTime(trailMeetup.Date.Year, trailMeetup.Date.Month,trailMeetup.Date.Day, trailMeetup.TimeFrom.Hour, trailMeetup.TimeFrom.Minute, 0,0);
+                trailMeetup.TimeFrom = currentTimeFrom;
+                DateTime currentTimeTo = new DateTime(trailMeetup.Date.Year, trailMeetup.Date.Month, trailMeetup.Date.Day, trailMeetup.TimeTo.Hour, trailMeetup.TimeTo.Minute, 0, 0);
+                trailMeetup.TimeTo = currentTimeTo;
+
                 dataGateway.Insert(trailMeetup);                                        // Insert the newly created TrailMeetup into DB
                
                 // Get the Trail ID for the newly added Trail above

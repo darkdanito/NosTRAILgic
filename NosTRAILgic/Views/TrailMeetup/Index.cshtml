@@ -17,7 +17,7 @@
 
         foreach (var item in Model)
         {
-            if (item.Date.CompareTo(DateTime.Now) >= 0)
+            if (item.TimeFrom.CompareTo(DateTime.Now) >= 0)
             {
                 if (trailCount % 5 == 0)
                 {
