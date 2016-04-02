@@ -11,7 +11,7 @@
     <tr>
         @foreach (var item in Model)
         {
-            <td width="10%">                                                                   
+            <td width="10%">
                 <img src="/Content/Upload/@Url.Content(item.getTrailMeetup.ImageLink)" width="100" height="100" />
             </td>
 
@@ -21,12 +21,12 @@
                 <br />
 
                 <b>@Html.DisplayNameFor(model => model.getTrailMeetup.CreatorID) : </b>
-                    @Html.DisplayFor(model => item.getTrailMeetup.CreatorID)
+                @Html.DisplayFor(model => item.getTrailMeetup.CreatorID)
 
                 <br />
 
                 <b>@Html.DisplayNameFor(model => model.getTrailMeetup.Description) : </b>
-                    @Html.DisplayFor(model => item.getTrailMeetup.Description)
+                @Html.DisplayFor(model => item.getTrailMeetup.Description)
             </td>
 
             <td width="50%">
@@ -54,11 +54,11 @@
                     }
 
                 }
-                
+
                 <br />
 
                 <b>@Html.DisplayNameFor(model => model.getTrailMeetup.Date) : </b>
-                    @Html.DisplayFor(model => item.getTrailMeetup.Date)
+                @Html.DisplayFor(model => item.getTrailMeetup.Date)
 
                 <br />
 
@@ -68,16 +68,20 @@
                 <br />
 
                 <b><a href="#" data-toggle="modal" data-target="#listOfParticipants">@Html.DisplayNameFor(model => model.getTrailMeetup.Limit) :</a></b>
-                    @Html.DisplayFor(model => item.getNumberOfUsersInTrailMeetup) / @Html.DisplayFor(model => item.getTrailMeetup.Limit)
+                @Html.DisplayFor(model => item.getNumberOfUsersInTrailMeetup) / @Html.DisplayFor(model => item.getTrailMeetup.Limit)
             </td>
-        }
+                    }
     </tr>
 
     <tr>
         <td colspan="3"><div id="map_canvas" style="width: 100%; height: 300px;"></div></td>
     </tr>
-
-    <tr>
+</table>
+    <h3>Location Details: </h3>
+    <div id="locationDetails">
+        @*display output*@
+    </div>
+    @*<tr>
         <td colspan="3">
             <b>Location Details : </b>
         </td>
@@ -88,7 +92,7 @@
             <div id="locationDetails"></div>  
         </td>
     </tr>
-</table>
+</table>*@
 
 
 
@@ -144,6 +148,7 @@
 <!-- Passing to JS -->
 <p hidden id="detailsViewModelData">@Html.Raw(ViewBag.detailsViewModelJSON)</p>
 
+<div>
 <p>
     <!-----------------------------------------------------------------------------------
     - Description: Logic for showing the Edit and Delete Trail Button to users          -
@@ -170,6 +175,6 @@
 
     <button class="btn btn-default" type="button" onclick="location.href='@Url.Action("Index", "TrailMeetup")'">Back to Trail Index</button>
 </p>
-
+    </div>
 
 

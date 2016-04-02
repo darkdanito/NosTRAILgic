@@ -50,16 +50,40 @@ function initMarker() {
             var d = new Date(parseInt(m[0]));
 
             var content =
-            '<div>Name: ' + location.Name + '</div>' +
-            '<div>Description: ' + location.Description + '</div>' +
-            '<div>Link: <a href="' + location.HyperLink + '">' + location.HyperLink + '</a></div>' +
-            '<div>Image: <img src="' + location.ImageLink + '"/></div>' +
-            '<div>Postal Code: ' + location.PostalCode + '</div>' +
-            '<div>Forecast: ' + homeViewModel.enumerableAllWeather[i].Forecast + ' </div>' +
-            '<div>Region: ' + homeViewModel.enumerableAllWeather[i].Region + ' </div>' +
-            '<div>Area: ' + homeViewModel.enumerableAllWeather[i].Area + ' </div>' +
-            '<div>Icon: <img src="' + homeViewModel.enumerableAllWeather[i].Icon + '"/></div>' +
-            '<div>Last Updated: ' + d + ' </div>';
+            '<table style="width:70%; padding: 15px;" >'+
+                    
+            '<tr>'+
+                 '<td><div><img src="' + location.ImageLink + '"/></div></td>'+
+                 '<td><h4>' + location.Name + '</h4>' + 
+                     '<p>Description: ' + location.Description + '</p>' +
+                     '<p>Link: <a href="' + location.HyperLink + '">' + location.HyperLink + '</a></p></td>' +
+                 '<td align="center"><h5>Weather</h5><div><img src="' + homeViewModel.enumerableAllWeather[i].Icon + '"/></div>' +
+                     '<div>Forecast: ' + homeViewModel.enumerableAllWeather[i].Forecast + ' </div></td>' +
+                     
+            '</tr>'+
+            '<tr>' +
+                '<td><div>Postal Code: ' + location.PostalCode + '</div>' +
+                '<div>Region: ' + homeViewModel.enumerableAllWeather[i].Region + ' </div>' +
+                '<div>Area: ' + homeViewModel.enumerableAllWeather[i].Area + ' </div></td>' +
+                
+                '<td></td>' + //empty column
+                '<td><p>check-in button</p></td>'+ 
+                
+            '</tr>'
+            
+            
+            '<div>Last Updated: ' + d + ' </div></table>';
+
+            //'<div>Name: ' + location.Name + '</div>' +
+            //'<div>Description: ' + location.Description + '</div>' +
+            //'<div>Link: <a href="' + location.HyperLink + '">' + location.HyperLink + '</a></div>' +
+            //'<div>Image: <img src="' + location.ImageLink + '"/></div>' +
+            //'<div>Postal Code: ' + location.PostalCode + '</div>' +
+            //'<div>Forecast: ' + homeViewModel.enumerableAllWeather[i].Forecast + ' </div>' +
+            //'<div>Region: ' + homeViewModel.enumerableAllWeather[i].Region + ' </div>' +
+            //'<div>Area: ' + homeViewModel.enumerableAllWeather[i].Area + ' </div>' +
+            //'<div>Icon: <img src="' + homeViewModel.enumerableAllWeather[i].Icon + '"/></div>' +
+            //'<div>Last Updated: ' + d + ' </div>';
 
             document.getElementById("locationDetails").innerHTML = content;
 

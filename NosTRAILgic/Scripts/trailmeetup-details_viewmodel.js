@@ -45,13 +45,22 @@ function initMarker() {
         google.maps.event.addListener(markers[i], 'click', function () {
             
             var content =
+                '<section>' +
+                    '<div class="col-md-4">'+
+                    '<div>Name: ' + location.Name + '</div>' +
+                    '<div>Description: ' + location.Description + '</div>' +
+                     '<div>Link: <a href="' + location.HyperLink + '">' + location.HyperLink + '</a></div>' +
+                     '<div>Postal Code: ' + location.PostalCode + '</div></div>' +
+                     
+                '<div class="col-md-10" style="float:right;">Image: <img src="' + location.ImageLink + '"/></div></section>' ;
+            
 
             
-            '<div>Name: ' + location.Name + '</div>' +
-            '<div>Description: ' + location.Description + '</div>' +
-            '<div>Link: <a href="' + location.HyperLink + '">' + location.HyperLink + '</a></div>' +
-            '<div>Image: <img src="' + location.ImageLink + '"/></div>' +
-            '<div>Postal Code: ' + location.PostalCode + '</div>';
+            //'<div>Name: ' + location.Name + '</div>' +
+            //'<div>Description: ' + location.Description + '</div>' +
+            //'<div>Link: <a href="' + location.HyperLink + '">' + location.HyperLink + '</a></div>' +
+            //'<div>Image: <img src="' + location.ImageLink + '"/></div>' +
+            //'<div>Postal Code: ' + location.PostalCode + '</div>';
 
             //Remove empty image
             var str = content;
