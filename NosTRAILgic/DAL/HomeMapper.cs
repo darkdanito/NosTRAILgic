@@ -110,10 +110,10 @@ namespace NosTRAILgic.DAL
             {
                 currentDateTime = currentDateTime.AddHours(-1);                         // -1 hours
             }
-            //currentDateTime = new DateTime(currentDateTime.Year, currentDateTime.Month, currentDateTime.Day, currentDateTime.Hour, 0, 0, 0);
+            currentDateTime = new DateTime(currentDateTime.Year, currentDateTime.Month, currentDateTime.Day, currentDateTime.Hour, 0, 0, 0);
 
             //to cover Nea maintence
-            currentDateTime = new DateTime(2016, 4, 1, 18, 0, 0, 0);
+            //currentDateTime = new DateTime(2016, 4, 1, 18, 0, 0, 0);
 
             IQueryable<Weather> LINQAllWeatherBasedOnCat;
 
@@ -157,10 +157,10 @@ namespace NosTRAILgic.DAL
             {
                 currentDateTime = currentDateTime.AddHours(-1); // -1 hours
             }
-            //currentDateTime = new DateTime(currentDateTime.Year, currentDateTime.Month, currentDateTime.Day, currentDateTime.Hour, 0, 0, 0);
+            currentDateTime = new DateTime(currentDateTime.Year, currentDateTime.Month, currentDateTime.Day, currentDateTime.Hour, 0, 0, 0);
 
             //to cover Nea maintence
-            currentDateTime = new DateTime(2016, 4, 1, 18, 0, 0, 0);
+            //currentDateTime = new DateTime(2016, 4, 1, 18, 0, 0, 0);
 
             var LINQLocationWeather = (from weather in db.Weathers
                                         join area in db.Areas on weather.Area equals area.AreaName

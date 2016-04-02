@@ -32,6 +32,11 @@ namespace NosTRAILgic.Controllers
             JavaScriptSerializer oSerializer = new JavaScriptSerializer();
             ViewBag.homeViewModelJSON = oSerializer.Serialize(homeViewModel);
 
+            if (User.Identity.IsAuthenticated)
+                ViewBag.loginStatus = "Login";
+            else
+                ViewBag.loginStatus = "Not Login";
+
             return View(listHomeViewModel);
         }
 
@@ -57,9 +62,6 @@ namespace NosTRAILgic.Controllers
 
                     searchGateway.Insert(searchModel);
                 }
-
-
-
             }
             else {
                 if (!String.IsNullOrEmpty(Selection))
@@ -100,6 +102,11 @@ namespace NosTRAILgic.Controllers
             //Passing data to javascript
             JavaScriptSerializer oSerializer = new JavaScriptSerializer();
             ViewBag.homeViewModelJSON = oSerializer.Serialize(homeViewModel);
+
+            if (User.Identity.IsAuthenticated)
+                ViewBag.loginStatus = "Login";
+            else
+                ViewBag.loginStatus = "Not Login";
 
             return View(listHomeViewModel);
         }
@@ -189,6 +196,16 @@ namespace NosTRAILgic.Controllers
             listProfileViewModel.Add(profileViewModel);
 
             return View(listProfileViewModel);
+        }
+
+        public ActionResult CheckIn()
+        {
+            //Increase Checkin count
+            //If user did not checkin for today
+
+            //else increase the number
+            System.Diagnostics.Debug.WriteLine("CHECKIN");
+            return RedirectToAction("Index", "Home");
         }
 
     }

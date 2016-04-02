@@ -288,6 +288,7 @@
     <Content Include="images\HA.png" />
     <Content Include="images\logo.png" />
     <Content Include="images\nostrailgic.png" />
+    <Content Include="images\no_image_available.jpg" />
     <Content Include="images\PC.png" />
     <Content Include="images\PS.png" />
     <Content Include="images\RA.png" />
