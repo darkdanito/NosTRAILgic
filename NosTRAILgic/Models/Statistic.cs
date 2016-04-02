@@ -14,5 +14,7 @@
         public int Number { get; set; }
 
         public int Date { get; set; }
+
+        public string Image { get; set; }
     }
 }

@@ -9,117 +9,41 @@
 <script type="text/javascript" src="~/Scripts/autocomplete.js"></script>
 
 <script>
-    new Morris.Bar({
-        element: 'chart',
-        data: [
-            @foreach (var item in @ViewBag.statsByParticipants)
-            {
-                @Html.Raw("{TrailName: " + Json.Encode(item.Name) + ",NumberOfParticipant: " + Json.Encode(item.Number) + "},")
-            }
-        ],
-        xkey: 'TrailName',
-        ykeys: ['NumberOfParticipant'],
-        labels: ['Number Of Participant'],
-        gridTextSize: 8
-    });
-
-    new Morris.Donut({
-        element: 'pie',
-        data: [
-            @foreach (var item in @ViewBag.statsByCategory)
-            {
-                @Html.Raw("{label: " + Json.Encode(item.Name) + ",value: " + Json.Encode(item.Number) + "},")
-            }
-        ]
-    });
-
     google.charts.load('current', { packages: ['corechart', 'bar', 'geochart', 'line'] });
-    google.charts.setOnLoadCallback(drawBarColorsMonth);
+    google.charts.setOnLoadCallback(drawChartTopTrail);
 
-    function drawBarColorsMonth() {
+    function drawChartTopTrail() {
         var data = google.visualization.arrayToDataTable([
-          ['Location', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-
-            @foreach (var item in @ViewBag.statsBySearchLocationMonth)
+            ['Creator Name', 'Number of Participants'],
+            @foreach (var item in @ViewBag.statsByTopTrailContributor)
             {
-                @Html.Raw("['" + Json.Encode(item.Name) + "'");
-                for (int i = 0; i < 12; i++)
-                {
-                    if (i.Equals(item.Date))
-                    {
-                        @Html.Raw("," + Json.Encode(item.Number));
-                    }
-                    else
-                    {
-                        @Html.Raw(",0");
-                    }
-
-                }
-                @Html.Raw("],");
+                @Html.Raw("['" + Json.Encode(item.Name) + "'," + Json.Encode(item.Number) + "],");
             }
         ]);
 
         var options = {
-            title: 'Location Search per Month',
-            chartArea: { width: '70%' },
+            title: 'Top Trail Contributor (Top 5)',
+            chartArea: { width: '75%' },
             hAxis: {
-                title: 'Number of Search',
+                title: 'Total Participants',
                 minValue: 0
             },
             vAxis: {
-                title: 'Location'
+                title: 'Trail Creator Name'
             }
         };
-        var chart = new google.visualization.BarChart(document.getElementById('chart_month'));
-        chart.draw(data, options);
-    }
-    google.charts.setOnLoadCallback(drawBarColorsYear);
-    function drawBarColorsYear() {
-        var data = google.visualization.arrayToDataTable([
-          ['Location', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020'],
-            @foreach (var item in @ViewBag.statsBySearchLocationYear)
-                        {
-                @Html.Raw("['" + Json.Encode(item.Name) + "'");
-                for (int i = 2010; i < 2021; i++)
-                {
-                    if (i.Equals(item.Date))
-                    {
-                        @Html.Raw("," + Json.Encode(item.Number));
-                    }
-                    else
-                    {
-                        @Html.Raw(",0");
-                    }
-
-                }
-                @Html.Raw("],");
-                        }
-        ]);
-
-        var options = {
-            title: 'Location Search per Year',
-            chartArea: { width: '70%' },
-            hAxis: {
-                title: 'Number of Search',
-                minValue: 0
-            },
-            vAxis: {
-                title: 'Location'
-            }
-        };
-        var chart = new google.visualization.BarChart(document.getElementById('chart_year'));
+        var chart = new google.visualization.BarChart(document.getElementById('ChartTopTrail'));
         chart.draw(data, options);
     }
 
-    google.charts.setOnLoadCallback(drawChart);
-    function drawChart() {
+    google.charts.setOnLoadCallback(drawChartSearchLocation);
+    function drawChartSearchLocation() {
         var data = new google.visualization.DataTable();
         data.addColumn('number', 'Day');
         data.addColumn('number', 'Number Of Visitors');
 
         data.addRows([
-
-                        @for (var i = 1; i < 32; i++)
+        @for (var i = 1; i < 32; i++)
         {
             var skip = 0;
             foreach (var item in @ViewBag.searchLocationDay)
@@ -144,7 +68,6 @@
         ]);
 
         var options = {
-
             axes: {
                 x: {
                     all: {
@@ -164,8 +87,34 @@
             }
         };
 
-        var chart = new google.charts.Line(document.getElementById('line_visitor'));
+        var chart = new google.charts.Line(document.getElementById('ChartSearchLocation'));
 
         chart.draw(data, options);
     }
+
+    google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Year', 'Hours per Day'],
+          @foreach (var item in @ViewBag.statsByCheckInCurrentYear)
+          {
+              @Html.Raw("['" + Json.Encode(item.Date) + "'," + Json.Encode(item.Number) + "],");
+          }
+          @foreach (var item in @ViewBag.statsByCheckInPreviousYear)
+          {
+            @Html.Raw("['" + Json.Encode(item.Date) + "'," + Json.Encode(item.Number) + "],");
+          }
+        ]);
+
+        var options = {
+          title: 'Vistor based on current and previous year',
+          pieHole: 0.4,
+          width: "100%",
+          height: "500",
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('ChartCategory'));
+        chart.draw(data, options);
+      }
+
 </script>
