@@ -6,6 +6,7 @@ using NosTRAILgic.DAL;
 using NosTRAILgic.Models;
 using System.Xml;
 using HtmlAgilityPack;
+using System.Net;
 
 namespace NosTRAILgic.Controllers
 {
@@ -292,6 +293,13 @@ namespace NosTRAILgic.Controllers
             {
                 return View();
             }
-        }        
+        }
+
+        public ActionResult WebClient()
+        {
+            WebClient web = new WebClient();
+
+            return View();
+        }
     }
 }
