@@ -77,66 +77,70 @@
         <td colspan="3"><div id="map_canvas" style="width: 100%; height: 300px;"></div></td>
     </tr>
 </table>
-    <h3>Location Details: </h3>
-    <div id="locationDetails">
+<!-- Passing to JS -->
+    <p hidden id="detailsViewModelData">@Html.Raw(ViewBag.detailsViewModelJSON)</p>
+
+    <h4>Location Details: </h4>
+    <div id="locationDetails" style="width: 100%;">
         @*display output*@
     </div>
+    
     @*<tr>
-        <td colspan="3">
-            <b>Location Details : </b>
-        </td>
-    </tr>
+                <td colspan="3">
+                    <b>Location Details : </b>
+                </td>
+            </tr>
 
-    <tr>
-        <td colspan="3">
-            <div id="locationDetails"></div>  
-        </td>
-    </tr>
-</table>*@
-
-
+            <tr>
+                <td colspan="3">
+                    <div id="locationDetails"></div>
+                </td>
+            </tr>
+        </table>*@
 
 
 
 
-<div class="modal fade" id="listOfParticipants" tabindex="-1" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-body">
 
-                <table class="table table-bordered" style="width:100%">
-                    <tr>
-                        <td>List of Trail Meetup Participants: </td>
-                    </tr>
 
-                    <tr>
-                        <td>
-                            <ul>
-                                <!-----------------------------------------------------------------------------------
-                                - Description: For the displaying who are participants of Trails                    -
-                                -                                                                                   -
-                                - Developer: Yun Yong                                                               -
-                                -                                                                                   -
-                                - Date: 21/03/2016                                                                  -
-                                ------------------------------------------------------------------------------------->
-                                @{
-                                    foreach (var item in Model)
-                                    {
-                                        foreach (var trailParticipants in item.enumerableTrailParticipants)
+    <div class="modal fade" id="listOfParticipants" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+
+                    <table class="table table-bordered" style="width:100%">
+                        <tr>
+                            <td>List of Trail Meetup Participants: </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <ul>
+                                    <!-----------------------------------------------------------------------------------
+                                    - Description: For the displaying who are participants of Trails                    -
+                                    -                                                                                   -
+                                    - Developer: Yun Yong                                                               -
+                                    -                                                                                   -
+                                    - Date: 21/03/2016                                                                  -
+                                    ------------------------------------------------------------------------------------->
+                                    @{
+                                        foreach (var item in Model)
                                         {
-                                            <li>@trailParticipants</li>
+                                            foreach (var trailParticipants in item.enumerableTrailParticipants)
+                                            {
+                                                <li>@trailParticipants</li>
+                                            }
                                         }
                                     }
-                                }
-                            </ul>
-                        </td>
-                    </tr>
-                </table>
+                                </ul>
+                            </td>
+                        </tr>
+                    </table>
 
+                </div>
             </div>
         </div>
     </div>
-</div>    
 
 
 
@@ -145,36 +149,33 @@
 
 
 
-<!-- Passing to JS -->
-<p hidden id="detailsViewModelData">@Html.Raw(ViewBag.detailsViewModelJSON)</p>
 
-<div>
-<p>
-    <!-----------------------------------------------------------------------------------
-    - Description: Logic for showing the Edit and Delete Trail Button to users          -
-    -              Only the Trail Creator can edit the Trail information                -
-    -              Only the Trail Creator and the Site Admin can delete Trail           -
-    -                                                                                   -
-    - Developer: Yun Yong                                                               -
-    -                                                                                   -
-    - Date: 21/03/2016                                                                  -
-    ------------------------------------------------------------------------------------->
-    @{
-        foreach (var item in Model)
-        {
-            if (User.Identity.Name == item.getTrailMeetup.CreatorID)
-            {
-                @Html.ActionLink("Edit", "Edit", new { id = item.getTrailMeetup.TrailMeetupID }, new { @class = "btn btn-default" })
+    <div>
+        <p>
+            <!-----------------------------------------------------------------------------------
+            - Description: Logic for showing the Edit and Delete Trail Button to users          -
+            -              Only the Trail Creator can edit the Trail information                -
+            -              Only the Trail Creator and the Site Admin can delete Trail           -
+            -                                                                                   -
+            - Developer: Yun Yong                                                               -
+            -                                                                                   -
+            - Date: 21/03/2016                                                                  -
+            ------------------------------------------------------------------------------------->
+            @{
+                foreach (var item in Model)
+                {
+                    if (User.Identity.Name == item.getTrailMeetup.CreatorID)
+                    {
+                        @Html.ActionLink("Edit", "Edit", new { id = item.getTrailMeetup.TrailMeetupID }, new { @class = "btn btn-default" })
+                    }
+                    if (User.IsInRole("Admin") || User.Identity.Name == item.getTrailMeetup.CreatorID)
+                    {
+                        @Html.ActionLink("Delete", "Delete", new { id = item.getTrailMeetup.TrailMeetupID }, new { @class = "btn btn-default" })
+                    }
+                }
             }
-            if (User.IsInRole("Admin") || User.Identity.Name == item.getTrailMeetup.CreatorID)
-            {
-                @Html.ActionLink("Delete", "Delete", new { id = item.getTrailMeetup.TrailMeetupID }, new { @class = "btn btn-default" })
-            }
-        }
-    }
 
-    <button class="btn btn-default" type="button" onclick="location.href='@Url.Action("Index", "TrailMeetup")'">Back to Trail Index</button>
-</p>
+            <button class="btn btn-default" type="button" onclick="location.href='@Url.Action("Index", "TrailMeetup")'">Back to Trail Index</button>
+        </p>
     </div>
-
 
