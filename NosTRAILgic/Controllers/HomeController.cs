@@ -66,8 +66,8 @@ namespace NosTRAILgic.Controllers
                 {
                     if (Selection == "1")                                               // Musuem     
                     {
-                        homeViewModel.enumerableAllLocation = homeMapper.getAllLocationInfo("Musuem");
-                        homeViewModel.enumerableAllWeather = validateCategoryWeatherData("Musuem");
+                        homeViewModel.enumerableAllLocation = homeMapper.getAllLocationInfo("Museum");
+                        homeViewModel.enumerableAllWeather = validateCategoryWeatherData("Museum");
                         listHomeViewModel.Add(homeViewModel);
                     }
                     else if (Selection == "2")                                          // HistoricSites

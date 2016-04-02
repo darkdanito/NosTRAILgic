@@ -11,8 +11,6 @@ namespace NosTRAILgic.DAL
      ************************************************************************************/
     public class TrailMeetupMapper : DataGateway<TrailMeetup>
     {
-        private NosTRAILgicContext db = new NosTRAILgicContext();
-
         /************************************************************************************
          * Description: This function take in the Trail ID and return the participants      *
          *              of the TrailMeetup                                                  *

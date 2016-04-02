@@ -31,7 +31,7 @@
                         @Html.DropDownList("Selection", new SelectListItem[]
                         {
                             new SelectListItem() { Text = "All", Value = "0" },
-                            new SelectListItem() { Text = "Museum", Value = "1" },
+                            new SelectListItem() { Text = "Museums", Value = "1" },
                             new SelectListItem() { Text = "Historical Sites", Value = "2" },
                             new SelectListItem() { Text = "Monuments", Value = "3" },
                         },
@@ -52,6 +52,7 @@
 
         <div align="center">
             <!--displaying google map-->
+            <p><i>Markers will display more details</i></p>
             <div id="map_canvas" style="width: 100%; height: 400px;"></div>
 
             <!--details of each marker-->

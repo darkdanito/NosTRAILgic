@@ -192,6 +192,7 @@
     <Compile Include="Controllers\UploadController.cs" />
     <Compile Include="DAL\DataGateway.cs" />
     <Compile Include="DAL\HomeMapper.cs" />
+    <Compile Include="DAL\UploadGateway.cs" />
     <Compile Include="DAL\JoinTrailGateway.cs" />
     <Compile Include="DAL\NosTRAILgicContext.cs" />
     <Compile Include="DAL\IDataGateway.cs" />

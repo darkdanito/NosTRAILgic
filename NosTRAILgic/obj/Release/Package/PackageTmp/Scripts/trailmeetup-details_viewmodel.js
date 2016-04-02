@@ -45,25 +45,45 @@ function initMarker() {
         google.maps.event.addListener(markers[i], 'click', function () {
             
             var content =
+                '<table style="width:70%">' +
 
+            '<tr>' +
+                 '<td><div><img src="' + location.ImageLink + '"/></div> ' +
+                 '<div><p>Postal Code: ' + location.PostalCode + '</p></div></td>' +
+                 '<td></td><td><div><h3> ' + location.Name + '</h3></div>' +
+                     '<div><p>Description: ' + location.Description + '</p></div>' +
+                     '<div><p>Link: <a href="' + location.HyperLink + '">' + location.HyperLink + '</a></p></div></td>' +
+
+            '</tr></table>';
+                //    '<div style="width:70%;">'+
+                //    '<h4>' + location.Name + '</h4>' +
+                //    '<p>Description: ' + location.Description + '</p>' +
+                //     '<p>Link: <a href="' + location.HyperLink + '">' + location.HyperLink + '</a></p>' +
+                //     '<p>Postal Code: ' + location.PostalCode + '</p></div>' +
+
+                //'<div style="width:30%; "><p><img src="' + location.ImageLink + '"/></p></div>' ;
+            //'<div><h4>Name: Hello World </h4></div>' +
+            //'<p>Description: Hello</p>' +
+            //'<div>Link: Hi</div>' +
+            //'<div>Postal Code: hello</div>';
+            //'<div><h4>Name: ' + location.Name + '</h4></div>' +
+            //'<p>Description: ' + location.Description + '</p>' +
+            //'<div>Link: <a href="' + location.HyperLink + '">' + location.HyperLink + '</a></div>' +
+            //'<div>Image: <img src="' + location.ImageLink + '"/></div>' +
+            //'<div>Postal Code: ' + location.PostalCode + '</div>';
             
-            '<div>Name: ' + location.Name + '</div>' +
-            '<div>Description: ' + location.Description + '</div>' +
-            '<div>Link: <a href="' + location.HyperLink + '">' + location.HyperLink + '</a></div>' +
-            '<div>Image: <img src="' + location.ImageLink + '"/></div>' +
-            '<div>Postal Code: ' + location.PostalCode + '</div>';
-
+            
             //Remove empty image
             var str = content;
             var res = str.split("<div>");
-            if (!res[4].includes("jpg")) {
-                delete res[4];
+            if (!res[1].includes("jpg")) {
+                delete res[1];
                 content = res.join("<div>")
             }
 
             //Remove for empty link
             var content = content.replace('<div>Link: <a href="&lt;Null&gt;">&lt;Null&gt;</a></div>', "")
-
+         
             document.getElementById("locationDetails").innerHTML = content;
 
             infowindows[this.index].open(map, markers[this.index]);

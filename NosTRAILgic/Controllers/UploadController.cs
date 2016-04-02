@@ -19,10 +19,10 @@ namespace NosTRAILgic.Controllers
      * Date: 14/03/2016                                                                 *
      ************************************************************************************/
     [Authorize]
-    public class UploadController : Controller
+    public class UploadController : GeneralController<Location>
     {
-        private NosTRAILgicContext db = new NosTRAILgicContext();
         private Location location;
+        UploadGateway uploadGateway = new UploadGateway();
 
         // GET: Upload/Create
         public ActionResult Create()
@@ -48,9 +48,7 @@ namespace NosTRAILgic.Controllers
                     //System.Diagnostics.Debug.WriteLine(path);
 
                     //Delete all previous Museum
-                    var deleteLocation = db.Locations.Where(location => location.Category == "Museum");
-                    db.Locations.RemoveRange(deleteLocation);
-                    db.SaveChanges();
+                    uploadGateway.removePreviousMuseum();
 
                     //System.Diagnostics.Debug.WriteLine("Delete DB");
 
@@ -113,9 +111,8 @@ namespace NosTRAILgic.Controllers
 
                         location.Category = "Museum";
 
-                        if (!skipLocation) { 
-                            db.Locations.Add(location);
-                            db.SaveChanges();
+                        if (!skipLocation) {
+                            uploadGateway.Insert(location);
                         }
                         else
                         {
@@ -134,9 +131,7 @@ namespace NosTRAILgic.Controllers
                     //System.Diagnostics.Debug.WriteLine(path);
 
                     //Delete all previous Monument
-                    var deleteLocation = db.Locations.Where(location => location.Category == "Monument");
-                    db.Locations.RemoveRange(deleteLocation);
-                    db.SaveChanges();
+                    uploadGateway.removePreviousMonument();
 
                     // TODO: Add insert logic here
                     XmlDocument xmlDoc = new XmlDocument();
@@ -192,8 +187,7 @@ namespace NosTRAILgic.Controllers
 
                         if (!skipLocation)
                         {
-                            db.Locations.Add(location);
-                            db.SaveChanges();
+                            uploadGateway.Insert(location);
                         }
                         else
                         {
@@ -211,10 +205,8 @@ namespace NosTRAILgic.Controllers
                     HistoricSiteFile.SaveAs(path);
                     //System.Diagnostics.Debug.WriteLine(path);
 
-                    //Delete all previous museum
-                    var deleteLocation = db.Locations.Where(location => location.Category == "HistoricSite");
-                    db.Locations.RemoveRange(deleteLocation);
-                    db.SaveChanges();
+                    //Delete all previous HistoricSite
+                    uploadGateway.removePreviousHistoricSite();
 
                     //System.Diagnostics.Debug.WriteLine("Delete DB");
 
@@ -278,8 +270,7 @@ namespace NosTRAILgic.Controllers
 
                         if (!skipLocation)
                         {
-                            db.Locations.Add(location);
-                            db.SaveChanges();
+                            uploadGateway.Insert(location);
                         }
                         else
                         {
@@ -293,13 +284,6 @@ namespace NosTRAILgic.Controllers
             {
                 return View();
             }
-        }
-
-        public ActionResult WebClient()
-        {
-            WebClient web = new WebClient();
-
-            return View();
         }
     }
 }
