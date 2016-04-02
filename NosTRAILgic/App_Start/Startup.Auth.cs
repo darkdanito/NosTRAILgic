@@ -26,7 +26,7 @@ namespace NosTRAILgic
 
             //Facebook Azure Host
             app.UseFacebookAuthentication(
-               appId: "797670433702310",
+               appId: "797669907035696",
                appSecret: "e693642fcff48c361ca1002172130d4c");
 
             //Google Azure & Local Host
