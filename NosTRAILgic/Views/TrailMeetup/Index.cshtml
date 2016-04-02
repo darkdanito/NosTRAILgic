@@ -17,10 +17,8 @@
 
         foreach (var item in Model)
         {
-            if (item.TimeFrom.CompareTo(DateTime.Now) >= 0)
+            if (trailCount % 5 == 0)
             {
-                if (trailCount % 5 == 0)
-                {
                     @Html.Raw("<tr>");
                 }
 
@@ -42,8 +40,6 @@
                     @Html.Raw("</tr>");
                 }
                 trailCount++;
-            }
-
 
         }
 

@@ -1,4 +1,5 @@
 ﻿using NosTRAILgic.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -43,6 +44,24 @@ namespace NosTRAILgic.DAL
             var result = from r in db.Locations
                          where r.Name.ToLower().StartsWith(term)
                          select r.Name;
+
+            return result;
+        }
+
+        /************************************************************************************
+         * Description: This function will get the Date.Time.Now and compare to the         *
+         *              list of TrailMeetup in the DB and only return TrailMeetup that is   *
+         *              occur later then the cucrrent datetime                              *
+         *                                                                                  *
+         * Developer: Elson & Yun Yon                                                       *
+         *                                                                                  *
+         * Date: 13/03/2016                                                                 *
+         ************************************************************************************/
+        public IQueryable<TrailMeetup> getTrailsByDate()
+        {
+            var result = from i in db.Trails
+                         where i.TimeFrom.CompareTo(DateTime.Now) >= 0
+                         select i;
 
             return result;
         }

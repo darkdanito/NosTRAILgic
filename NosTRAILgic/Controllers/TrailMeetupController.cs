@@ -29,7 +29,7 @@ namespace NosTRAILgic.Controllers
 
         public ActionResult Index()                                                     // Display the Index Page
         {
-            return View(dataGateway.SelectAll());
+            return View(trailMeetupMapper.getTrailsByDate());
         }
 
         /************************************************************************************
