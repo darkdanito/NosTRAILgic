@@ -58,7 +58,7 @@ function initMarker() {
 
             var content1 =
             '<hr/>' +
-            '<table cellpadding="10" style="width:70%;">' +
+            '<table style="width:70%;" cellpadding="10" id="detailtable">' +
                 '<tr>' +
                      '<td rowspan="2" width:"20%" align="center">' +
                         '<div><img src="' + location.ImageLink + '" style="width:150px; height:150px;" onError="this.onerror=null;this.src=\'/images/no_image_available.jpg\';"/></div><br>';

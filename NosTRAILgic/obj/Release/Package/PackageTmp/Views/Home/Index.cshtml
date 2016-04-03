@@ -24,8 +24,6 @@
             {
                 <center>
                     <span>
-
-
                         @Html.TextBox("searchKeyword", null, new { @placeholder = "Search" })
 
                         @Html.DropDownList("Selection", new SelectListItem[]
@@ -49,6 +47,7 @@
         <!-- Passing to JS -->
         <p hidden id="homeViewModelData">@Html.Raw(ViewBag.homeViewModelJSON)</p>
         <p hidden id="autoCompleteURL" data-url='@Url.Action("GetLocation")'></p>
+        <p hidden id="loginStatus">@Html.Raw(ViewBag.loginStatus)</p>
 
         <div align="center">
             <!--displaying google map-->

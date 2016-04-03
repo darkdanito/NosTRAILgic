@@ -9,10 +9,11 @@
 @using (Html.BeginForm("Create", "Upload", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
+    <br />
     <div class="form-horizontal">
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                *Some message*
+            <div class="col-md-offset-1 col-md-11">
+                <i>Update database by uploading only <b>KML</b> files to the following:</i>
             </div>
         </div>
         @Html.ValidationSummary(true)

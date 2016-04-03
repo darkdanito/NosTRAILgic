@@ -9,35 +9,11 @@
 @using (Html.BeginForm("Create", "Upload", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
+    <br />
     <div class="form-horizontal">
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <b>AUTO</b>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                *Some Message*
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("WebClient", "Upload")'">
-                    Updated to Database
-                </button>
-            </div>
-        </div>
-    </div>
-    <hr/>
-    <div class="form-horizontal">
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <b>MANUAL</b>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                *Use if Auto Upload Fails*
+            <div class="col-md-offset-1 col-md-11">
+                <i>Update database by uploading only <b>KML</b> files to the following:</i>
             </div>
         </div>
         @Html.ValidationSummary(true)

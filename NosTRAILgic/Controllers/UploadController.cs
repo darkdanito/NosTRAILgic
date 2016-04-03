@@ -18,7 +18,7 @@ namespace NosTRAILgic.Controllers
      *                                                                                  *
      * Date: 14/03/2016                                                                 *
      ************************************************************************************/
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class UploadController : GeneralController<Location>
     {
         private Location location;

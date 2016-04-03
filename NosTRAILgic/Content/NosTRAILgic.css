@@ -260,3 +260,7 @@
     .panel-yellow a:hover {
         color: #df8a13;
     }
+
+    #detailtable td {
+        padding:1em;
+    }
