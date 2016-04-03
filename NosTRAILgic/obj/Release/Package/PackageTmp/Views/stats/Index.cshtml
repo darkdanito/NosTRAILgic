@@ -2,6 +2,11 @@
 @{
     ViewBag.Title = "Trail Statistics";
 }
+
+<link rel="stylesheet" href="~/Content/jquery-ui.min.css">
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript" src="~/Scripts/autocomplete.js"></script>
 <h2>Statistical Page</h2>
 
 <div class="pull-left">
@@ -40,6 +45,12 @@
 
 <!-- Passing to JS -->
 <p hidden id="autoCompleteURL" data-url='@Url.Action("GetLocation")'></p>
+<p hidden id="statsByTopSearchLocationData">@Html.Raw(ViewBag.statsByTopSearchLocationJSON)</p>
+<p hidden id="statsByTopTrailContributorData">@Html.Raw(ViewBag.statsByTopTrailContributorJSON)</p>
+<p hidden id="searchLocationDayData">@Html.Raw(ViewBag.searchLocationDayJSON)</p>
+<p hidden id="statsByCheckInCurrentYearData">@Html.Raw(ViewBag.statsByCheckInCurrentYearJSON)</p>
+<p hidden id="statsByCheckInPreviousYearData">@Html.Raw(ViewBag.statsByCheckInPreviousYearJSON)</p>
+
 
 <div id="line_visitor"></div>
 

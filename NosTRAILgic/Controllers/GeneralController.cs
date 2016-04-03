@@ -1,4 +1,5 @@
 ﻿using NosTRAILgic.DAL;
+using System.Net;
 using System.Web.Mvc;
 
 namespace NosTRAILgic.Controllers
@@ -14,9 +15,45 @@ namespace NosTRAILgic.Controllers
     {
         internal IDataGateway<T> dataGateway;
 
-        virtual public ActionResult Index()
+        //virtual public ActionResult Index()
+        //{
+        //    return View(dataGateway.SelectAll());
+        //}
+
+        public virtual ActionResult Edit(int? id)
         {
-            return View(dataGateway.SelectAll());
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            T obj = dataGateway.SelectById(id);
+            if (obj == null)
+            {
+                return HttpNotFound();
+            }
+            return View(obj);
+        }
+
+        public virtual ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            T obj = dataGateway.SelectById(id);
+            if (obj == null)
+            {
+                return HttpNotFound();
+            }
+            return View(obj);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public virtual ActionResult DeleteConfirmed(int id)
+        {
+            dataGateway.Delete(id);
+            return RedirectToAction("Index");
         }
     }
 }

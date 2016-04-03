@@ -4,6 +4,7 @@ using System.Web;
 using System.Web.Mvc;
 using NosTRAILgic.DAL;
 using NosTRAILgic.Models;
+using NosTRAILgic.Libraries;
 using System.Xml;
 using HtmlAgilityPack;
 using System.Net;
@@ -31,9 +32,20 @@ namespace NosTRAILgic.Controllers
         }
 
         // POST: Upload/Create
+        /************************************************************************************
+         * Description: It will first validate whether which file is been receive,          *
+         *              then it will execute respective XML parse to extract relevant       *
+         *              information and insert into database.                               *
+         *                                                                                  *
+         * Developer: Elson                                                                 *
+         *                                                                                  *
+         * Date: 14/03/2016                                                                 *
+         ************************************************************************************/
         [HttpPost]
         public ActionResult Create(HttpPostedFileBase MuseumFile, HttpPostedFileBase MonumentFile, HttpPostedFileBase HistoricSiteFile)
         {
+            LogWriter.Instance.LogInfo("UploadController / Create");
+
             Boolean skipLocation = false;
 
             try
@@ -41,7 +53,7 @@ namespace NosTRAILgic.Controllers
                 // Check If MuseumFile and Etc is not emptyy before continue
                 if (MuseumFile != null)
                 {
-                    System.Diagnostics.Debug.WriteLine("Upload Museum Files");
+                    LogWriter.Instance.LogInfo("UploadController / Upload Museum Files");
 
                     string path = Server.MapPath("~/Content/KML/" + MuseumFile.FileName);
                     MuseumFile.SaveAs(path);
@@ -49,9 +61,7 @@ namespace NosTRAILgic.Controllers
 
                     // Delete all previous Museum
                     uploadGateway.removePreviousMuseum();
-
-                    // System.Diagnostics.Debug.WriteLine("Delete DB");
-
+                    
                     // TODO: Add insert logic here
                     XmlDocument xmlDoc = new XmlDocument();
                     xmlDoc.Load(path);
@@ -124,7 +134,7 @@ namespace NosTRAILgic.Controllers
                 //Check If MonumentFile and Etc is not emptyy before continue
                 if (MonumentFile != null)
                 {
-                    System.Diagnostics.Debug.WriteLine("Upload Monument Files");
+                    LogWriter.Instance.LogInfo("UploadController /Upload Monument Files");
 
                     string path = Server.MapPath("~/Content/KML/" + MonumentFile.FileName);
                     MonumentFile.SaveAs(path);
@@ -199,7 +209,7 @@ namespace NosTRAILgic.Controllers
                 //Check If MuseumFile and Etc is not emptyy before continue
                 if (HistoricSiteFile != null)
                 {
-                    System.Diagnostics.Debug.WriteLine("Upload HistoricSite Files");
+                    LogWriter.Instance.LogInfo("UploadController /Upload Historic Site Files");
 
                     string path = Server.MapPath("~/Content/KML/" + HistoricSiteFile.FileName);
                     HistoricSiteFile.SaveAs(path);

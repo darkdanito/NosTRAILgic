@@ -1,4 +1,5 @@
 ﻿using NosTRAILgic.Models;
+using NosTRAILgic.Libraries;
 using System;
 using System.Linq;
 
@@ -11,7 +12,9 @@ namespace NosTRAILgic.DAL
     public class WeatherGateway : DataGateway<Weather>
     {
         /************************************************************************************
-         * Description: This function XXXXXXX [Elson do remember to fill in]                *
+         * Description: This function remove duplicate record of weather in database        *
+         *              as in a event not retrieve the update information may cause         *              
+         *              duplicate copy                                                      *
          *                                                                                  *
          * Developer: Elson                                                                 *
          *                                                                                  *
@@ -19,6 +22,8 @@ namespace NosTRAILgic.DAL
          ************************************************************************************/
         public void removeDuplicateWeatherData()
         {
+            LogWriter.Instance.LogInfo("WeatherGateway / removeDuplicateWeatherData");
+
             // Attempt get current DateTime without second and minute and millisecond
             DateTime currentDateTime = (from weather in db.Weathers
                                         orderby weather.LastUpdated descending
@@ -29,8 +34,7 @@ namespace NosTRAILgic.DAL
                                        where weather.LastUpdated == currentDateTime
                                        select weather);
 
-            System.Diagnostics.Debug.WriteLine("DELETE DUPLICATE DATA");
-            System.Diagnostics.Debug.WriteLine(LINQLocationWeather.Count());
+            LogWriter.Instance.LogInfo("WeatherGateway / " + LINQLocationWeather.Count());
 
             foreach (var weather in LINQLocationWeather)
             {

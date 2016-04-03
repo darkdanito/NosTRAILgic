@@ -4,7 +4,7 @@ using System.IO;
 namespace NosTRAILgic.Libraries
 {
     /************************************************************************************
-     * Description: XXXXXX                                                              *
+     * Description: a Singleton that assist in logging all function for east debug      *
      *                                                                                  *
      * Developer: Elson                                                                 *
      *                                                                                  *

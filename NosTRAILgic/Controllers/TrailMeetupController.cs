@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using NosTRAILgic.DAL;
 using NosTRAILgic.Services;
 using NosTRAILgic.Models;
+using NosTRAILgic.Libraries;
 using System.Collections.Generic;
 using System.Web.Script.Serialization;
 using System.Linq;
@@ -25,8 +26,9 @@ namespace NosTRAILgic.Controllers
         WeatherForecastGateway weatherService = new WeatherForecastGateway();           // New Gateway: WeatherForecastGateway
         WeatherGateway weatherGateway = new WeatherGateway();
 
-        public override ActionResult Index()                                                     // Display the Index Page
+        public ActionResult Index()                                                     // Display the Index Page
         {
+            LogWriter.Instance.LogInfo("TrailMeetupController / Index");
             return View(trailMeetupMapper.getTrailsByDate());
         }
 
@@ -40,6 +42,7 @@ namespace NosTRAILgic.Controllers
          ************************************************************************************/
         public ActionResult GetLocation(string term)
         {
+            LogWriter.Instance.LogInfo("TrailMeetupController / GetLocation");
             var searchAutoComplete = trailMeetupMapper.getSearchAutoComplete(term);
 
             return Json(searchAutoComplete, JsonRequestBehavior.AllowGet);
@@ -55,6 +58,7 @@ namespace NosTRAILgic.Controllers
         [Authorize]
         public ActionResult JoinTrail(int? id)
         {
+            LogWriter.Instance.LogInfo("TrailMeetupController / JoinTrail");
             JoinTrail jointrail = new JoinTrail();
 
             if (User.Identity.Name == null || User.Identity.Name == "")                 // Check is the username valid
@@ -82,6 +86,7 @@ namespace NosTRAILgic.Controllers
         [Authorize]
         public ActionResult LeaveTrail(int id)
         {
+            LogWriter.Instance.LogInfo("TrailMeetupController / LeaveTrail");
             JoinTrail jointrail = new JoinTrail();
 
             if (User.Identity.Name == null || User.Identity.Name == "")                 // Check is the username valid
@@ -99,6 +104,7 @@ namespace NosTRAILgic.Controllers
 
         public ActionResult Details_ViewModel(int? id)
         {
+            LogWriter.Instance.LogInfo("TrailMeetupController / Details_ViewModel");
             if (id == null)
             {
                 return RedirectToAction("Index");
@@ -151,6 +157,15 @@ namespace NosTRAILgic.Controllers
              * Date: 21/03/2016                                                                 *
              ************************************************************************************/
             trailMeetup_DetailsViewModel.enumerableAllLocationFromTrail = trailMeetupMapper.getAllLocationInfoFromTrail(trailID);
+
+            /************************************************************************************
+             * Description: This function handles the getting Locations and weather Information *
+             *              from DB based on the Trail ID                                       *
+             *                                                                                  *
+             * Developer: Yun Yong                                                              *
+             *                                                                                  *
+             * Date: 21/03/2016                                                                 *
+             ************************************************************************************/
             trailMeetup_DetailsViewModel.enumerableAllWeatherFromTrail = validateTrailWeatherData(trailID);
 
             /************************************************************************************
@@ -213,6 +228,8 @@ namespace NosTRAILgic.Controllers
         {
             if (ModelState.IsValid)
             {
+                LogWriter.Instance.LogInfo("TrailMeetupController / Create");
+
                 JoinTrail jointrail = new JoinTrail();
                 TrailMeetup_Location trailMeetup_Location = new TrailMeetup_Location();         // New TrailMeetup_Location Model()
 
@@ -239,7 +256,8 @@ namespace NosTRAILgic.Controllers
                         trailMeetup_Location.TrailMeetupID = TrailID;
 
                         // Convert the Location name to convert to the LocationID
-                        trailMeetup_Location.LocationID = trailMeetupMapper.getLocationID(text[i]);
+                        //trailMeetup_Location.LocationID = trailMeetupMapper.getLocationID(text[i]);
+                        trailMeetup_Location.LocationName = text[i];
 
                         trailMeetupLocationGateway.Insert(trailMeetup_Location);
                     }
@@ -258,7 +276,7 @@ namespace NosTRAILgic.Controllers
 
         // GET: TrailMeetup/Edit/5
         [Authorize]
-        public ActionResult Edit(int? id)
+        public override ActionResult Edit(int? id)
         {
             if (id == null)
             {
@@ -282,6 +300,8 @@ namespace NosTRAILgic.Controllers
         {
             if (ModelState.IsValid)
             {
+                LogWriter.Instance.LogInfo("TrailMeetupController / Edit");
+
                 trailMeetup.CreatorID = User.Identity.Name;
 
                 trailMeetupMapper.Update(trailMeetup);
@@ -293,7 +313,7 @@ namespace NosTRAILgic.Controllers
 
         // GET: TrailMeetup/Delete/5
         [Authorize]
-        public ActionResult Delete(int? id)
+        public override ActionResult Delete(int? id)
         {
             if (id == null)
             {
@@ -321,8 +341,10 @@ namespace NosTRAILgic.Controllers
          ************************************************************************************/
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public override ActionResult DeleteConfirmed(int id)
         {
+            LogWriter.Instance.LogInfo("TrailMeetupController / Delete");
+
             TrailMeetup trailMeetup = trailMeetupMapper.SelectById(id);
 
             trailMeetupMapper.Delete(id);
@@ -368,9 +390,17 @@ namespace NosTRAILgic.Controllers
             return RedirectToAction("Index");
         }
 
-
+        /************************************************************************************
+         * Description: This function handles logic behind retrieve latest weather forecast *
+         *              (Validate and return weather based on Trail ID)                     *                                                                                  *
+         * Developer: Elson                                                                 *
+         *                                                                                  *
+         * Date: 02/04/2016                                                                 *
+         ************************************************************************************/
         public IEnumerable<Weather> validateTrailWeatherData(int trailID)
         {
+            LogWriter.Instance.LogInfo("TrailMeetupController / validateTrailWeatherData");
+
             IEnumerable<Weather> enumerableAllWeather = trailMeetupMapper.getAllWeatherInfoFromTrail(trailID, false);
 
             // If not updated weather forecast

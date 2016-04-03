@@ -1,5 +1,6 @@
 ﻿using NosTRAILgic.DAL;
 using NosTRAILgic.Models;
+using NosTRAILgic.Libraries;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
@@ -14,7 +15,7 @@ namespace NosTRAILgic.Controllers
      *                                                                                  *
      * Date: 21/03/2016                                                                 *
      ************************************************************************************/
-    public class StatsController : Controller
+    public class StatsController : GeneralController<Statistic>
     {
         StatsMapper statsMapper = new StatsMapper();
 
@@ -66,6 +67,8 @@ namespace NosTRAILgic.Controllers
         }
         public ActionResult Index(string valMonth, string searchKeyword, string valCategory)
         {
+            LogWriter.Instance.LogInfo("StatsController /  Index");
+
             string category = "Museum";
             foreach (var item in ViewBag.ddl_Month)
             {
@@ -104,6 +107,7 @@ namespace NosTRAILgic.Controllers
             }
 
             // Top Searched Location
+            LogWriter.Instance.LogInfo("StatsController /  Top Searched Location");
             var statsByTopSearchLocation = statsMapper.GetStatsByTopSearchLocation(valMonth);
             ViewBag.statsByTopSearchLocation = statsByTopSearchLocation;
 
@@ -111,6 +115,7 @@ namespace NosTRAILgic.Controllers
             ViewBag.statsByTopSearchLocationJSON = oSerializer.Serialize(statsByTopSearchLocation);
 
             // Top Creator Name
+            LogWriter.Instance.LogInfo("StatsController /  Top Creator Name");
             var statsByTopTrailContributor = statsMapper.GetStatsByTopTrailContributor();
             ViewBag.statsByTopTrailContributor = statsByTopTrailContributor;
 
@@ -118,18 +123,21 @@ namespace NosTRAILgic.Controllers
             ViewBag.statsByTopTrailContributorJSON = oSerializer.Serialize(statsByTopTrailContributor);
 
             // Search Location
+            LogWriter.Instance.LogInfo("StatsController /  Search Location");
             var searchLocationDay = statsMapper.GetSearchLocationDay(searchKeyword);
             ViewBag.searchLocationDay = searchLocationDay;
 
             oSerializer = new JavaScriptSerializer();
             ViewBag.searchLocationDayJSON = oSerializer.Serialize(searchLocationDay);
 
-            // Checkin per Category based on current and previous year           
+            // Checkin per Category based on current and previous year       
+            LogWriter.Instance.LogInfo("StatsController /  Current Year");
             var statsByCheckInCurrentYear = statsMapper.GetStatsByCheckInCurrentYear(category);
             ViewBag.statsByCheckInCurrentYear = statsByCheckInCurrentYear;
             oSerializer = new JavaScriptSerializer();
             ViewBag.statsByCheckInCurrentYearJSON = oSerializer.Serialize(statsByCheckInCurrentYear);
 
+            LogWriter.Instance.LogInfo("StatsController /  Previous Year");
             var statsByCheckInPreviousYear = statsMapper.GetStatsByCheckInPreviousYear(category);
             ViewBag.statsByCheckInPreviousYear = statsByCheckInPreviousYear;
             oSerializer = new JavaScriptSerializer();

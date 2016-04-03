@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Web.Mvc;
 using NosTRAILgic.DAL;
+using NosTRAILgic.Libraries;
 using System.Collections.Generic;
 using System.Web.Script.Serialization;
 using NosTRAILgic.Models;
@@ -16,7 +17,7 @@ namespace NosTRAILgic.Controllers
      *                                                                                  *
      * Date: 17/02/2016                                                                 *
      ************************************************************************************/
-    public class HomeController : Controller
+    public class HomeController : GeneralController<Location>
     {
         WeatherForecastGateway weatherService = new WeatherForecastGateway();           // New Gateway: WeatherForecastGateway
         SearchGateway searchGateway = new SearchGateway();                              // New Gateway: SearchGateway
@@ -26,6 +27,9 @@ namespace NosTRAILgic.Controllers
 
         public ActionResult Index(string Selection)
         {
+            
+            LogWriter.Instance.LogInfo("HomeController /  Index");
+
             List<Home_ViewModel> listHomeViewModel = new List<Home_ViewModel>();        // New List: for Home_ViewModel
 
             Home_ViewModel homeViewModel = new Home_ViewModel();                        // New ViewModel: Home_ViewModel
@@ -49,6 +53,8 @@ namespace NosTRAILgic.Controllers
         [HttpPost]
         public ActionResult Index(string Selection, string searchKeyword)
         {
+            LogWriter.Instance.LogInfo("HomeController /  Index");
+
             List<Home_ViewModel> listHomeViewModel = new List<Home_ViewModel>();        // New List: for Home_ViewModel
 
             Home_ViewModel homeViewModel = new Home_ViewModel();                        // New ViewModel: Home_ViewModel
@@ -125,8 +131,17 @@ namespace NosTRAILgic.Controllers
             return View(listHomeViewModel);
         }
 
+        /************************************************************************************
+         * Description: This function handles logic behind retrieve latest weather forecast *
+         *              (Validate and return weather based on category)                     *                                                                                  *
+         * Developer: Elson                                                                 *
+         *                                                                                  *
+         * Date: 02/04/2016                                                                 *
+         ************************************************************************************/
         public IEnumerable<Weather> validateCategoryWeatherData(string category)
         {
+            LogWriter.Instance.LogInfo("HomeController /  validateCategoryWeatherData");
+
             IEnumerable<Weather> enumerableAllWeather = homeMapper.getAllLocationWeather(category, false);
             
             // If not updated weather forecast
@@ -151,8 +166,17 @@ namespace NosTRAILgic.Controllers
             return enumerableAllWeather;
         }
 
+        /************************************************************************************
+         * Description: This function handles logic behind retrieve latest weather forecast *
+         *              (Validate and return weather based on seach keyword)                *                                                                                  *
+         * Developer: Elson                                                                 *
+         *                                                                                  *
+         * Date: 02/04/2016                                                                 *
+         ************************************************************************************/
         public IEnumerable<Weather> validateSearchWeatherData(string search)
         {
+            LogWriter.Instance.LogInfo("HomeController /  validateSearchWeatherData");
+
             IEnumerable<Weather> enumerableWeather = homeMapper.getLocationWeather(search, false);
             // If not updated weather forecast
             if (enumerableWeather.Count() == 0)
@@ -199,6 +223,8 @@ namespace NosTRAILgic.Controllers
         [Authorize]
         public ActionResult UserProfile()
         {
+            LogWriter.Instance.LogInfo("HomeController /  UserProfile");
+
             List<ProfileViewModel> listProfileViewModel = new List<ProfileViewModel>();       // New List: for ProfileViewModel
 
             ProfileViewModel profileViewModel = new ProfileViewModel();                       // New ViewModel: ProfileViewModel
@@ -213,7 +239,7 @@ namespace NosTRAILgic.Controllers
         }
 
         /************************************************************************************
-         * Description: This function handles CheckIn                                       *
+         * Description: This function handles CheckIn logic and insert into database        *
          *                                                                                  *
          * Developer: Elson                                                                 *
          *                                                                                  *
@@ -221,15 +247,18 @@ namespace NosTRAILgic.Controllers
          ************************************************************************************/
         public ActionResult CheckIn(string LocationName)
         {
+            LogWriter.Instance.LogInfo("HomeController /  CheckIn");
+
             //Increase Checkin count
             //If user did not checkin for today
             if (checkinGateway.isUserCheckIn(User.Identity.Name, LocationName))
             {
                 //Pop out?
-                System.Diagnostics.Debug.WriteLine("You have already checkin for today");
+                LogWriter.Instance.LogInfo("HomeController /  You have already checkin for today");
             }
             else
             {
+                LogWriter.Instance.LogInfo("HomeController /  Checkin Success");
                 CheckIn newCheckIn = new CheckIn();
                 newCheckIn.UserName = User.Identity.Name;
                 newCheckIn.LocationName = LocationName;

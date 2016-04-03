@@ -1,4 +1,5 @@
 ﻿using NosTRAILgic.Models;
+using NosTRAILgic.Libraries;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,7 @@ namespace NosTRAILgic.DAL
          ************************************************************************************/
         public List<string> getTrailParticipants(int trailID)
         {
+            LogWriter.Instance.LogInfo("TrailMeetupMapper / getTrailParticipants");
             var trailParticipants = (from p in db.JoinTrails
                                      where p.TrailMeetupID == trailID
                                      select p.UserID).ToList();
@@ -57,6 +59,7 @@ namespace NosTRAILgic.DAL
          ************************************************************************************/
         public IQueryable<TrailMeetup> getTrailsByDate()
         {
+            LogWriter.Instance.LogInfo("TrailMeetupMapper / getTrailsByDate");
             var trailMeetupByDate = from i in db.Trails
                                     where i.TimeFrom.CompareTo(DateTime.Now) >= 0
                                     select i;
@@ -74,6 +77,7 @@ namespace NosTRAILgic.DAL
          ************************************************************************************/
         public string isUserInTrail(int trailID, string userName)
         {
+            LogWriter.Instance.LogInfo("TrailMeetupMapper / isUserInTrail");
             string isUserNameInTrail = (from p in db.JoinTrails
                                         where p.UserID == userName 
                                         && p.TrailMeetupID == trailID
@@ -92,6 +96,7 @@ namespace NosTRAILgic.DAL
          ************************************************************************************/
         public int getNewlyCreatedTrailID(string newTrailName)
         {
+            LogWriter.Instance.LogInfo("TrailMeetupMapper / getNewlyCreatedTrailID");
             int newlyCreatedTrailID = (from c in db.Trails
                                        where c.Name == newTrailName
                                        select c.TrailMeetupID).FirstOrDefault();
@@ -109,6 +114,7 @@ namespace NosTRAILgic.DAL
          ************************************************************************************/
         public int getLocationID(string locationName)
         {
+            LogWriter.Instance.LogInfo("TrailMeetupMapper / getLocationID");
             int getLocationID = (from a in db.Locations
                                  where a.Name == locationName
                                  select a.LocationId).FirstOrDefault();
@@ -127,9 +133,10 @@ namespace NosTRAILgic.DAL
          ************************************************************************************/
         public IQueryable<Location> getAllLocationInfoFromTrail(int trailID)
         {
+            LogWriter.Instance.LogInfo("TrailMeetupMapper / getAllLocationInfoFromTrail");
             var LINQAllLocationQuery = (from y in db.Trails
                                         join x in db.TrailMeetup_Location on y.TrailMeetupID equals x.TrailMeetupID
-                                        join w in db.Locations on x.LocationID equals w.LocationId
+                                        join w in db.Locations on x.LocationName equals w.Name
                                         where y.TrailMeetupID == trailID
                                         select w);
 
@@ -147,6 +154,7 @@ namespace NosTRAILgic.DAL
          ************************************************************************************/
         public IQueryable<Weather> getAllWeatherInfoFromTrail(int trailID, bool olderData)
         {
+            LogWriter.Instance.LogInfo("TrailMeetupMapper / getAllWeatherInfoFromTrail");
             // Attempt get current DateTime without second and minute and millisecond
             DateTime currentDateTime = DateTime.Now;
             if (olderData)
@@ -159,7 +167,7 @@ namespace NosTRAILgic.DAL
 
             var LINQAllWeatherBasedOnTrail = (from trail in db.Trails
                                         join meetupLocation in db.TrailMeetup_Location on trail.TrailMeetupID equals meetupLocation.TrailMeetupID
-                                        join location in db.Locations on meetupLocation.LocationID equals location.LocationId
+                                        join location in db.Locations on meetupLocation.LocationName equals location.Name
                                         join area in db.Areas on location.AreaCode equals area.AreaCode
                                         join weather in db.Weathers on area.AreaName equals weather.Area
                                         where trail.TrailMeetupID == trailID && weather.LastUpdated == currentDateTime
@@ -181,6 +189,7 @@ namespace NosTRAILgic.DAL
          ************************************************************************************/
         public List<int> getTrailUserCreated (int trailID)
         {
+            LogWriter.Instance.LogInfo("TrailMeetupMapper / getTrailUserCreated");
             var trailUserCreated = (from r in db.JoinTrails
                                     where r.TrailMeetupID == trailID
                                     select r.JoinTrailID).ToList<int>();
@@ -198,6 +207,7 @@ namespace NosTRAILgic.DAL
          ************************************************************************************/
         public List<int> getTrailUserJoined(int trailID)
         {
+            LogWriter.Instance.LogInfo("TrailMeetupMapper / getTrailUserJoined");
             var trailUserCreated = (from d in db.TrailMeetup_Location
                                     where d.TrailMeetupID == trailID
                                     select d.TrailMeetup_LocationID).ToList<int>();
@@ -213,6 +223,7 @@ namespace NosTRAILgic.DAL
          ************************************************************************************/
         public int getTrailMeetupParticipantsCount(int trailID)
         {
+            LogWriter.Instance.LogInfo("TrailMeetupMapper / getTrailMeetupParticipantsCount");
             int LINQTrailMeetupParticipantsCount = (from c in db.JoinTrails
                                                     where c.TrailMeetupID == trailID
                                                     select c).Count();
@@ -228,6 +239,7 @@ namespace NosTRAILgic.DAL
          ************************************************************************************/
         public int getUserJoinTrailForDelete (int trailID, string userName)
         {
+            LogWriter.Instance.LogInfo("TrailMeetupMapper / getUserJoinTrailForDelete");
             var LINQGetUserJoinTrail = (from s in db.JoinTrails
                                        where s.UserID == userName
                                        && s.TrailMeetupID == trailID
@@ -235,9 +247,5 @@ namespace NosTRAILgic.DAL
 
             return LINQGetUserJoinTrail;
         }
-
-
-
-
     }
 }

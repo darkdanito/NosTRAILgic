@@ -1,4 +1,5 @@
 ﻿using NosTRAILgic.Models;
+using NosTRAILgic.Libraries;
 using System;
 using System.Linq;
 
@@ -30,6 +31,7 @@ namespace NosTRAILgic.DAL
          ************************************************************************************/
         public IQueryable<Location> getAllLocationInfo(string trailCategory)
         {
+            LogWriter.Instance.LogInfo("HomeMapper / getAllLocationInfo");
             IQueryable<Location> LINQAllLocationBasedOnCat;
 
             if (trailCategory == "All")
@@ -56,7 +58,7 @@ namespace NosTRAILgic.DAL
          ************************************************************************************/
         public IQueryable<Location> getLocationInfo(string searchLocation)
         {
-
+            LogWriter.Instance.LogInfo("HomeMapper / getLocationInfo");
             var LINQAllLocationBasedOnCat = from a in db.Locations
                                             where a.Name == searchLocation
                                             select a;
@@ -71,6 +73,7 @@ namespace NosTRAILgic.DAL
          ************************************************************************************/
         public IQueryable<TrailMeetup> getJoinedTrails(string userName)
         {
+            LogWriter.Instance.LogInfo("HomeMapper / getJoinedTrails");
             var LINQGetAllJoinedTrails = from j in db.JoinTrails
                                          join k in db.Trails on j.TrailMeetupID equals k.TrailMeetupID
                                          where j.UserID == userName
@@ -86,6 +89,7 @@ namespace NosTRAILgic.DAL
          ************************************************************************************/
         public IQueryable<TrailMeetup> getCreatedTrails(string userName)
         {
+            LogWriter.Instance.LogInfo("HomeMapper / getCreatedTrails");
             var LINQGetAllCreatedTrails = from c in db.Trails
                                           where c.CreatorID == userName
                                           select c;
@@ -94,7 +98,9 @@ namespace NosTRAILgic.DAL
         }
 
         /************************************************************************************
-         * Description: This function XXXXXXX [Elson do remember to fill in]                *
+         * Description: This function get location weather based on Category selected       *
+         *              if olderData is true, it will return latest update exist in DB      *
+         *              instead of weather of current hour                                  *
          *                                                                                  *
          * Developer: Elson                                                                 *
          *                                                                                  *
@@ -102,6 +108,7 @@ namespace NosTRAILgic.DAL
          ************************************************************************************/
         public IQueryable<Weather> getAllLocationWeather(string trailCategory, Boolean olderData)
         {
+            LogWriter.Instance.LogInfo("HomeMapper / getAllLocationWeather");
             // Attempt get current DateTime without second and minute and millisecond
             DateTime currentDateTime = DateTime.Now;
             if (olderData)
@@ -143,7 +150,9 @@ namespace NosTRAILgic.DAL
         }
 
         /************************************************************************************
-         * Description: This function XXXXXXX [Elson do remember to fill in]                *
+         * Description: This function get location weather based on search keyword          *
+         *              if olderData is true, it will return latest update exist in DB      *
+         *              instead of weather of current hour                                  *
          *                                                                                  *
          * Developer: Elson                                                                 *
          *                                                                                  *
@@ -151,6 +160,7 @@ namespace NosTRAILgic.DAL
          ************************************************************************************/
         public IQueryable<Weather> getLocationWeather(string searchLocation, Boolean olderData)
         {
+            LogWriter.Instance.LogInfo("HomeMapper / getLocationWeather");
             // Attempt get current DateTime without second and minute and millisecond
             DateTime currentDateTime = DateTime.Now;
             if (olderData)

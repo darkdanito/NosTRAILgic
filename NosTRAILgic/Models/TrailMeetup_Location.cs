@@ -18,6 +18,6 @@ namespace NosTRAILgic.Models
 
         public int TrailMeetupID { get; set; }
 
-        public int LocationID { get; set; }
+        public string LocationName { get; set; }
     }
 }

@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Cache;
 using System.Xml;
 using NosTRAILgic.Models;
+using NosTRAILgic.Libraries;
 using NosTRAILgic.DAL;
 
 namespace NosTRAILgic.Services
@@ -23,6 +22,8 @@ namespace NosTRAILgic.Services
 
         public void GetNowcast()
         {
+            LogWriter.Instance.LogInfo("WeatherForecastGateway / GetNowcast");
+
             string URL = "http://www.nea.gov.sg/api/WebAPI/?dataset=nowcast&keyref=781CF461BB6606ADC4A6A6217F5F2AD610E9D42F3AA8BF6D";
 
             // Create the request
