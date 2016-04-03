@@ -137,6 +137,41 @@ namespace NosTRAILgic.DAL
         }
 
         /************************************************************************************
+         * Description: This function will take in the TrailMeetup ID and return            *
+         *              Location table that the TrailMeetup contains by joining the DB      *
+         *              TrailMeetup_Location and TrailMeetup_Location with TrailMeetup      *
+         *                                                                                  *
+         * Developer: Elson                                                             *
+         *                                                                                  *
+         * Date: 01/04/2016                                                                 *
+         ************************************************************************************/
+        public IQueryable<Weather> getAllWeatherInfoFromTrail(int trailID, bool olderData)
+        {
+            // Attempt get current DateTime without second and minute and millisecond
+            DateTime currentDateTime = DateTime.Now;
+            if (olderData)
+            {
+                currentDateTime = (from weather in db.Weathers
+                                   orderby weather.LastUpdated descending
+                                   select weather.LastUpdated).FirstOrDefault();
+            }
+            currentDateTime = new DateTime(currentDateTime.Year, currentDateTime.Month, currentDateTime.Day, currentDateTime.Hour, 0, 0, 0);
+
+            var LINQAllWeatherBasedOnTrail = (from trail in db.Trails
+                                        join meetupLocation in db.TrailMeetup_Location on trail.TrailMeetupID equals meetupLocation.TrailMeetupID
+                                        join location in db.Locations on meetupLocation.LocationID equals location.LocationId
+                                        join area in db.Areas on location.AreaCode equals area.AreaCode
+                                        join weather in db.Weathers on area.AreaName equals weather.Area
+                                        where trail.TrailMeetupID == trailID && weather.LastUpdated == currentDateTime
+                                        select weather);
+
+            System.Diagnostics.Debug.WriteLine("GET WEATHER COUNT");
+            System.Diagnostics.Debug.WriteLine(LINQAllWeatherBasedOnTrail.Count());
+
+            return LINQAllWeatherBasedOnTrail;
+        }
+
+        /************************************************************************************
          * Description: This function will take in the trail ID and return the trails       *
          *              that the user has created                                           *
          *                                                                                  *
@@ -200,6 +235,9 @@ namespace NosTRAILgic.DAL
 
             return LINQGetUserJoinTrail;
         }
+
+
+
 
     }
 }

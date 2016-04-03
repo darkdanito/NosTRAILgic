@@ -11,10 +11,8 @@ namespace NosTRAILgic.DAL
      *                                                                                  *
      * Date: 24/03/2016                                                                 *
      ************************************************************************************/
-    public class HomeMapper
-    {
-        private NosTRAILgicContext db = new NosTRAILgicContext();
-        
+    public class HomeMapper : DataGateway<Location>
+    {        
         public IQueryable<string> getSearchAutoComplete(string term)
         {
             var result = from r in db.Locations
@@ -108,7 +106,9 @@ namespace NosTRAILgic.DAL
             DateTime currentDateTime = DateTime.Now;
             if (olderData)
             {
-                currentDateTime = currentDateTime.AddHours(-1);                         // -1 hours
+                currentDateTime = (from weather in db.Weathers
+                                   orderby weather.LastUpdated descending
+                                   select weather.LastUpdated).FirstOrDefault();
             }
             currentDateTime = new DateTime(currentDateTime.Year, currentDateTime.Month, currentDateTime.Day, currentDateTime.Hour, 0, 0, 0);
 
@@ -155,12 +155,11 @@ namespace NosTRAILgic.DAL
             DateTime currentDateTime = DateTime.Now;
             if (olderData)
             {
-                currentDateTime = currentDateTime.AddHours(-1); // -1 hours
+                currentDateTime = (from weather in db.Weathers
+                                              orderby weather.LastUpdated descending
+                                              select weather.LastUpdated).FirstOrDefault();
             }
             currentDateTime = new DateTime(currentDateTime.Year, currentDateTime.Month, currentDateTime.Day, currentDateTime.Hour, 0, 0, 0);
-
-            //to cover Nea maintence
-            //currentDateTime = new DateTime(2016, 4, 1, 18, 0, 0, 0);
 
             var LINQLocationWeather = (from weather in db.Weathers
                                         join area in db.Areas on weather.Area equals area.AreaName
@@ -170,34 +169,6 @@ namespace NosTRAILgic.DAL
                                         select weather);
 
             return LINQLocationWeather;
-        }
-
-        /************************************************************************************
-         * Description: This function XXXXXXX [Elson do remember to fill in]                *
-         *                                                                                  *
-         * Developer: Elson                                                                 *
-         *                                                                                  *
-         * Date: 25/03/2016                                                                 *
-         ************************************************************************************/
-        public void removeDuplicateWeatherData()
-        {
-            // Attempt get current DateTime without second and minute and millisecond
-            DateTime currentDateTime = DateTime.Now;
-            currentDateTime = currentDateTime.AddHours(-1); // -1 hours
-            currentDateTime = new DateTime(currentDateTime.Year, currentDateTime.Month, currentDateTime.Day, currentDateTime.Hour, 0, 0, 0);
-
-            var LINQLocationWeather = (from weather in db.Weathers
-                                       where weather.LastUpdated == currentDateTime
-                                       select weather);
-
-            System.Diagnostics.Debug.WriteLine("DELETE DUPLICATE DATA");
-            System.Diagnostics.Debug.WriteLine(LINQLocationWeather.Count());
-
-            foreach (var weather in LINQLocationWeather)
-            {
-                db.Weathers.Remove(weather);                
-            }
-            db.SaveChanges();
-        }
+        }        
     }
 }

@@ -26,5 +26,7 @@ namespace NosTRAILgic.Models
 
         public IEnumerable<Location> enumerableAllLocationFromTrail { get; set; }   // Enumerable that hold all the Location informationn
                                                                                     // for the trail
+        public IEnumerable<Weather> enumerableAllWeatherFromTrail { get; set; }   // Enumerable that hold all the Weather informationn
+                                                                                    // for the trail
     }
 }

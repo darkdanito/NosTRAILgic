@@ -110,22 +110,22 @@ namespace NosTRAILgic.Controllers
             ViewBag.statsByTopTrailContributor = statsByTopTrailContributor;
 
             // Search Location
-            var searchLocationDay = db.Database.SqlQuery<Statistic>("select Name, count(DAY(CONVERT(Date, DATE))) as Number, DAY(CONVERT(Date, DATE)) as Date from CheckIns c left join Locations l on l.LocationID = c.LocationID where l.Name = '" + searchKeyword + "' group by l.Name, DAY(CONVERT(Date, DATE))").ToList();
+            var searchLocationDay = db.Database.SqlQuery<Statistic>("select Name, count(DAY(CONVERT(Date, DATE))) as Number, DAY(CONVERT(Date, DATE)) as Date from CheckIns c left join Locations l on l.Name = c.LocationName where l.Name = '" + searchKeyword + "' group by l.Name, DAY(CONVERT(Date, DATE))").ToList();
             if (searchKeyword == "" || searchKeyword == null)
             {
-                searchLocationDay = db.Database.SqlQuery<Statistic>("select Name, count(DAY(CONVERT(Date, DATE))) as Number, DAY(CONVERT(Date, DATE)) as Date from CheckIns c left join Locations l on l.LocationID = c.LocationID where l.Name = '' group by l.Name, DAY(CONVERT(Date, DATE))").ToList();
+                searchLocationDay = db.Database.SqlQuery<Statistic>("select Name, count(DAY(CONVERT(Date, DATE))) as Number, DAY(CONVERT(Date, DATE)) as Date from CheckIns c left join Locations l on l.Name = c.LocationName where l.Name = '' group by l.Name, DAY(CONVERT(Date, DATE))").ToList();
             }
             else
             {
-                searchLocationDay = db.Database.SqlQuery<Statistic>("select Name, count(DAY(CONVERT(Date, DATE))) as Number, DAY(CONVERT(Date, DATE)) as Date from CheckIns c left join Locations l on l.LocationID = c.LocationID where l.Name = '" + searchKeyword + "' group by l.Name, DAY(CONVERT(Date, DATE))").ToList();
+                searchLocationDay = db.Database.SqlQuery<Statistic>("select Name, count(DAY(CONVERT(Date, DATE))) as Number, DAY(CONVERT(Date, DATE)) as Date from CheckIns c left join Locations l on l.Name = c.LocationName where l.Name = '" + searchKeyword + "' group by l.Name, DAY(CONVERT(Date, DATE))").ToList();
             }
             ViewBag.searchLocationDay = searchLocationDay;
 
             // Checkin per Category based on current and previous year
-            var statsByCheckInCurrentYear = db.Database.SqlQuery<Statistic>("select Category as Name, YEAR(CONVERT(Date, DATE)) as Date, count(*) as Number from CheckIns c right join Locations l on l.LocationID = c.LocationID where Category = '" + category + "' and YEAR(CONVERT(Date, DATE)) = YEAR(CONVERT(Date, GETDATE())) group by Category, YEAR(CONVERT(Date, DATE))").ToList();
+            var statsByCheckInCurrentYear = db.Database.SqlQuery<Statistic>("select Category as Name, YEAR(CONVERT(Date, DATE)) as Date, count(*) as Number from CheckIns c right join Locations l on l.Name = c.LocationName where Category = '" + category + "' and YEAR(CONVERT(Date, DATE)) = YEAR(CONVERT(Date, GETDATE())) group by Category, YEAR(CONVERT(Date, DATE))").ToList();
             ViewBag.statsByCheckInCurrentYear = statsByCheckInCurrentYear;
 
-            var statsByCheckInPreviousYear = db.Database.SqlQuery<Statistic>("select Category as Name, YEAR(CONVERT(Date, DATE)) as Date, count(*) as Number from CheckIns c right join Locations l on l.LocationID = c.LocationID where Category = '" + category + "' and YEAR(CONVERT(Date, DATE)) = YEAR(CONVERT(Date, GETDATE()))-1 group by Category, YEAR(CONVERT(Date, DATE))").ToList();
+            var statsByCheckInPreviousYear = db.Database.SqlQuery<Statistic>("select Category as Name, YEAR(CONVERT(Date, DATE)) as Date, count(*) as Number from CheckIns c right join Locations l on l.Name = c.LocationName where Category = '" + category + "' and YEAR(CONVERT(Date, DATE)) = YEAR(CONVERT(Date, GETDATE()))-1 group by Category, YEAR(CONVERT(Date, DATE))").ToList();
             ViewBag.statsByCheckInPreviousYear = statsByCheckInPreviousYear;
 
             return View();

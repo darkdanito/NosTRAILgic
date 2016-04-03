@@ -14,7 +14,9 @@ namespace NosTRAILgic.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int CheckInID { get; set; }
 
-        public int LocationID { get; set; }
+        public string LocationName { get; set; }
+
+        public string UserName { get; set; }
 
         public DateTime Date { get; set; }
     }

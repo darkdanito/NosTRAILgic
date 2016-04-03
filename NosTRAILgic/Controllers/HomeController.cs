@@ -20,9 +20,9 @@ namespace NosTRAILgic.Controllers
     {
         WeatherForecastGateway weatherService = new WeatherForecastGateway();           // New Gateway: WeatherForecastGateway
         SearchGateway searchGateway = new SearchGateway();                              // New Gateway: SearchGateway
-
+        CheckInGateway checkinGateway = new CheckInGateway();                           // New Gateway: CheckInGateway
         HomeMapper homeMapper = new HomeMapper();                                       // New Mapper: HomeMapper
-        
+        WeatherGateway weatherGateway = new WeatherGateway();
 
         public ActionResult Index(string Selection)
         {
@@ -141,7 +141,7 @@ namespace NosTRAILgic.Controllers
                 if (enumerableAllWeather.Count() == 0)
                 {
                     // Delete Duplicate weather forecast in database (a job for mapper or service)
-                    homeMapper.removeDuplicateWeatherData();
+                    weatherGateway.removeDuplicateWeatherData();
                     // Update database with lastest forecast
                     weatherService.getNowcast();
                     // Retrieve from database again
@@ -165,7 +165,7 @@ namespace NosTRAILgic.Controllers
                 if (enumerableWeather.Count() == 0)
                 {
                     // Delete Duplicate weather forecast in database (a job for mapper or service)
-                    homeMapper.removeDuplicateWeatherData();
+                    weatherGateway.removeDuplicateWeatherData();
                     // Update database with lastest forecast
                     weatherService.getNowcast();
                     // Retrieve from database again
@@ -220,13 +220,23 @@ namespace NosTRAILgic.Controllers
          *                                                                                  *
          * Date: 02/04/2016                                                                 *
          ************************************************************************************/
-        public ActionResult CheckIn()
+        public ActionResult CheckIn(string LocationName)
         {
             //Increase Checkin count
             //If user did not checkin for today
-
-            //else increase the number
-            System.Diagnostics.Debug.WriteLine("CHECKIN");
+            if (checkinGateway.isUserCheckIn(User.Identity.Name, LocationName))
+            {
+                //Pop out?
+                System.Diagnostics.Debug.WriteLine("You have checkin for today");
+            }
+            else
+            {
+                CheckIn newCheckIn = new CheckIn();
+                newCheckIn.UserName = User.Identity.Name;
+                newCheckIn.LocationName = LocationName;
+                newCheckIn.Date = DateTime.Today;
+                checkinGateway.Insert(newCheckIn);
+            }
             return RedirectToAction("Index", "Home");
         }
 

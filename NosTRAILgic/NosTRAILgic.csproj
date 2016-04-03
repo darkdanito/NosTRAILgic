@@ -190,13 +190,15 @@
     <Compile Include="Controllers\StatsController.cs" />
     <Compile Include="Controllers\TrailMeetupController.cs" />
     <Compile Include="Controllers\UploadController.cs" />
+    <Compile Include="DAL\WeatherGateway.cs" />
     <Compile Include="DAL\DataGateway.cs" />
     <Compile Include="DAL\HomeMapper.cs" />
+    <Compile Include="DAL\CheckInGateway.cs" />
     <Compile Include="DAL\UploadGateway.cs" />
     <Compile Include="DAL\JoinTrailGateway.cs" />
     <Compile Include="DAL\NosTRAILgicContext.cs" />
     <Compile Include="DAL\IDataGateway.cs" />
-    <Compile Include="DAL\SeachesGateway.cs" />
+    <Compile Include="DAL\SeachGateway.cs" />
     <Compile Include="DAL\TrailMeetupLocationGateway.cs" />
     <Compile Include="DAL\TrailMeetupMapper.cs" />
     <Compile Include="Global.asax.cs">

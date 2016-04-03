@@ -2,9 +2,11 @@
 using System.Web;
 using System.Web.Mvc;
 using NosTRAILgic.DAL;
+using NosTRAILgic.Services;
 using NosTRAILgic.Models;
 using System.Collections.Generic;
 using System.Web.Script.Serialization;
+using System.Linq;
 
 namespace NosTRAILgic.Controllers
 {
@@ -18,9 +20,10 @@ namespace NosTRAILgic.Controllers
     public class TrailMeetupController : GeneralController<TrailMeetup>
     {
         TrailMeetupMapper trailMeetupMapper = new TrailMeetupMapper();                  // New Mapper: TrailMeetup
-
         JoinTrailGateway joinTrailGateway = new JoinTrailGateway();                     // New Gateway: JoinTrail
         TrailMeetupLocationGateway trailMeetupLocationGateway = new TrailMeetupLocationGateway(); // New Gateway: TraiLMeetupLocation
+        WeatherForecastGateway weatherService = new WeatherForecastGateway();           // New Gateway: WeatherForecastGateway
+        WeatherGateway weatherGateway = new WeatherGateway();
 
         public TrailMeetupController()
         {
@@ -145,16 +148,16 @@ namespace NosTRAILgic.Controllers
 
 
             /************************************************************************************
-             * Description: This function handles the getting Locations Information from DB     *
-             *              based on the Trail ID                                               *
+             * Description: This function handles the getting Locations and weather Information *
+             *              from DB based on the Trail ID                                       *
              *                                                                                  *
              * Developer: Yun Yong                                                              *
              *                                                                                  *
              * Date: 21/03/2016                                                                 *
              ************************************************************************************/
             trailMeetup_DetailsViewModel.enumerableAllLocationFromTrail = trailMeetupMapper.getAllLocationInfoFromTrail(trailID);
+            trailMeetup_DetailsViewModel.enumerableAllWeatherFromTrail = validateTrailWeatherData(trailID);
 
-            
             /************************************************************************************
              * Description: This function handles the getting Locations Information from DB     *
              *              based on the Trail ID                                               *
@@ -364,6 +367,33 @@ namespace NosTRAILgic.Controllers
             }
 
             return RedirectToAction("Index");
+        }
+
+
+        public IEnumerable<Weather> validateTrailWeatherData(int trailID)
+        {
+            IEnumerable<Weather> enumerableAllWeather = trailMeetupMapper.getAllWeatherInfoFromTrail(trailID, false);
+
+            // If not updated weather forecast
+            if (enumerableAllWeather.Count() == 0)
+            {
+                // Update database with lastest forecast
+                weatherService.getNowcast();
+                // Retrieve from database again
+                enumerableAllWeather = trailMeetupMapper.getAllWeatherInfoFromTrail(trailID, false);
+
+                if (enumerableAllWeather.Count() == 0)
+                {
+                    // Delete Duplicate weather forecast in database (a job for mapper or service)
+                    weatherGateway.removeDuplicateWeatherData();
+                    // Update database with lastest forecast
+                    weatherService.getNowcast();
+                    // Retrieve from database again
+                    enumerableAllWeather = trailMeetupMapper.getAllWeatherInfoFromTrail(trailID, true);
+                }
+            }
+
+            return enumerableAllWeather;
         }
     }
 }
