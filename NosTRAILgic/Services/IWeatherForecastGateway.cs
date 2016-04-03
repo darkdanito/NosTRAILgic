@@ -1,11 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace NosTRAILgic.Services
+﻿namespace NosTRAILgic.Services
 {
+    /************************************************************************************
+     * Description: Interface for the WeatherForecastGateway                            *
+     *                                                                                  *
+     * Developer: Elson                                                                 *
+     *                                                                                  *
+     * Date: 24/03/2016                                                                 *
+     ************************************************************************************/
     public interface IWeatherForecastGateway
     {
         void getNowcast();

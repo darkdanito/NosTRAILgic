@@ -57,11 +57,11 @@ namespace NosTRAILgic.DAL
          ************************************************************************************/
         public IQueryable<TrailMeetup> getTrailsByDate()
         {
-            var result = from i in db.Trails
-                         where i.TimeFrom.CompareTo(DateTime.Now) >= 0
-                         select i;
+            var trailMeetupByDate = from i in db.Trails
+                                    where i.TimeFrom.CompareTo(DateTime.Now) >= 0
+                                    select i;
 
-            return result;
+            return trailMeetupByDate;
         }
 
         /************************************************************************************
@@ -75,9 +75,9 @@ namespace NosTRAILgic.DAL
         public string isUserInTrail(int trailID, string userName)
         {
             string isUserNameInTrail = (from p in db.JoinTrails
-                                     where p.UserID == userName 
-                                     && p.TrailMeetupID == trailID
-                                     select p.UserID).FirstOrDefault();
+                                        where p.UserID == userName 
+                                        && p.TrailMeetupID == trailID
+                                        select p.UserID).FirstOrDefault();
 
             return isUserNameInTrail;
         }
@@ -147,7 +147,7 @@ namespace NosTRAILgic.DAL
         public List<int> getTrailUserCreated (int trailID)
         {
             var trailUserCreated = (from r in db.JoinTrails
-                                     where r.TrailMeetupID == trailID
+                                    where r.TrailMeetupID == trailID
                                     select r.JoinTrailID).ToList<int>();
 
             return trailUserCreated;

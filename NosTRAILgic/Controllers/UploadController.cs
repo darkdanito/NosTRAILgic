@@ -38,19 +38,19 @@ namespace NosTRAILgic.Controllers
 
             try
             {
-                //Check If MuseumFile and Etc is not emptyy before continue
+                // Check If MuseumFile and Etc is not emptyy before continue
                 if (MuseumFile != null)
                 {
                     System.Diagnostics.Debug.WriteLine("Upload Museum Files");
 
                     string path = Server.MapPath("~/Content/KML/" + MuseumFile.FileName);
                     MuseumFile.SaveAs(path);
-                    //System.Diagnostics.Debug.WriteLine(path);
+                    // System.Diagnostics.Debug.WriteLine(path);
 
-                    //Delete all previous Museum
+                    // Delete all previous Museum
                     uploadGateway.removePreviousMuseum();
 
-                    //System.Diagnostics.Debug.WriteLine("Delete DB");
+                    // System.Diagnostics.Debug.WriteLine("Delete DB");
 
                     // TODO: Add insert logic here
                     XmlDocument xmlDoc = new XmlDocument();

@@ -4,6 +4,11 @@ using System.Data.Entity;
 
 namespace NosTRAILgic.DAL
 {
+    /************************************************************************************
+     * Description: NosTRAILgic Context                                                 *
+     *              Contains the get and set for the different tables in the database   *
+     *                                                                                  *
+     ************************************************************************************/
     public class NosTRAILgicContext : IdentityDbContext<ApplicationUser>
     {
         public NosTRAILgicContext() : base("NosTRAILgicDB")

@@ -12,7 +12,8 @@ namespace NosTRAILgic.Models
      ************************************************************************************/
     public class Home_ViewModel
     {
-        public IEnumerable<Location> enumerableAllLocation { get; set; }
-        public IEnumerable<Weather> enumerableAllWeather { get; set; }
+        public IEnumerable<Location> enumerableAllLocation { get; set; }                // Contains the Enumerable of the Locaions
+
+        public IEnumerable<Weather> enumerableAllWeather { get; set; }                  // Contains the Enumerable of the Weather
     }
 }

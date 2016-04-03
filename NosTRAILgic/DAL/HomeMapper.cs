@@ -166,7 +166,7 @@ namespace NosTRAILgic.DAL
                                         join area in db.Areas on weather.Area equals area.AreaName
                                         join location in db.Locations on area.AreaCode equals location.AreaCode
                                         where weather.LastUpdated == currentDateTime && location.Name == searchLocation
-                                       orderby location.LocationId ascending
+                                        orderby location.LocationId ascending
                                         select weather);
 
             return LINQLocationWeather;

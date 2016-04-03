@@ -3,6 +3,13 @@ using System.IO;
 
 namespace NosTRAILgic.Libraries
 {
+    /************************************************************************************
+     * Description: XXXXXX                                                              *
+     *                                                                                  *
+     * Developer: Elson                                                                 *
+     *                                                                                  *
+     * Date: 02/04/2016                                                                 *
+     ************************************************************************************/
     public sealed class LogWriter
     {
         private static volatile LogWriter instance;

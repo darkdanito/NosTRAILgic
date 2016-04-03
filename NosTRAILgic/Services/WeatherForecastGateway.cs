@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Cache;
-using System.Web;
 using System.Xml;
 using NosTRAILgic.Models;
 using NosTRAILgic.DAL;
@@ -26,10 +25,10 @@ namespace NosTRAILgic.Services
         {
             string URL = "http://www.nea.gov.sg/api/WebAPI/?dataset=nowcast&keyref=781CF461BB6606ADC4A6A6217F5F2AD610E9D42F3AA8BF6D";
 
-            //Create the request
+            // Create the request
             WebRequest request = WebRequest.Create(URL);
-            //Define a cache policy for this request only.
-            //ensures that the request is not cached.
+
+            // Define a cache policy for this request only. Ensures that the request is not cached.
             HttpRequestCachePolicy noCachePolicy = new HttpRequestCachePolicy(HttpRequestCacheLevel.NoCacheNoStore);
             request.CachePolicy = noCachePolicy;
             request.Method = "GET";
@@ -37,8 +36,8 @@ namespace NosTRAILgic.Services
             XmlDocument xmlDoc = new XmlDocument();
             xmlDoc.Load(response.GetResponseStream());
 
-            //Parse XML to get relevant details
-            //Last Update Information
+            // Parse XML to get relevant details
+            // Last Update Information
             string issueDateTime = xmlDoc.GetElementsByTagName("issue_datentime").Item(0).InnerText;
             string[] issueParts = issueDateTime.Split((char[])null, StringSplitOptions.RemoveEmptyEntries);
             int timeLastUpdate = 0;
@@ -47,7 +46,7 @@ namespace NosTRAILgic.Services
             int dayLastUpdate = 0;
             for (int i = 0; i < issueParts.Length; i++)
             {
-                //Attempt to capture last updated time
+                // Attempt to capture last updated time
                 if (issueParts[i].Equals("at"))
                 {
                     string[] timeParts = issueParts[i + 1].Split(':');
@@ -61,7 +60,7 @@ namespace NosTRAILgic.Services
 
                     }
                 }
-                //Attempt to capture last updated date
+                // Attempt to capture last updated date
                 if (issueParts[i].Equals("on"))
                 {
                     string[] dateParts = issueParts[i + 1].Split('-');
@@ -86,7 +85,7 @@ namespace NosTRAILgic.Services
                 weather.Region = areaList[i].Attributes["zone"].Value;
                 weather.LastUpdated = lastUpdated;
 
-                //Add to Database
+                // Add to Database
                 db.Weathers.Add(weather);
                 db.SaveChanges();
             }       
