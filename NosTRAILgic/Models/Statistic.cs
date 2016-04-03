@@ -1,7 +1,7 @@
 ﻿namespace NosTRAILgic.Models
 {
     /************************************************************************************
-     * Description: Model for the Join Trail                                            *
+     * Description: Model for the Statistic                                             *
      *                                                                                  *
      * Developer: Khaleef                                                               *
      *                                                                                  *

@@ -13,9 +13,11 @@ namespace NosTRAILgic.Controllers
      *                                                                                  *
      * Date: 21/03/2016                                                                 *
      ************************************************************************************/
-    public class StatsController : Controller
+    public class StatsController : GeneralController<Statistic>
     {
-        private NosTRAILgicContext db = new NosTRAILgicContext();
+        //private NosTRAILgicContext db = new NosTRAILgicContext();
+        StatsMapper statsMapper = new StatsMapper();
+
         // GET: Stats
         List<SelectListItem> dropDownList_Month = new List<SelectListItem>();
         List<SelectListItem> dropDownList_Category = new List<SelectListItem>();
@@ -102,31 +104,18 @@ namespace NosTRAILgic.Controllers
             }
 
             // Top Searched Location
-            var statsByTopSearchLocation = db.Database.SqlQuery<Statistic>("select top 5 Name, count(*) as No, l.ImageLink as Image from Searches s left join Locations l on s.Keyword = l.Name where MONTH(CONVERT(Date, DATE)) = '" + valMonth + "' group by Name, ImageLink ORDER BY No DESC").ToList();
-            ViewBag.statsByTopSearchLocation = statsByTopSearchLocation;
+            ViewBag.statsByTopSearchLocation = statsMapper.GetStatsByTopSearchLocation(valMonth);
 
             // Top Creator Name
-            var statsByTopTrailContributor = db.Database.SqlQuery<Statistic>("select top 5 t.CreatorID as Name,count(j.TrailMeetupID) as Number from JoinTrails j right join TrailMeetups t on t.TrailMeetupID = j.TrailMeetupID GROUP BY t.CreatorID ORDER BY Number DESC").ToList();
-            ViewBag.statsByTopTrailContributor = statsByTopTrailContributor;
+            ViewBag.statsByTopTrailContributor = statsMapper.GetStatsByTopTrailContributor();
 
             // Search Location
-            var searchLocationDay = db.Database.SqlQuery<Statistic>("select Name, count(DAY(CONVERT(Date, DATE))) as Number, DAY(CONVERT(Date, DATE)) as Date from CheckIns c left join Locations l on l.Name = c.LocationName where l.Name = '" + searchKeyword + "' group by l.Name, DAY(CONVERT(Date, DATE))").ToList();
-            if (searchKeyword == "" || searchKeyword == null)
-            {
-                searchLocationDay = db.Database.SqlQuery<Statistic>("select Name, count(DAY(CONVERT(Date, DATE))) as Number, DAY(CONVERT(Date, DATE)) as Date from CheckIns c left join Locations l on l.Name = c.LocationName where l.Name = '' group by l.Name, DAY(CONVERT(Date, DATE))").ToList();
-            }
-            else
-            {
-                searchLocationDay = db.Database.SqlQuery<Statistic>("select Name, count(DAY(CONVERT(Date, DATE))) as Number, DAY(CONVERT(Date, DATE)) as Date from CheckIns c left join Locations l on l.Name = c.LocationName where l.Name = '" + searchKeyword + "' group by l.Name, DAY(CONVERT(Date, DATE))").ToList();
-            }
-            ViewBag.searchLocationDay = searchLocationDay;
+            
+            ViewBag.searchLocationDay = statsMapper.GetSearchLocationDay(searchKeyword);
 
-            // Checkin per Category based on current and previous year
-            var statsByCheckInCurrentYear = db.Database.SqlQuery<Statistic>("select Category as Name, YEAR(CONVERT(Date, DATE)) as Date, count(*) as Number from CheckIns c right join Locations l on l.Name = c.LocationName where Category = '" + category + "' and YEAR(CONVERT(Date, DATE)) = YEAR(CONVERT(Date, GETDATE())) group by Category, YEAR(CONVERT(Date, DATE))").ToList();
-            ViewBag.statsByCheckInCurrentYear = statsByCheckInCurrentYear;
-
-            var statsByCheckInPreviousYear = db.Database.SqlQuery<Statistic>("select Category as Name, YEAR(CONVERT(Date, DATE)) as Date, count(*) as Number from CheckIns c right join Locations l on l.Name = c.LocationName where Category = '" + category + "' and YEAR(CONVERT(Date, DATE)) = YEAR(CONVERT(Date, GETDATE()))-1 group by Category, YEAR(CONVERT(Date, DATE))").ToList();
-            ViewBag.statsByCheckInPreviousYear = statsByCheckInPreviousYear;
+            // Checkin per Category based on current and previous year           
+            ViewBag.statsByCheckInCurrentYear = statsMapper.GetStatsByCheckInCurrentYear(category);
+            ViewBag.statsByCheckInPreviousYear = statsMapper.GetStatsByCheckInPreviousYear(category);
 
             return View();
         }
@@ -134,10 +123,7 @@ namespace NosTRAILgic.Controllers
 
         public ActionResult GetLocation(string term)
         {
-            var result = from r in db.Locations
-                         where r.Name.ToLower().StartsWith(term)
-                         select r.Name;
-
+            var result = statsMapper.GetAutoCompleteResult(term);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
     }

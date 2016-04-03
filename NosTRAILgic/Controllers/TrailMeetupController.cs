@@ -25,11 +25,6 @@ namespace NosTRAILgic.Controllers
         WeatherForecastGateway weatherService = new WeatherForecastGateway();           // New Gateway: WeatherForecastGateway
         WeatherGateway weatherGateway = new WeatherGateway();
 
-        public TrailMeetupController()
-        {
-            dataGateway = new TrailMeetupMapper();                                      // New Gateway: TraiLMeetup
-        }
-
         public override ActionResult Index()                                                     // Display the Index Page
         {
             return View(trailMeetupMapper.getTrailsByDate());
@@ -118,7 +113,7 @@ namespace NosTRAILgic.Controllers
             TrailMeetup_Details_ViewModel trailMeetup_DetailsViewModel = new TrailMeetup_Details_ViewModel();  
 
             // Select the TrailMeetup by ID
-            trailMeetup_DetailsViewModel.getTrailMeetup = dataGateway.SelectById(id);
+            trailMeetup_DetailsViewModel.getTrailMeetup = trailMeetupMapper.SelectById(id);
 
             if (trailMeetup_DetailsViewModel.getTrailMeetup == null)                   // If the TraiMeetup cannot be found
             {
@@ -232,7 +227,7 @@ namespace NosTRAILgic.Controllers
                 DateTime currentTimeTo = new DateTime(trailMeetup.Date.Year, trailMeetup.Date.Month, trailMeetup.Date.Day, trailMeetup.TimeTo.Hour, trailMeetup.TimeTo.Minute, 0, 0);
                 trailMeetup.TimeTo = currentTimeTo;
 
-                dataGateway.Insert(trailMeetup);                                        // Insert the newly created TrailMeetup into DB
+                trailMeetupMapper.Insert(trailMeetup);                                        // Insert the newly created TrailMeetup into DB
                
                 // Get the Trail ID for the newly added Trail above
                 int TrailID = trailMeetupMapper.getNewlyCreatedTrailID(trailMeetup.Name);
@@ -270,7 +265,7 @@ namespace NosTRAILgic.Controllers
                 return RedirectToAction("Index");
             }
             
-            TrailMeetup trailMeetup = dataGateway.SelectById(id);
+            TrailMeetup trailMeetup = trailMeetupMapper.SelectById(id);
 
             if (trailMeetup == null)
             {
@@ -289,7 +284,7 @@ namespace NosTRAILgic.Controllers
             {
                 trailMeetup.CreatorID = User.Identity.Name;
 
-                dataGateway.Update(trailMeetup);
+                trailMeetupMapper.Update(trailMeetup);
 
                 return RedirectToAction("Index");
             }
@@ -305,7 +300,7 @@ namespace NosTRAILgic.Controllers
                 return RedirectToAction("Index");
             }
 
-            TrailMeetup trailMeetup = dataGateway.SelectById(id);
+            TrailMeetup trailMeetup = trailMeetupMapper.SelectById(id);
 
             if (trailMeetup == null)
             {
@@ -328,9 +323,9 @@ namespace NosTRAILgic.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            TrailMeetup trailMeetup = dataGateway.SelectById(id);
+            TrailMeetup trailMeetup = trailMeetupMapper.SelectById(id);
 
-            dataGateway.Delete(id);
+            trailMeetupMapper.Delete(id);
 
             /************************************************************************************
              * Description: This function will get the list of users that has joined the trail  *
@@ -382,7 +377,7 @@ namespace NosTRAILgic.Controllers
             if (enumerableAllWeather.Count() == 0)
             {
                 // Update database with lastest forecast
-                weatherService.getNowcast();
+                weatherService.GetNowcast();
                 // Retrieve from database again
                 enumerableAllWeather = trailMeetupMapper.getAllWeatherInfoFromTrail(trailID, false);
 
@@ -391,7 +386,7 @@ namespace NosTRAILgic.Controllers
                     // Delete Duplicate weather forecast in database (a job for mapper or service)
                     weatherGateway.removeDuplicateWeatherData();
                     // Update database with lastest forecast
-                    weatherService.getNowcast();
+                    weatherService.GetNowcast();
                     // Retrieve from database again
                     enumerableAllWeather = trailMeetupMapper.getAllWeatherInfoFromTrail(trailID, true);
                 }

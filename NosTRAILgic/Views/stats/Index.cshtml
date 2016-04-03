@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<NosTRAILgic.Models.Statistic>
 @{
-    ViewBag.Title = "Stats";
+    ViewBag.Title = "Trail Statistics";
 }
 <h2>Statistical Page</h2>
 
@@ -46,7 +46,7 @@
 <hr />
 
 <div class="pull-left">
-    @Html.Label("Changes to vistior based on year")
+    @Html.Label("Changes to visitor based on year")
     @Html.DropDownList("ddl_Category", null, new { onchange = "document.location.href='/Stats/Index?valCategory='+this.value"})
 </div>
 

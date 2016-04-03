@@ -21,7 +21,7 @@ namespace NosTRAILgic.Services
     {
         NosTRAILgicContext db = new NosTRAILgicContext();
 
-        public void getNowcast()
+        public void GetNowcast()
         {
             string URL = "http://www.nea.gov.sg/api/WebAPI/?dataset=nowcast&keyref=781CF461BB6606ADC4A6A6217F5F2AD610E9D42F3AA8BF6D";
 

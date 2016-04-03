@@ -16,7 +16,7 @@ namespace NosTRAILgic.Controllers
      *                                                                                  *
      * Date: 17/02/2016                                                                 *
      ************************************************************************************/
-    public class HomeController : Controller
+    public class HomeController : GeneralController<Location>
     {
         WeatherForecastGateway weatherService = new WeatherForecastGateway();           // New Gateway: WeatherForecastGateway
         SearchGateway searchGateway = new SearchGateway();                              // New Gateway: SearchGateway
@@ -31,7 +31,6 @@ namespace NosTRAILgic.Controllers
             Home_ViewModel homeViewModel = new Home_ViewModel();                        // New ViewModel: Home_ViewModel
 
             homeViewModel.enumerableAllLocation = homeMapper.getAllLocationInfo("All");
-            // getAllLocationWeather(Category , is to take current hours -1 data?)
             homeViewModel.enumerableAllWeather = validateCategoryWeatherData("All");            
             listHomeViewModel.Add(homeViewModel);
 
@@ -134,7 +133,7 @@ namespace NosTRAILgic.Controllers
             if (enumerableAllWeather.Count() == 0)
             {
                 // Update database with lastest forecast
-                weatherService.getNowcast();
+                weatherService.GetNowcast();
                 // Retrieve from database again
                 enumerableAllWeather = homeMapper.getAllLocationWeather(category, false);
 
@@ -143,7 +142,7 @@ namespace NosTRAILgic.Controllers
                     // Delete Duplicate weather forecast in database (a job for mapper or service)
                     weatherGateway.removeDuplicateWeatherData();
                     // Update database with lastest forecast
-                    weatherService.getNowcast();
+                    weatherService.GetNowcast();
                     // Retrieve from database again
                     enumerableAllWeather = homeMapper.getAllLocationWeather(category, true);
                 }
@@ -159,7 +158,7 @@ namespace NosTRAILgic.Controllers
             if (enumerableWeather.Count() == 0)
             {
                 // Update database with lastest forecast
-                weatherService.getNowcast();
+                weatherService.GetNowcast();
                 // Retrieve from database again
                 enumerableWeather = homeMapper.getLocationWeather(search, false);
                 if (enumerableWeather.Count() == 0)
@@ -167,7 +166,7 @@ namespace NosTRAILgic.Controllers
                     // Delete Duplicate weather forecast in database (a job for mapper or service)
                     weatherGateway.removeDuplicateWeatherData();
                     // Update database with lastest forecast
-                    weatherService.getNowcast();
+                    weatherService.GetNowcast();
                     // Retrieve from database again
                     enumerableWeather = homeMapper.getLocationWeather(search, true);
                 }
@@ -227,7 +226,7 @@ namespace NosTRAILgic.Controllers
             if (checkinGateway.isUserCheckIn(User.Identity.Name, LocationName))
             {
                 //Pop out?
-                System.Diagnostics.Debug.WriteLine("You have checkin for today");
+                System.Diagnostics.Debug.WriteLine("You have already checkin for today");
             }
             else
             {

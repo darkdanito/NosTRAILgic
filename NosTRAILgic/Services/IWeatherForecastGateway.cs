@@ -9,6 +9,6 @@
      ************************************************************************************/
     public interface IWeatherForecastGateway
     {
-        void getNowcast();
+        void GetNowcast();
     }
 }

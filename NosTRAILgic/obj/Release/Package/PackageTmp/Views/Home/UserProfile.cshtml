@@ -24,7 +24,7 @@
             @Html.Raw("<td width='20 %'>");
 
             <ul style="list-style-type : none">
-                <li><img src="/Content/Upload/@Url.Content(row.ImageLink)" width="100" height="100" /></li>
+                <li><img src="/Content/Upload/@Url.Content(row.ImageLink)" style="height: 100px; width: 100px" /></li>
                 <li>@row.Name</li>
                 <li>@row.Date.ToShortDateString()</li>
                 <li>@row.TimeFrom.ToShortTimeString() - @row.TimeTo.ToShortTimeString()</li>
@@ -62,7 +62,7 @@
             @Html.Raw("<td width='20 %'>");
 
             <ul style="list-style-type : none">
-                <li><img src="/Content/Upload/@Url.Content(row.ImageLink)" width="100" height="100" /></li>
+                <li><img src="/Content/Upload/@Url.Content(row.ImageLink)" style="height: 100px; width: 100px" /></li>
                 <li>@row.Name</li>
                 <li>@row.Date.ToShortDateString()</li>
                 <li>@row.TimeFrom.ToShortTimeString() - @row.TimeTo.ToShortTimeString()</li>
