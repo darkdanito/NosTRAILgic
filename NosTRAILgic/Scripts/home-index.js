@@ -82,17 +82,25 @@ function initMarker() {
 
                 '<tr>' +
                     '<td style="vertical-align: top;">' +
-                        '<p>' + location.Description + '</p>' +
-                        '<a href="' + location.HyperLink + '"> Read More </a>' +
-                    '</td>' +
+                        '<p>' + location.Description + '</p>';
+            var HyperLink = '<a href="' + location.HyperLink + '"> Read More </a>';
+            var content3 =   '</td>' +
                 '</tr>' +
             '</table>';
 
             //Validate to in checkin button or not            
             if (loginStatus.innerHTML == "Login") {
-                var contentArray = [content1,checkInButton, content2];
+                if (location.HyperLink == "<Null>") {
+                    var contentArray = [content1, checkInButton, content2, content3];
+                } else {
+                    var contentArray = [content1, checkInButton, content2, HyperLink, content3];
+                }                
             }else{
-                var contentArray = [content1, content2];
+                if (location.HyperLink == "<Null>") {
+                    var contentArray = [content1, content2, content3];
+                } else {
+                    var contentArray = [content1, content2, HyperLink, content3];
+                }
             }
 
             var content = contentArray.join('');

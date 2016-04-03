@@ -98,7 +98,7 @@ namespace NosTRAILgic.Controllers
             }
             else if (valCategory == "3")
             {
-                category = "Historic Site";
+                category = "HistoricSite";
             }
 
             // Top Searched Location

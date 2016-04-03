@@ -79,12 +79,8 @@
 </table>
 <!-- Passing to JS -->
     <p hidden id="detailsViewModelData">@Html.Raw(ViewBag.detailsViewModelJSON)</p>
-
-    <h4>Location Details: </h4>
-    <div id="locationDetails" style="width: 100%;">
-        @*display output*@
-    </div>
-
+    <p hidden id="loginStatus">@Html.Raw(ViewBag.loginStatus)</p>
+    <div id="locationDetails" style="width: 100%;"></div>
 
     <div class="modal fade" id="listOfParticipants" tabindex="-1" role="dialog">
         <div class="modal-dialog">
@@ -124,14 +120,6 @@
             </div>
         </div>
     </div>
-
-
-
-
-
-
-
-
 
     <div>
         <p>
