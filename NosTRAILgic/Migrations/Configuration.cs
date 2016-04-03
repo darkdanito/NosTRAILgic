@@ -11,6 +11,7 @@ namespace NosTRAILgic.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
+            //AutomaticMigrationDataLossAllowed = true;
         }
 
         protected override void Seed(NosTRAILgic.DAL.NosTRAILgicContext context)

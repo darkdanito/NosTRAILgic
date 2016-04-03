@@ -9,18 +9,18 @@
     @Html.DropDownList("ddl_Month", null, new { onchange = "document.location.href='/Stats/Index?valMonth='+this.value;" })
 </div>
 
-<br />
-<table>
+<br /><br />
+<table align="center">
     <tr>
         @foreach (var item in @ViewBag.statsByTopSearchLocation)
         {
-            <th><img src="@item.Image" alt="@item.Image" /></th>
+            <th width="150px"><img src="@item.Image" onError="this.onerror=null;this.src='/images/no_image_available.jpg';" style="width:150px; height:150px;"/></th>
         }
     </tr>
     <tr>
         @foreach (var item in @ViewBag.statsByTopSearchLocation)
         {
-            <td>@item.Name</td>
+            <td width="150px">@item.Name</td>
         }
     </tr>
 </table>

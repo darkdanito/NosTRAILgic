@@ -181,6 +181,10 @@ namespace NosTRAILgic.Controllers
              ************************************************************************************/
             JavaScriptSerializer oSerializer = new JavaScriptSerializer();
             ViewBag.detailsViewModelJSON = oSerializer.Serialize(trailMeetup_DetailsViewModel);
+            if (User.Identity.IsAuthenticated)
+                ViewBag.loginStatus = "Login";
+            else
+                ViewBag.loginStatus = "Not Login";
 
             return View(listTrailMeetup_DetailsViewModel);
         }

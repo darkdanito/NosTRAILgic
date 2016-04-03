@@ -15,12 +15,14 @@
         @foreach (var item in @ViewBag.statsByTopSearchLocation)
         {
             <th width="150px"><img src="@item.Image" onError="this.onerror=null;this.src='/images/no_image_available.jpg';" style="width:150px; height:150px;"/></th>
+            <th>&nbsp;</th>
         }
     </tr>
     <tr>
         @foreach (var item in @ViewBag.statsByTopSearchLocation)
         {
             <td width="150px">@item.Name</td>
+            <td>&nbsp;</td>
         }
     </tr>
 </table>

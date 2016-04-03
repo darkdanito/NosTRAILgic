@@ -63,8 +63,9 @@ function initMarker() {
                      '<td rowspan="2" width:"20%" align="center">' +
                         '<div><img src="' + location.ImageLink + '" style="width:150px; height:150px;" onError="this.onerror=null;this.src=\'/images/no_image_available.jpg\';"/></div><br>';
 
+            var encodeName = encodeURI(location.Name);
             var checkInButton =
-                    '<div><input class="btn btn-default" value="I am Here!" type="button" onclick="window.location.href=\'/Home/CheckIn\';"/></div>';
+                    '<div><input class="btn btn-default" value="I am Here!" type="button" onclick="window.location.href=\'/Home/CheckIn?LocationName=' + encodeName + '\';"/></div>';
             
             var content2 =
                      '</td>' +
