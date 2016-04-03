@@ -16,7 +16,7 @@ namespace NosTRAILgic.Controllers
      *                                                                                  *
      * Date: 17/02/2016                                                                 *
      ************************************************************************************/
-    public class HomeController : GeneralController<Location>
+    public class HomeController : Controller
     {
         WeatherForecastGateway weatherService = new WeatherForecastGateway();           // New Gateway: WeatherForecastGateway
         SearchGateway searchGateway = new SearchGateway();                              // New Gateway: SearchGateway

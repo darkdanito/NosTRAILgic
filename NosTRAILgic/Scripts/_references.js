@@ -16,5 +16,6 @@
 /// <reference path="modernizr-2.8.3.js" />
 /// <reference path="respond.matchmedia.addlistener.min.js" />
 /// <reference path="respond.min.js" />
+/// <reference path="stats-index.js" />
 /// <reference path="trailmeetup-create.js" />
 /// <reference path="trailmeetup-details_viewmodel.js" />

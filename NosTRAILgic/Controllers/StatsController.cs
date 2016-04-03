@@ -3,6 +3,7 @@ using NosTRAILgic.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 
 namespace NosTRAILgic.Controllers
 {
@@ -13,9 +14,8 @@ namespace NosTRAILgic.Controllers
      *                                                                                  *
      * Date: 21/03/2016                                                                 *
      ************************************************************************************/
-    public class StatsController : GeneralController<Statistic>
+    public class StatsController : Controller
     {
-        //private NosTRAILgicContext db = new NosTRAILgicContext();
         StatsMapper statsMapper = new StatsMapper();
 
         // GET: Stats
@@ -104,18 +104,36 @@ namespace NosTRAILgic.Controllers
             }
 
             // Top Searched Location
-            ViewBag.statsByTopSearchLocation = statsMapper.GetStatsByTopSearchLocation(valMonth);
+            var statsByTopSearchLocation = statsMapper.GetStatsByTopSearchLocation(valMonth);
+            ViewBag.statsByTopSearchLocation = statsByTopSearchLocation;
+
+            JavaScriptSerializer oSerializer = new JavaScriptSerializer();
+            ViewBag.statsByTopSearchLocationJSON = oSerializer.Serialize(statsByTopSearchLocation);
 
             // Top Creator Name
-            ViewBag.statsByTopTrailContributor = statsMapper.GetStatsByTopTrailContributor();
+            var statsByTopTrailContributor = statsMapper.GetStatsByTopTrailContributor();
+            ViewBag.statsByTopTrailContributor = statsByTopTrailContributor;
+
+            oSerializer = new JavaScriptSerializer();
+            ViewBag.statsByTopTrailContributorJSON = oSerializer.Serialize(statsByTopTrailContributor);
 
             // Search Location
-            
-            ViewBag.searchLocationDay = statsMapper.GetSearchLocationDay(searchKeyword);
+            var searchLocationDay = statsMapper.GetSearchLocationDay(searchKeyword);
+            ViewBag.searchLocationDay = searchLocationDay;
+
+            oSerializer = new JavaScriptSerializer();
+            ViewBag.searchLocationDayJSON = oSerializer.Serialize(searchLocationDay);
 
             // Checkin per Category based on current and previous year           
-            ViewBag.statsByCheckInCurrentYear = statsMapper.GetStatsByCheckInCurrentYear(category);
-            ViewBag.statsByCheckInPreviousYear = statsMapper.GetStatsByCheckInPreviousYear(category);
+            var statsByCheckInCurrentYear = statsMapper.GetStatsByCheckInCurrentYear(category);
+            ViewBag.statsByCheckInCurrentYear = statsByCheckInCurrentYear;
+            oSerializer = new JavaScriptSerializer();
+            ViewBag.statsByCheckInCurrentYearJSON = oSerializer.Serialize(statsByCheckInCurrentYear);
+
+            var statsByCheckInPreviousYear = statsMapper.GetStatsByCheckInPreviousYear(category);
+            ViewBag.statsByCheckInPreviousYear = statsByCheckInPreviousYear;
+            oSerializer = new JavaScriptSerializer();
+            ViewBag.statsByCheckInPreviousYearJSON = oSerializer.Serialize(statsByCheckInPreviousYear);
 
             return View();
         }
