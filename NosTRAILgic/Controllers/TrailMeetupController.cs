@@ -27,7 +27,7 @@ namespace NosTRAILgic.Controllers
             dataGateway = new TrailMeetupMapper();                                      // New Gateway: TraiLMeetup
         }
 
-        public ActionResult Index()                                                     // Display the Index Page
+        public override ActionResult Index()                                                     // Display the Index Page
         {
             return View(trailMeetupMapper.getTrailsByDate());
         }

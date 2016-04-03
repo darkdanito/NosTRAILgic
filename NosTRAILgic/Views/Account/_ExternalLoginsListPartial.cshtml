@@ -2,6 +2,7 @@
 
 <h4>Sign in using the following: </h4>
 <hr />
+
 @{
     var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
 
@@ -13,6 +14,7 @@
         using (Html.BeginForm(action, "Account", new { ReturnUrl = returnUrl }))
         {
             @Html.AntiForgeryToken()
+
             <div id="socialLoginList">
                 <p>
                     @foreach (AuthenticationDescription p in loginProviders)

@@ -14,9 +14,9 @@ namespace NosTRAILgic.Controllers
     {
         internal IDataGateway<T> dataGateway;
 
-        //virtual public ActionResult Index(int? id)
-        //{
-        //    return View(dataGateway.SelectAll());
-        //}
+        virtual public ActionResult Index()
+        {
+            return View(dataGateway.SelectAll());
+        }
     }
 }
