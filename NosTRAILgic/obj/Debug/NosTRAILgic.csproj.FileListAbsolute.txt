@@ -636,3 +636,4 @@ C:\Users\Elson\Documents\GitHub\NosTRAILgic\NosTRAILgic\bin\System.Web.WebPages.
 C:\Users\Elson\Documents\GitHub\NosTRAILgic\NosTRAILgic\obj\Debug\NosTRAILgic.dll
 C:\Users\Elson\Documents\GitHub\NosTRAILgic\NosTRAILgic\obj\Debug\NosTRAILgic.pdb
 C:\Users\Elson\Documents\GitHub\NosTRAILgic\NosTRAILgic\obj\Debug\NosTRAILgic.csprojResolveAssemblyReference.cache
+C:\Users\darkdanito\Documents\GitHub\NosTRAILgic\NosTRAILgic\obj\Debug\NosTRAILgic.csprojResolveAssemblyReference.cache
