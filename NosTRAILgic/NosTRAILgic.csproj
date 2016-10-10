@@ -276,7 +276,6 @@
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="Content\Upload\BirdPark.jpg" />
-    <Content Include="Content\Upload\Sheep.jpg" />
     <Content Include="Content\Upload\Zoo.jpg" />
     <Content Include="Content\ZocialCSSSocialButtons\zocial.css" />
     <Content Include="Content\ZocialCSSSocialButtons\zocial.svg" />
@@ -367,9 +366,7 @@
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\StatsMapper\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
